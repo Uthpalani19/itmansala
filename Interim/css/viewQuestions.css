@@ -1,0 +1,168 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #FFFFFF;
+}
+
+/*Sub topic*/
+.subtopic-title
+{
+    text-align: center;
+    color: #636363;
+}
+
+/*Course Details*/
+.course-details-box
+{
+    height: 150px;
+    background-color: #5319a6;
+    align-items: center;
+    width: 100%;
+    border-radius: 0px 0px 100px 100px;
+}
+
+.course-details-box p
+{
+    text-align: center;
+    color:white;
+}
+
+#title
+{
+    font-weight: bold;
+    padding-top: 100px;
+}
+
+#content
+{
+    margin-left: 100px;
+    margin-right:100px;
+    font-size: small;
+}
+
+/*Navigation bar*/
+.navbar{
+    width: 100%;
+    height: 60px;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    background: linear-gradient(45deg,#7e58bc 5%, #5319a6);
+    position: fixed;
+    margin:auto;
+    z-index: 1;
+}
+
+.nav-left{
+    display: inline-block;
+    margin-left: 1.5rem;
+}
+
+.navbar-logo{
+    width: 50%;
+}
+
+.nav-right{
+    float: right;
+}
+
+.nav-links{
+    display: inline-block;
+}
+
+.nav-links p{
+    margin-right: 4rem;
+    cursor: pointer;
+}
+
+.nav-user-tray{
+    display: inline-block;
+    margin: 0 1rem 0 1rem;
+}
+
+.nav-user-tray p{
+    margin-right: 1rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.nav-right p{
+    display: inline-block;
+}
+
+/*Table*/
+.addedQuestions
+{
+    font-family: 'Poppins', sans-serif;
+    border-collapse: collapse;
+    width: 75%;
+}
+
+.addedQuestions td, .addedQuestions th
+{
+    font-size: 12px;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+  
+.addedQuestions th
+{
+    background-color: #5319a6;
+    color: white;
+}
+
+td:nth-child(1)
+{
+    width: 10px;
+}
+td:nth-child(2)
+{
+    width: 400px;
+}
+td:nth-child(3)
+{
+    width: 150px;
+}
+
+td:nth-child(4)
+{
+    width: 150px;
+}
+
+td:nth-child(5)
+{
+    width: 150px;
+}
+
+td:nth-child(6)
+{
+    width: 150px;
+}
+
+td:nth-child(7) {
+    width: 150px;
+}
+td:nth-child(8)
+{
+    width: 15px;
+}
+  
+td:nth-child(9)
+{
+    width: 15px;
+}
+
+#delete-icon
+{
+    color:#5319a6;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+#edit-icon
+{
+    color:#5319a6;
+    margin-left: 8px;
+    cursor: pointer;
+}
+  
