@@ -1,0 +1,143 @@
+/*-----------------fonts--------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100&display=swap');
+
+/*----------------global.css---------------*/
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #d9d9d9;
+}
+
+.navbar{
+    width: 100%;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    background: linear-gradient(45deg,#7e58bc 5%, #5319a6);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: fadeIn 0.2s ease-in forwards;
+}
+
+.nav-left{
+    display: inline-block;
+    margin-left: 1.5rem;
+}
+
+.navbar-logo{
+    width: 50%;
+}
+
+.nav-right{
+    float: right;
+}
+
+.nav-links{
+    display: inline-block;
+    border-right: 2px solid white;
+}
+
+.nav-links p{
+    margin-right: 4rem;
+    cursor: pointer;
+}
+
+.nav-user-tray{
+    display: inline-block;
+    margin: 0 1rem 0 1rem;
+}
+
+.nav-user-tray p{
+    margin-right: 1rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.nav-right p{
+    display: inline-block;
+}
+
+@keyframes fadeIn{
+    to{
+      opacity: 1;
+    } 
+  }
+
+  .footer-container{
+    background: linear-gradient(90deg,#5319a6 20%, #864fb9);
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    position: relative;
+}
+
+.left{
+    display: inline-block;
+    color: white;
+    padding-left: 10px;
+    font-weight: 700;
+}
+
+.right{
+    float: right;
+    font-size: 25px;
+}
+
+.right i{
+    padding-right: 10px;
+}
+
+
+.fa-youtube{
+    color: #f20000;
+}
+
+.fa-linkedin{
+    color: #1c6db5;
+}
+
+.fa-square-twitter{
+    color: #00a6de;
+}
+
+.fa-square-instagram{
+    color: pink;
+}
+
+.fa-facebook{
+    color: #334c8c;
+}
+
+.social{
+    width: 90%;
+    margin: auto;
+    border-bottom: 2px solid white;
+    padding-top: 4%;
+    vertical-align: text-bottom;
+  
+}
+
+.privacy{
+    width: 90%;
+    margin: auto;
+    color: white;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 20px 0 5px 0;
+}
+
+.privacy-left{
+    display: inline-block;
+}
+
+.privacy-left p{
+    display: inline-block;
+    padding-right: 15px;
+}
+
+.privacy-right{
+    float: right;
+}
