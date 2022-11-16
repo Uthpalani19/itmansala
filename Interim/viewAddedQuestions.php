@@ -24,24 +24,9 @@
 
     <body>
         <!--Navigation Bar-->
-        <div class="navbar">
-            <div class="nav-left">
-                <img class="navbar-logo" src="img/icon.png">
-            </div>
-            <div class="nav-right">
-                <div class="nav-links">
-                    <p>Dashboard</p>
-                    <p>Payment</p>
-                    <p>Student</p>
-                    <p>Course</p>
-                </div>
-                <div class="nav-user-tray">
-                    <p><i class="fa-regular fa-bell"></i></p>
-                    <p><i class="fa-solid fa-circle-user"></i></p>
-                    <p>Teacher007</p>
-                </div>
-            </div>
-        </div>
+        <?php
+            require_once('navbar.php');
+        ?>
 
         <!--Course Details-->
         <div class="course-details-box">
@@ -95,5 +80,12 @@
             </table>
             </center>
         </div>
+
+        
     </body>
+
+    <!-- Footer -->
+    <?php
+            require_once('footer.php');
+    ?>
 </html>
