@@ -1,0 +1,168 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #FFFFFF;
+}
+
+/*Course Details*/
+.course-details-box
+{
+    height: 150px;
+    background-color: #5319a6;
+    align-items: center;
+    width: 100%;
+    border-radius: 0px 0px 100px 100px;
+}
+
+.course-details-box p
+{
+    text-align: center;
+    color:white;
+}
+
+#title
+{
+    font-weight: bold;
+    padding-top: 100px;
+}
+
+#content
+{
+    margin-left: 100px;
+    margin-right:100px;
+    font-size: small;
+}
+
+/*Sub topic*/
+.subtopic-title
+{
+    text-align: center;
+    color: #636363;
+}
+
+/*Add Questions*/
+.question-number
+{
+    color: white;
+    padding: 20px;
+    margin-top: 8px;
+    margin-left: 100px;
+    background-color: #5319a6;
+    position:absolute;
+}
+
+::placeholder
+{
+    color: #000000;
+}
+
+/* Buttons */
+.buttons
+{
+    display: flex;
+    width: 75%;   
+    flex-direction: space-between;
+    margin-left: 100px;
+    margin-right: auto;
+}
+
+#back
+{
+    background-color: #979797;
+    color: white;
+}
+
+#back:hover
+{
+    font-size: 16px;
+}
+
+.buttons > input
+{
+    flex: 1 1 100%;
+}
+
+.btn-question
+{
+    background-color: #5319a6;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 5%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 15px;
+    margin-left: 200px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24);
+}
+
+.buttons > input:hover
+{
+    background-color: #0BA7FF;
+}
+
+/* Question and answers */
+.container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.container > .question
+{
+    flex: 1 1 100%;
+}
+
+.container > .question > textarea
+{
+    width: 75%;
+    height: 100px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    border:none;
+    background-color: #D9D9D9;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    resize: none;
+    margin-left: 200px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    cursor:pointer;
+    outline: none;
+}
+
+.container > .option
+{
+    flex: 1 1 100%;   
+}
+
+.container > .option > textarea
+{
+    width: 75%;
+    height: 20px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    border:none;
+    background-color: #D9D9D9;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    resize: none;
+    margin-left: 200px;
+    margin-top: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.option > textarea:focus
+{
+    background-color: green;
+    outline: none;
+}
+
+.container > .option > textarea:hover
+{
+    background-color: #B3B3B3;
+}
