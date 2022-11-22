@@ -1,0 +1,142 @@
+/*----------fonts-----------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100&display=swap');
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    
+    
+}
+
+
+/*-------------Navigation Bar--------------*/
+
+.navbar{
+    width: 100%;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    background: linear-gradient(45deg,#7e58bc 5%, #5319a6);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: fadeIn 0.2s ease-in forwards;
+
+    
+}
+
+.nav-left{
+    display: inline-block;
+    margin-left: 1.5rem;
+}
+
+.navbar-logo{
+    width: 50%;
+}
+
+.nav-right{
+    float: right;
+}
+
+.nav-links{
+    display: inline-block;
+    border-right: 2px solid white;
+}
+
+.nav-links p{
+    margin-right: 4rem;
+    cursor: pointer;
+}
+
+.nav-user-tray{
+    display: inline-block;
+    margin: 0 1rem 0 1rem;
+}
+
+.nav-user-tray p{
+    margin-right: 1rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.nav-right p{
+    display: inline-block;
+}
+
+@keyframes fadeIn{
+    to{
+      opacity: 1;
+    } 
+  }
+
+
+/*---------------------Search Bar----------------*/
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 120px;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+}
+
+
+.container .container-item form input{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 60px;
+    padding-left: 5px;
+    background: transparent;
+    border-radius: 3px; 
+    
+}
+
+.container .container-item form button{
+    background: #2a96f7 ;
+    color: #fff;
+    outline: none;
+    border: none; 
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 3px;
+    line-height: 27px;
+    padding-left: 27px;
+    padding-right: 27px;
+}
+
+
+
+/*---------------------Table---------------------*/
+.content{
+    margin-top: 2%;
+}
+
+.content table{
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    vertical-align: middle;
+    text-align: center;
+    
+}
+
+.content table, th, td{
+    border: 1px solid #bdbbbb;
+    border-collapse: collapse;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+
+.content table th{
+    font-weight: 450;
+    color: #646262;
+}
+
+
+
+
+
