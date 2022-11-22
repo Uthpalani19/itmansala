@@ -85,7 +85,7 @@
 
     <!-- Edit Details button -->
     <div class="edit-details">
-        <button type="button" class="btn-edit">Edit Details</button>
+        <button type="button" class="btn-edit" onclick="window.location.href='editProfile.php'">Edit Details</button>
     </div>
 
     <!-- Footer -->

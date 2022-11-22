@@ -70,22 +70,26 @@
                             <td>'.$row['option3'].'</td>
                             <td>'.$row['option4'].'</td>
                             <td>'.$row['answer'].'</td>
-                            <td><i class="fa-solid fa-file-pen" id="edit-icon"></i></td>
-                            <td><i class="fa fa-trash" aria-hidden="true" id="delete-icon"></i></td>
+                            <td><i class="fa-solid fa-large fa-file-pen" id="edit-icon"></i></td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
                         </tr>
                     ';
                 }
             ?>
-
             </table>
             </center>
         </div>
 
-        
+        <!-- Footer -->
+        <div class="footer">
+            <?php
+                    require_once('footer.php');
+            ?>
+        </div>
     </body>
-
-    <!-- Footer -->
-    <?php
-            require_once('footer.php');
-    ?>
 </html>

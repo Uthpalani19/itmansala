@@ -61,6 +61,56 @@
         <title>Sign Up</title>
         <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!-- Java Script validation -->
+        <script type="text/javascript">
+            function signupFor()
+            {
+                var phonenumber = document.forms["signupForm"]["phonenumber"].value;
+                var firstName = document.forms["signupForm"]["firstName"].value;
+                var lastName = document.forms["signupForm"]["lastName"].value;
+                var password = document.forms["signupForm"]["password"].value;
+                var repassword = document.forms["signupForm"]["repassword"].value;
+                var fieldOfExpertise = document.forms["signupForm"]["fieldOfExpertise"].value;
+
+                var regPhone=/^\d{10}$/;                                        // JS reGex for Phone Number validation.
+                var regName = /\d+$/g;                                          // JS reGex for Name validation
+                var regPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;      // JS reGex for password validation
+
+                if(phonenumber=="" || firstName=="" || lastName=="" || password=="" || repassword=="" || fieldOfExpertise=="")
+                {
+                    alert("Please fill all the fields.");
+                    return false;
+                }
+                else if(!regPhone.test(phonenumber))
+                {
+                    alert("Please enter a valid phone number.");
+                    return false;
+                }
+                else if(regName.test(firstName) || regName.test(lastName))
+                {
+                    alert("Please enter a valid name.");
+                    return false;
+                }
+                else if(!regPassword.test(password))
+                {
+                    alert("Please enter a valid password.");
+                    return false;
+                }
+                else if(password!=repassword)
+                {
+                    alert("Passwords are not matching.");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+        </script>
+        <!-- End of JS -->
+        
     </head>
 
     <body>
@@ -70,14 +120,14 @@
 
                 <div class="signup-form-details">
                     <!--Login form-->
-                    <form method="POST" class="sign-up-form">
+                    <form onsubmit="return signupFor()" method="POST" class="sign-up-form" name="signupForm">
                         <h2>Sign Up</h2>
-                        <input type="text" class="input-text" name="phonenumber" placeholder="Phone Number" required>
-                        <input type="text" class="input-text" name="firstName" placeholder="First Name" required>
-                        <input type="text" class="input-text" name="lastName" placeholder="Last Name" required>
-                        <input type="password" class="input-text" name="password" placeholder="Password" required><br />
-                        <input type="password" class="input-text" name="repassword" placeholder="Re-enter Password" required><br />
-                        <input type="text" class="input-text" name="fieldOfExpertise" placeholder="Field of Expertise" required><br />
+                        <input type="text" class="input-text" name="phonenumber" placeholder="Phone Number">
+                        <input type="text" class="input-text" name="firstName" placeholder="First Name">
+                        <input type="text" class="input-text" name="lastName" placeholder="Last Name">
+                        <input type="password" class="input-text" name="password" placeholder="Password"><br />
+                        <input type="password" class="input-text" name="repassword" placeholder="Re-enter Password"><br />
+                        <input type="text" class="input-text" name="fieldOfExpertise" placeholder="Field of Expertise"><br />
 
                         <input type="submit" class="submit-btn" name="SignUp" value="Sign Up">
                         <div class="signup">
