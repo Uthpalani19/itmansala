@@ -19,7 +19,7 @@
             if(mysqli_fetch_assoc($result))
             {
                 $_SESSION['User']=$_POST['username'];
-                header("location:editCourseContent.php");
+                header("location:dashboard-teacher.php");
             }
             else
             {

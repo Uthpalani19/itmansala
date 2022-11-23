@@ -1,6 +1,9 @@
 <?php
     session_start();
     require_once('dbconnection.php');
+    
+    // Navigation Bar
+    require_once('navbar-teacher.php');
 
     if(isset($_SESSION['User']))
     {
@@ -23,11 +26,6 @@
     </head>
 
     <body>
-        <!--Navigation Bar-->
-        <?php
-            require_once('navbar.php');
-        ?>
-
         <!--Course Details-->
         <div class="course-details-box">
             <p id="title">Lesson 01: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

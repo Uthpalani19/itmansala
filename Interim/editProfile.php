@@ -1,5 +1,5 @@
 <?php
-    require_once('navbar.php');
+    require_once('navbar-student.php');
 ?>
 
 <!DOCTYPE html>

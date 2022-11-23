@@ -1,6 +1,8 @@
 <?php
     session_start();
     require('dbconnection.php');
+    // Navigation Bar
+    require_once('navbar-teacher.php');
 
     if(isset($_SESSION['User']))
     {
@@ -48,6 +50,7 @@
 
     if(isset($_POST['addQuestions']) || isset($_POST['FinishQuiz']))
     {
+        // Check if the fields are not empty
         if(!empty($_POST['question']) && !empty($_POST['option1']) && !empty($_POST['option2']) && !empty($_POST['option3']) && !empty($_POST['option4']) && !empty($_POST['answer']))
         {
                 $id= mysqli_real_escape_string($connection,$id);
@@ -58,47 +61,58 @@
                 $option3= mysqli_real_escape_string($connection,$_POST['option3']); 
                 $option4= mysqli_real_escape_string($connection,$_POST['option4']); 
 
-                $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)
-                VALUES ('$id', 'S001','$question','$answer','$option1','$option2','$option3','$option4',1)";
-                
-            if(isset($_POST['FinishQuiz']))
-            {
-                if ($connection->query($sql) === TRUE)
-                {?>
-                    <script type="text/javascript">
-                        alert("Quiz added successfully.");
-                        window.location.href="editCourseContent.php";
-                    </script>
-                <?php
+                if($answer == $option1 || $answer == $option2 || $answer == $option3 || $answer == $option4)
+                {
+                    $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)
+                    VALUES ('$id', 'S001','$question','$answer','$option1','$option2','$option3','$option4',1)";
+                        
+                    if(isset($_POST['FinishQuiz']))
+                    {
+                        if ($connection->query($sql) === TRUE)
+                        {?>
+                            <script type="text/javascript">
+                                alert("Quiz added successfully.");
+                                window.location.href="editCourseContent.php";
+                            </script>
+                        <?php
+                        }
+                        else
+                        {?>
+                            <script type="text/javascript">
+                                alert("Try Again!!.");
+                                window.location.href=window.location.href;
+                            </script>
+                        <?php
+                        }
+                    }
+                    else 
+                    {
+                        if ($connection->query($sql) === TRUE)
+                        {?>
+                            <script type="text/javascript">
+                                alert("Question added successfully.");
+                                window.location.href=window.location.href;
+                            </script>
+                        <?php
+                        }
+                        else
+                        {?>
+                            <script type="text/javascript">
+                                alert("Try Again!!.");
+                                window.location.href=window.location.href;
+                            </script>
+                        <?php
+                        }
+                    }
                 }
                 else
-                {?>
+                {
+                    ?>
                     <script type="text/javascript">
-                        alert("Try Again!!.");
-                        window.location.href=window.location.href;
+                        alert("Answer should be one from options.");
                     </script>
                 <?php
                 }
-            }
-            else 
-            {
-                if ($connection->query($sql) === TRUE)
-                {?>
-                    <script type="text/javascript">
-                        alert("Question added successfully.");
-                        window.location.href=window.location.href;
-                    </script>
-                <?php
-                }
-                else
-                {?>
-                    <script type="text/javascript">
-                        alert("Try Again!!.");
-                        window.location.href=window.location.href;
-                    </script>
-                <?php
-                }
-            }
             
         }
         else
@@ -121,10 +135,6 @@
     </head>
 
     <body>
-        <!--Navigation Bar-->
-        <?php
-            require_once('navbar.php');
-        ?>
 
         <!--Course Details-->
         <form action="" method="POST">

@@ -39,7 +39,7 @@ h2{
 
 .input-text
 {
-    width: 25%;
+    width: 50%;
     text-align: left;
     border-top: 0;
     border-right: 0;
@@ -47,16 +47,15 @@ h2{
     border-bottom: 1;
     padding-top: 20px;
     padding-bottom: 5px;
-    margin-left: 100px;
     outline: none;
-
+    margin-left: 75px;
 }
 
 .submit-btn
 {
     padding: 10px 50px;
     margin-top: 30px;
-    margin-left: 130px;
+    margin-left: 75px;
     background-image: linear-gradient(to right,rgb(18, 146, 142),rgb(65, 67, 219));
     border: none;
     text-align: center;
@@ -80,11 +79,80 @@ h2{
 .signup
 {
     margin-top: 10px;
-    margin-left: 500px;
+    margin-left: 75px;
     color: rgb(76, 74, 74);
 }
 
 .signup a
+{
+    color: rgb(18, 146, 142);
+}
+
+.signup-form-details
+{
+    display: flex;
+    margin-left: 100px;
+    margin-right: auto;
+}
+
+.signup-form-details > .input-text
+{
+    flex: auto;
+    flex-direction: row;
+    margin-left: 100px;
+}
+
+.login
+{
+    margin-top: 10px;
+    margin-left: 500px;
+    color: rgb(76, 74, 74);
+}
+
+/* Error */
+.error
+{
+    color: red;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+/* Login */
+
+.login-form
+{
+    display: flex;
+}
+
+.login-form > div
+{
+    flex: auto;
+    flex-direction: row;
+    margin-left: 50px;
+}
+
+.input-login-text
+{
+    width: 50%;
+    text-align: left;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    outline: none;
+    margin-left: 75px;
+}
+
+.login-form > .signup-login
+{
+    margin-top: 200px;
+    margin-left: -80%;
+    color: rgb(76, 74, 74);
+}
+
+.login-form > .signup-login a
 {
     color: rgb(18, 146, 142);
 }

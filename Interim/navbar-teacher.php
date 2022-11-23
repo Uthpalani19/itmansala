@@ -12,9 +12,10 @@
         </div>
         <div class="nav-right">
             <div class="nav-links">
-                <p>Dashboard</p>
-                <p>Student</p>
-                <p>Course</p>
+                <p onclick="window.location.href='underconstruction.php'">Dashboard</p>
+                <p onclick="window.location.href='underconstruction.php'">Student</p>
+                <p onclick="window.location.href='underconstruction.php'">Course</p>
+                <p onclick="window.location.href='editCourseContent.php'">My Courses</p>
             </div>
             <div class="nav-user-tray">
                 <p><i class="fa-regular fa-bell"></i></p>

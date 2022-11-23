@@ -2,21 +2,71 @@
     session_start();
     include 'dbconnection.php';
 
+    $phoneError = $fNameError = $lNameError = $passwordError = $repasswordError = $fieldError = "";
+    $phone = $firstname = $lastname = $password = $repassword = $fieldOfExpertise = "";
+
     if(isset($_POST['SignUp']))
     {
-        $phonenumber = mysqli_real_escape_string($connection,$_POST['phonenumber']);
-        $firstname = mysqli_real_escape_string($connection,$_POST['firstName']);
-        $lastname = mysqli_real_escape_string($connection,$_POST['lastName']);
-        $password = mysqli_real_escape_string($connection,$_POST['password']);
-        $repassword = mysqli_real_escape_string($connection,$_POST['repassword']);
-        $fieldOfExpertise = mysqli_real_escape_string($connection,$_POST['fieldOfExpertise']);
-
-        $sql = "SELECT * from teacher WHERE phonenumber='$phonenumber' LIMIT 1";
-        $result = mysqli_query($connection,$sql);
-        $user = mysqli_fetch_assoc($result);
-
-        if($password==$repassword)
+        // Check if all fields are filled
+        if(empty($_POST['phonenumber']))
         {
+            $phoneError = "* Phone number is required";
+        }
+        else
+        {
+            $phonenumber = mysqli_real_escape_string($connection,$_POST['phonenumber']);
+        }
+
+        if(empty($_POST['firstName']))
+        {
+            $fNameError = "* First name is required";
+        }
+        else
+        {
+            $firstname = mysqli_real_escape_string($connection,$_POST['firstName']);
+        }
+
+        if(empty($_POST['lastName']))
+        {
+            $lNameError = "* Last name is required";
+        }
+        else
+        {
+            $lastname = mysqli_real_escape_string($connection,$_POST['lastName']);
+        }
+
+        if(empty($_POST['password']))
+        {
+            $passwordError = "* Password is required";
+        }
+        else
+        {
+            $password = mysqli_real_escape_string($connection,$_POST['password']);
+        }
+
+        if(empty($_POST['repassword']))
+        {
+            $repasswordError = "* Re-enter password";
+        }
+        else
+        {
+            $repassword = mysqli_real_escape_string($connection,$_POST['repassword']);
+        }
+
+        if(empty($_POST['fieldOfExpertise']))
+        {
+            $fieldError = "* This is required";
+        }
+        else
+        {
+            $fieldOfExpertise = mysqli_real_escape_string($connection,$_POST['fieldOfExpertise']);
+        }
+
+        // Entering data to the DB
+            $sql = "SELECT * from teacher WHERE phonenumber='$phonenumber' LIMIT 1";
+            $result = mysqli_query($connection,$sql);
+            $user = mysqli_fetch_assoc($result);
+
             if($user)
             {
                 ?>
@@ -38,21 +88,10 @@
 
                 ?>
                 <script type="text/javascript">
-                    alert("User Recorded.");
-                    window.location.href="editCourseContent.php";
+                    window.location.href="dashboard-teacher.php";
                 </script>
                 <?php
             }
-        }
-        else
-        {
-            ?>
-            <script type="text/javascript">
-                alert("Passwords are not matching.");
-                window.location.href=window.location.href;
-            </script>
-            <?php
-        }
     }
 ?>
 
@@ -79,7 +118,6 @@
 
                 if(phonenumber=="" || firstName=="" || lastName=="" || password=="" || repassword=="" || fieldOfExpertise=="")
                 {
-                    alert("Please fill all the fields.");
                     return false;
                 }
                 else if(!regPhone.test(phonenumber))
@@ -122,14 +160,38 @@
                     <!--Login form-->
                     <form onsubmit="return signupFor()" method="POST" class="sign-up-form" name="signupForm">
                         <h2>Sign Up</h2>
-                        <input type="text" class="input-text" name="phonenumber" placeholder="Phone Number">
-                        <input type="text" class="input-text" name="firstName" placeholder="First Name">
-                        <input type="text" class="input-text" name="lastName" placeholder="Last Name">
-                        <input type="password" class="input-text" name="password" placeholder="Password"><br />
-                        <input type="password" class="input-text" name="repassword" placeholder="Re-enter Password"><br />
-                        <input type="text" class="input-text" name="fieldOfExpertise" placeholder="Field of Expertise"><br />
 
-                        <input type="submit" class="submit-btn" name="SignUp" value="Sign Up">
+                        <div class="input-box">
+                            <input type="text" class="input-text" name="phonenumber" placeholder="Phone number">
+                            <span class="error"> <?php echo $phoneError; ?></span> 
+                        </div>
+
+                        <div class="input-box">
+                            <input type="text" class="input-text" name="firstName" placeholder="First name">
+                            <span class="error"> <?php echo $fNameError; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <input type="text" class="input-text" name="lastName" placeholder="Last name">
+                            <span class="error"> <?php echo $lNameError; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <input type="password" class="input-text" name="password" placeholder="Password">
+                            <span class="error"> <?php echo $passwordError; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <input type="password" class="input-text" name="repassword" placeholder="Re-enter Password">
+                            <span class="error"> <?php echo $repasswordError; ?></span>
+                        </div>
+
+                        <div class="input-box">
+                            <input type="text" class="input-text" name="fieldOfExpertise" placeholder="Field of expertise">
+                            <span class="error"> <?php echo $fieldError; ?></span>
+                        </div>
+
+                        <input type="submit" class="input-text submit-btn" name="SignUp" value="Sign Up">
                         <div class="signup">
                             <p>Have an account already? <a href="index.php"> Log in </a> </p>
                         </div>

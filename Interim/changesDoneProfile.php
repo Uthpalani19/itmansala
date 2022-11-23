@@ -15,7 +15,7 @@
     <!-- Student main details -->
     <div class="draken-area">
         <?php 
-            require_once('navbar.php');
+            require_once('navbar-student.php');
         ?>
 
         <div class="container">

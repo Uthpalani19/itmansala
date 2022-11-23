@@ -15,13 +15,15 @@
 
                     <!--Login form-->
                     <div class="login-form">
-                        <form action="login.php" method="POST">
-                            <input type="text" class="input-text" name="username" placeholder="Username or phone number" required><br />
-                            <input type="password" class="input-text" name="password" placeholder="Password" required><br />
-                            <input type="submit" class="submit-btn" name="Login" value="Log in" >
-                        </form>
+                        <div>
+                            <form action="login.php" method="POST">
+                                <input type="text" class="input-login-text" name="username" placeholder="Username or phone number" required><br />
+                                <input type="password" class="input-login-text" name="password" placeholder="Password" required><br />
+                                <input type="submit" class="submit-btn" name="Login" value="Log in" >
+                            </form>
+                        </div>
 
-                        <div class="signup">
+                        <div class="signup-login">
                             <p>Not on our platform? <a href="signup.php"> Create New Account </a> </p>
                         </div>
                     </div>
