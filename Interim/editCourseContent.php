@@ -88,6 +88,7 @@
             </div>
         </div>
         
+        <br> <br> <br> <br> <br> <br>
         <!-- Footer -->
         <?php
             require_once('footer.php');

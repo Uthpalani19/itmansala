@@ -28,12 +28,12 @@
     <body>
         <!--Course Details-->
         <div class="course-details-box">
-            <p id="title">Lesson 01: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p id="title">Lesson 01: දත්ත සහ තොරතුරු </p>
         </div>
 
         <!--Set Subtopic Name-->
         <div class="subtopic-title">
-            <p> 1.1 Basic building blocks of information and their characteristics </p>
+            <p> 1.1 දත්ත සහ තොරතුරු වල මූලික තැනුම් ඒකක හා ඒවායේ ගති ලක්ෂණ </p>
         </div>
 
         <div>
@@ -59,7 +59,6 @@
                 while($row = mysqli_fetch_assoc($result))
                 {
                     echo '
-
                         <tr>
                             <td>'.$row['questionId'].'</td>
                             <td>'.$row['question'].'</td>
@@ -68,13 +67,8 @@
                             <td>'.$row['option3'].'</td>
                             <td>'.$row['option4'].'</td>
                             <td>'.$row['answer'].'</td>
-                            <td><i class="fa-solid fa-large fa-file-pen" id="edit-icon"></i></td>
-                            <td>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                            </td>
+                            <td><a href="editQuestions.php?editId='.$row['questionId'].'"><i class="fa-solid fa-large fa-file-pen" id="edit-icon" ></i></td>
+                            <td><a href="deleteQuestions.php?deleteId='.$row['questionId'].'"><i class="fa-solid fa-large fa-trash" id="edit-icon"></i></td>
                         </tr>
                     ';
                 }

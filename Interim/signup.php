@@ -5,8 +5,8 @@
     $phoneError = $fNameError = $lNameError = $passwordError = $repasswordError = $fieldError = "";
     $phone = $firstname = $lastname = $password = $repassword = $fieldOfExpertise = "";
 
-    if(isset($_POST['SignUp']))
-    {
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if all fields are filled
         if(empty($_POST['phonenumber']))
         {
@@ -158,7 +158,7 @@
 
                 <div class="signup-form-details">
                     <!--Login form-->
-                    <form onsubmit="return signupFor()" method="POST" class="sign-up-form" name="signupForm">
+                    <form onsubmit="return signupFor()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="sign-up-form" name="signupForm">
                         <h2>Sign Up</h2>
 
                         <div class="input-box">
