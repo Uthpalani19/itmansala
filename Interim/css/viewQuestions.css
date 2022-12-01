@@ -137,73 +137,32 @@ tr:nth-child(odd)
     background: #D9D9D9;
 }
 
-/* Toggle Button */
-/* .switch
+/* Recover Option */
+.recover
 {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-}
-  
-.switch input
-{ 
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider 
-{
-    position: absolute;
+    color: #5319a6;
+    display:flex;
+    width: 35%;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #D9D9D9;
-    -webkit-transition: .3s;
-    transition: .3s;
-}
-  
-.slider:before 
-{
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    right: 25px;
-    background-color: #FFFFFF;
-    -webkit-transition: .3s;
-    transition: .3s;
-}
-  
-input:checked + .slider
-{
-    background-color: #5319a6;
-}
-  
-input:focus + .slider
-{
-    box-shadow: 0 0 1px #5319a6;
-}
-  
-input:checked + .slider:before 
-{
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
 }
 
-.slider.round 
+.recover > .recover-btn
 {
-    border-radius: 30px;
+    flex: auto;
+    background-color: #5319a6;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
 }
-  
-.slider.round:before 
+
+.recover > #recover-icon
 {
-    border-radius: 50%;
-} */
+    flex: auto;
+    color:#5319a6;
+    margin-left: 10px;
+    cursor: pointer;
+}
 
 /* Footer */
 .footer

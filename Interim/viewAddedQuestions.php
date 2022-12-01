@@ -36,6 +36,12 @@
             <p> 1.1 දත්ත සහ තොරතුරු වල මූලික තැනුම් ඒකක හා ඒවායේ ගති ලක්ෂණ </p>
         </div>
 
+        <!-- Questions Recovery -->
+        <div class="recover">
+            <i class="fa-large fas fa-trash-restore" id="recover-icon" ></i>
+            <button type="button" class="recover-btn" onclick="window.location.href='editQuestions.php'">Recover Questions</button>
+        </div>
+
         <div>
             <center>
             <table class="addedQuestions">

@@ -77,6 +77,7 @@
                 $option3= mysqli_real_escape_string($connection,$_POST['option3']); 
                 $option4= mysqli_real_escape_string($connection,$_POST['option4']); 
 
+                //Check if the answer is one of the options
                 if($answer == $option1 || $answer == $option2 || $answer == $option3 || $answer == $option4)
                 {
                     $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)

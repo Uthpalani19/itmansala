@@ -84,31 +84,58 @@
                             <?php
                                 if(isset($_POST['saveChanges']))
                                 {
-                                    $question = $_POST['question'];
-                                    $option1 = $_POST['option1'];
-                                    $option2 = $_POST['option2'];
-                                    $option3 = $_POST['option3'];
-                                    $option4 = $_POST['option4'];
-                                    $answer = $_POST['answer'];
-
-                                    $sql = "UPDATE modelpaperquestion SET question = '$question', option1 = '$option1', option2 = '$option2', option3 = '$option3', option4 = '$option4', answer = '$answer' WHERE questionID = '$questionID'";
-                                    $result = mysqli_query($connection, $sql);
-
-                                    if($result)
+                                    //Check if the question and answers are not empty
+                                    if(!empty($_POST['question']) && !empty($_POST['option1']) && !empty($_POST['option2']) && !empty($_POST['option3']) && !empty($_POST['option4']) && !empty($_POST['answer']))
                                     {
-                                        echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                        // Check if the options are not same
+                                        if($_POST['option1'] != $_POST['option2'] && $_POST['option1'] != $_POST['option3'] && $_POST['option1'] != $_POST['option4'] && $_POST['option2'] != $_POST['option3'] && $_POST['option2'] != $_POST['option4'] && $_POST['option3'] != $_POST['option4'])
+                                        {
+                                            // Check if the answer is one of the options
+                                            if($_POST['answer'] == $_POST['option1'] || $_POST['answer'] == $_POST['option2'] || $_POST['answer'] == $_POST['option3'] || $_POST['answer'] == $_POST['option4'])
+                                            {
+                                                $question = $_POST['question'];
+                                                $option1 = $_POST['option1'];
+                                                $option2 = $_POST['option2'];
+                                                $option3 = $_POST['option3'];
+                                                $option4 = $_POST['option4'];
+                                                $answer = $_POST['answer'];
+
+                                                $sql = "UPDATE modelpaperquestion SET question = '$question', option1 = '$option1', option2 = '$option2', option3 = '$option3', option4 = '$option4', answer = '$answer' WHERE questionID = '$questionID'";
+                                                $result = mysqli_query($connection, $sql);
+
+                                                if($result)
+                                                {
+                                                    echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                                }
+                                                else
+                                                {
+                                                    echo "<script>alert('Question Update Failed!')</script>";
+                                                    echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                echo "<script>alert('Answer is not one of the options!')</script>";
+                                                echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo "<script>alert('Options are same!')</script>";
+                                            echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                        }
                                     }
                                     else
                                     {
-                                        echo "<script>alert('Question Update Failed!')</script>";
-                                        echo "<script>window.location.href='editQuestions.php'</script>";
+                                        echo "<script>alert('Question or Answers are empty!')</script>";
+                                        echo "<script>window.location.href='viewAddedQuestions.php'</script>";
                                     }
                                 }  
                                 if(isset($_POST['goBack']))
                                 {
                                     echo "<script>window.location.href='viewAddedQuestions.php'</script>";
                                 }
-                    }
+                            }
                     else
                     {
                         echo $connection->error;

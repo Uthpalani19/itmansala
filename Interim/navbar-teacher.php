@@ -12,9 +12,9 @@
         </div>
         <div class="nav-right">
             <div class="nav-links">
-                <p onclick="window.location.href='underconstruction.php'">Dashboard</p>
-                <p onclick="window.location.href='underconstruction.php'">Student</p>
-                <p onclick="window.location.href='underconstruction.php'">Course</p>
+                <p onclick="window.location.href='dashboard-teacher.php'">Dashboard</p>
+                <p onclick="window.location.href='teacher-studentview.php'">Student</p>
+                <p onclick="window.location.href='teacher-courses.php'">Course</p>
                 <p onclick="window.location.href='editCourseContent.php'">My Courses</p>
             </div>
             <div class="nav-user-tray">
