@@ -11,6 +11,12 @@ body {
     color: #636363;
 }
 
+/* Paragraphs */
+p
+{
+    color: #5319a6;
+}
+
 /*Course Details*/
 .course-details-box
 {
@@ -142,7 +148,7 @@ tr:nth-child(odd)
 {
     color: #5319a6;
     display:flex;
-    width: 35%;
+    width: 25%;
     cursor: pointer;
 }
 
@@ -153,7 +159,9 @@ tr:nth-child(odd)
     color: #FFFFFF;
     border: none;
     border-radius: 8px;
+    margin-left: 75px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .recover > #recover-icon

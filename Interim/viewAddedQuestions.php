@@ -37,9 +37,9 @@
         </div>
 
         <!-- Questions Recovery -->
-        <div class="recover">
-            <i class="fa-large fas fa-trash-restore" id="recover-icon" ></i>
-            <button type="button" class="recover-btn" onclick="window.location.href='editQuestions.php'">Recover Questions</button>
+        <div class="recover"> 
+            <button class="recover-btn"  onclick="window.location.href='recoverQuestions.php'"> <i class="fa-large fas fa-trash-restore" id="recover-icon"
+            ></i> Recover Questions</button>
         </div>
 
         <div>
