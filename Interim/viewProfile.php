@@ -10,7 +10,7 @@
 <body>
     <!-- Navigation Bar -->
     <?php 
-        require_once('navbar.php');
+        require_once('navbar-teacher.php');
     ?>
 
     <!-- Student main details -->
