@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once('navbar.php');
+    require_once('navbar-teacher.php');
 
     if(isset($_SESSION['User']))
     {
@@ -27,12 +27,10 @@
             }
         </script>
         <link rel="stylesheet" href="css/quiz.css"></link>
+
     </head>
 
     <body>
-        <?php
-            require_once('navbar.php');
-        ?>
         <!--Course Details-->
         <div class="course-details-box">
             <p id="title">Lesson 01: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -90,6 +88,7 @@
             </div>
         </div>
         
+        <br> <br> <br> <br> <br> <br>
         <!-- Footer -->
         <?php
             require_once('footer.php');

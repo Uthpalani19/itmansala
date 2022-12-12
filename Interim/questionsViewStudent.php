@@ -17,7 +17,7 @@
     <body>
         <!--Navigation Bar-->
         <?php
-            require_once('navbar.php');
+            require_once('navbar-student.php');
         ?>
 
         <!--Course Details-->

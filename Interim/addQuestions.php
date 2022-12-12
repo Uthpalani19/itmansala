@@ -1,6 +1,8 @@
 <?php
     session_start();
     require('dbconnection.php');
+    // Navigation Bar
+    require_once('navbar-teacher.php');
 
     if(isset($_SESSION['User']))
     {
@@ -11,7 +13,7 @@
         header("location:index.php");
     }
 
-    /* Auto generated ID */
+    // Auto generated ID
     $sql = "Select questionId from modelpaperquestion order by questionId desc limit 1";
     $result = mysqli_query($connection,$sql);
     $row = mysqli_fetch_array($result);
@@ -45,11 +47,28 @@
         }
     }
 
+    // Finish Button
 
-    if(isset($_POST['addQuestions']) || isset($_POST['FinishQuiz']))
+    if(isset($_POST['finish']))
     {
+        ?>
+            <script type="text/javascript">
+            alert("Quiz added successfully.");
+            window.location.href="viewAddedQuestions.php";
+            </script>
+        <?php
+    }
+
+    // Add Question Button
+
+    if(isset($_POST['addQuestions']))
+    {
+        // Check if the fields are not empty
         if(!empty($_POST['question']) && !empty($_POST['option1']) && !empty($_POST['option2']) && !empty($_POST['option3']) && !empty($_POST['option4']) && !empty($_POST['answer']))
         {
+            // Check if the options are not same
+            if($_POST['option1'] != $_POST['option2'] && $_POST['option1'] != $_POST['option3'] && $_POST['option1'] != $_POST['option4'] && $_POST['option2'] != $_POST['option3'] && $_POST['option2'] != $_POST['option4'] && $_POST['option3'] != $_POST['option4'])
+            {
                 $id= mysqli_real_escape_string($connection,$id);
                 $question= mysqli_real_escape_string($connection,$_POST['question']);
                 $answer= mysqli_real_escape_string($connection,$_POST['answer']);
@@ -58,48 +77,46 @@
                 $option3= mysqli_real_escape_string($connection,$_POST['option3']); 
                 $option4= mysqli_real_escape_string($connection,$_POST['option4']); 
 
-                $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)
-                VALUES ('$id', 'S001','$question','$answer','$option1','$option2','$option3','$option4',1)";
-                
-            if(isset($_POST['FinishQuiz']))
-            {
-                if ($connection->query($sql) === TRUE)
-                {?>
-                    <script type="text/javascript">
-                        alert("Quiz added successfully.");
-                        window.location.href="editCourseContent.php";
-                    </script>
-                <?php
+                //Check if the answer is one of the options
+                if($answer == $option1 || $answer == $option2 || $answer == $option3 || $answer == $option4)
+                {
+                    $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)
+                    VALUES ('$id', 'S001','$question','$answer','$option1','$option2','$option3','$option4',1)";
+                        
+                        if ($connection->query($sql) === TRUE)
+                        {?>
+                            <script type="text/javascript">
+                                alert("Question added successfully.");
+                                window.location.href=window.location.href;
+                            </script>
+                        <?php
+                        }
+                        else
+                        {?>
+                            <script type="text/javascript">
+                                alert("Try Again!!.");
+                                window.location.href=window.location.href;
+                            </script>
+                        <?php
+                        }
                 }
                 else
-                {?>
+                {
+                    ?>
                     <script type="text/javascript">
-                        alert("Try Again!!.");
-                        window.location.href=window.location.href;
+                        alert("Answer should be one from options.");
                     </script>
                 <?php
                 }
-            }
-            else 
+            } 
+            else
             {
-                if ($connection->query($sql) === TRUE)
-                {?>
-                    <script type="text/javascript">
-                        alert("Question added successfully.");
-                        window.location.href=window.location.href;
-                    </script>
-                <?php
-                }
-                else
-                {?>
-                    <script type="text/javascript">
-                        alert("Try Again!!.");
-                        window.location.href=window.location.href;
-                    </script>
-                <?php
-                }
-            }
-            
+            ?>
+                <script type="text/javascript">
+                    alert("Answers should be different from each other.");
+                </script>
+            <?php
+            }           
         }
         else
         {
@@ -121,20 +138,16 @@
     </head>
 
     <body>
-        <!--Navigation Bar-->
-        <?php
-            require_once('navbar.php');
-        ?>
 
         <!--Course Details-->
         <form action="" method="POST">
         <div class="course-details-box">
-            <p id="title">Lesson 01: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p id="title">Lesson 01: දත්ත සහ තොරතුරු.</p>
         </div>
 
         <!--Set Subtopic Name-->
         <div class="subtopic-title">
-            <p> 1.1 Basic building blocks of information and their characteristics </p>
+            <p> 1.1 දත්ත සහ තොරතුරු වල මූලික තැනුම් ඒකක හා ඒවායේ ගති ලක්ෂණ </p>
         </div>
 
         <!--Add a new Question-->
@@ -156,7 +169,7 @@
             <br />
 
             <!--div class="buttons"-->
-                <input type="submit" value="Finish Quiz" class="btn-question" name="FinishQuiz">
+                <input type="submit" value="Finish" class="btn-question" name="finish">
                 <input type="submit" value="Add Questions" class="btn-question" id="question" name="addQuestions">
             <!--/div-->
             

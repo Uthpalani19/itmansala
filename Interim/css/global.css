@@ -22,6 +22,15 @@ body {
     animation: fadeIn 0.2s ease-in forwards;
 }
 
+/* Nav bar hover */
+.nav-links :hover
+{
+    color: #5319a6;
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 10px;
+}
+
 .nav-left{
     display: inline-block;
     margin-left: 1.5rem;
@@ -37,7 +46,6 @@ body {
 
 .nav-links{
     display: inline-block;
-    border-right: 2px solid white;
 }
 
 .nav-links p{
