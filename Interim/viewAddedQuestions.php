@@ -22,7 +22,7 @@
         <script type="text/javascript">
                 
         </script>
-        <link rel="stylesheet" href="css/viewQuestions.css"></link>
+        <link rel="stylesheet" href="css/teacher-style.css"></link>
     </head>
 
     <body>

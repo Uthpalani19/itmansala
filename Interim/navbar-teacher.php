@@ -20,7 +20,7 @@
             <div class="nav-user-tray">
                 <p><i class="fa-regular fa-bell"></i></p>
                 <p onclick="window.location.href='viewProfile.php'"><i class="fa-solid fa-circle-user"></i></p>
-                <!-- <p><?php echo $_SESSION['name']; ?></p> -->
+                <?php echo $_SESSION['firstname']; ?></p>
             </div>
 
         </div>

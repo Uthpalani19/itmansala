@@ -26,23 +26,22 @@
                 window.location.href="viewAddedQuestions.php";
             }
         </script>
-        <link rel="stylesheet" href="css/quiz.css"></link>
+        <link rel="stylesheet" href="css/teacher-style.css"></link>
 
     </head>
 
-    <body>
+    <body class="grey-bg">
         <!--Course Details-->
         <div class="course-details-box">
-            <p id="title">Lesson 01: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <p id="content">Maecenas vel condimentum est. Morbi auctor sed sem id condimentum. Fusce efficitur gravida scelerisque. Nam ut neque viverra, tempor lectus eget, scelerisque urna. Nullam eleifend finibus tincidunt. Duis turpis erat, porta ac erat non, vestibulum tristique orci. Nam sit amet auctor diam, et sollicitudin massa. Mauris tempus,
-                sapien a cursus fermentum, tellus turpis viverra risus, sit amet congue ex velit at elit.</p>
+            <p id="title">Lesson 01: දත්ත සහ තොරතුරු. </p>
+            <p id="content">දත්ත යනු තනි පුද්ගල කරුණු ලෙස අර්ථ දක්වා ඇති අතර තොරතුරු යනු එම කරුණු සංවිධානය කිරීම සහ අර්ථ නිරූපණය කිරීමයි. </p>
         </div>
 
         <!--Subtopic Details-->
         <div class="subtopic">
             <div class="subtopic-done"></div>
-            <div class="subtopic-title">
-                <p>1.1 Basic building blocks of information and their characteristics</p>
+            <div>
+                <p>1.1 දත්ත සහ තොරතුරු වල මූලික තැනුම් ඒකක හා ඒවායේ ගති ලක්ෂණ</p>
             </div>
             <div class="subtopic-edit">
                 <p><i class="fa-solid fa-lg fa-file-pen" id="edit-icon"></i></p>
@@ -58,7 +57,7 @@
         <!--Lessons Details-->
         <div class="lesson">
             <div>
-                <p>Life cycle of data</p>
+                <p>දත්තවල ජීවන චක්‍රය</p>
             </div>
             <div class="lesson-edit">
                 <p><i class="fa-solid fa-lg fa-file-pen" id="edit-icon"></i></p>

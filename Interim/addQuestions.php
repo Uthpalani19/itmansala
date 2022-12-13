@@ -86,7 +86,6 @@
                         if ($connection->query($sql) === TRUE)
                         {?>
                             <script type="text/javascript">
-                                alert("Question added successfully.");
                                 window.location.href=window.location.href;
                             </script>
                         <?php
@@ -134,7 +133,7 @@
         <title>Manage Questions</title>
         <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
         <!--script src="js/logout.js"></script-->
-        <link rel="stylesheet" href="css/addQuestions.css"></link>
+        <link rel="stylesheet" href="css/teacher-style.css"></link>
     </head>
 
     <body>

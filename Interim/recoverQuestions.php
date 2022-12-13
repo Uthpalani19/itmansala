@@ -13,6 +13,19 @@
     {
         header("location:index.php");
     }
+
+    // $questionID = $_GET['editId'];
+    // $sql = "UPDATE modelpaperquestion set status=1 WHERE questionId='$questionID'";
+    // $result = mysqli_query($connection,$sql);
+
+    // if($result)
+    // {
+    //     echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+    // }
+    // else
+    // {
+    //     echo "Question Recovering Failed";
+    // }
 ?>
 
 <html>
@@ -22,7 +35,7 @@
         <script type="text/javascript">
                 
         </script>
-        <link rel="stylesheet" href="css/viewQuestions.css"></link>
+        <link rel="stylesheet" href="css/teacher-style.css"></link>
     </head>
 
     <body>
@@ -38,7 +51,7 @@
 
         <div>
             <center>
-                <p>Deleted Questions</p>
+                <p id="purple-text">Deleted Questions</p>
             <table class="addedQuestions">
                 <tr>
                     <th>No:</th>
@@ -67,7 +80,7 @@
                             <td>'.$row['option3'].'</td>
                             <td>'.$row['option4'].'</td>
                             <td>'.$row['answer'].'</td>
-                            <td><a href="editQuestions.php?editId='.$row['questionId'].'"><i class="fa-solid fa-large fa-file-pen" id="edit-icon" ></i></td>
+                            <td><a href="recoverQuestions.php?editId='.$row['questionId'].'"><i class="fa fa-reply fa-lg" aria-hidden="true" id="edit-icon"></i></td>
                         </tr>
                     ';
                 }
