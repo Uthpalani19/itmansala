@@ -1,6 +1,6 @@
 <?php
 
-    $connection = mysqli_connect('localhost','root','','emansala');
+    $connection = mysqli_connect('localhost','root','','itmansala');
 
     if(!$connection)
     {
