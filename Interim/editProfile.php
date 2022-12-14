@@ -1,7 +1,19 @@
 <?php
-    require_once('navbar-student.php');
-?>
+    session_start();
+    require_once('navbar-teacher.php');
+    require('dbconnection.php');
 
+    if(!isset($_SESSION['firstname']))
+    {
+        header('location:index.php');
+    }
+    if(isset($_GET['logout']))
+    {
+        session_destroy();
+        unset($_SESSION['firstname']);
+        header('location:index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

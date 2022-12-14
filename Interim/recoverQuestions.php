@@ -1,31 +1,18 @@
 <?php
     session_start();
-    require_once('dbconnection.php');
-    
-    // Navigation Bar
     require_once('navbar-teacher.php');
+    require('dbconnection.php');
 
-    if(isset($_SESSION['User']))
+    if(!isset($_SESSION['firstname']))
     {
-        //echo '<a href="logout.php?logout">Logout</a>';
+        header('location:index.php');
     }
-    else
+    if(isset($_GET['logout']))
     {
-        header("location:index.php");
+        session_destroy();
+        unset($_SESSION['firstname']);
+        header('location:index.php');
     }
-
-    // $questionID = $_GET['editId'];
-    // $sql = "UPDATE modelpaperquestion set status=1 WHERE questionId='$questionID'";
-    // $result = mysqli_query($connection,$sql);
-
-    // if($result)
-    // {
-    //     echo "<script>window.location.href='viewAddedQuestions.php'</script>";
-    // }
-    // else
-    // {
-    //     echo "Question Recovering Failed";
-    // }
 ?>
 
 <html>
@@ -80,7 +67,7 @@
                             <td>'.$row['option3'].'</td>
                             <td>'.$row['option4'].'</td>
                             <td>'.$row['answer'].'</td>
-                            <td><a href="recoverQuestions.php?editId='.$row['questionId'].'"><i class="fa fa-reply fa-lg" aria-hidden="true" id="edit-icon"></i></td>
+                            <td><a href="viewDeletedQuestions.php?recoverId='.$row['questionId'].'"><i class="fa fa-reply fa-lg" aria-hidden="true" id="edit-icon"></i></td>
                         </tr>
                     ';
                 }

@@ -163,7 +163,7 @@
 
 
 /* Changes Done Profile */
-.container
+/* .container
 {
     margin-top: 55px;
     display: flex;
@@ -673,7 +673,7 @@ body {
     flex: 1 1 100%;
 }
 
-.container-question > .question > textarea
+/* .container-question > .question > textarea
 {
     width: 75%;
     height: 100px;
@@ -721,19 +721,19 @@ body {
 .container-question > .option > #stu-answer
 {
     background-color:#FF3F3F;
-}
+} */
 
 /* Seperator */
-.separator
+/* .separator
 {
     border: 1px solid #D9D9D9;
     margin-top: 20px;
     margin-bottom: 20px;
     width: 90%;
-}
+} */
 
 /* Buttons */
-.finish-review
+/* .finish-review
 {
     display: flex;
 }
@@ -762,15 +762,15 @@ body {
 }
 
 /* Next ACtion buttons */
-.next-action
+/* .next-action
 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-left: 100px;
     margin-right: 100px;
-}
-
+} */ 
+/* 
 .next-action > #disable
 {
     background-color: #979797;
@@ -786,4 +786,4 @@ body {
     margin-right: auto;
     cursor: pointer;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24);
-}
+}  */

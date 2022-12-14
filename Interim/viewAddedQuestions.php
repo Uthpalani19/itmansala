@@ -1,17 +1,17 @@
 <?php
     session_start();
-    require_once('dbconnection.php');
-    
-    // Navigation Bar
     require_once('navbar-teacher.php');
+    require('dbconnection.php');
 
-    if(isset($_SESSION['User']))
+    if(!isset($_SESSION['firstname']))
     {
-        //echo '<a href="logout.php?logout">Logout</a>';
+        header('location:index.php');
     }
-    else
+    if(isset($_GET['logout']))
     {
-        header("location:index.php");
+        session_destroy();
+        unset($_SESSION['firstname']);
+        header('location:index.php');
     }
 ?>
 

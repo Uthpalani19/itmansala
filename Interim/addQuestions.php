@@ -1,18 +1,21 @@
 <?php
     session_start();
-    require('dbconnection.php');
-    // Navigation Bar
     require_once('navbar-teacher.php');
+    require('dbconnection.php');
 
-    if(isset($_SESSION['User']))
+    if(!isset($_SESSION['firstname']))
     {
-        //echo '<a href="logout.php?logout">Logout</a>';
+        header('location:index.php');
     }
-    else
+    if(isset($_GET['logout']))
     {
-        header("location:index.php");
+        session_destroy();
+        unset($_SESSION['firstname']);
+        header('location:index.php');
     }
+?>
 
+<?php
     // Auto generated ID
     $sql = "Select questionId from modelpaperquestion order by questionId desc limit 1";
     $result = mysqli_query($connection,$sql);
