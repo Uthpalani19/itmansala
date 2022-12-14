@@ -77,8 +77,8 @@
         </div>
 
         <!--Add Questions button-->
-        <input type="submit" value="Add Questions" class="btn-questions" name="addQuestions" onClick="addQuestions()">
-        <input type="submit" value="View Questions" class="btn-questions-view" name="viewQuestions"  onClick="viewQuestions()">
+        <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions" onClick="addQuestions()">
+        <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions"  onClick="viewQuestions()">
 
         <!--Subtopic Details-->
         <div class="subtopic-new">
