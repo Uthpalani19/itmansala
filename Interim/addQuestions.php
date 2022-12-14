@@ -67,50 +67,59 @@
     if(isset($_POST['addQuestions']))
     {
         // Check if the fields are not empty
-        if(!empty($_POST['question']) && !empty($_POST['option1']) && !empty($_POST['option2']) && !empty($_POST['option3']) && !empty($_POST['option4']) && !empty($_POST['answer']))
+        if(!empty($_POST['question']) && !empty($_POST['option1']) && !empty($_POST['option2']) && !empty($_POST['option3']) && !empty($_POST['option4']))
         {
             // Check if the options are not same
             if($_POST['option1'] != $_POST['option2'] && $_POST['option1'] != $_POST['option3'] && $_POST['option1'] != $_POST['option4'] && $_POST['option2'] != $_POST['option3'] && $_POST['option2'] != $_POST['option4'] && $_POST['option3'] != $_POST['option4'])
             {
                 $id= mysqli_real_escape_string($connection,$id);
                 $question= mysqli_real_escape_string($connection,$_POST['question']);
-                $answer= mysqli_real_escape_string($connection,$_POST['answer']);
                 $option1= mysqli_real_escape_string($connection,$_POST['option1']);
                 $option2= mysqli_real_escape_string($connection,$_POST['option2']);    
                 $option3= mysqli_real_escape_string($connection,$_POST['option3']); 
                 $option4= mysqli_real_escape_string($connection,$_POST['option4']); 
+                $answer = $_POST['answer'];
 
-                //Check if the answer is one of the options
-                if($answer == $option1 || $answer == $option2 || $answer == $option3 || $answer == $option4)
+                if($answer == "option1")
                 {
-                    $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)
+                    $answer = $option1;
+                }
+                else if($answer == "option2")
+                {
+                    $answer = $option2;
+                }
+                else if($answer == "option3")
+                {
+                    $answer = $option3;
+                }
+                else if($answer == "option4")
+                {
+                    $answer = $option4;
+                }
+                
+                $answer = mysqli_real_escape_string($connection,$answer);
+
+                // Insert the question to the database
+                $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)
                     VALUES ('$id', 'S001','$question','$answer','$option1','$option2','$option3','$option4',1)";
                         
-                        if ($connection->query($sql) === TRUE)
-                        {?>
-                            <script type="text/javascript">
-                                window.location.href=window.location.href;
-                            </script>
-                        <?php
-                        }
-                        else
-                        {?>
-                            <script type="text/javascript">
-                                alert("Try Again!!.");
-                                window.location.href=window.location.href;
-                            </script>
-                        <?php
-                        }
+                if ($connection->query($sql) === TRUE)
+                {?>
+                    <script type="text/javascript">
+                        window.location.href=window.location.href;
+                    </script>
+                    
+                    <?php
                 }
                 else
-                {
-                    ?>
-                    <script type="text/javascript">
-                        alert("Answer should be one from options.");
-                    </script>
-                <?php
+                {?>
+                        <script type="text/javascript">
+                            alert("Try Again!!.");
+                            window.location.href=window.location.href;
+                        </script>
+                    <?php
                 }
-            } 
+            }
             else
             {
             ?>
@@ -118,16 +127,16 @@
                     alert("Answers should be different from each other.");
                 </script>
             <?php
-            }           
+            }  
         }
         else
         {
-        ?>
-            <script type="text/javascript">
-                alert("All fields are required.");
-            </script>
-        <?php
-        }
+            ?>
+                <script type="text/javascript">
+                    alert("Answers should not be empty.");
+                </script>
+            <?php
+        }  
     }
 ?>
 
@@ -163,10 +172,13 @@
             </div>
             
             <textarea placeholder="Enter the option 1 " class="option" name="option1" rows="4" cols="60"></textarea>
+            <input type="radio" class="input-option" name="answer" checked value="option1">
             <textarea placeholder="Enter the option 2 " class="option" name="option2" rows="4" cols="60"></textarea>
+            <input type="radio" class="input-option" name="answer" value="option2">
             <textarea placeholder="Enter the option 3 " class="option" name="option3" rows="4" cols="60"></textarea>
+            <input type="radio" class="input-option" name="answer" value="option3">
             <textarea placeholder="Enter the option 4 " class="option" name="option4" rows="4" cols="60"></textarea>
-            <textarea placeholder="Enter the Correct answer " class="answer" name="answer" rows="4" cols="60"></textarea>
+            <input type="radio" class="input-option" name="answer" value="option4">
 
             <br />
 

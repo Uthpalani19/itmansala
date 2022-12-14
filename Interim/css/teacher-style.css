@@ -222,7 +222,12 @@ table
     color: white;
 }
 
-td:nth-child(2),td:nth-child(3),td:nth-child(4),td:nth-child(5),td:nth-child(6),td:nth-child(7)
+td:nth-child(2)
+{
+    width: 500px;
+}
+
+td:nth-child(3),td:nth-child(4),td:nth-child(5),td:nth-child(6),td:nth-child(7)
 {
     width: 300px;
 }
@@ -403,6 +408,62 @@ tr:nth-child(odd)
 }
 
 /*Add Questions*/
+.input-option
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    bottom: 5px;
+    height: 40px;
+    width: 40px;
+    transition: all 0.15s ease-out 0s;
+    background: #D9D9D9;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 0.5rem;
+    outline: none;
+    position: relative;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.input-option:hover
+{
+    background: #6D6D6D;
+}
+
+.input-option:checked
+{
+    background: #299617;
+}
+
+.input-option:checked::before
+{
+    width: 40px;
+    height: 40px;
+    display:flex;
+    content: '\f00c';
+    font-size: 25px;
+    font-weight:bold;
+    position: absolute;
+    align-items:center;
+    justify-content:center;
+    font-family:'Font Awesome 5 Free';
+}
+
+.input-option:checked::after
+{
+    background: #299617;
+    content: '';
+}
+
+/* Question details */
+  
 .question-number
 {
     color: white;
