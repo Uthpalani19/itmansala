@@ -31,8 +31,6 @@
     {
         $id = "Q001";
     }
-    else
-    {
         $id = substr($lastid,3);
         $id = intval($id);
 
@@ -48,7 +46,6 @@
         {
             $id = "Q00".($id + 1);
         }
-    }
 
     // Finish Button
 
@@ -117,7 +114,7 @@
                             alert("Try Again!!.");
                             window.location.href=window.location.href;
                         </script>
-                    <?php
+                <?php
                 }
             }
             else
