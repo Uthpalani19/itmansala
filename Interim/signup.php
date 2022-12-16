@@ -1,67 +1,8 @@
 <?php
     session_start();
     include 'dbconnection.php';
-
-    $phoneError = $fNameError = $lNameError = $passwordError = $repasswordError = $fieldError = "";
-    $phone = $firstname = $lastname = $password = $repassword = $fieldOfExpertise = "";
-
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Check if all fields are filled
-        if(empty($_POST['phonenumber']))
-        {
-            $phoneError = "* Phone number is required";
-        }
-        else
-        {
-            $phonenumber = mysqli_real_escape_string($connection,$_POST['phonenumber']);
-        }
-
-        if(empty($_POST['firstName']))
-        {
-            $fNameError = "* First name is required";
-        }
-        else
-        {
-            $firstname = mysqli_real_escape_string($connection,$_POST['firstName']);
-        }
-
-        if(empty($_POST['lastName']))
-        {
-            $lNameError = "* Last name is required";
-        }
-        else
-        {
-            $lastname = mysqli_real_escape_string($connection,$_POST['lastName']);
-        }
-
-        if(empty($_POST['password']))
-        {
-            $passwordError = "* Password is required";
-        }
-        else
-        {
-            $password = mysqli_real_escape_string($connection,$_POST['password']);
-        }
-
-        if(empty($_POST['repassword']))
-        {
-            $repasswordError = "* Re-enter password";
-        }
-        else
-        {
-            $repassword = mysqli_real_escape_string($connection,$_POST['repassword']);
-        }
-
-        if(empty($_POST['fieldOfExpertise']))
-        {
-            $fieldError = "* This is required";
-        }
-        else
-        {
-            $fieldOfExpertise = mysqli_real_escape_string($connection,$_POST['fieldOfExpertise']);
-        }
-
         // Entering data to the DB
             $sql = "SELECT * from teacher WHERE phonenumber='$phonenumber' LIMIT 1";
             $result = mysqli_query($connection,$sql);
@@ -99,56 +40,9 @@
     <head>
         <title>Sign Up</title>
         <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/teacher-style.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
-        <!-- Java Script validation -->
-        <script type="text/javascript">
-            function signupFor()
-            {
-                var phonenumber = document.forms["signupForm"]["phonenumber"].value;
-                var firstName = document.forms["signupForm"]["firstName"].value;
-                var lastName = document.forms["signupForm"]["lastName"].value;
-                var password = document.forms["signupForm"]["password"].value;
-                var repassword = document.forms["signupForm"]["repassword"].value;
-                var fieldOfExpertise = document.forms["signupForm"]["fieldOfExpertise"].value;
-
-                var regPhone=/^\d{10}$/;                                        // JS reGex for Phone Number validation.
-                var regName = /\d+$/g;                                          // JS reGex for Name validation
-                var regPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;      // JS reGex for password validation
-
-                if(phonenumber=="" || firstName=="" || lastName=="" || password=="" || repassword=="" || fieldOfExpertise=="")
-                {
-                    return false;
-                }
-                else if(!regPhone.test(phonenumber))
-                {
-                    alert("Please enter a valid phone number.");
-                    return false;
-                }
-                else if(regName.test(firstName) || regName.test(lastName))
-                {
-                    alert("Please enter a valid name.");
-                    return false;
-                }
-                else if(!regPassword.test(password))
-                {
-                    alert("Please enter a valid password.");
-                    return false;
-                }
-                else if(password!=repassword)
-                {
-                    alert("Passwords are not matching.");
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-
-            }
-        </script>
-        <!-- End of JS -->
-        
     </head>
 
     <body>
@@ -158,37 +52,43 @@
 
                 <div class="signup-form-details">
                     <!--Login form-->
-                    <form onsubmit="return signupFor()" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="sign-up-form" name="signupForm">
+                    <form onsubmit="return signupFor()" autocomplete="off" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="sign-up-form" name="signupForm">
                         <h2>Sign Up</h2>
 
                         <div class="input-box">
-                            <input type="text" class="input-text" name="phonenumber" placeholder="Phone number">
-                            <span class="error"> <?php echo $phoneError; ?></span> 
+                            <input type="text" class="input-text" name="phonenumber" placeholder="Phone number" id="phone" required>
+                            <span id="phone-error" class="hide error">Invalid Input</span>
+                            <span id="empty-phone" class="hide error">Phone number Cannot Be Empty</span> 
                         </div>
 
                         <div class="input-box">
-                            <input type="text" class="input-text" name="firstName" placeholder="First name">
-                            <span class="error"> <?php echo $fNameError; ?></span>
+                            <input type="text" class="input-text" name="firstName" placeholder="First name" id="first-name-input">
+                            <span id="first-name-error" class="hide error">Invalid Input</span>
+                            <span id="empty-first-name" class="hide error">First Name Cannot Be Empty</span> 
                         </div>
 
                         <div class="input-box">
-                            <input type="text" class="input-text" name="lastName" placeholder="Last name">
-                            <span class="error"> <?php echo $lNameError; ?></span>
+                            <input type="text" class="input-text" name="lastName" placeholder="Last name" id="last-name-input">
+                            <span id="last-name-error" class="hide error">Invalid Input</span>
+                            <span id="empty-first-name" class="hide error">Last Name Cannot Be Empty</span> 
                         </div>
 
                         <div class="input-box">
-                            <input type="password" class="input-text" name="password" placeholder="Password">
-                            <span class="error"> <?php echo $passwordError; ?></span>
+                            <input type="password" class="input-text" name="password" placeholder="Password" id="password">
+                            <span id="password-error" class="hide error">Passwords Should Have Letter, Special symbols, Numbers And Length >=8</span>
+                            <span id="empty-password" class="hide error">Password Cannot Be Empty</span>
                         </div>
 
                         <div class="input-box">
-                            <input type="password" class="input-text" name="repassword" placeholder="Re-enter Password">
-                            <span class="error"> <?php echo $repasswordError; ?></span>
+                            <input type="password" class="input-text" name="repassword" placeholder="Re-enter Password" id="verify-password">
+                            <span id="verify-password-error" class="hide error">Invalid Input</span>
+                            <span id="empty-verify-password" class="hide error">This Cannot Be Empty</span>
                         </div>
 
                         <div class="input-box">
-                            <input type="text" class="input-text" name="fieldOfExpertise" placeholder="Field of expertise">
-                            <span class="error"> <?php echo $fieldError; ?></span>
+                            <input type="text" class="input-text" name="fieldOfExpertise" placeholder="Field of expertise" id="field-of-expertise">
+                            <span id="field-error" class="hide error">Invalid Input</span>
+                            <span id="empty-field" class="hide error">Field of expertise Cannot Be Empty</span>
                         </div>
 
                         <input type="submit" class="input-text submit-btn" name="SignUp" value="Sign Up">
@@ -200,5 +100,9 @@
 
             </div>
         </div>
+        
+        <!-- Script -->
+        <script src="js/signupvalidation.js"></script>
+
     </body>
 </html>

@@ -3,19 +3,7 @@
 <head>
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="css/global.css">
-  <script>
-    const logout = document.getElementById("logout");
-    const hidden = document.getElementById("hidden");
-    const close = document.getElementById("close");
 
-    logout.onclick = function(){
-        hidden.style.display = "block";
-    }
-
-    close.onclick = function(){
-        hidden.style.display = "none"
-    }
-  </script>
 </head>
 <body>
 
@@ -33,17 +21,30 @@
             <div class="nav-user-tray">
                 <p><i class="fa-regular fa-bell"></i></p>
                 <p onclick="window.location.href='viewProfile.php'"><i class="fa-solid fa-circle-user"></i></p>
-                <?php echo $_SESSION['firstname']; ?></p>
-            </div>
-            <!-- Logout button -->
-            <div class="hidden" id="hidden">
-                <p><i id="close" class="fa-solid fa-xmark"></i></p>
-                <p><i class="fa-solid fa-circle-user user2"></i></p>
-                <a href="dashboard-teacher.php?logout='1'">Logout</a>
+                <p id="logout"><?php echo $_SESSION['firstname']; ?></p>
+            
+                <!-- Logout button -->
+                <div class="hidden" id="hidden">
+                    <p><i id="close" class="fa-solid fa-xmark"></i></p>
+                    <p><i class="fa-solid fa-circle-user user2"></i></p>
+                    <a href="dashboard-teacher.php?logout='1'">Logout</a>
+                </div>
             </div>
 
         </div>
     </div>
+    <script>
+    const logout = document.getElementById("logout");
+    const hidden = document.getElementById("hidden");
+    const close = document.getElementById("close");
 
+    logout.onclick = function(){
+        hidden.style.display = "block";
+    }
+
+    close.onclick = function(){
+        hidden.style.display = "none"
+    }
+  </script>
 </body>
 </html>

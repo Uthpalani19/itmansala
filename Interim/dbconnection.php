@@ -6,6 +6,4 @@
     {
         die('Please Check your connection'.mysqli_error());
     }
-
-
 ?>
