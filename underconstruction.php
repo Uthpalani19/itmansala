@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css"></link>
+    <link rel="stylesheet" href="src/assets/css/global.css"></link>
     <title>Under Construction</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
         </div>
         <br><br>
         <div class="avatar">
-            <img src="img/avatar4.png" alt="quizReviewAvatar" id="quizReviewAvatar" width = "500">
+            <img src="src\assets\images\avatar4.png" alt="quizReviewAvatar" id="quizReviewAvatar" width = "500">
         </div>
         <br><br>
         <div class="encouragement-msg2">

@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Questions</title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/questionsViewStudent.css"></link>
+    <link rel="stylesheet" href="src/assets/css/questionsViewStudent.css"></link>
 </head>
 
     <body>
