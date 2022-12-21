@@ -29,7 +29,7 @@
                 window.location.href="viewAddedQuestions.php";
             }
         </script>
-        <link rel="stylesheet" href="css/teacher-style.css"></link>
+        <link rel="stylesheet" href="src/assets/css/teacher-style.css"></link>
 
     </head>
 

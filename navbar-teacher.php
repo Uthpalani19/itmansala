@@ -2,14 +2,14 @@
 <html>
 <head>
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="css/global.css">
+  <link rel="stylesheet" type="text/css" href="src/assets/css/global.css">
 
 </head>
 <body>
 
     <div class="navbar" id="navId">
         <div class="nav-left">
-            <img class="navbar-logo" src="img/icon.png">
+            <img class="navbar-logo" src="src\assets\images\icon.png">
         </div>
         <div class="nav-right">
             <div class="nav-links">

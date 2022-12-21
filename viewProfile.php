@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/student-style.css"></link>
+    <link rel="stylesheet" href="src/assets/css/student-style.css"></link>
     <title>View Profile</title>
 </head>
 <body>
@@ -30,7 +30,7 @@
     <!-- Student main details -->
     <div class="container">
         <div class="profilepicture">
-            <img src="img/propic.jpg" class="rounded-circle" width="150">
+            <img src="src\assets\images\propic.jpg" class="rounded-circle" width="150">
         </div>
 
         <div class="student-details">

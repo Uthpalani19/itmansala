@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Login</title>
-        <link rel="stylesheet" href="css/teacher-style.css"></link>
+        <link rel="stylesheet" href="src/assets/css/teacher-style.css"></link>
     </head>
 
     <body>

@@ -142,7 +142,7 @@
         <title>Manage Questions</title>
         <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
         <!--script src="js/logout.js"></script-->
-        <link rel="stylesheet" href="css/teacher-style.css"></link>
+        <link rel="stylesheet" href="src/assets/css/teacher-style.css"></link>
     </head>
 
     <body>

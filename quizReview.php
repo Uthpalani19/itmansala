@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Questions</title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/quizReview.css"></link>
+    <link rel="stylesheet" href="src/assets/css/quizReview.css"></link>
 </head>
 
     <body>
@@ -48,7 +48,7 @@
                 <p> Hmm! You have done a good job. <br />But your score is <span id="marks"> 2 out of 5 </span> which means you need improvement. </p>
             </div>
             <div class="avatar">
-                <img src="img/welcome_avatar.png" alt="quizReviewAvatar" id="quizReviewAvatar" width = "300">
+                <img src="src\assets\images\welcome_avatar.png" alt="quizReviewAvatar" id="quizReviewAvatar" width = "300">
             </div>
             <div class="encouragement-msg2">
                 <p> Next time let's get a good score. </p>

@@ -40,8 +40,7 @@
     <head>
         <title>Sign Up</title>
         <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="css/teacher-style.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="src/assets/css/teacher-style.css">
 
     </head>
 
@@ -102,7 +101,7 @@
         </div>
         
         <!-- Script -->
-        <script src="js/signupvalidation.js"></script>
+        <script src="src\assets\js\signupvalidation.js"></script>
 
     </body>
 </html>
