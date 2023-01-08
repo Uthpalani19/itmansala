@@ -1,6 +1,7 @@
+<!-- Temporary File -->
 <?php
     session_start();
-    require_once('src\assets\includes\navbar-teacher.php');
+    require_once '..\..\assets\includes\navbar-teacher.php';
     require('dbconnection.php');
 
     if(!isset($_SESSION['firstname']))
@@ -29,8 +30,8 @@
                 window.location.href="viewAddedQuestions.php";
             }
         </script>
-        <link rel="stylesheet" href="src/assets/css/teacher-style.css"></link>
-
+        <link rel="stylesheet" href="../../assets/css/global.css"></link>
+        <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
     </head>
 
     <body class="grey-bg">

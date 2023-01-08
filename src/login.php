@@ -18,11 +18,10 @@
             $result=mysqli_query($connection,$query);
             if (mysqli_num_rows($result)==1)
             {
-
                 $row = mysqli_fetch_array($result);
                 $Firstname = $row['firstName'];
                 $_SESSION['firstname'] = $Firstname;
-                header('location:dashboard-teacher.php');
+                header('location:views/teacherviews/dashboard-teacher.php');
             }
             else
             {

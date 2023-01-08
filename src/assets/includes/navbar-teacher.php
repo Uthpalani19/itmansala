@@ -1,8 +1,3 @@
-<!-- Delete -->
-<?php
-    $_SESSION['firstname']='UTHPALANI';
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +13,10 @@
         </div>
         <div class="nav-right">
             <div class="nav-links">
-                <p onclick="window.location.href='dashboard-teacher.php'">Dashboard</p>
-                <p onclick="window.location.href='teacher-studentview.php'">Student</p>
-                <p onclick="window.location.href='teacher-courses.php'">Course</p>
-                <p onclick="window.location.href='editCourseContent.php'">My Courses</p>
+                <p onclick="window.location.href='../../views/teacherviews/dashboard-teacher.php'">Dashboard</p>
+                <p onclick="window.location.href='../../views/teacherviews/teacher-studentview.php'">Student</p>
+                <p onclick="window.location.href='../../views/teacherviews/teacher-courses.php'">Course</p>
+                <p onclick="window.location.href='../../views/teacherviews/editCourseContent.php'">My Courses</p>
             </div>
             <div class="nav-user-tray">
                 <p><i class="fa-regular fa-bell"></i></p>
