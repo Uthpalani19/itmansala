@@ -13,7 +13,7 @@
 ?>
 
 <?php
-    require_once 'navbar-teacher.php';
+    require_once 'src\assets\includes\navbar-teacher.php';
 ?>
 
 <!DOCTYPE html>

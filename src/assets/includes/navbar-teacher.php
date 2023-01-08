@@ -1,15 +1,20 @@
+<!-- Delete -->
+<?php
+    $_SESSION['firstname']='UTHPALANI';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="src/assets/css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
 
 </head>
 <body>
 
     <div class="navbar" id="navId">
         <div class="nav-left">
-            <img class="navbar-logo" src="src\assets\images\icon.png">
+            <img class="navbar-logo" src="../../assets/images/icon.png">
         </div>
         <div class="nav-right">
             <div class="nav-links">
@@ -20,14 +25,14 @@
             </div>
             <div class="nav-user-tray">
                 <p><i class="fa-regular fa-bell"></i></p>
-                <p onclick="window.location.href='viewProfile.php'"><i class="fa-solid fa-circle-user"></i></p>
+                <p onclick="window.location.href='../../config/teacherconfig/viewProfile.php'"><i class="fa-solid fa-circle-user"></i></p>
                 <p id="logout"><?php echo $_SESSION['firstname']; ?></p>
             
                 <!-- Logout button -->
                 <div class="hidden" id="hidden">
                     <p><i id="close" class="fa-solid fa-xmark"></i></p>
                     <p><i class="fa-solid fa-circle-user user2"></i></p>
-                    <a href="dashboard-teacher.php?logout='1'">Logout</a>
+                    <a href="../../config/teacherconfig/dashboard-teacher.php?logout='1'">Logout</a>
                 </div>
             </div>
 

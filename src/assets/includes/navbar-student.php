@@ -8,7 +8,7 @@
 
     <div class="navbar" id="navId">
         <div class="nav-left">
-            <img class="navbar-logo" src="src\assets\images\icon.png">
+            <img class="navbar-logo" src="../images/icon.png">
         </div>
         <div class="nav-right">
             <div class="nav-links">

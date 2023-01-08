@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once('navbar-teacher.php');
+    require_once('src\assets\includes\navbar-student.php');
     require('dbconnection.php');
 
     if(!isset($_SESSION['firstname']))
