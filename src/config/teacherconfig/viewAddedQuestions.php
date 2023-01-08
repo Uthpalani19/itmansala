@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once('navbar-teacher.php');
+    require_once('src\assets\includes\navbar-teacher.php');
     require('dbconnection.php');
 
     if(!isset($_SESSION['firstname']))
@@ -36,9 +36,14 @@
             <p> 1.1 දත්ත සහ තොරතුරු වල මූලික තැනුම් ඒකක හා ඒවායේ ගති ලක්ෂණ </p>
         </div>
 
+        <!-- Questions Recovery -->
+        <div class="recover"> 
+            <button class="recover-btn"  onclick="window.location.href='recoverQuestions.php'"> <i class="fa-large fas fa-trash-restore" id="recover-icon"
+            ></i> Recover Questions</button>
+        </div>
+
         <div>
             <center>
-                <p id="purple-text">Deleted Questions</p>
             <table class="addedQuestions">
                 <tr>
                     <th>No:</th>
@@ -48,12 +53,13 @@
                     <th>Option 03</th>
                     <th>Option 04</th>
                     <th>Answer</th>
-                    <th>Recover</th>
+                    <th>Edit</th>
+                    <th>Del</th>
                 </tr>
 
             <!--PHP Code-->
             <?php
-                $sql="SELECT * FROM modelpaperquestion where status=0";
+                $sql="SELECT * FROM modelpaperquestion where status=1";
                 $result = mysqli_query($connection,$sql);
 
                 while($row = mysqli_fetch_assoc($result))
@@ -67,7 +73,8 @@
                             <td>'.$row['option3'].'</td>
                             <td>'.$row['option4'].'</td>
                             <td>'.$row['answer'].'</td>
-                            <td><a href="viewDeletedQuestions.php?recoverId='.$row['questionId'].'"><i class="fa fa-reply fa-lg" aria-hidden="true" id="edit-icon"></i></td>
+                            <td><a href="editQuestions.php?editId='.$row['questionId'].'"><i class="fa-solid fa-large fa-file-pen" id="edit-icon" ></i></td>
+                            <td><a href="deleteQuestions.php?deleteId='.$row['questionId'].'"><i class="fa-solid fa-large fa-trash" id="edit-icon"></i></td>
                         </tr>
                     ';
                 }
@@ -76,8 +83,8 @@
             </center>
         </div>
 
-    <!-- Footer -->
-    <div class="footer">
+        <!-- Footer -->
+        <div class="footer">
             <?php
                     require_once('footer.php');
             ?>

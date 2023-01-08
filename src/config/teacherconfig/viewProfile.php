@@ -24,7 +24,7 @@
 <body>
     <!-- Navigation Bar -->
     <?php 
-        require_once('navbar-teacher.php');
+        require_once('src\assets\includes\navbar-teacher.php');
     ?>
 
     <!-- Student main details -->

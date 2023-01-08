@@ -1,27 +1,11 @@
-<?php
-    session_start();
-    require_once('navbar-teacher.php');
-    require('dbconnection.php');
-
-    if(!isset($_SESSION['firstname']))
-    {
-        header('location:index.php');
-    }
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/assets/css/student-style.css"></link>
+    <link rel="stylesheet" href="../../assets/css/student-style.css"></link>
+        <link rel="stylesheet" href="../../assets/css/global.css"></link>
     <title>View Profile</title>
 </head>
 <body>
@@ -30,7 +14,7 @@
     <!-- Student main details -->
     <div class="draken-area">
         <?php 
-            require_once('navbar-student.php');
+            require_once('../../assets/includes/navbar-student.php');
         ?>
 
         <div class="container">
