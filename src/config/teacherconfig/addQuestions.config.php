@@ -15,9 +15,7 @@
 ?>
 
 <?php
-
     // Finish Button
-
     if(isset($_POST['finish']))
     {
         ?>

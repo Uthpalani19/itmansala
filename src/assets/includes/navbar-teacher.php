@@ -20,15 +20,17 @@
             </div>
             <div class="nav-user-tray">
                 <p><i class="fa-regular fa-bell"></i></p>
-                <p onclick="window.location.href='../../config/teacherconfig/viewProfile.php'"><i class="fa-solid fa-circle-user"></i></p>
-                <p id="logout"><?php echo $_SESSION['firstname']; ?></p>
+                <p onclick="window.location.href='../../views/teacherviews/viewProfile.php'"><i class="fa-solid fa-circle-user"></i></p>
+                <p id="logout"><?php
+                    // echo $_SESSION['firstname'];
+                ?></p>
             
                 <!-- Logout button -->
-                <div class="hidden" id="hidden">
+                <!-- <div class="hidden" id="hidden">
                     <p><i id="close" class="fa-solid fa-xmark"></i></p>
                     <p><i class="fa-solid fa-circle-user user2"></i></p>
                     <a href="../../config/teacherconfig/dashboard-teacher.php?logout='1'">Logout</a>
-                </div>
+                </div> -->
             </div>
 
         </div>

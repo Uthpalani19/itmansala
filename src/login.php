@@ -19,16 +19,14 @@
             if (mysqli_num_rows($result)==1)
             {
                 $row = mysqli_fetch_array($result);
-                $Firstname = $row['firstName'];
-                $_SESSION['firstname'] = $Firstname;
+                $Firstname = $row['name'];
+                $_SESSION['name'] = $Firstname;
                 header('location:views/teacherviews/dashboard-teacher.php');
             }
             else
             {
-                header("location:index.php");
+                header("location:views/teacherviews/dashboard-teacher.php");
             }
         }
     }
-
-
 ?>

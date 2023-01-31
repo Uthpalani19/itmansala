@@ -1,15 +1,15 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['firstname']))
-    {
-        header('location:index.php');
-    }
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
-    }
+    // session_start();
+    // if(!isset($_SESSION['firstname']))
+    // {
+    //     header('location:index.php');
+    // }
+    // if(isset($_GET['logout']))
+    // {
+    //     session_destroy();
+    //     unset($_SESSION['firstname']);
+    //     header('location:index.php');
+    // }
 ?>
 
 <?php
@@ -47,14 +47,17 @@
         </div>
 
         <!-- Choose the course -->
-        <div class="select_course">
-            <select name="course" id="course">
-                <option value="course1">Course 1</option>
-                <option value="course2">Course 2</option>
-                <option value="course3">Course 3</option>
-                <option value="course4">Course 4</option>
-            </select>
+        <div class="white-box">
+            <div class="dropdown">
+                <button class="dropbtn">Select <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
         </div>
+        
     </div>
 </body>
 </html>

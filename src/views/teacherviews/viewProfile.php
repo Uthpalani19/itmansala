@@ -1,15 +1,25 @@
-<?php
+<?php 
+    // Navigation Bar
+    require_once('../../assets/includes/navbar-teacher.php');
     session_start();
-    if(!isset($_SESSION['firstname']))
+    require('../../config/dbconnection.php');
+
+    if(!isset($_SESSION['name']))
     {
         header('location:index.php');
     }
+
     if(isset($_GET['logout']))
     {
         session_destroy();
-        unset($_SESSION['firstname']);
+        unset($_SESSION['name']);
         header('location:index.php');
     }
+?>
+
+<!-- Navigation Bar -->
+<?php 
+    require_once('../../assets/includes/navbar-teacher.php');
 ?>
 
 <!DOCTYPE html>
@@ -18,25 +28,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/assets/css/student-style.css"></link>
+    <link rel="stylesheet" href="../../assets/css/student-style.css"></link>
+    <link rel="stylesheet" href="../../assets/css/global.css"></link>
     <title>View Profile</title>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <?php 
-        require_once('src\assets\includes\navbar-teacher.php');
-    ?>
 
     <!-- Student main details -->
-    <div class="container">
+    <div class="container-profile">
         <div class="profilepicture">
-            <img src="src\assets\images\propic.jpg" class="rounded-circle" width="150">
+            <img src="../../assets/images/propic.jpg" class="rounded-circle" width="150">
         </div>
 
         <div class="student-details">
             <div class="student-name">
-                <p id="student-name">Sandani Punchihewa</p>
+                <p id="student-name"> <?php echo $_SESSION['name'] ?></p>
             </div>
+
 
             <div class = "std-details">
                 <p id="student-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna</p>
