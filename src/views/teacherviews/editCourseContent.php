@@ -1,16 +1,19 @@
-<?php
+<!-- Temporary File -->
+<?php 
+    // Navigation Bar
+    require_once('../../assets/includes/navbar-teacher.php');
     session_start();
-    require_once('src\assets\includes\navbar-teacher.php');
-    require('dbconnection.php');
+    require('../../config/dbconnection.php');
 
-    if(!isset($_SESSION['firstname']))
+    if(!isset($_SESSION['name']))
     {
         header('location:index.php');
     }
+
     if(isset($_GET['logout']))
     {
         session_destroy();
-        unset($_SESSION['firstname']);
+        unset($_SESSION['name']);
         header('location:index.php');
     }
 ?>
@@ -29,8 +32,8 @@
                 window.location.href="viewAddedQuestions.php";
             }
         </script>
-        <link rel="stylesheet" href="src/assets/css/teacher-style.css"></link>
-
+        <link rel="stylesheet" href="../../assets/css/global.css"></link>
+        <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
     </head>
 
     <body class="grey-bg">

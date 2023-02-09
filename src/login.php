@@ -18,18 +18,19 @@
             $result=mysqli_query($connection,$query);
             if (mysqli_num_rows($result)==1)
             {
-
                 $row = mysqli_fetch_array($result);
-                $Firstname = $row['firstName'];
-                $_SESSION['firstname'] = $Firstname;
-                header('location:dashboard-teacher.php');
+                $Firstname = $row['name'];
+                $_SESSION['name'] = $Firstname;
+                $_SESSION['contact'] = $row['phoneNumber'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['fieldofexpertise'] = $row['fieldOfExpertise'];
+
+                header('location:views/teacherviews/dashboard-teacher.php');
             }
             else
             {
-                header("location:index.php");
+                header("location:views/teacherviews/dashboard-teacher.php");
             }
         }
     }
-
-
 ?>

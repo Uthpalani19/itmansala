@@ -8,6 +8,10 @@ body {
     margin: 0;
 }
 
+.body-2
+{
+    background-color: #D9D9D9;
+}
 .navbar{
     width: 100%;
     color: white;
