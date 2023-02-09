@@ -1,0 +1,267 @@
+/*-----------------fonts--------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100&display=swap');
+
+/*----------------availablecourse.css---------------*/
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #d9d9d9;
+}
+
+.search-section{
+    background: linear-gradient(45deg,#5318a6 , #7e58bc 95%);
+    width: 70%;
+    left: 225px;
+    top: 105px;
+    position: absolute;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.search-field{
+    border-radius: 5px;
+    width: 65%;
+    border: none;
+    margin: 10px 0 10px 10px;
+    padding: 15px;
+}
+
+.search-field :hover, :active, :focus{
+    outline: none;
+
+}
+
+::placeholder{
+    color: #636363;
+    font-size: 1rem;
+    font-family: FontAwesome;
+    padding-left: 1.5rem;
+}
+
+.search-btn{
+    color: white;
+    background: inherit;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    margin-left: 7.5rem;
+}
+
+.content-container{
+    background: white;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    margin-top: 8rem;
+    padding-bottom: 5rem;
+    opacity: 0;
+    animation: fadeIn 0.2s ease-in forwards;
+}
+
+.title{
+    border-top: 2px solid #dedede;
+    border-bottom: 2px solid #dedede;
+}
+
+.title p{
+    margin: 0 0 0 1.5rem;
+    padding: 15px;
+    color: #636363;
+
+}
+
+.available-course p{
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+.padding{
+    padding-top: 80px;
+}
+
+
+.tip p{
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color: black;
+    width: 60%;
+    margin: auto;
+    padding: 30px;
+}
+
+.available-course{
+    width: 90%;
+    margin: auto;
+}
+
+.lesson-container{
+    width: 90%;
+    margin: auto;
+    text-align: left;
+    margin-left: 125px;
+}
+
+.db-lesson{
+    width: 25%;
+    margin: 25px 20px;
+    height: 28rem;
+    display: inline-block;
+    border: 2px solid #c5c5c5;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.db-lesson p{
+    text-align: center;
+    color: black;
+}
+
+.cover-img{
+    width: 100%;
+    height: 175px;
+}
+
+.lock{
+    margin-top: -42px;
+    margin-right: 10px;
+    float: right;
+}
+
+.fa-lock{
+    padding: 0;
+    margin: 0;
+    font-size: 2rem;
+}
+
+.course-name{
+    background: #f0f0f0;
+    height: 80px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.price-username p{
+    color: #636363;
+    font-size: 1rem;
+}
+
+.price-username{
+    margin-top: 10px;
+}
+
+.price{
+    display: inline-block;
+    margin-right: 70px;
+}
+
+.cart-btn{
+    color: white;
+    background: #0BA7FF;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer; 
+}
+
+.lines{
+    margin: auto;
+    margin-top: 50px;
+    border-top: 2px solid #dedede;
+    border-bottom: 2px solid #dedede;
+    padding: 20px;
+    width: 85%;
+ 
+}
+
+.page-end{
+    margin-top: 50px;
+}
+
+.page-end P{
+    display: inline-block;
+    font-size: 13px;
+    width: 50%;
+    margin-left: 190px;
+}
+
+.page-end a{
+    color: #0BA7FF;
+    font-size: 2.5rem;
+    display: inline-block;
+    margin-left: 180px;
+    cursor: pointer;
+}
+
+.fa-circle-chevron-up{
+    border: 5px solid #0BA7FF;
+    padding: 4px;
+    border-radius: 50px;
+}
+
+@keyframes fadeIn{
+    to{
+      opacity: 1;
+    } 
+  }
+  
+  .fade-in{
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+  }
+  
+  
+  .welcome-msg{
+    color: white;
+    font-size: 2rem;
+  }
+  
+  .splashcourse p{
+    color: white;
+    font-size: 2rem;
+    margin-top: 5rem;
+  }
+  
+  .welcome-avatar{
+    width: 25%;
+    margin-top: 5rem;
+  }
+  
+  .splashcourse{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    text-align: center;
+    background: linear-gradient(320deg, #7e40d5 13%, #844ad5 13% 19%, #7e40d5 19% 24%, #844ad5 24% 42%, #773bcd 42% 54%, #6c2cc7 54%, #7634d4, #7f4ccd);
+  }
+  
+  .splashcourse.display-none{
+    position: fixed;
+    width: 100%;
+    opacity: 0;
+    height: 100%;
+    z-index: -10;
+    text-align: center;
+    transition: 0.5s;
+    background: linear-gradient(320deg, #7e40d5 13%, #844ad5 13% 19%, #7e40d5 19% 24%, #844ad5 24% 42%, #773bcd 42% 54%, #6c2cc7 54%, #7634d4, #7f4ccd);
+  }
+
+  .container{
+    overflow: hidden;
+  }
+
+.db-lesson a{
+    color: black;
+    text-decoration: none;
+}

@@ -1,5 +1,5 @@
 <?php
-    require('../dbconnection.php');
+    require('../../config/dbconnection.php');
     require_once('../../assets/includes/navbar-teacher.php');
 
     // Auto generated ID

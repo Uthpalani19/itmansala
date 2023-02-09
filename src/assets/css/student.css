@@ -1,0 +1,445 @@
+/*-----------------fonts--------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100&display=swap');
+
+
+
+/*----------------------student_login.php------------------------*/
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    
+}
+
+.left{
+  float: left;
+  width: 45%;
+  height: 100%;
+  left: 0;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  overflow-x: hidden;
+  background: linear-gradient(45deg, #5319A6 15%, #5C26A9 15% 35%, #6634AD 35% 65%, #5C26A9 65% 85%, #5319A6 85%);
+}
+
+.right{
+  float: right;
+  width: 55%;
+  height: 100%;
+  right: 0;
+  z-index: 1;
+  position: fixed;
+  top: 0; 
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.welcome{
+  color: #d4c6e8;
+  text-align: left;
+  font-weight: 500;
+  font-size: 2rem;
+  margin: 4rem 0 0 9.5rem;
+}
+
+.message{
+  margin: 0 0 0 0;
+}
+
+@keyframes shake {
+  0% { transform: translateY(0);}
+  100% {transform: translateY(-25px);}
+}
+
+.avatar{
+  width: 40%;
+  padding-top: 3.5rem;
+  margin-left: 12rem;
+  animation: shake 1s infinite alternate;
+}
+
+h1{
+  color: #636363;
+  margin-top: 5rem;
+  margin-bottom: 8.5rem;
+}
+
+
+.login_field{
+  padding-bottom: 2.5rem;
+}
+
+::placeholder{
+  color: #848484;
+}
+
+
+.login_input {
+	border: none;
+	border-bottom: 2px solid #848484;
+	background: none;
+  font-size: 1.3rem;
+	width: 33%;
+	transition: 0.5s;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+}
+
+.login_icon {
+	color: #848484;
+  font-size: 1.3rem;
+  top: 30px;
+  padding-right: 10px;
+}
+
+.login_input:hover, :active, :focus {
+	outline: none;
+	border-bottom-color: #5C26A9;
+}
+
+.options{
+  margin-top: 2.9rem;
+  color: #848484;
+}
+
+.tick{
+  height: 20px;
+  width: 20px;
+  accent-color: #5C26A9;
+  vertical-align: sub;
+}
+
+.options p{
+  display: inline; 
+}
+
+.forgot-password{
+  text-decoration: none;
+  color: #848484;
+  padding-left: 35px;
+}
+
+.forgot-password:hover{
+  color: #5C26A9;
+}
+
+.loginbtn {
+  width: 38.5%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  background: #5C26A9;
+  border: none;
+  border-radius: 3px;
+  padding: 12px 0 12px 0;
+  margin: 12px 0 22px 0;
+  box-shadow: 3px 5px 10px #848484;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login{
+  color: #848484;
+}
+
+.create-account{
+  color: #5C26A9;
+}
+
+.error{
+  font-size: 1rem;
+  color: rgb(224, 0, 0);
+}
+
+
+.fa-circle-exclamation{
+  margin-right: 5px;
+}
+
+
+.splash{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  text-align: center;
+  background: linear-gradient(40deg, #5a24a8 13%, #6737ad 13% 19%, #5a24a8 19% 24%, #6737ad 24% 42%, #6029b0 42% 54%, #6426bc 54%, #7634d4, #7f4ccd);
+}
+
+.splash.display-none{
+  position: fixed;
+  width: 100%;
+  opacity: 0;
+  height: 100%;
+  z-index: -10;
+  text-align: center;
+  transition: 0.5s;
+  background: linear-gradient(40deg, #5a24a8 13%, #6737ad 13% 19%, #5a24a8 19% 24%, #6737ad 24% 42%, #6029b0 42% 54%, #6426bc 54%, #7634d4, #7f4ccd);
+}
+
+.logo{
+  margin-top: 12rem;
+}
+
+@keyframes fadeIn{
+  to{
+    opacity: 1;
+  } 
+}
+
+.fade-in{
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+/* ----------------- courses.php ---------------------*/
+
+.welcome-msg{
+  color: white;
+  font-size: 2rem;
+}
+
+.splashcourse p{
+  color: white;
+  font-size: 2rem;
+  margin-top: 5rem;
+}
+
+.welcome-avatar{
+  width: 25%;
+  margin-top: 5rem;
+}
+
+.splashcourse{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  text-align: center;
+  background: linear-gradient(320deg, #7e40d5 13%, #844ad5 13% 19%, #7e40d5 19% 24%, #844ad5 24% 42%, #773bcd 42% 54%, #6c2cc7 54%, #7634d4, #7f4ccd);
+}
+
+.splashcourse.display-none{
+  position: fixed;
+  width: 100%;
+  opacity: 0;
+  height: 100%;
+  z-index: -10;
+  text-align: center;
+  transition: 0.5s;
+  background: linear-gradient(320deg, #7e40d5 13%, #844ad5 13% 19%, #7e40d5 19% 24%, #844ad5 24% 42%, #773bcd 42% 54%, #6c2cc7 54%, #7634d4, #7f4ccd);
+}
+
+
+/*----------------------student_signup.php-------------------*/
+
+.signupleft{
+  background: linear-gradient(320deg, #5b25a9 15%, #6534ad 15% 35%, #5d28aa 35% 55%, #5319a6 55%);
+}
+
+.signupmessage{
+  padding-left: 45%;
+  padding-top: 10px;
+}
+
+@keyframes signupshake {
+  0% { transform: translateX(70px);}
+  100% {transform: translateY(-70px);}
+}
+
+.signupavatar{
+  animation: signupshake 1.5s infinite alternate;
+}
+
+.slider{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin-top: 0;
+}
+
+.signup{
+  margin-bottom: 6rem;
+}
+
+.signupbtn{
+  width: 36%;
+}
+
+#form2{
+  display: none;
+}
+
+#form3{
+  display: none;
+}
+
+.back{
+  float: left;
+  position: absolute;
+  margin-left: 20%;
+  margin-top: 1%;
+  z-index: 100;
+}
+
+.back button{
+  border: none;
+  background: none;
+  color: #6426bc;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.signupfield{
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in forwards;
+}
+
+.fa-eye-slash{
+  cursor: pointer;
+  color: #848484;
+  position: absolute;
+}
+
+.fa-eye{
+  cursor: pointer;
+  color: #848484;
+  position: absolute;
+}
+
+.container{
+  display: flex;
+}
+
+.forgotpass-section{
+  width: 75%;
+  background-color: white;
+  padding: 15px;
+  padding-top: 5px;
+  border-radius: 15px;
+  margin: auto;
+}
+
+.column1{
+  display: inline-block;
+  width: 20%;
+}
+
+.column2{
+  display: inline-block;
+  width: 75%;
+}
+
+.passwordbody{
+  background: #d9d9d9;
+}
+
+h3{
+  color: #636363;
+}
+
+.forgotpass-section{
+  padding-bottom: 35px;
+  margin-top: 75px;
+}
+
+.pass-field{
+  border: 1px solid #cbcbcb;
+  border-radius: 15px;
+  box-shadow: 3px 5px 10px #848484;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+  padding-right: 70px;
+  padding-top: 25px;
+  margin-top: 25px;
+  
+}
+
+.pass-field p{
+  color: #636363;
+  font-weight: 500;
+}
+
+.password-input{
+  border: 1px solid #cbcbcb;
+  border-radius: 3px;
+  vertical-align: middle; 
+  width: 100%;
+  padding: 10px;
+}
+
+.password-input:hover, :active, :focus{
+  outline: none;
+  border-color: #5C26A9;
+} 
+
+.form-btn{
+  color: white;
+  background: #5319a6;
+  width: 15%;
+  padding: 7px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  margin-right: 15px;
+}
+
+.buttons{
+  margin-left: 30px;
+}
+
+.input-field p, h4{
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: #636363;
+}
+
+.input-field p{
+  font-size: 15px;
+}
+
+#show{
+  color: #0ba7ff;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#show:hover{
+  color: #0087d5;
+}
+
+.otpboxes{
+  text-align: center;
+  margin: 20px 0;
+}
+
+input[type=number] {
+  height: 45px;
+  width: 45px;
+  margin: 0 7px;
+  font-size: 25px;
+  text-align: center;
+  border: 1px solid #cbcbcb;
+
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+h3{
+  padding-left: 25px;
+}
+
+

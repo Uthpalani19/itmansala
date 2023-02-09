@@ -65,7 +65,7 @@
 
                 // Insert the question to the database
                 $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)
-                    VALUES ('$id', 'S001','$question','$answer','$option1','$option2','$option3','$option4',1)";
+                    VALUES ('$id', '1.1','$question','$answer','$option1','$option2','$option3','$option4',1)";
                         
                 if ($connection->query($sql) === TRUE)
                 {?>

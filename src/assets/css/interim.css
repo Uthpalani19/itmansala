@@ -1,0 +1,106 @@
+/*-----------------fonts--------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100&display=swap');
+
+body{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.left{
+    float: left;
+    width: 45%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow-x: hidden;
+
+}
+
+.image{
+    width: 120%;
+    margin-top: 50px;
+}
+
+.right{
+    float: right;
+    width: 55%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    margin-top: 50px;
+    text-align: center;
+    color: #636363;
+}
+
+.title{
+    font-weight: 700;
+    font-size: 2rem;
+    color: #5C26A9;
+    margin-bottom: 50px;
+}
+
+input{
+    display: block;
+    width: 35%;
+    border: none;
+	border-bottom: 2px solid #848484;
+    font-size: 1.2rem;
+    margin: auto;
+    background: none;
+    margin-top: 25px;
+    text-align: center;
+    padding: 5px;
+}
+
+::placeholder{
+    color: #848484;
+    font-family: 'Poppins', sans-serif;
+ }
+
+.signup_input:hover, :active, :focus {
+	outline: none;
+	border-bottom-color: #5C26A9;
+}
+
+.signupbtn{
+    display: block;
+    width: 36%;
+    margin: auto;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    background: #5C26A9;
+    border: none;
+    border-radius: 3px;
+    padding: 12px 0 12px 0;
+    box-shadow: 3px 5px 10px #848484;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 45px;
+}
+
+.create-account{
+    color: #5C26A9;
+}
+
+.form-container p{
+    margin-top: 20px;
+}
+
+.error{
+    font-size: 1rem;
+    color: rgb(224, 0, 0);
+}
+
+.login-right{
+    margin-top: 160px;
+}
+
+  
+.fa-regular{
+    cursor: pointer;
+    color: #848484;
+    float: right;
+    margin-top: -28px;
+    margin-right: 275px;
+}

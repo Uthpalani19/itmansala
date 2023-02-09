@@ -1050,3 +1050,103 @@ tr:nth-child(odd)
     font-weight: bold;
     color: #979797;
 }
+
+/* Student view - teachers */
+/*--------Search Bar-----*/
+.search-bar-course
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 40rem;
+}
+
+.search-bar-course > .searchBar
+{
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    width: 310px;
+    margin: 0 0 0 1rem;
+}
+
+.dropdown1
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.container{
+    margin-top: 100px;
+    margin-bottom: 40px;
+    margin-left: 7.8%;
+}
+
+.container .container-item .searchBar input{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 80px;
+    padding-left: 13px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    border: 0;
+    outline: none;
+}
+
+.container .container-item form button{
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+
+h4{
+    color: rgb(54, 53, 53);
+}
+
+/*--------------Table---------------------*/
+
+.content table{
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    vertical-align: middle;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 5px;
+}
+
+.content table td{
+    border: 1px solid #ebe9e9;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #555454;
+    background: #fff;
+}
+
+.content table th{
+    border: 1px solid #8a8989;
+    margin-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #5c26a9;
+    color: white;
+    font-weight: 450;
+}   
+
+.statusButton{
+    border-radius: 5px;
+    border: 2px solid #078f66;
+}
+
+#icons
+{
+    color:#5319a6;
+    margin-left: 8px;
+    cursor: pointer;
+}
