@@ -21,6 +21,10 @@
                 $row = mysqli_fetch_array($result);
                 $Firstname = $row['name'];
                 $_SESSION['name'] = $Firstname;
+                $_SESSION['contact'] = $row['phoneNumber'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['fieldofexpertise'] = $row['fieldOfExpertise'];
+
                 header('location:views/teacherviews/dashboard-teacher.php');
             }
             else

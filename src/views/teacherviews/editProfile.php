@@ -25,6 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/css/global.css"></link>
     <link rel="stylesheet" href="../../assets/css/student-style.css"></link>
+    <script src="../../assets/js/editProfile.js"></script>
     <title>Edit profile</title>
 </head>
 
@@ -42,7 +43,7 @@
                                     <label for="name" class="label-field">Name</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="name" class="input-field">
+                                    <input type="text" name="name" class="input-field" value="<?php echo $_SESSION['name']?>">
                                 </td>
                             </tr>
 
@@ -52,7 +53,7 @@
                                     <label for="name" class="label-field">E-mail</label>
                                 </td>
                                 <td>
-                                    <input type="email" name="email" class="input-field">
+                                    <input type="email" name="email" class="input-field" value="<?php echo $_SESSION['email']?>">
                                 </td>
                             </tr>
 
@@ -62,7 +63,7 @@
                                     <label for="name" class="label-field" read only>Phone Number</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="contact" class="input-field">
+                                    <input type="text" name="contact" class="input-field" value="<?php echo $_SESSION['contact']?>" readonly id="disabled-txt-field">
                                 </td>
                             </tr>
                         </table>
@@ -80,6 +81,10 @@
                                 </td>
                                 <td>
                                     <input type="password" name="current-password" class="input-field">
+                                </td>
+                                <td>
+                                    <i class="fa-solid fa-magnifying-glass" id="icon-search" a href="changePassword.config.php?id='.$_SESSION['name'].'"></i></a>
+                                    
                                 </td>
                             </tr>
 

@@ -15,6 +15,8 @@
         unset($_SESSION['name']);
         header('location:index.php');
     }
+
+    // Retrieve email address of the current user
 ?>
 
 <!-- Navigation Bar -->
@@ -63,19 +65,19 @@
                     <td>Email address</td>
                 </tr>
                 <tr>
-                    <td>sandanip@gmail.com</td>
+                    <td><?php echo $_SESSION['email']; ?></td>
                 </tr>
                 <tr>
                     <td>Telephone Number</td>
                 </tr>
                 <tr>
-                    <td>071 255 6989</td>
+                    <td> 0<?php echo $_SESSION['contact']; ?></td>
                 </tr>
                 <tr>
-                    <td>Address</td>
+                    <td>Field of expertise</td>
                 </tr>
                 <tr>
-                    <td id="last-row">No:222, Araliya Road, Wadduwa, Panadura</td>
+                    <td id="last-row"><?php echo $_SESSION['fieldofexpertise']; ?></td>
                 </tr>
             </table>
         </div>
