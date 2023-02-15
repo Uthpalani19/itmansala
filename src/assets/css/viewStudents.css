@@ -1,0 +1,178 @@
+/*-----------------fonts--------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100&display=swap');
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #d9d9d9;
+    
+}
+
+/*--------Search Bar-----*/
+.container{
+    margin-top: 100px;
+    margin-bottom: 40px;
+    margin-left: 7.8%;
+}
+
+.container .container-item .searchBar input{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 80px;
+    padding-left: 13px;
+    background: transparent;
+    border: 0; 
+    outline: none;
+    
+}
+
+.container .container-item form button{
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    
+}
+
+.searchBar{
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    width: 310px;
+}
+
+h4{
+    color: rgb(54, 53, 53);
+}
+
+/*--------------Table---------------------*/
+
+.content{
+    margin-top: 1%;
+}
+
+.content table{
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    vertical-align: middle;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 5px;
+    
+}
+
+.content table td{
+    border: 1px solid #ebe9e9;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #555454;
+    background: #fff;
+}
+
+.content table th{
+    border: 1px solid #8a8989;
+    margin-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #5c26a9;
+    color: white;
+    font-weight: 450;
+}   
+
+.statusButton{
+    border-radius: 5px;
+    border: 2px solid #078f66;
+}
+
+#icons
+{
+    color:#5319a6;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+/*-------------Add Teacher Button----------*/
+
+.addTeacher{
+    margin-top: 40px;
+    margin-left: 105px;
+    background: #5c26a9 ;
+    outline: none;
+    border: none; 
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 7px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+
+.addTeacher:hover{
+    background-color: #5319a6;
+    color: #929292;
+}
+
+.addTeacher a{
+    color: #fff;
+    text-decoration: none;
+}
+
+/*----------------toggle---------------*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+  }
+  
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #5319a6;
+  }
+  
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }

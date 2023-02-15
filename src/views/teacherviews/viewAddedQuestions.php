@@ -6,14 +6,14 @@
 
     if(!isset($_SESSION['name']))
     {
-        header('location:index.php');
+        header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
 
     if(isset($_GET['logout']))
     {
         session_destroy();
         unset($_SESSION['name']);
-        header('location:index.php');
+        header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
 ?>
 
@@ -31,7 +31,7 @@
     <body>
         <!--Course Details-->
         <div class="course-details-box">
-            <p id="title">Lesson 01: දත්ත සහ තොරතුරු </p>
+            <p id="title">Course 01: දත්ත සහ තොරතුරු </p>
         </div>
 
         <!--Set Subtopic Name-->
@@ -41,7 +41,7 @@
 
         <!-- Questions Recovery -->
         <div class="recover"> 
-            <button class="recover-btn"  onclick="window.location.href='recoverQuestions.php'"> <i class="fa-large fas fa-trash-restore" id="recover-icon"
+            <button class="recover-btn"  onclick="window.location.href='../../config/teacherconfig/recoverQuestions.php'"> <i class="fa-large fas fa-trash-restore" id="recover-icon"
             ></i> Recover Questions</button>
         </div>
 
@@ -76,8 +76,8 @@
                             <td>'.$row['option3'].'</td>
                             <td>'.$row['option4'].'</td>
                             <td>'.$row['answer'].'</td>
-                            <td><a href="editQuestions.php?editId='.$row['questionId'].'"><i class="fa-solid fa-large fa-file-pen" id="edit-icon" ></i></td>
-                            <td><a href="deleteQuestions.php?deleteId='.$row['questionId'].'"><i class="fa-solid fa-large fa-trash" id="edit-icon"></i></td>
+                            <td><a href="../../config/teacherconfig/editQuestions.config.php?editId='.$row['questionId'].'"><i class="fa-solid fa-large fa-file-pen" id="edit-icon" ></i></td>
+                            <td><a href="../../config/teacherconfig/deleteQuestions.config.php?deleteId='.$row['questionId'].'"><i class="fa-solid fa-large fa-trash" id="edit-icon"></i></td>
                         </tr>
                     ';
                 }
@@ -93,4 +93,8 @@
             ?>
         </div>
     </body>
+
+    <?php
+            // include('../../config/teacherconfig/deleteQuestions.config.php');
+    ?>
 </html>

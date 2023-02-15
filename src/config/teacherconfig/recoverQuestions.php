@@ -1,17 +1,19 @@
 <?php
+    // Navigation Bar
+    require_once('../../assets/includes/navbar-teacher.php');
     session_start();
-    require_once('src\assets\includes\navbar-teacher.php');
-    require('dbconnection.php');
+    require('../../config/dbconnection.php');
 
-    if(!isset($_SESSION['firstname']))
+    if(!isset($_SESSION['name']))
     {
-        header('location:index.php');
+        header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
+
     if(isset($_GET['logout']))
     {
         session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
+        unset($_SESSION['name']);
+        header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
 ?>
 
@@ -22,13 +24,15 @@
         <script type="text/javascript">
                 
         </script>
-        <link rel="stylesheet" href="src/assets/css/teacher-style.css"></link>
+        <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
+        <link rel="stylesheet" href="../../assets/css/global.css"></link>
+
     </head>
 
     <body>
         <!--Course Details-->
         <div class="course-details-box">
-            <p id="title">Lesson 01: දත්ත සහ තොරතුරු </p>
+            <p id="title">Course 01: දත්ත සහ තොරතුරු </p>
         </div>
 
         <!--Set Subtopic Name-->
@@ -39,7 +43,7 @@
         <div>
             <center>
                 <p id="purple-text">Deleted Questions</p>
-            <table class="addedQuestions">
+                <table class="addedQuestions">
                 <tr>
                     <th>No:</th>
                     <th>Question</th>

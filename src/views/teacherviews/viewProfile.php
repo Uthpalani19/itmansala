@@ -65,19 +65,20 @@
                     <td>Email address</td>
                 </tr>
                 <tr>
-                    <td><?php echo $_SESSION['email']; ?></td>
+                    <!-- ?php echo $_SESSION['email']; ?-->
+                    <td>uthpalanijayasinghe19@gmail.com</td>
                 </tr>
                 <tr>
                     <td>Telephone Number</td>
                 </tr>
                 <tr>
-                    <td> 0<?php echo $_SESSION['contact']; ?></td>
+                    <td> 0763361822</td>
                 </tr>
                 <tr>
                     <td>Field of expertise</td>
                 </tr>
                 <tr>
-                    <td id="last-row"><?php echo $_SESSION['fieldofexpertise']; ?></td>
+                    <td id="last-row">Networking</td>
                 </tr>
             </table>
         </div>

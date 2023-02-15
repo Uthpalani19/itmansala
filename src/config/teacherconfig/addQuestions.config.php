@@ -1,20 +1,4 @@
 <?php
-    session_start();
-    require('../dbconnection.php');
-
-    if(!isset($_SESSION['firstname']))
-    {
-        header('location:index.php');
-    }
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
-    }
-?>
-
-<?php
     // Finish Button
     if(isset($_POST['finish']))
     {
@@ -27,7 +11,6 @@
     }
 
     // Add Question Button
-
     if(isset($_POST['addQuestions']))
     {
         // Check if the fields are not empty
@@ -36,12 +19,13 @@
             // Check if the options are not same
             if($_POST['option1'] != $_POST['option2'] && $_POST['option1'] != $_POST['option3'] && $_POST['option1'] != $_POST['option4'] && $_POST['option2'] != $_POST['option3'] && $_POST['option2'] != $_POST['option4'] && $_POST['option3'] != $_POST['option4'])
             {
-                $id= mysqli_real_escape_string($connection,$id);
+                // Check if the answer is selected
+                $id= mysqli_real_escape_string($connection,$_POST['questionNumber']);
                 $question= mysqli_real_escape_string($connection,$_POST['question']);
                 $option1= mysqli_real_escape_string($connection,$_POST['option1']);
-                $option2= mysqli_real_escape_string($connection,$_POST['option2']);    
-                $option3= mysqli_real_escape_string($connection,$_POST['option3']); 
-                $option4= mysqli_real_escape_string($connection,$_POST['option4']); 
+                $option2= mysqli_real_escape_string($connection,$_POST['option2']);
+                $option3= mysqli_real_escape_string($connection,$_POST['option3']);
+                $option4= mysqli_real_escape_string($connection,$_POST['option4']);
                 $answer = $_POST['answer'];
 
                 if($answer == "option1")
@@ -64,8 +48,7 @@
                 $answer = mysqli_real_escape_string($connection,$answer);
 
                 // Insert the question to the database
-                $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status)
-                    VALUES ('$id', 'S001','$question','$answer','$option1','$option2','$option3','$option4',1)";
+                $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,status) VALUES ('$id', '1.1','$question','$answer','$option1','$option2','$option3','$option4',1)";
                         
                 if ($connection->query($sql) === TRUE)
                 {?>
@@ -105,6 +88,5 @@
 
 
 //  Footer 
-
-    require_once('../../assets/includes/footer.php');
+    // require_once('../../assets/includes/footer.php');
 ?>
