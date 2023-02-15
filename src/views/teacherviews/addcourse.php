@@ -62,7 +62,7 @@
                                     <img src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" class="cover-img">
                                 </div>
 
-                                <p><a href="subtopic.php?lesson=<?php echo $number ?>">Lesson 0<?php echo $course_row['courseId'];?></a></p>
+                                <p><a href="subtopic.php?lesson=<?php echo $number ?>">Course 0<?php echo $course_row['courseId'];?></a></p>
                                 <div class="course-name">
                                     <?php echo $course_row['courseName'];?>
                                 </div>

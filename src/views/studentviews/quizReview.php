@@ -1,16 +1,16 @@
 <?php
     session_start();
-    require_once('src\assets\includes\navbar-student.php');
-    require('dbconnection.php');
+    require_once('../../assets/includes/navbar-student.php');
+    require('C:\xampp\htdocs\itmansala\src\config\dbconnection.php');
 
-    if(!isset($_SESSION['firstname']))
+    if(!isset($_SESSION['name']))
     {
         header('location:index.php');
     }
-    if(isset($_GET['logout']))
+    if(isset($_GET['name']))
     {
         session_destroy();
-        unset($_SESSION['firstname']);
+        unset($_SESSION['name']);
         header('location:index.php');
     }
 ?>
@@ -23,14 +23,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Questions</title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="src/assets/css/quizReview.css"></link>
+    <link rel="stylesheet" href="../../assets/css/quizReview.css"></link>
+    <link rel="stylesheet" href="../../assets/css/global.css"></link>
 </head>
 
     <body>
-        <!--Navigation Bar-->
-        <?php
-            require_once('navbar-student.php');
-        ?>
 
         <!--Course Details-->
         <div class="course-details-box">

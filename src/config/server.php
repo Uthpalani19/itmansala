@@ -6,39 +6,31 @@
 // initializing variables
 $Username = "";
 $password = "";
-$Firstname = "";
-$Lastname = "";
+$name = "";
 $Email = "";
 $PhoneNumber = "";
-$DOB = "";
-$ALyear ="";
 $Firstname_Error = array();
-$Lastname_Error = array();
 $Username_Error = array(); 
 $Email_Error = array();
 $Password_Error = array();
 $PhoneNumber_Error = array();
-$DOB_Error = array();
-$ALyear_Error = array();
 $Login_Error = array();
 
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'emansala');
+$db = mysqli_connect('localhost', 'root', '', 'itmansala');
 
 // Register student
 
 if (isset($_POST['signup_student'])) {
     // get all input values from the form
-    $Firstname = mysqli_real_escape_string($db, $_POST['firstname']);
-    $Lastname = mysqli_real_escape_string($db, $_POST['lastname']);
+    $name = mysqli_real_escape_string($db, $_POST['name']);
     $Username = mysqli_real_escape_string($db, $_POST['username']);
     $Email = mysqli_real_escape_string($db, $_POST['email']);
     $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
     $PhoneNumber = mysqli_real_escape_string($db, $_POST['phonenumber']);
-    $DOB = mysqli_real_escape_string($db, $_POST['dob']);
-    $ALyear = mysqli_real_escape_string($db, $_POST['alyear']);
+
 
         // Validate password strength
         if($password_1 != ""){
@@ -60,35 +52,24 @@ if (isset($_POST['signup_student'])) {
             }
         
             //name validation
-            $fnamenum = preg_match('@[0-9]@', $Firstname);
-            $fnamespc = preg_match('@[^\w]@', $Firstname);
-            $lnamenum = preg_match('@[0-9]@', $Lastname);
-            $lnamespc = preg_match('@[^\w]@', $Lastname);
+            $namenum = preg_match('@[0-9]@', $name);
+            $namespc = preg_match('@[^\w]@', $name);
         
-            if ($fnamenum != NULL){
+            if ($namenum != NULL){
                 array_push($Firstname_Error, "Name cannot contain numbers <br> or special characters!");
             }
         
-            if ($fnamespc != NULL){
+            if ($namespc != NULL){
                 array_push($Firstname_Error, "Name cannot contain numbers <br> or special characters!");
             }
             
-            if ($lnamenum != NULL){
-                array_push($Lastname_Error, "Name cannot contain numbers <br> or special characters!");
-            }
-        
-            if ($lnamespc != NULL){
-                array_push($Lastname_Error, "Name cannot contain numbers <br> or special characters!");
-            }
   
     // empty form validation
     
-    if (empty($Firstname)) {
-        array_push($Firstname_Error, "First name is required!");
+    if (empty($name)) {
+        array_push($Firstname_Error, "Name is required!");
     }
-    if (empty($Lastname)) {
-        array_push($Lastname_Error, "Last name is required!");
-    }
+
     if (empty($Username)) {
         array_push($Username_Error, "Username is required!");
     }
@@ -104,27 +85,14 @@ if (isset($_POST['signup_student'])) {
     if (empty($PhoneNumber)) {
         array_push($PhoneNumber_Error, "Phone Number is required!");
     }
-    if (empty($DOB)) {
-        array_push($DOB_Error, "Date of birth is required!");
-    }
-    if (empty($ALyear)) {
-        array_push($ALyear_Error, "A/L year is required!");
-    }
 
   
     // check if same data already exists in database
-    $user_check_query = "SELECT * FROM student WHERE userName='$Username' OR email='$Email' OR phoneNumber='$PhoneNumber' LIMIT 1";
+    $user_check_query = "SELECT * FROM usertable WHERE phoneNumber='$PhoneNumber' LIMIT 1";
     $result = mysqli_query($db, $user_check_query);
     $user = mysqli_fetch_assoc($result);
     
-    if ($user) { 
-      if ($user['userName'] === $Username) {
-        array_push($Username_Error, "Username already exists");
-      }
-  
-      if ($user['email'] === $Email) {
-        array_push($Email_Error, "Email already exists");
-      }
+    if ($user) {
       if ($user['phoneNumber'] === $PhoneNumber) {
         array_push($PhoneNumber_Error, "Phone number already exists");
       }
@@ -132,18 +100,22 @@ if (isset($_POST['signup_student'])) {
 
 
     // register user if there are no errors in the form
-    $master_error = array_merge($Firstname_Error, $Lastname_Error, $Username_Error, $Email_Error, $Password_Error, $PhoneNumber_Error, $DOB_Error, $ALyear_Error);
+    $master_error = array_merge($Firstname_Error, $Username_Error, $Email_Error, $Password_Error, $PhoneNumber_Error);
     if (count($master_error) == 0) {
         $password = md5($password_1);//encrypt the password before saving in the database
   
-        $query = "INSERT INTO student (firstName, lastName, userName, email, password, phoneNumber, dob, alYear) 
-                  VALUES('$Firstname', '$Lastname', '$Username', '$Email', '$password', '$PhoneNumber', '$DOB', '$ALyear')";
+        // $query = "INSERT INTO student (name, userName, email, password, phoneNumber) 
+        //           VALUES('$name', '$Username', '$Email', '$password', '$PhoneNumber')";
+
+        $query = "INSERT INTO student (name, email, password, phoneNumber, status) 
+                  VALUES('$name', '$Email', '$password', '$PhoneNumber', '1')";
+
         $userquery = "INSERT INTO usertable (phoneNumber, password, role)
                         VALUES('$PhoneNumber', '$password', 'student')";
         mysqli_query($db, $query);
         mysqli_query($db, $userquery);
-        $_SESSION['Username'] = $Username;
-        header('location: studentview/availablecourses.php');
+        $_SESSION['name'] = $name;
+        header('location: views/studentviews/quizReview.php');
     }
   }
 
@@ -154,7 +126,7 @@ if (isset($_POST['login_student']))  {
     $password = mysqli_real_escape_string($db, $_POST['password']);
   
     if (empty($User)) {
-        array_push($PhoneNumber_Error, "Username or Phone number is required!");
+        array_push($PhoneNumber_Error, "Phone number is required!");
     }
     if (empty($password)) {
         array_push($Password_Error, "Password is required!");
@@ -166,31 +138,38 @@ if (isset($_POST['login_student']))  {
             $query = "SELECT * FROM usertable WHERE phoneNumber = '$User' AND password ='$decrypt'";
             $results = mysqli_query($db, $query);
             if (mysqli_num_rows($results) == 1){
-              $row = mysqli_fetch_assoc($results);
-              $role = $row['role'];
-              if ($role == 'student'){
+                $row = mysqli_fetch_assoc($results);
+                $role = $row['role'];
+
+              if ($role == 'student' || $role == 'Student'){
                   $stdquery = "SELECT * FROM student WHERE phoneNumber = '$User'";
                   $stdresults = mysqli_query($db, $stdquery);
                   $stdrow = mysqli_fetch_assoc($stdresults);
-                  $Username = $stdrow['userName'];
-                  $_SESSION['Username'] = $Username;
-                  header('location: studentview/availablecourses.php');
+                  $Username = $stdrow['name'];
+                  $_SESSION['name'] = $Username;
+                  echo $_SESSION['name'];
+                  header('location: views/studentviews/student-dashboard.php');
               }
-              if ($role == 'teacher'){
+              if ($role == 'Teacher' || $role == 'teacher'){
                 $tchquery = "SELECT * FROM teacher WHERE phoneNumber = '$User'";
                 $tchresults = mysqli_query($db, $tchquery);
                 $tchrow = mysqli_fetch_assoc($tchresults);
-                $Firstname = $tchrow['firstName'];
-                $_SESSION['firstname'] = $Firstname;
-                header('location: teacherview/addcourse.php');
+                $name = $tchrow['name'];
+                $_SESSION['name'] = $name;
+                $_SESSION['phone']=$User;
+                $_SESSION['email']=$tchrow['email'];
+
+
+
+                header('location: views/teacherviews/dashboard-teacher.php');
              }
-             if ($role == 'admin'){
+             if ($role == 'admin' || $role == 'Admin'){
                 $admquery = "SELECT * FROM admin WHERE phoneNumber = '$User'";
                 $admresults = mysqli_query($db, $admquery);
                 $admrow = mysqli_fetch_assoc($admresults);
                 $name = $admrow['name'];
                 $_SESSION['name'] = $name;
-                header('location: teacherview/viewTeachers.php');
+                header('location: views/adminviews/Admin-dashboard.php');
              }
             }else {
               array_push($Login_Error, "Incorrect username or password");
@@ -198,7 +177,7 @@ if (isset($_POST['login_student']))  {
 
     }
     }
-  }
-
+  
+}
 
   ?>

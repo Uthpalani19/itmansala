@@ -1,13 +1,14 @@
 <?php 
   session_start(); 
+  require('../../config/dbconnection.php');
 
-  if (!isset($_SESSION['Username'])) {
+  if (!isset($_SESSION['name'])) {
   	header('location: ../student_login.php');
   }
 
   if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['Username']);
+    unset($_SESSION['name']);
     header("location: ../student_login.php");
  }
 ?>
@@ -19,15 +20,17 @@
   <title>IT Mansala</title>
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../../assets/css/availablecourses.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
+
 </head>
 <body>
 
-<div class="splashcourse">
-        <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['Username']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
+<!-- <div class="splashcourse">
+        <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['name']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
         <img class="welcome-avatar fade-in" src="../../assets/images/welcome_avatar.png">
-</div>
+</div> -->
 <div class="container">
-    <?php include('../../assets/includes/studentnav.php') ?>
+    <?php include('../../assets/includes/navbar-student.php') ?>
 
     <div class="search-section">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -51,7 +54,7 @@
             <div class="lesson-container">
                 <?php
                     $course_query= "SELECT * FROM course";
-                    $course_result = mysqli_query($db, $course_query);
+                    $course_result = mysqli_query($connection, $course_query);
                     $check_course_result = mysqli_num_rows($course_result) > 0;
 
                     if($check_course_result){
@@ -100,10 +103,6 @@
         </div>
     </div>
 
-
-       
-
-    <?php include('../../assets/includes/footer.php') ?>
 </div>
 </body>
 

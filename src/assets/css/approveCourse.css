@@ -1,0 +1,93 @@
+body{
+    background: #d9d9d9;   
+}
+
+.container{
+    margin-top: -10px;
+    position: absolute;
+    background: #fff;
+    border-radius: 20px;
+    width: 90%;
+    height: 640px;
+    margin-left: 4.8%;
+    text-align: center;
+}
+
+.container-2{
+    margin-top: 40px;
+}
+.container .container-2 .text-1{
+    color: rgb(24, 135, 209);
+}
+
+.container .container-2 .text-2{
+    color: rgb(54, 53, 53);
+    margin-top: -18px;
+}
+
+.lesson-container{
+    width: 80%;
+    margin-top: 100px;
+    /* margin: auto; */
+    text-align: left;
+    margin-left: 220px;
+}
+
+.db-lesson{
+    width: 25%;
+    margin: auto;
+    margin-left: 270px;
+    height: 26rem;
+    display: inline-block;
+    border: 2px solid #c5c5c5;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.db-lesson p{
+    text-align: center;
+    color: black;
+}
+
+.lesson-no{
+    font-weight: bold;
+}
+.cover-img{
+    width: 100%;
+    height: 175px;
+    margin-top: 15px;
+}
+
+.course-name{
+    background: #f0f0f0;
+    height: 70px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.price-username p{
+    color: #636363;
+    font-weight: bold;
+}
+
+.price-username{
+    margin-top: 0px;
+    display: inline-flex;
+    gap: 40px;
+}
+
+.text{
+    font-weight: bold;
+}
+
+.pub-btn{
+    color: white;
+    background: #2b7c2b;
+    border: none;
+    padding: 3px 34px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}

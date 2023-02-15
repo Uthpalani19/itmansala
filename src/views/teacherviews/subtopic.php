@@ -21,14 +21,24 @@
   <title>IT Mansala</title>
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
+  <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
   <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
-
+    <script>
+        function addQuestions()
+            {
+                window.location.href="addQuestions.php?>";
+            }
+            function viewQuestions()
+            {
+                window.location.href="viewAddedQuestions.php";
+            }
+    </script>
 </head>
-<body>
+<body class="grey-bg">
 
 <div class="lesson-info">
     <div class="lesson-num">
-        <p class="lesson-number">Lesson 0<?php echo $subtopic_row['courseId'];?>:</p>
+        <p class="lesson-number">Course 0<?php echo $subtopic_row['courseId'];?>:</p>
         <p class="lesson-name"><?php echo $subtopic_row['courseName'];?></p>
     </div>
     <p class="lesson-desc"><?php echo $subtopic_row['courseDescription'];?></p>
@@ -82,7 +92,7 @@
                     <div class="dblesson">
                         
                         <p><?php echo $retrieve_lesson_row['lessonName'];?></p>
-                        <a href=""><?php echo $retrieve_lesson_row['activeMessage'];?></a>
+                        <!-- <a href=""><?php echo $retrieve_lesson_row['activeMessage'];?></a> -->
                         
                     </div>
 
@@ -92,10 +102,14 @@
                         }
                     }
                     ?>
-
+                        
                         <div class="add-lesson" id="addlesson">
                             <i class="fa-solid fa-circle-plus"></i>
                             <p>Click here to add a lesson</p>
+
+                            <!--Add Questions button-->
+                            <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions" onClick="addQuestions()">
+                            <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions"  onClick="viewQuestions()">
                         </div>
 
                     <div class="form-container lesson-form" id="formId1">
@@ -111,14 +125,14 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="column1">
                             <p>Active Message</p>
                         </div>  
                         <div class="column2">
                             <input type="text" class="course-input title" name="activeMessage">
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="row">
                         <div class="column1">
@@ -148,6 +162,7 @@
 	                    </div>
                         <button type="submit" name="add_lesson" class="form-btn">Create Lesson</button>
                         <button type="reset" class="form-btn" id="discardlesson">Discard</button>
+
                     </div>
                 </form>
             </div>
@@ -204,6 +219,7 @@
         </div>
 </div>
 
-<script type="text/javascript" src="../../assets/js/subtopic.js"></script>
+<script type="text/javascript" src="../../assets/js/subtopic.js">
+</script>
 </body>
 </html>

@@ -1,5 +1,7 @@
-<?php include('../config/server.php') ?>
-<?php include('../config/errors.php') ?>
+<?php
+    include('config/server.php');
+    include('config/errors.php');
+?>
 
 <!DOCTYPE html>
 <html>
@@ -7,17 +9,17 @@
 
   <title>IT Mansala</title>
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="../assets/css/student.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/student.css">
 </head>
 <body>
     <div class="splash" id="hide">
-        <img class="logo fade-in" src="../assets/images/logo.png">
+        <img class="logo fade-in" src="assets/images/logo.png">
     </div>
     <div class="left">
         <div class="welcome">
             <p class="message">Hi!<br>Welcome to IT Mansala</p>
         </div>
-        <img class="avatar "src="../assets/images/avatar.png">     
+        <img class="avatar "src="assets/images/avatar.png">     
     </div>
 
     <div class="right">
@@ -26,7 +28,7 @@
             <div class="login_field">
 
                 <i class="login_icon fa-regular fa-user"></i>
-				<input type="text" class="login_input" placeholder="  Username or Phone number" name="user" value="<?php echo $PhoneNumber;?>">
+				<input type="text" class="login_input" placeholder="  Phone number" name="user" value="<?php echo $PhoneNumber;?>">
                 <div>
                     <?php PhoneError(); ?>
                 </div>
@@ -54,7 +56,7 @@
     
     </div>
 
-<script type="text/javascript" src="../assets/javascript/student.js"></script>
+<script type="text/javascript" src="assets/js/student.js"></script>
 
 </body>
 </html>

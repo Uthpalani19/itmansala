@@ -1,6 +1,7 @@
 <?php
     require('../../config/dbconnection.php');
     require_once('../../assets/includes/navbar-teacher.php');
+    require('C:\xampp\htdocs\itmansala\src\config\teacherconfig\addQuestions.config.php');
 
     // Auto generated ID
      $sql = "Select questionId from modelpaperquestion order by questionId desc limit 1";
@@ -10,7 +11,7 @@
      
      if(mysqli_num_rows($result) > 0)
      {
-         $lastid = $row['questionId'];
+        $lastid = $row['questionId'];
      }
  
      if($lastid == " ")
@@ -44,7 +45,7 @@
 
     <body>
         <!--Course Details-->
-        <form action="../../config/teacherconfig/addQuestions.config.php" method="POST">
+        <form action="" method="POST">
         <div class="course-details-box">
             <p id="title">Lesson 01: දත්ත සහ තොරතුරු.</p>
         </div>
@@ -57,7 +58,7 @@
         <!--Add a new Question-->
         <div class="question">
             <div class="question-number-box">
-                <label class="question-number" name="questionNumber" ><?php echo $id; ?></label>
+                <textarea class="question-number" name="questionNumber" readonly style="resize: none;"><?php echo $id; ?></textarea>
             </div>
 
             <div>

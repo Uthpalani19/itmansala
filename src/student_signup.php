@@ -1,40 +1,33 @@
-<?php include('../config/server.php') ?>
-<?php include('../config/errors.php') ?>
+<?php include('config/server.php') ?>
+<?php include('config/errors.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>IT Mansala</title>
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="../assets/css/student.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/student.css">
 </head>
 <body>
     <div class="splash" id="hide">
-        <img class="logo fade-in" src="../assets/images/logo.png">
+        <img class="logo fade-in" src="assets/images/logo.png">
     </div>
     <div class="left signupleft">
         <div class="welcome">
             <p class="message signupmessage">Fill your Info</p>
         </div>
-        <img class="avatar signupavatar "src="../assets/images/avatar.png">     
+        <img class="avatar signupavatar "src="assets/images/avatar.png">     
     </div>
 
     <div class="right">
-        <h1 class="signup">Sign Up</h1>
+        <h1 class="signup">Sign Up as a student</h1>
         <div class="container">
             <div class="slider">
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div id="form1">
                         <div class="login_field signupfield">
-                            <input type="text" class="login_input" placeholder="  First Name" name="firstname" value="<?php echo $Firstname;?>">
+                            <input type="text" class="login_input" placeholder="  Name" name="name" value="<?php echo $name;?>">
                             <div>
                                 <?php FirstnameError(); ?>
-                            </div>
-                        </div>
-
-                        <div class="login_field signupfield">
-                            <input type="text" class="login_input" placeholder="  Last Name" name="lastname" value="<?php echo $Lastname;?>">
-                            <div>
-                                <?php LastnameError(); ?>
                             </div>
                         </div>
 
@@ -42,6 +35,13 @@
                             <input type="text" class="login_input" placeholder="  Username" name="username" value="<?php echo $Username;?>">
                             <div>
                                 <?php userError(); ?>
+                            </div>
+                        </div>
+
+                        <div class="login_field signupfield">
+                            <input type="email" class="login_input" placeholder="  Email" name="email" value="<?php echo $Email;?>">
+                            <div>
+                                <?php EmailError(); ?>
                             </div>
                         </div>
 
@@ -54,16 +54,16 @@
                     </div>
 
                     <div id="form2">
-                        <div class="login_field signupfield">
-                            <input type="email" class="login_input" placeholder="  Email" name="email" value="<?php echo $Email;?>">
-                            <div>
-                                <?php EmailError(); ?>
-                            </div>
-                        </div>
-
                         <div class="back">
                             <button type="button" id="back1"><i class="fa-solid fa-chevron-left"></i></button>
                         </div> 
+
+                        <div class="login_field signupfield">
+                            <input type="text" class="login_input" placeholder="  Phone Number" name="phonenumber" value="<?php echo $PhoneNumber;?>">
+                            <div>
+                                <?php PhoneError(); ?>
+                            </div>
+                        </div>
 
                         <div class="login_field signupfield">
                             <input type="password" class="login_input" id="psw1" placeholder="  Password" name="password_1" value="<?php echo $password;?>">
@@ -82,41 +82,10 @@
                         </div>
 
                         <div class="login">
-                            <button type="button" id="next2" class="loginbtn signupbtn">Next</button>
-                        </div> 
-
-
-                    </div>
-
-                    <div id="form3">
-                        <div class="login_field signupfield">
-                            <input type="text" class="login_input" placeholder="  Phone Number" name="phonenumber" value="<?php echo $PhoneNumber;?>">
-                            <div>
-                                <?php PhoneError(); ?>
-                            </div>
-                        </div>
-
-                        <div class="back">
-                            <button type="button" id="back2"><i class="fa-solid fa-chevron-left"></i></button>
-                        </div> 
-
-                        <div class="login_field signupfield">
-                            <input type="text" class="login_input" placeholder="  Date of Birth" name="dob" value="<?php echo $DOB;?>" onfocus="(this.type='date')"  id="customdob">
-                            <div>
-                                <?php DobError(); ?>
-                            </div>
-                        </div>
-
-                        <div class="login_field signupfield">
-                            <input type="text" class="login_input" placeholder="  A/L Year" name="alyear" value="<?php echo $ALyear;?>">
-                            <div>
-                                <?php AlError(); ?>
-                            </div>
-                        </div>
-
-                        <div class="login">
                             <button type="submit" name="signup_student" class="loginbtn signupbtn">Sign Up</button><br>
-                        </div>  
+                        </div> 
+
+
                     </div>
                 </form>
 
@@ -126,7 +95,7 @@
     
 
 
-<script type="text/javascript" src="../assets/javascript/student.js"></script>
+<script type="text/javascript" src="assets/js/student.js"></script>
 </body>
 </html>
 

@@ -63,7 +63,7 @@
                                     <label for="name" class="label-field" read only>Phone Number</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="contact" class="input-field" value="<?php echo $_SESSION['contact']?>" readonly id="disabled-txt-field">
+                                    <input type="text" name="contact" class="input-field" value="0763361822" readonly id="disabled-txt-field">
                                 </td>
                             </tr>
                         </table>

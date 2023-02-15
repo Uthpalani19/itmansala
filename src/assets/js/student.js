@@ -25,21 +25,13 @@ const hide = document.getElementById("hide");
 
 const form1 = document.getElementById("form1");
 const form2 = document.getElementById("form2");
-const form3 = document.getElementById("form3");
 
 const next1 = document.getElementById("next1");
-const next2 = document.getElementById("next2");
 const back1 = document.getElementById("back1");
-const back2 = document.getElementById("back2");
 
 next1.onclick = function(){
     form1.style.display = "none";
     form2.style.display = "block";
-}
-
-next2.onclick = function(){
-    form2.style.display = "none";
-    form3.style.display = "block";
 }
 
 back1.onclick = function(){
@@ -47,10 +39,6 @@ back1.onclick = function(){
     form1.style.display = "block";
 }
 
-back2.onclick = function(){
-    form3.style.display = "none";
-    form2.style.display = "block";
-}
 
 
 //-----------------hide/show password---------------//

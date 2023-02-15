@@ -1,18 +1,5 @@
 <?php
-    session_start();
-    require_once('src\assets\includes\navbar-teacher.php');
-    require('dbconnection.php');
-
-    if(!isset($_SESSION['firstname']))
-    {
-        header('location:index.php');
-    }
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
-    }
+    require('../../config/dbconnection.php');
 ?>
 
 <!DOCTYPE html>
@@ -25,16 +12,14 @@
 </head>
 
 <body>
-    <?php
-        require_once 'dbconnection.php';
-
+    <?php   
         $questionID = $_GET['deleteId'];
         $sql = "UPDATE modelpaperquestion set status=0 WHERE questionId='$questionID'";
         $result = mysqli_query($connection,$sql);
 
         if($result)
         {
-            echo "<script>window.location.href='viewAddedQuestions.php'</script>";        }
+            echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php'</script>";        }
         else
         {
             echo "Question Deletion Failed";

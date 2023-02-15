@@ -770,11 +770,12 @@ tr:nth-child(odd)
 .question-number
 {
     color: white;
+    width: 50px;
+    height: 20px;
     padding: 20px;
-    margin-top: 8px;
     margin-left: 100px;
     background-color: #5319a6;
-    position:absolute;
+    position:relative;
 }
 
 .question-add
@@ -789,7 +790,7 @@ tr:nth-child(odd)
     font-size: 14px;
     resize: none;
     margin-left: 200px;
-    margin-top: 5px;
+    margin-top: -68px;
     margin-bottom: 10px;
 }
 

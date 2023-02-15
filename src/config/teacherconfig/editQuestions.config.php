@@ -1,17 +1,19 @@
-<?php
+<?php 
+    // Navigation Bar
+    require_once('../../assets/includes/navbar-teacher.php');
     session_start();
-    require_once('src\assets\includes\navbar-teacher.php');
-    require('dbconnection.php');
+    require('../../config/dbconnection.php');
 
-    if(!isset($_SESSION['firstname']))
+    if(!isset($_SESSION['name']))
     {
-        header('location:index.php');
+        header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
+
     if(isset($_GET['logout']))
     {
         session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
+        unset($_SESSION['name']);
+        header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
 ?>
 
@@ -20,15 +22,15 @@
         <title>Manage Questions</title>
         <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
         <!--script src="js/logout.js"></script-->
-        <link rel="stylesheet" href="src/assets/css/teacher-style.css"></link>
+        <link rel="stylesheet" href="../../assets/css/global.css"></link>
+        <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
     </head>
 
     <body>
-
         <form action="" method="POST">
             <!--Course Details-->
             <div class="course-details-box">
-                <p id="title">Lesson 01: දත්ත සහ තොරතුරු </p>
+                <p id="title">Course 01: දත්ත සහ තොරතුරු </p>
             </div>
 
             <!--Set Subtopic Name-->
@@ -120,29 +122,29 @@
 
                                                 if($result)
                                                 {
-                                                    echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                                    echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php'</script>";
                                                 }
                                                 else
                                                 {
                                                     echo "<script>alert('Question Update Failed!')</script>";
-                                                    echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                                    echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php'</script>";
                                                 }
                                         }
                                         else
                                         {
                                             echo "<script>alert('Options are same!')</script>";
-                                            echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                            echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php'</script>";
                                         }
                                     }
                                     else
                                     {
                                         echo "<script>alert('Question or Answers are empty!')</script>";
-                                        echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                        echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php'</script>";
                                     }
                                 }  
                                 if(isset($_POST['goBack']))
                                 {
-                                    echo "<script>window.location.href='viewAddedQuestions.php'</script>";
+                                    echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php'</script>";
                                 }
                             }
                     else
@@ -156,7 +158,7 @@
 
         <!-- Footer -->
         <?php
-            require_once('footer.php');
+            require_once('../../assets/includes/footer.php');
         ?>
     </body>
 </html>

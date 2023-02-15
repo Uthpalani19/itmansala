@@ -1,7 +1,11 @@
 <?php
-session_start();
 
-if (!isset($_SESSION['Username'])) {
+session_start();
+require('../../config/dbconnection.php');
+include('../../assets/includes/navbar-student.php');
+
+
+if (!isset($_SESSION['name'])) {
     header('location: ../student_login.php');
 }
 ?>
@@ -12,14 +16,14 @@ if (!isset($_SESSION['Username'])) {
     <title>IT Mansala</title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
 </head>
 
 <body>
 
-    <?php include('../../assets/includes/studentnav.php') ?>
     <div class="lesson-info viewlessoninfo">
         <div class="lesson-num">
-            <p class="lesson-number">Lesson 0<?php echo $subtopic_row['courseId']; ?>:</p>
+            <p class="lesson-number">Course 0<?php echo $subtopic_row['courseId']; ?>:</p>
             <p class="lesson-name">
                 <?php echo $subtopic_row['courseName']; ?>
             </p>
@@ -34,7 +38,7 @@ if (!isset($_SESSION['Username'])) {
 
         <?php
         $retrieve_subtopic = "SELECT * FROM subtopic WHERE courseID = $lesson";
-        $retrieve_subtopic_result = mysqli_query($db, $retrieve_subtopic);
+        $retrieve_subtopic_result = mysqli_query($connection, $retrieve_subtopic);
         $check_retrieve_subtopic = mysqli_num_rows($retrieve_subtopic_result) > 0;
 
         if ($check_retrieve_subtopic) {
@@ -67,7 +71,7 @@ if (!isset($_SESSION['Username'])) {
 
         } else {
             $retrieve_lesson = "SELECT * FROM lesson WHERE subTopicId = $subtopic";
-            $retrieve_lesson_result = mysqli_query($db, $retrieve_lesson);
+            $retrieve_lesson_result = mysqli_query($connection, $retrieve_lesson);
             $check_retrieve_lesson = mysqli_num_rows($retrieve_lesson_result) > 0;
 
             if ($check_retrieve_lesson) {

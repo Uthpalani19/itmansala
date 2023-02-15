@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0; 
+    
+}
+
+.form-title{
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding-top: 1.7rem;
+    margin-top: 100px;
+    color: #636363;
+    text-align: center;
+
+}
+
+input{
+    font-family: 'Poppins', sans-serif;
+}
+
+.teacher-form{
+    width: 75%;
+    margin: auto;
+}
+
+.teacher-input{
+    border: 1px solid #e7e7e7;
+    border-radius: 3px;
+    vertical-align: middle; 
+    width: 100%;
+    padding: 7px;
+}
+
+.teacher-input:hover, :active, :focus{
+    outline: none;
+	border-color: #5C26A9;
+} 
+
+.column1{
+    display: inline-block;
+    width: 15%;
+}
+
+.column2{
+    display: inline-block;
+    width: 80%;
+    vertical-align: middle;
+}
+
+textarea{
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.column1-name{
+    display: inline-block;
+    width: 15%;
+}
+
+.column2-name{
+    display: inline-block;
+    margin-right: 45px;
+    width: 32%;
+}
+
+.column3-name{
+    display: inline-block;
+    margin-right: 25px;
+}
+
+.select{
+    margin-left: 45px;
+    
+}
+
+.upload-option{
+    text-align: center;
+    font-weight:700;
+    color: #6d6d6d;
+    margin-left: 13.5%;
+}
+
+.drop-zone{
+	width: 75%;
+	height: 3rem;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	cursor: pointer;
+	border: 2px dashed #636363;
+	border-radius: 4px;
+    background-color: #ddf2ff;
+    color: #9ea0a2;
+    margin-left: 15.5%;
+}
+
+.drop-zone-hover{
+	border-style: solid;
+}
+
+input[type="file"]{
+	display: none;
+}
+
+.drop-zone-thumbnail{
+	width: 15%;
+	height: 100%;
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+}
+
+.drop-zone-thumbnail::after{
+	content: attr(data-label);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 5px 0;
+	color: #ffffff;
+	background: rgba(0, 0, 0, 0.75);
+	font-size: 10px;
+	text-align: center;
+}
+
+.upload{
+    padding: 10px 0 10px 0px;
+    border: 1px solid #e7e7e7;
+    border-radius: 3px;
+    color: #7e53bc;
+    font-size: 13px;
+}
+
+.upload label{
+    padding-left: 10px;
+}
+
+label{
+    cursor: pointer;
+}
+
+.fa-file-import{
+    color: #636363;
+    font-size: 25px;
+    margin-left: 30px;
+}
+
+
+
+.form-btn{
+    color: white;
+    background: #5319a6;
+    width: 15%;
+    padding: 7px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 2rem;
+    margin-right: 1rem;
+}
