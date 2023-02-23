@@ -31,6 +31,7 @@ if (isset($_POST['add_course'])) {
     $Price = mysqli_real_escape_string($connection, $_POST['price']);
     $coverPhoto1 = mysqli_real_escape_string($connection, $_FILES['coverPhoto1']['name']);
     $coverPhoto2 = mysqli_real_escape_string($connection, $_FILES['coverPhoto2']['name']);
+    $teacherNumber = $_SESSION['phone'];
   
     if(empty($coverPhoto1)){
         $courseImage = $coverPhoto2;
@@ -50,7 +51,7 @@ if (isset($_POST['add_course'])) {
     $master_error = array_merge($Title_Error, $Desc_Error);
     if (count($master_error) == 0) {
     $query = "INSERT INTO course (courseId, courseName, courseDescription, courseImage, price, teacherPhoneNumber, status) 
-    VALUES('$courseNumber', '$courseName', '$courseDescription', '$courseImage', '$Price', '714900086', '1')";
+    VALUES('$courseNumber', '$courseName', '$courseDescription', '$courseImage', '$Price', '$teacherNumber', '1')";
     mysqli_query($connection, $query);
     move_uploaded_file($_FILES['courseImage']['tmp_name'], "../../uploads/$courseImage");
     header('location: addcourse.php');

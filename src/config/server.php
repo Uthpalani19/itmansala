@@ -3,6 +3,8 @@
     session_start();
 }
 
+require('dbconnection.php');
+
 // initializing variables
 $Username = "";
 $password = "";
@@ -16,20 +18,16 @@ $Password_Error = array();
 $PhoneNumber_Error = array();
 $Login_Error = array();
 
-
-// connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'itmansala');
-
 // Register student
 
 if (isset($_POST['signup_student'])) {
     // get all input values from the form
-    $name = mysqli_real_escape_string($db, $_POST['name']);
-    $Username = mysqli_real_escape_string($db, $_POST['username']);
-    $Email = mysqli_real_escape_string($db, $_POST['email']);
-    $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
-    $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
-    $PhoneNumber = mysqli_real_escape_string($db, $_POST['phonenumber']);
+    $name = mysqli_real_escape_string($connection, $_POST['name']);
+    $Username = mysqli_real_escape_string($connection, $_POST['username']);
+    $Email = mysqli_real_escape_string($connection, $_POST['email']);
+    $password_1 = mysqli_real_escape_string($connection, $_POST['password_1']);
+    $password_2 = mysqli_real_escape_string($connection, $_POST['password_2']);
+    $PhoneNumber = mysqli_real_escape_string($connection, $_POST['phonenumber']);
 
 
         // Validate password strength
@@ -89,7 +87,7 @@ if (isset($_POST['signup_student'])) {
   
     // check if same data already exists in database
     $user_check_query = "SELECT * FROM usertable WHERE phoneNumber='$PhoneNumber' LIMIT 1";
-    $result = mysqli_query($db, $user_check_query);
+    $result = mysqli_query($connection, $user_check_query);
     $user = mysqli_fetch_assoc($result);
     
     if ($user) {
@@ -122,8 +120,8 @@ if (isset($_POST['signup_student'])) {
 
 // Login student
 if (isset($_POST['login_student']))  {
-    $User = mysqli_real_escape_string($db, $_POST['user']);
-    $password = mysqli_real_escape_string($db, $_POST['password']);
+    $User = mysqli_real_escape_string($connection, $_POST['user']);
+    $password = mysqli_real_escape_string($connection, $_POST['password']);
   
     if (empty($User)) {
         array_push($PhoneNumber_Error, "Phone number is required!");
@@ -136,14 +134,14 @@ if (isset($_POST['login_student']))  {
         if (count($Password_Error) == 0) {
             $decrypt = md5($password);
             $query = "SELECT * FROM usertable WHERE phoneNumber = '$User' AND password ='$decrypt'";
-            $results = mysqli_query($db, $query);
+            $results = mysqli_query($connection, $query);
             if (mysqli_num_rows($results) == 1){
                 $row = mysqli_fetch_assoc($results);
                 $role = $row['role'];
 
               if ($role == 'student' || $role == 'Student'){
                   $stdquery = "SELECT * FROM student WHERE phoneNumber = '$User'";
-                  $stdresults = mysqli_query($db, $stdquery);
+                  $stdresults = mysqli_query($connection, $stdquery);
                   $stdrow = mysqli_fetch_assoc($stdresults);
                   $Username = $stdrow['name'];
                   $_SESSION['name'] = $Username;
@@ -152,7 +150,7 @@ if (isset($_POST['login_student']))  {
               }
               if ($role == 'Teacher' || $role == 'teacher'){
                 $tchquery = "SELECT * FROM teacher WHERE phoneNumber = '$User'";
-                $tchresults = mysqli_query($db, $tchquery);
+                $tchresults = mysqli_query($connection, $tchquery);
                 $tchrow = mysqli_fetch_assoc($tchresults);
                 $name = $tchrow['name'];
                 $_SESSION['name'] = $name;
@@ -165,7 +163,7 @@ if (isset($_POST['login_student']))  {
              }
              if ($role == 'admin' || $role == 'Admin'){
                 $admquery = "SELECT * FROM admin WHERE phoneNumber = '$User'";
-                $admresults = mysqli_query($db, $admquery);
+                $admresults = mysqli_query($connection, $admquery);
                 $admrow = mysqli_fetch_assoc($admresults);
                 $name = $admrow['name'];
                 $_SESSION['name'] = $name;

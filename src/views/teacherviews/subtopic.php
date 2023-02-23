@@ -22,18 +22,18 @@
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
   <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
-  <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
     <script>
         function addQuestions()
             {
-                window.location.href="addQuestions.php?>";
+                window.location.href="addQuestions.php";
             }
             function viewQuestions()
             {
                 window.location.href="viewAddedQuestions.php";
             }
     </script>
-</head>
+</head> -->
 <body class="grey-bg">
 
 <div class="lesson-info">
@@ -46,16 +46,15 @@
 
 <div class="content">
 
+            <form action="viewAddedQuestions.php" method="POST">
 <?php
                     $retrieve_subtopic= "SELECT * FROM subtopic WHERE courseID = $lesson";
                     $retrieve_subtopic_result = mysqli_query($connection, $retrieve_subtopic);
                     $check_retrieve_subtopic = mysqli_num_rows($retrieve_subtopic_result) > 0;
 
-
                     if($check_retrieve_subtopic){
                         while($retrieve_subtopic_row = mysqli_fetch_array($retrieve_subtopic_result)){
                             $subtopic = $retrieve_subtopic_row['subTopicId'];
-                            
                             ?>
                         <div class="db-subtopic">
                             <div class="db-subtopic-left">
@@ -92,7 +91,6 @@
                     <div class="dblesson">
                         
                         <p><?php echo $retrieve_lesson_row['lessonName'];?></p>
-                        <!-- <a href=""><?php echo $retrieve_lesson_row['activeMessage'];?></a> -->
                         
                     </div>
 
@@ -108,9 +106,11 @@
                             <p>Click here to add a lesson</p>
 
                             <!--Add Questions button-->
-                            <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions" onClick="addQuestions()">
-                            <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions"  onClick="viewQuestions()">
+                            <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions">
+                            <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions">
                         </div>
+            </form>
+
 
                     <div class="form-container lesson-form" id="formId1">
             <div class="course-form">
@@ -124,15 +124,6 @@
                             <input type="text" class="course-input title" name="lessonName">
                         </div>
                     </div>
-
-                    <!-- <div class="row">
-                        <div class="column1">
-                            <p>Active Message</p>
-                        </div>  
-                        <div class="column2">
-                            <input type="text" class="course-input title" name="activeMessage">
-                        </div>
-                    </div> -->
 
                     <div class="row">
                         <div class="column1">

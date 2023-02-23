@@ -2,7 +2,6 @@
    include("assets/includes/navbar-landingPage.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,8 +125,6 @@
                     1.5  දත්ත සැකසීමේ ක්‍රියාකාරකම්<br>
                     1.6 විවිධ වසම් තළ, තොරත හා සන්නිදෙන තාෂණය යෙදම<br>
                     1.7  සමාජය කෛරහි තොරත හා සන්නිදෙන තාෂණෙය් බලපෑම 
- 
-
                     </h3>
             </div>
     </div>
