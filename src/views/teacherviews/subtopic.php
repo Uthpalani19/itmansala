@@ -22,7 +22,7 @@
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
   <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
-  <!-- <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
     <script>
         function addQuestions()
             {
@@ -33,7 +33,7 @@
                 window.location.href="viewAddedQuestions.php";
             }
     </script>
-</head> -->
+</head>
 <body class="grey-bg">
 
 <div class="lesson-info">
@@ -70,7 +70,6 @@
 
                         </div>
 
-
                         <?php
                         }
                     }
@@ -105,9 +104,13 @@
                             <i class="fa-solid fa-circle-plus"></i>
                             <p>Click here to add a lesson</p>
 
-                            <!--Add Questions button-->
-                            <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions">
-                            <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions">
+                            <!--Add & view Questions button-->
+                            <form action = "addQuestions.php" method = "POST">
+                                <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions">
+                            </form>
+                            <form action = "ViewAddedQuestions.php" method = "POST">
+                                <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions">
+                            </form>
                         </div>
             </form>
 

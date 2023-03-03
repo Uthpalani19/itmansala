@@ -15,6 +15,37 @@
         unset($_SESSION['name']);
         header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
+
+    // Auto generated ID
+     $sql = "Select questionId from modelpaperquestion order by questionId desc limit 1";
+     $result = mysqli_query($connection,$sql);
+     $row = mysqli_fetch_array($result);
+     $lastid="";
+     
+     if(mysqli_num_rows($result) > 0)
+     {
+        $lastid = $row['questionId'];
+     }
+ 
+     if($lastid == " ")
+     {
+         $id = "Q001";
+     }
+         $id = substr($lastid,3);
+         $id = intval($id);
+ 
+         if($id>='9')
+         {
+             $id = "Q0".($id + 1);
+         }
+         else if($id>='99')
+         {
+             $id = "Q".($id + 1);            
+         }
+         else
+         {
+             $id = "Q00".($id + 1);
+         } 
 ?>
 
 <head>
@@ -39,8 +70,7 @@
         </div>
 
 <!-- View Added Questions of a specific subtopic -->
-<?php 
-        ?>
+
         <!-- Questions Recovery -->
         <div class="recover"> 
             <button class="recover-btn"  onclick="window.location.href='../../config/teacherconfig/recoverQuestions.php'"> <i class="fa-large fas fa-trash-restore" id="recover-icon"
@@ -87,56 +117,43 @@
             </table>
             </center>
         </div>
-        <?php
-    }
-?>
 
-<!-- Add a question to a specific subtopic -->
-<?php
-if(isset($_POST['addQuestions']))
-    {
-        ?>
-        <!-- Questions Recovery -->
-        <div class="recover"> 
-            <button class="recover-btn"  onclick="window.location.href='../../config/teacherconfig/recoverQuestions.php'"> <i class="fa-large fas fa-trash-restore" id="recover-icon"
-            ></i> Recover Questions</button>
-        </div>
+        <!--Add Questions-->
+         <!-- Add a question to a specific subtopic -->
+            <form action="../../config/teacherconfig/addQuestions.config.php" method="POST">
+            <!--Add a new Question-->
+            <div class="question">
+                    <div class="question-number-box">
+                        <textarea class="question-number" name="questionNumber" readonly style="resize: none;"><?php echo $id; ?></textarea>
+                    </div>
 
-       <!--Add a new Question-->
-       <div class="question">
-            <div class="question-number-box">
-                <textarea class="question-number" name="questionNumber" readonly style="resize: none;"><?php echo $id; ?></textarea>
-            </div>
+                    <div>
+                        <textarea placeholder="Enter the question here.." class="question-add" name="question" rows="4" cols="100"></textarea>
+                    </div>
+                    
+                    <textarea placeholder="Enter the option 1 " class="option" name="option1" rows="4" cols="60"></textarea>
+                    <input type="radio" class="input-option" name="answer" checked value="option1">
+                    <textarea placeholder="Enter the option 2 " class="option" name="option2" rows="4" cols="60"></textarea>
+                    <input type="radio" class="input-option" name="answer" value="option2">
+                    <textarea placeholder="Enter the option 3 " class="option" name="option3" rows="4" cols="60"></textarea>
+                    <input type="radio" class="input-option" name="answer" value="option3">
+                    <textarea placeholder="Enter the option 4 " class="option" name="option4" rows="4" cols="60"></textarea>
+                    <input type="radio" class="input-option" name="answer" value="option4">
+                    <br />
 
-            <div>
-                <textarea placeholder="Enter the question here.." class="question-add" name="question" rows="4" cols="100"></textarea>
-            </div>
-            
-            <textarea placeholder="Enter the option 1 " class="option" name="option1" rows="4" cols="60"></textarea>
-            <input type="radio" class="input-option" name="answer" checked value="option1">
-            <textarea placeholder="Enter the option 2 " class="option" name="option2" rows="4" cols="60"></textarea>
-            <input type="radio" class="input-option" name="answer" value="option2">
-            <textarea placeholder="Enter the option 3 " class="option" name="option3" rows="4" cols="60"></textarea>
-            <input type="radio" class="input-option" name="answer" value="option3">
-            <textarea placeholder="Enter the option 4 " class="option" name="option4" rows="4" cols="60"></textarea>
-            <input type="radio" class="input-option" name="answer" value="option4">
-
-            <br />
-
-            <!--div class="buttons"-->
-                <input type="submit" value="Finish" class="btn-question" name="finish">
-                <input type="submit" value="Add Questions" class="btn-question" id="question" name="addQuestions">
-            <!--/div-->
-            
+                    <!--div class="buttons"-->
+                        <input type="submit" value="Finish" class="btn-question" name="finish">
+                        <input type="submit" value="Add Questions" class="btn-question" id="question" name="addQuestions">
+                    <!--/div-->
             </form>
-        </div>
-        <?php
-    }
-?>
+                </div>
+                <?php
+            }
+        ?>
 
 <!-- Footer -->
 <div class="footer">
             <?php
                 require_once('../../assets/includes/footer.php');
             ?>
-        </div>
+</div>

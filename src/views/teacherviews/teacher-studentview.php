@@ -37,6 +37,10 @@
                         <a href="#">C001</a>
                         <a href="#">C002</a>
                         <a href="#">C003</a>
+                        <?php 
+                        // Getting the course ID from the database
+                            $courseID = 'C001';
+                        ?>
                     </div>
                 </div>
 
@@ -53,10 +57,12 @@
     <div class="content">
         <table>
             <tr>
-              <th>Profile photo</th>
+              <th>Profile</th>
               <th>Name</th>
               <th>Phone Number</th>
               <th>Email</th>
+              <th>Enrollment Status</th>
+              <th>Last logged in date & time</th>
             </tr>
 
             <!-- PHP code -->
@@ -68,12 +74,27 @@
 
                 while($row = mysqli_fetch_assoc($result))
                 {
+                    $phoneNumber = $row['phoneNumber'];
+                     // check if the student is enrolled in the course
+                    $sql_enrolstatus = "SELECT * from student_course where phoneNumber = '$phoneNumber' && courseId = '$courseID'";
+                    $result2 = mysqli_query($connection,$sql_enrolstatus);
+
+                    if(mysqli_num_rows($result2) > 0)
+                    {
+                        $enrolstatus = 'Enrolled';
+                    }
+                    else
+                    {
+                        $enrolstatus = 'Not Enrolled';
+                    }
                     echo '
                         <tr>
                             <td><img src="../../assets/images/profile/'.$row['profilePicture'].'" alt="profile" id="profile"></td>
                             <td>'.$row['name'].'</td>
                             <td>'.$row['phoneNumber'].'</td>
                             <td>'.$row['email'].'</td>
+                            <td id="status">'.$enrolstatus.'</td>
+                            <td>2023-02-01 12:00:00</td>
                         </tr>
                     ';
                 }

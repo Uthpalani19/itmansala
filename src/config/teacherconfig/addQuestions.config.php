@@ -1,11 +1,14 @@
 <?php
+    // Connect to the database
+    require('../dbconnection.php');
+
     // Finish Button
     if(isset($_POST['finish']))
     {
         ?>
             <script type="text/javascript">
             alert("Quiz added successfully.");
-            window.location.href="viewAddedQuestions.php";
+            window.location.href="../../views/teacherviews/viewAddedQuestions.php";
             </script>
         <?php
     }
@@ -20,7 +23,7 @@
             if($_POST['option1'] != $_POST['option2'] && $_POST['option1'] != $_POST['option3'] && $_POST['option1'] != $_POST['option4'] && $_POST['option2'] != $_POST['option3'] && $_POST['option2'] != $_POST['option4'] && $_POST['option3'] != $_POST['option4'])
             {
                 // Check if the answer is selected
-                $id= mysqli_real_escape_string($connection,$_POST['questionNumber']);
+                $id = mysqli_real_escape_string($connection,$_POST['questionNumber']);
                 $question= mysqli_real_escape_string($connection,$_POST['question']);
                 $option1= mysqli_real_escape_string($connection,$_POST['option1']);
                 $option2= mysqli_real_escape_string($connection,$_POST['option2']);
@@ -85,8 +88,4 @@
             <?php
         }  
     }
-
-
-//  Footer 
-    // require_once('../../assets/includes/footer.php');
 ?>
