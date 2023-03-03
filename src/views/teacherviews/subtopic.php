@@ -26,7 +26,7 @@
     <script>
         function addQuestions()
             {
-                window.location.href="addQuestions.php?>";
+                window.location.href="addQuestions.php";
             }
             function viewQuestions()
             {
@@ -46,16 +46,15 @@
 
 <div class="content">
 
+            <form action="viewAddedQuestions.php" method="POST">
 <?php
                     $retrieve_subtopic= "SELECT * FROM subtopic WHERE courseID = $lesson";
                     $retrieve_subtopic_result = mysqli_query($connection, $retrieve_subtopic);
                     $check_retrieve_subtopic = mysqli_num_rows($retrieve_subtopic_result) > 0;
 
-
                     if($check_retrieve_subtopic){
                         while($retrieve_subtopic_row = mysqli_fetch_array($retrieve_subtopic_result)){
                             $subtopic = $retrieve_subtopic_row['subTopicId'];
-                            
                             ?>
                         <div class="db-subtopic">
                             <div class="db-subtopic-left">
@@ -70,7 +69,6 @@
                             </div>
 
                         </div>
-
 
                         <?php
                         }
@@ -92,7 +90,6 @@
                     <div class="dblesson">
                         
                         <p><?php echo $retrieve_lesson_row['lessonName'];?></p>
-                        <!-- <a href=""><?php echo $retrieve_lesson_row['activeMessage'];?></a> -->
                         
                     </div>
 
@@ -107,10 +104,16 @@
                             <i class="fa-solid fa-circle-plus"></i>
                             <p>Click here to add a lesson</p>
 
-                            <!--Add Questions button-->
-                            <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions" onClick="addQuestions()">
-                            <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions"  onClick="viewQuestions()">
+                            <!--Add & view Questions button-->
+                            <form action = "addQuestions.php" method = "POST">
+                                <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions">
+                            </form>
+                            <form action = "ViewAddedQuestions.php" method = "POST">
+                                <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions">
+                            </form>
                         </div>
+            </form>
+
 
                     <div class="form-container lesson-form" id="formId1">
             <div class="course-form">
@@ -124,15 +127,6 @@
                             <input type="text" class="course-input title" name="lessonName">
                         </div>
                     </div>
-
-                    <!-- <div class="row">
-                        <div class="column1">
-                            <p>Active Message</p>
-                        </div>  
-                        <div class="column2">
-                            <input type="text" class="course-input title" name="activeMessage">
-                        </div>
-                    </div> -->
 
                     <div class="row">
                         <div class="column1">

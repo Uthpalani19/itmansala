@@ -23,7 +23,6 @@
   <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="../../assets/css/teacher.css">
   <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
-
 </head> 
 
 <body>
@@ -48,7 +47,8 @@
 
             <div class="lesson-container">
                 <?php
-                    $course_query= "SELECT * FROM course";
+                    $phoneNumber = $_SESSION['phone'];
+                    $course_query= "SELECT * FROM course WHERE teacherPhoneNumber = $phoneNumber";
                     $course_result = mysqli_query($connection, $course_query);
                     $check_course_result = mysqli_num_rows($course_result) > 0;
 
