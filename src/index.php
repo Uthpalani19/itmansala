@@ -104,6 +104,7 @@
     <?php include("views/landingPages/pi.php"); ?>
     </div>
 
+            <!-- this is jus a comment -->
     <div class="lpage3-course-des">
             <div class="course-des-heading">
                 <h3>01 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
