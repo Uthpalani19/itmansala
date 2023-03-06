@@ -58,7 +58,6 @@
                         <a href="#">C002</a>
                         <a href="#">C003</a>
                     </div>
-
                 </div>
 
                 <p id="course-name">Course - C001</p>
