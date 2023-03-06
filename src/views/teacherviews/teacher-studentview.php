@@ -10,6 +10,7 @@
         header("location: ../student_login.php");
     }
 
+    include('../../config/dbconnection.php');
     include('../../assets/includes/navbar-teacher.php');
 ?>
 
@@ -25,24 +26,43 @@
 </head>
 
 <body>
-    <br />
-    <!-- Search Teacher -->
+
     <div class="container">
         <div class="container-item">
             <div class="search-bar-course">
-                <!-- dropdown -->
-                <div class="dropdown1">
+                <!-- Search Teacher -->
+                <?php
+                    // Getting the course name from the database
+                    $sql_dropdown = "SELECT courseName from course where teacherPhoneNumber = '$_SESSION[phone]'";
+                    $result_dropdown = mysqli_query($connection,$sql_dropdown);
+                ?>
+                    <!-- dropdown -->
+                    <div class="dropdown">
                     <button class="dropbtn">Select <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">C001</a>
-                        <a href="#">C002</a>
-                        <a href="#">C003</a>
+                        <div class="dropdown-content">
+
+                            <!-- Dropdown content -->
+                            <?php
+                                if(mysqli_num_rows($result_dropdown) > 0)
+                                {
+                                    while($row = mysqli_fetch_assoc($result_dropdown))
+                                    {
+                                        echo '<a>'.$row['courseName'].'</a>';
+                                    }
+                                }
+                                else
+                                {
+                                    echo '<a href="#">No Courses</a>';
+                                }
+                            ?>
+                        </div>
+
+                    </div>
                         <?php 
                         // Getting the course ID from the database
                             $courseID = 'C001';
                         ?>
-                    </div>
-                </div>
+                    
 
                 <!-- Search Bar -->
                 <form class="searchBar">
