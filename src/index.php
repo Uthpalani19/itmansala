@@ -116,7 +116,7 @@
             </div>
 
             <hr></hr>
-
+            <!-- this is a comment -->
             <div class="course-des-subtopics">
                     <h3>
                     1.1 දත්තවල සහ තොරතුරුවල මූලක තැනුම් ඒකකය<br>
