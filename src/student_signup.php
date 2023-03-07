@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="login_field signupfield">
-                            <input type="password" class="login_input" id="psw1" placeholder="  Password" name="password_1" value="<?php echo $password;?>">
+                            <input type="password" class="login_input" id="psw1" placeholder="  Password" name="password_1" value="<?php echo $password_1;?>">
                             <i class="fa-regular fa-eye-slash" id="hidePsw1"></i>
                             <div>
                                 <?php passError(); ?>

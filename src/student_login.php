@@ -28,7 +28,7 @@
             <div class="login_field">
 
                 <i class="login_icon fa-regular fa-user"></i>
-				<input type="text" class="login_input" placeholder="  Phone number" name="user" value="<?php echo $PhoneNumber;?>">
+				<input type="text" class="login_input" placeholder="  Phone number" name="user" value="<?php echo $User;?>">
                 <div>
                     <?php PhoneError(); ?>
                 </div>
@@ -45,7 +45,7 @@
             <div class="options">
                     <input type="checkbox" class="tick" name="remember"> 
                     <p>Remember Me</p>
-                    <a href="forgotpassword.php" class="forgot-password">Forgot Password?</a>
+                    <a href="views/forgotpassword.php" class="forgot-password">Forgot Password?</a>
                    
             </div>
             <div class="login">

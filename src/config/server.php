@@ -7,7 +7,10 @@ require('dbconnection.php');
 
 // initializing variables
 $Username = "";
+$User = "";
 $password = "";
+$password_1 = "";
+$password_2 = "";
 $name = "";
 $Email = "";
 $PhoneNumber = "";
@@ -23,7 +26,7 @@ $Login_Error = array();
 if (isset($_POST['signup_student'])) {
     // get all input values from the form
     $name = mysqli_real_escape_string($connection, $_POST['name']);
-    $Username = mysqli_real_escape_string($connection, $_POST['username']);
+   // $Username = mysqli_real_escape_string($connection, $_POST['username']);
     $Email = mysqli_real_escape_string($connection, $_POST['email']);
     $password_1 = mysqli_real_escape_string($connection, $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($connection, $_POST['password_2']);
@@ -68,9 +71,9 @@ if (isset($_POST['signup_student'])) {
         array_push($Firstname_Error, "Name is required!");
     }
 
-    if (empty($Username)) {
-        array_push($Username_Error, "Username is required!");
-    }
+    //if (empty($Username)) {
+       // array_push($Username_Error, "Username is required!");
+   // }
     if (empty($Email)) {
         array_push($Email_Error, "E-mail is required!");
     }
@@ -98,7 +101,7 @@ if (isset($_POST['signup_student'])) {
 
 
     // register user if there are no errors in the form
-    $master_error = array_merge($Firstname_Error, $Username_Error, $Email_Error, $Password_Error, $PhoneNumber_Error);
+    $master_error = array_merge($Firstname_Error, $Email_Error, $Password_Error, $PhoneNumber_Error);
     if (count($master_error) == 0) {
         $password = md5($password_1);//encrypt the password before saving in the database
   
@@ -110,8 +113,8 @@ if (isset($_POST['signup_student'])) {
 
         $userquery = "INSERT INTO usertable (phoneNumber, password, role)
                         VALUES('$PhoneNumber', '$password', 'student')";
-        mysqli_query($db, $query);
-        mysqli_query($db, $userquery);
+        mysqli_query($connection, $query);
+        mysqli_query($connection, $userquery);
         $_SESSION['name'] = $name;
         header('location: views/studentviews/quizReview.php');
     }
@@ -139,7 +142,7 @@ if (isset($_POST['login_student']))  {
                 $row = mysqli_fetch_assoc($results);
                 $role = $row['role'];
 
-              if ($role == 'student' || $role == 'Student'){
+              if ($role == 'student'){
                   $stdquery = "SELECT * FROM student WHERE phoneNumber = '$User'";
                   $stdresults = mysqli_query($connection, $stdquery);
                   $stdrow = mysqli_fetch_assoc($stdresults);
