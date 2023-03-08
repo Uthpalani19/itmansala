@@ -151,20 +151,24 @@ if (isset($_POST['login_student']))  {
                   echo $_SESSION['name'];
                   header('location: views/studentviews/student-dashboard.php');
               }
-              if ($role == 'Teacher' || $role == 'teacher'){
+              if ($role == 'Teacher'){
                 $tchquery = "SELECT * FROM teacher WHERE phoneNumber = '$User'";
                 $tchresults = mysqli_query($connection, $tchquery);
                 $tchrow = mysqli_fetch_assoc($tchresults);
                 $name = $tchrow['name'];
+                $status = $tchrow['status'];
                 $_SESSION['name'] = $name;
                 $_SESSION['phone']=$User;
                 $_SESSION['email']=$tchrow['email'];
 
-
-
-                header('location: views/teacherviews/dashboard-teacher.php');
+                if($status == 0){
+                    header('location: views/teacherviews/change-password.php'); 
+                }else{
+                    header('location: views/teacherviews/dashboard-teacher.php');
+                }
              }
-             if ($role == 'admin' || $role == 'Admin'){
+             
+             if ($role == 'admin'){
                 $admquery = "SELECT * FROM admin WHERE phoneNumber = '$User'";
                 $admresults = mysqli_query($connection, $admquery);
                 $admrow = mysqli_fetch_assoc($admresults);

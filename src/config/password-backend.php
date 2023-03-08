@@ -8,6 +8,8 @@ require('dbconnection.php');
 $email = "";
 $rstpassword_1 = "";
 $rstpassword_2 = "";
+$chgpassword_1 = "";
+$chgpassword_2 = "";
 $Email_Error = array();
 $Password_Error = array();
 
@@ -55,7 +57,7 @@ if(isset($_POST['send_email'])){
             // HTML body
             $mail->isHTML(true);
             $mail->Subject="Reset Password - IT Mansala";
-            $mail->Body="<b>Dear User,</b>
+            $mail->Body="<b>Dear $name,</b>
             <p>We received a request to reset your password,<p>
             <p>Kindly click on the link below to reset your password</p>
             http://localhost/itmansala/src/views/resetpassword.php
@@ -114,5 +116,43 @@ if(isset($_POST["reset_pass"])){
         }
     }
 
+
+if(isset($_POST["teacher_pass"])){
+    $chgpassword_1 = mysqli_real_escape_string($connection, $_POST['chgpassword_1']);
+    $chgpassword_2 = mysqli_real_escape_string($connection, $_POST['chgpassword_2']);
+
+    $chgPhone = $_SESSION['phone'];
+
+    if($chgPhone){
+
+        if($chgpassword_1 != ""){
+            $uppercase = preg_match('@[A-Z]@', $chgpassword_1);
+            $lowercase = preg_match('@[a-z]@', $chgpassword_1);
+            $number = preg_match('@[0-9]@', $chgpassword_1);
+            $specialChars = preg_match('@[^\w]@', $chgpassword_1);
+        
+            if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($chgpassword_1) < 8) {
+                array_push($Password_Error, "Password should be minimum 8 characters long with <br>at least one upper case letter, one number and a special character!");
+            }
+        }
+        if (empty($chgpassword_1)) {
+            array_push($Password_Error, "Password is required!");
+        }
+        if ($chgpassword_1 != $chgpassword_2) {
+            array_push($Password_Error, "The two passwords do not match");
+        }
+
+        if (count($Password_Error) == 0){
+            $teacherPass = md5($chgpassword_1);
+            $teacher_table = "UPDATE teacher SET password='$teacherPass', status='1' WHERE phoneNumber='$chgPhone'";
+            $user_table = "UPDATE usertable SET password='$teacherPass' WHERE phoneNumber='$chgPhone'";
+            $teacher_query = mysqli_query($connection, $teacher_table);
+            $user_query = mysqli_query($connection, $user_table);
+            header('location: dashboard-teacher.php'); 
+        }
+    }else{
+
+    }
+}
 
 ?>
