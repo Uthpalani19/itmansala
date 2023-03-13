@@ -1072,12 +1072,17 @@ tr:nth-child(odd)
     margin: 0 0 0 1rem;
 }
 
-.dropdown1
+.dropdown-courses
 {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 10px;
+    padding: 0.5rem 0.75rem;
+    margin: 0 10px 0 10px;
+    background-color: #FFFFFF;
+    color: #5319a6;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    outline: none;
 }
 
 .container{

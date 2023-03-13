@@ -20,6 +20,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Student Details </title>
+    <script src="../../assets/js/teacher.js"></script>
+
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href = "../../assets/css/teacher-style.css">
     <link rel="stylesheet" href = "../../assets/css/global.css">
@@ -33,94 +35,135 @@
                 <!-- Search Teacher -->
                 <?php
                     // Getting the course name from the database
-                    $sql_dropdown = "SELECT courseName from course where teacherPhoneNumber = '$_SESSION[phone]'";
+                    $sql_dropdown = "SELECT courseName from course where teacherPhoneNumber = '{$_SESSION['phone']}'";
                     $result_dropdown = mysqli_query($connection,$sql_dropdown);
                 ?>
-                    <!-- dropdown -->
-                    <div class="dropdown">
-                    <button class="dropbtn">Select <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
-                        <div class="dropdown-content">
 
-                            <!-- Dropdown content -->
-                            <?php
-                                if(mysqli_num_rows($result_dropdown) > 0)
-                                {
+                    <!-- Dropdown content -->
+                    <?php
+                        if(mysqli_num_rows($result_dropdown) > 0)
+                        {?>
+                            Select your course  :
+                            <select id="courseName" class="dropdown-courses" onchange ="getSelectedCourse()">
+                                <?php
                                     while($row = mysqli_fetch_assoc($result_dropdown))
                                     {
-                                        echo '<a>'.$row['courseName'].'</a>';
+                                ?>
+                                        <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName'];?> </option>
+                                        <?php
                                     }
-                                }
-                                else
-                                {
-                                    echo '<a href="#">No Courses</a>';
-                                }
-                            ?>
-                        </div>
+                                ?>
+                            </select>
+                        <?php
+                        }
+                        else
+                        {
+                            echo '<a href="#">No Courses</a>';
+                        }
+                    ?>
 
+                    <!-- Search Bar -->
+                    <form class="searchBar">
+                        <p><input type="text" placeholder="Search Students"  class="search-bar">
+                        <button type="submit"><i class="fa-solid fa-search"></i></button></p>
+                    </form>
                     </div>
-                        <?php 
-                        // Getting the course ID from the database
-                            $courseID = 'C001';
-                        ?>
-                    
-
-                <!-- Search Bar -->
-                <form class="searchBar">
-                    <p><input type="text" placeholder="Search Students"  class="search-bar">
-                    <button type="submit"><i class="fa-solid fa-search"></i></button></p>
-                </form>
-            </div>
         </div>
     </div>
 
-    <!-- Table Content -->
-    <div class="content">
-        <table>
-            <tr>
-              <th>Profile</th>
-              <th>Name</th>
-              <th>Phone Number</th>
-              <th>Email</th>
-              <th>Enrollment Status</th>
-              <th>Last logged in date & time</th>
-            </tr>
+    <div id="refresh">
+                    <?php 
+                        $sql_courseID = "SELECT courseId from course where courseName = 'Tea'";
+                        $result_courseID = mysqli_query($connection,$sql_courseID);
 
-            <!-- PHP code -->
-            <?php
-                require_once '../../config/dbconnection.php';
+                        if(mysqli_num_rows($result_courseID) > 0)
+                        {
+                            $row = mysqli_fetch_assoc($result_courseID);
+                            $courseID = $row['courseId'];
+                        }
+                        else
+                        {
+                            echo "No course ID";
+                        }
+                    // Getting the course ID from the database
+                        $courseID = "C001";
+                    ?>
 
-                $sql = "SELECT profilePicture, phoneNumber,name,email from student";
-                $result = mysqli_query($connection,$sql);
+        <!-- Table Content -->
+        <div class="content" id="student-details">
+            <table>
+                <tr>
+                    <th>Profile</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Enrollment Status</th>
+                    <th>Last logged in date & time</th>
+                </tr>
 
-                while($row = mysqli_fetch_assoc($result))
-                {
-                    $phoneNumber = $row['phoneNumber'];
-                     // check if the student is enrolled in the course
-                    $sql_enrolstatus = "SELECT * from student_course where phoneNumber = '$phoneNumber' && courseId = '$courseID'";
-                    $result2 = mysqli_query($connection,$sql_enrolstatus);
+                    <?php
+                        // $sql = "SELECT profilePicture, phoneNumber,name,email from student";
+                        // $result = mysqli_query($connection,$sql);
 
-                    if(mysqli_num_rows($result2) > 0)
-                    {
-                        $enrolstatus = 'Enrolled';
-                    }
-                    else
-                    {
-                        $enrolstatus = 'Not Enrolled';
-                    }
-                    echo '
-                        <tr>
-                            <td><img src="../../assets/images/profile/'.$row['profilePicture'].'" alt="profile" id="profile"></td>
-                            <td>'.$row['name'].'</td>
-                            <td>'.$row['phoneNumber'].'</td>
-                            <td>'.$row['email'].'</td>
-                            <td id="status">'.$enrolstatus.'</td>
-                            <td>2023-02-01 12:00:00</td>
-                        </tr>
-                    ';
-                }
-            ?>
-        </table>
+                        // while($row = mysqli_fetch_assoc($result))
+                        // {
+                        //     $phoneNumber = $row['phoneNumber'];
+                        //      // check if the student is enrolled in the course - npt working
+                        //     $sql_enrolstatus = "SELECT * from student_course where phoneNumber = '$phoneNumber' && courseId = 'C001'";
+                        //     $result2 = mysqli_query($connection,$sql_enrolstatus);
+
+                        //     if(mysqli_num_rows($result2) > 0)
+                        //     {
+                        //         $enrolstatus = 'Enrolled';
+                        //     }
+                        //     else
+                        //     {
+                        //         $enrolstatus = 'Not Enrolled';
+                        //     }
+                        //     echo '
+                        //         <tr>
+                        //             <td><img src="../../assets/images/profile/'.$row['profilePicture'].'" alt="profile" id="profile"></td>
+                        //             <td>'.$row['name'].'</td>
+                        //             <td>'.$row['phoneNumber'].'</td>
+                        //             <td>'.$row['email'].'</td>
+                        //             <td id="status">'.$enrolstatus.'</td>
+                        //             <td>2023-02-01 12:00:00</td>
+                        //         </tr>
+                        //     ';
+                        // }
+                    ?>
+            </table>
+        </div>
     </div>
 
 </body>
+<script>
+    // function getSelectedCourse(){
+    //     var selectedValue = document.getElementById("courseName").value;
+    // }
+    function getSelectedCourse(){
+        var selectedValue = document.getElementById("courseName").value;
+        $("#student-details").load("../../config/teacherconfig/studenttable-load.php", { courseName: selectedValue });
+    }
+
+    // $(document).ready(function()
+    // {
+    //     $("select").click(function()
+    //     {
+    //         document.write(selectedValue);
+    //         $("#student-details").load("../../config/teacherconfig/studenttable-load.php",
+    //         {
+    //             courseName : selectedValue
+    //         });
+    //     });
+    // });
+
+    $(document).ready(function() {
+     $("#courseName").change(function() {
+         var selectedValue = $(this).val();
+         $("#student-details").load("../../config/teacherconfig/studenttable-load.php", { courseName: selectedValue });
+     });
+ });
+
+</script>
 </html>
