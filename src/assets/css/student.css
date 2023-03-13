@@ -451,3 +451,21 @@ h3{
   margin-left: 60px;
 }
 
+.reset-img{
+  width: 50%;
+  margin: auto;
+  margin-top: 4rem;
+}
+
+.reset-text{
+  width: 75%;
+  margin: auto;
+  text-align: center;
+  font-weight: bold;
+  color: #636363;
+}
+
+.reset-text h3{
+  color: #5319A6;
+}
+

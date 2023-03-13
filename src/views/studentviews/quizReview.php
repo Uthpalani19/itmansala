@@ -153,7 +153,7 @@
 
         <!-- Footer -->
         <?php
-            require_once('footer.php');
+            require_once('../../assets/includes/footer.php');
         ?>
     </body>
 </html>
