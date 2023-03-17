@@ -16,7 +16,6 @@
                 <p onclick="window.location.href='../../views/teacherviews/dashboard-teacher.php'">Dashboard</p>
                 <p onclick="window.location.href='../../views/teacherviews/teacher-studentview.php'">Student</p>
                 <p onclick="window.location.href='../../views/teacherviews/addcourse.php'">Course</p>
-                <!-- <p onclick="window.location.href='../../views/teacherviews/editCourseContent.php'">My Courses</p> -->
             </div>
             <div class="nav-user-tray">
                 <p><i class="fa-regular fa-bell"></i></p>
