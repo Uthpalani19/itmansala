@@ -20,29 +20,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href = "../../assets/css/global.css">
+
+    <link rel="stylesheet" href = "../../assets/css/teacher-style.css">
 </head>
 
 <body>
     <?php
     if(isset($_POST['request'])){
         $request = $_POST['request'];
-        $sql = "SELECT courseId from course where courseName = '$request'";
-        $result = mysqli_query($connection,$sql);
+        $sql = "SELECT * FROM course WHERE courseName = '$request'";
+        $result = mysqli_query($connection, $sql);
+        $row = mysqli_fetch_assoc($result);
 
-        $count = 0;
-
-        if($result == true)
+        if($row['courseId'] > 0)
         {
-            $sql2 = "SELECT * from student, student_course where student_course.phoneNumber==student.phoneNumber and student_course.courseId = '$result'";
-            $result2 = mysqli_query($connection,$sql2);
+            $count = 0;
 
+            $sql2 = "SELECT * FROM student INNER JOIN student_course ON student_course.phoneNumber = student.phoneNumber WHERE student_course.courseId = '{$row['courseId']}'";
+            $result2 = mysqli_query($connection, $sql2);
+            if (!$result2) {
+                die("Error retrieving data: " . mysqli_error($connection));
+            }
             $count = mysqli_num_rows($result2);
-        } 
+        }    
     }
     ?>
 
-    <table class="studentDetails">
+    <table class="tableStudent">
         <?php
             if($count)
             {
@@ -78,7 +83,7 @@
                                 <td>'.$row['phoneNumber'].'</td>
                                 <td>'.$row['email'].'</td>
                                 <td id="status">'.$enrolstatus.'</td>
-                                <td>2023-02-01 12:00:00</td>
+                                <td>'.$row['lastaccesstime'].'</td>
                             </tr>
                         ';
                 }

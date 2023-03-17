@@ -21,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Student Details </title>
     <script src="../../assets/js/teacher.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href = "../../assets/css/teacher-style.css">
@@ -44,7 +45,9 @@
                         if(mysqli_num_rows($result_dropdown) > 0)
                         {?>
                             Select your course  :
-                            <select id="courseName" class="dropdown-courses" onchange ="getSelectedCourse()">
+                            <div id="filters">
+                            <select id="courses" class="courseName dropdown-courses">
+                                <option value="" disabled="" selected="">Select your course </option>
                                 <?php
                                     while($row = mysqli_fetch_assoc($result_dropdown))
                                     {
@@ -54,6 +57,7 @@
                                     }
                                 ?>
                             </select>
+                            </div>
                         <?php
                         }
                         else
@@ -64,34 +68,15 @@
 
                     <!-- Search Bar -->
                     <form class="searchBar">
-                        <p><input type="text" placeholder="Search Students"  class="search-bar">
+                        <p><input type="text" placeholder="Search Students"  class="search-bar" id="livesearch">
                         <button type="submit"><i class="fa-solid fa-search"></i></button></p>
                     </form>
                     </div>
         </div>
     </div>
 
-    <div id="refresh">
-                    <?php 
-                        $sql_courseID = "SELECT courseId from course where courseName = 'Tea'";
-                        $result_courseID = mysqli_query($connection,$sql_courseID);
-
-                        if(mysqli_num_rows($result_courseID) > 0)
-                        {
-                            $row = mysqli_fetch_assoc($result_courseID);
-                            $courseID = $row['courseId'];
-                        }
-                        else
-                        {
-                            echo "No course ID";
-                        }
-                    // Getting the course ID from the database
-                        $courseID = "C001";
-                    ?>
-
-        <!-- Table Content -->
-        <div class="content" id="student-details">
-            <table>
+        <table class="tableStudent" id="student-details">
+            <thead>
                 <tr>
                     <th>Profile</th>
                     <th>Name</th>
@@ -100,70 +85,85 @@
                     <th>Enrollment Status</th>
                     <th>Last logged in date & time</th>
                 </tr>
+            </thead>
 
-                    <?php
-                        // $sql = "SELECT profilePicture, phoneNumber,name,email from student";
-                        // $result = mysqli_query($connection,$sql);
+            <tbody>
+                <?php
+                    $sql = "SELECT DISTINCT phoneNumber, lastaccesstime FROM student_course INNER JOIN course ON student_course.courseID = course.courseID WHERE course.teacherPhoneNumber = '{$_SESSION['phone']}'";
+                    $result = mysqli_query($connection,$sql);
 
-                        // while($row = mysqli_fetch_assoc($result))
-                        // {
-                        //     $phoneNumber = $row['phoneNumber'];
-                        //      // check if the student is enrolled in the course - npt working
-                        //     $sql_enrolstatus = "SELECT * from student_course where phoneNumber = '$phoneNumber' && courseId = 'C001'";
-                        //     $result2 = mysqli_query($connection,$sql_enrolstatus);
-
-                        //     if(mysqli_num_rows($result2) > 0)
-                        //     {
-                        //         $enrolstatus = 'Enrolled';
-                        //     }
-                        //     else
-                        //     {
-                        //         $enrolstatus = 'Not Enrolled';
-                        //     }
-                        //     echo '
-                        //         <tr>
-                        //             <td><img src="../../assets/images/profile/'.$row['profilePicture'].'" alt="profile" id="profile"></td>
-                        //             <td>'.$row['name'].'</td>
-                        //             <td>'.$row['phoneNumber'].'</td>
-                        //             <td>'.$row['email'].'</td>
-                        //             <td id="status">'.$enrolstatus.'</td>
-                        //             <td>2023-02-01 12:00:00</td>
-                        //         </tr>
-                        //     ';
-                        // }
-                    ?>
-            </table>
-        </div>
-    </div>
-
+                    while($row = mysqli_fetch_assoc($result))
+                    {
+                        $sql_studentDetails = "SELECT * FROM student WHERE phoneNumber = '{$row['phoneNumber']}'";
+                        $result_studentDetails = mysqli_query($connection,$sql_studentDetails);
+                        $row_studentDetails = mysqli_fetch_assoc($result_studentDetails);
+                        $enrolstatus = 'Enrolled';
+                        echo '
+                            <tr>
+                                <td><img src="../../assets/images/profile/'.$row_studentDetails['profilePicture'].'" alt="profile" id="profile"></td>
+                                <td>'.$row_studentDetails['name'].'</td>
+                                <td>'.$row_studentDetails['phoneNumber'].'</td>
+                                <td>'.$row_studentDetails['email'].'</td>
+                                <td id="status">'.$enrolstatus.'</td>
+                                <td>'.$row['lastaccesstime'].'</td>
+                            </tr>
+                        ';
+                    }
+                ?>
+            </tbody>
+        </table>
 </body>
-<script>
-    // function getSelectedCourse(){
-    //     var selectedValue = document.getElementById("courseName").value;
-    // }
-    function getSelectedCourse(){
-        var selectedValue = document.getElementById("courseName").value;
-        $("#student-details").load("../../config/teacherconfig/studenttable-load.php", { courseName: selectedValue });
-    }
 
-    // $(document).ready(function()
-    // {
-    //     $("select").click(function()
-    //     {
-    //         document.write(selectedValue);
-    //         $("#student-details").load("../../config/teacherconfig/studenttable-load.php",
-    //         {
-    //             courseName : selectedValue
-    //         });
-    //     });
-    // });
+<script type="text/javascript">
+    $(document).ready(function(){
+            $("#courses").on('change',function(){
+                var value = $(this).val();
+                // alert(value);
 
-    $(document).ready(function() {
-     $("#courseName").change(function() {
-         var selectedValue = $(this).val();
-         $("#student-details").load("../../config/teacherconfig/studenttable-load.php", { courseName: selectedValue });
-     });
- });
+                $.ajax({
+                    url: '../../config/teacherconfig/studenttable-load.php',
+                    type: 'POST',
+                    data: 'request='+value,
+                    beforeSend: function(){
+                        $('#student-details').html('<img src="../../assets/images/loading.gif" alt="loading" id="loading">');
+                    },
+                    success: function(data){
+                        $('#student-details').html(data);
+                    }
+                });
+            });
+        });
 
+    $(document).ready(function(){
+        $("#livesearch").keyup(function(){
+            var input = $(this).val();
+            // alert(input);
+
+            if(input != "")
+            {
+                $.ajax({
+                    url: '../../config/teacherconfig/studenttable-search.php',
+                    type: 'POST',
+                    data: {input:input},
+
+                    success:function(data){
+                        $("#student-details").html(data);
+                    }
+                });
+            }
+            else
+            {
+                $.ajax({
+                    url: '../../config/teacherconfig/studenttable-search.php',
+                    type: 'POST',
+                    data: {input: ''},
+
+                    success:function(data){
+                        $("#student-details").html(data);
+                    }
+                });
+            }
+            });
+    });
 </script>
 </html>

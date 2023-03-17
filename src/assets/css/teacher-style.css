@@ -206,17 +206,17 @@ body
 
 table
 {
-    border-radius: 10%;
+    border-radius:  10px;
 }
 
-.addedQuestions td, .addedQuestions th
+.addedQuestions>td, .addedQuestions th
 {
     font-size: 14px;
     border: 1px solid #ddd;
     padding: 12px;
 }
   
-.addedQuestions th
+.addedQuestions>th
 {
     background-color: #5319a6;
     color: white;
@@ -1115,12 +1115,10 @@ h4{
 
 /*--------------Table---------------------*/
 
-.content table{
+.tableStudent{
     margin-left: auto;
     margin-right: auto;
-    width: 85%;
     vertical-align: middle;
-    text-align: center;
     border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
@@ -1128,20 +1126,22 @@ h4{
     
 }
 
-.content table td{
+.tableStudent td{
     border: 1px solid #ebe9e9;
     padding-left: 10px;
     padding-right: 10px;
+    text-align: center;
     padding-top: 2px;
     background: #cacaca;
     font-size: 13px;
 }
 
-.content table th{
+.tableStudent th{
     border: 1px solid #8a8989;
     margin-bottom: 30px;
     padding-left: 10px;
     padding-right: 10px;
+    text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
     background: #5c26a9;
@@ -1150,38 +1150,36 @@ h4{
     font-size: 13px;
 }  
 
-.content td:nth-child(1)
+.tableStudent td:nth-child(1)
 {
     width: 90px;
     height: 30px;
 }
 
-.content td:nth-child(2)
+.tableStudent td:nth-child(2)
 {
     width: 250px;
 }
 
-.content td:nth-child(3)
+.tableStudent td:nth-child(3)
 {
     width: 110px;
 }
 
-.content td:nth-child(4)
+.tableStudent td:nth-child(4)
 {
     width: 150px;
 }
 
-.content td:nth-child(5)
+.tableStudent td:nth-child(5)
 {
     width: 200px;
 }
 
-.content td:nth-child(6)
+.tableStudent td:nth-child(6)
 {
     width: 500px;
 }
-
-
 
 .statusButton{
     border-radius: 5px;
