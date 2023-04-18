@@ -22,7 +22,7 @@
         <img class="avatar "src="../../assets/images/avatar.png">     
     </div>
     <div class="right">
-        <h1>Change your password</h1>
+        <h1 class="chgpasstitle">Change your password</h1>
 
           <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="login_field signupfield">
@@ -49,6 +49,38 @@
     
     </div>
 
-<script type="text/javascript" src="../../assets/js/student.js"></script>
+
+<script>
+const psw1 = document.getElementById("psw1");
+const psw2 = document.getElementById("psw2");
+const hidePsw1 = document.getElementById("hidePsw1");
+const hidePsw2 = document.getElementById("hidePsw2");
+
+hidePsw1.onclick = function(){
+    if (psw1.type === "password"){
+        psw1.type = "text";
+    }else{
+        psw1.type = "password";
+    }
+    if (hidePsw1.className == "fa-regular fa-eye-slash"){
+        hidePsw1.className = "fa-regular fa-eye";
+    }else{
+        hidePsw1.className = "fa-regular fa-eye-slash";
+    }
+}
+
+hidePsw2.onclick = function(){
+    if (psw2.type === "password"){
+        psw2.type = "text";
+    }else{
+        psw2.type = "password";
+    }
+    if (hidePsw2.className == "fa-regular fa-eye-slash"){
+        hidePsw2.className = "fa-regular fa-eye";
+    }else{
+        hidePsw2.className = "fa-regular fa-eye-slash";
+    }
+}
+</script>
 </body>
 </html>
