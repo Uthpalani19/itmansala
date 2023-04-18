@@ -89,7 +89,7 @@
 
             <tbody>
                 <?php
-                    $sql = "SELECT DISTINCT phoneNumber, lastaccesstime FROM student_course INNER JOIN course ON student_course.courseID = course.courseID WHERE course.teacherPhoneNumber = '{$_SESSION['phone']}'";
+                    $sql = "SELECT DISTINCT phoneNumber, lastaccesstime FROM student_course INNER JOIN course ON student_course.courseID = course.courseID WHERE course.teacherPhoneNumber = '{$_SESSION['phone']}' GROUP BY student_course.phoneNumber";
                     $result = mysqli_query($connection,$sql);
 
                     while($row = mysqli_fetch_assoc($result))
@@ -98,9 +98,18 @@
                         $result_studentDetails = mysqli_query($connection,$sql_studentDetails);
                         $row_studentDetails = mysqli_fetch_assoc($result_studentDetails);
                         $enrolstatus = 'Enrolled';
+                        if($row_studentDetails['profilePicture'] != null)
+                        {
+                            $proPic = $row_studentDetails['profilePicture'];
+                        }
+                        else
+                        {
+                            $proPic = '<i class="fa-solid fa-user"></i>';
+                        }
+
                         echo '
                             <tr>
-                                <td><img src="../../assets/images/profile/'.$row_studentDetails['profilePicture'].'" alt="profile" id="profile"></td>
+                                <td><i class="fa-regular fa-user fa-lg"></i></td>
                                 <td>'.$row_studentDetails['name'].'</td>
                                 <td>'.$row_studentDetails['phoneNumber'].'</td>
                                 <td>'.$row_studentDetails['email'].'</td>
@@ -118,7 +127,6 @@
     $(document).ready(function(){
             $("#courses").on('change',function(){
                 var value = $(this).val();
-                // alert(value);
 
                 $.ajax({
                     url: '../../config/teacherconfig/studenttable-load.php',
@@ -137,7 +145,6 @@
     $(document).ready(function(){
         $("#livesearch").keyup(function(){
             var input = $(this).val();
-            // alert(input);
 
             if(input != "")
             {

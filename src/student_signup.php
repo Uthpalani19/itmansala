@@ -13,7 +13,7 @@
     </div>
     <div class="left signupleft">
         <div class="welcome">
-            <p class="message signupmessage">Fill your Info</p>
+            <p class="message signupmessage">Few clicks away from creating your account</p>
         </div>
         <img class="avatar"src="assets/images/avatar.png">     
     </div>

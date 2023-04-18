@@ -78,7 +78,7 @@
                     $enrolstatus = 'Enrolled';
                         echo '
                             <tr>
-                                <td><img src="../../assets/images/profile/'.$row['profilePicture'].'" alt="profile" id="profile"></td>
+                                <td><i class="fa-regular fa-user fa-lg"></i></td>
                                 <td>'.$row['name'].'</td>
                                 <td>'.$row['phoneNumber'].'</td>
                                 <td>'.$row['email'].'</td>

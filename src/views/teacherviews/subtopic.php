@@ -24,16 +24,7 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
     <link rel="stylesheet" href="../../assets/css/teacher-style.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
-    <script>
-        function addQuestions()
-            {
-                window.location.href="addQuestions.php?subtopic=<?php echo $_SESSION['subtopic']; ?>";
-            }
-            function viewQuestions()
-            {
-                window.location.href="viewAddedQuestions.php?subtopic=<?php echo $_SESSION['subtopic']; ?>";
-            }
-    </script>
+    
 </head>
 <body id="grey-bg">
 
@@ -113,12 +104,16 @@
             <i class="fa-regular fa-rectangle-xmark" id="<?php echo $close ?>"></i>
             <embed src="../../assets/uploads/<?php echo $retrieve_lesson_row['content'];?>" height="630" width="1000"/>
         </div>
+        
         <script>
             const <?php echo $showonclick; ?> = document.getElementById("<?php echo $show; ?>");
             const <?php echo $pdfIDonclick; ?> = document.getElementById("<?php echo $pdfid; ?>");
             const <?php echo $closeonclick; ?> = document.getElementById("<?php echo $close; ?>");
             const <?php echo $bodyonclick; ?> = document.getElementById("grey-bg");
 
+            
+                            
+            </form>
             <?php echo $showonclick; ?>.onclick = function(){
                 <?php echo $pdfIDonclick; ?>.style.display = "block";
                 <?php echo $bodyonclick; ?>.classList.add("fixed");
@@ -140,8 +135,10 @@
             <p>Click here to add a lesson</p>
 
             <!--Add & view Questions button-->
-            <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions" onClick="addQuestions()">
-            <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions"  onClick="viewQuestions()">
+
+            <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
+            <a href="viewAddedQuestions.php"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
+
         </div>
 
         <?php
