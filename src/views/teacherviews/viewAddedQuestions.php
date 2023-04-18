@@ -57,8 +57,8 @@
 
     <body>
 <?php
-    if(isset($_POST['viewQuestions']))
-    {?>
+
+    ?>
         <!--Course Details-->
         <div class="course-details-box">
             <p id="title">Course 01: <?php $_POST['subtopic']; ?> </p>
@@ -94,7 +94,7 @@
 
             <!--PHP Code-->
             <?php
-                $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId=1";
+                $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId='1.1'";
                 $result = mysqli_query($connection,$sql);
 
                 while($row = mysqli_fetch_assoc($result))
@@ -148,7 +148,7 @@
             </form>
                 </div>
                 <?php
-            }
+            
         ?>
 
 <!-- Footer -->

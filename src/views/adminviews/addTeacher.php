@@ -30,7 +30,7 @@
 
             if(in_array($file_extention,$extention))
             {
-                    $upload_image ='../../assets/images'.$image_name;
+                    $upload_image ='../../assets/uploads/teacherdp'.$image_name;
                     move_uploaded_file($image_tempname,$upload_image);
             }
                 $sql = "INSERT into teacher (phoneNumber, name, email,password,teacherImage,fieldOfExpertise,status)

@@ -1,6 +1,6 @@
 <?php
     // Connect to the database
-    require('../dbconnection.php');
+    require('../../config/dbconnection.php');
 
     // Finish Button
     if(isset($_POST['finish']))

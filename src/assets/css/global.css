@@ -19,7 +19,7 @@ body {
     font-size: 1rem;
     background: linear-gradient(45deg,#7e58bc 5%, #5319a6);
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     top: 0;
     left: 0;
     opacity: 0;

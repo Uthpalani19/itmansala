@@ -6,7 +6,9 @@
 require('dbconnection.php');
 
 // initializing variables
-$Username = "";
+$Cookie_Username = "";
+$Cookie_Password = "";
+$remember = "";
 $User = "";
 $password = "";
 $password_1 = "";
@@ -21,12 +23,16 @@ $Password_Error = array();
 $PhoneNumber_Error = array();
 $Login_Error = array();
 
+if (isset($_COOKIE['ITPASSWORD']) && isset($_COOKIE['ITUSERNAME'])){
+    $Cookie_Username = $_COOKIE['ITUSERNAME'];
+    $Cookie_Password = $_COOKIE['ITPASSWORD']; 
+}
+
 // Register student
 
 if (isset($_POST['signup_student'])) {
     // get all input values from the form
     $name = mysqli_real_escape_string($connection, $_POST['name']);
-   // $Username = mysqli_real_escape_string($connection, $_POST['username']);
     $Email = mysqli_real_escape_string($connection, $_POST['email']);
     $password_1 = mysqli_real_escape_string($connection, $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($connection, $_POST['password_2']);
@@ -71,11 +77,11 @@ if (isset($_POST['signup_student'])) {
         array_push($Firstname_Error, "Name is required!");
     }
 
-    //if (empty($Username)) {
-       // array_push($Username_Error, "Username is required!");
-   // }
     if (empty($Email)) {
         array_push($Email_Error, "E-mail is required!");
+    }
+    if (empty($PhoneNumber)) {
+        array_push($PhoneNumber_Error, "Phone Number is required!");
     }
     if (empty($password_1)) {
         array_push($Password_Error, "Password is required!");
@@ -83,9 +89,6 @@ if (isset($_POST['signup_student'])) {
     if ($password_1 != $password_2) {
         array_push($Password_Error, "The two passwords do not match");
       }
-    if (empty($PhoneNumber)) {
-        array_push($PhoneNumber_Error, "Phone Number is required!");
-    }
 
   
     // check if same data already exists in database
@@ -125,6 +128,7 @@ if (isset($_POST['signup_student'])) {
 if (isset($_POST['login_student']))  {
     $User = mysqli_real_escape_string($connection, $_POST['user']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
+    $remember = isset($_POST['remember']);
   
     if (empty($User)) {
         array_push($PhoneNumber_Error, "Phone number is required!");
@@ -141,6 +145,11 @@ if (isset($_POST['login_student']))  {
             if (mysqli_num_rows($results) == 1){
                 $row = mysqli_fetch_assoc($results);
                 $role = $row['role'];
+        
+                if ($remember == true){
+                    setcookie('ITUSERNAME',$User, time()+604800);
+                    setcookie('ITPASSWORD',$password, time()+604800);
+                }
 
               if ($role == 'student'){
                   $stdquery = "SELECT * FROM student WHERE phoneNumber = '$User'";

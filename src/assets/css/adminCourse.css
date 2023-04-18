@@ -182,3 +182,44 @@ body {
       opacity: 1;
     } 
   }
+
+.addcourse-name{
+    margin: 25px 0 0 140px;
+    text-align: left;
+}
+
+.addcourse-button{
+    margin-top: 40px;
+    background: #5c26a9 ;
+    outline: none;
+    border: none; 
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 7px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    color: #fff;
+}
+
+.addcourse-div{
+    display: inline;
+    background: #cccccc;
+    padding: 25px 15px 25px 15px;
+    border-radius: 7px;
+}
+
+.addcourse-text{
+    width: 45%;
+    padding: 13px 0 13px 7px;
+    border: #cccccc 1px solid;
+    border-radius: 7px;
+    margin-right: 7px;
+    font-size: 17px;
+}
+
+.addcourse-text:hover, :active, :focus{
+    outline: none;
+	border-color: #5C26A9;
+} 
