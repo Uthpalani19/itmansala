@@ -46,13 +46,12 @@ body {
     justify-content: center;
 }
 
-.logo{
+.lpage-logo{
     width: 150px;
-    height: 50px;
 }
 
 .header{
-    
+    z-index: 9999;
     display: block;
     position: fixed;
     display: flex;
@@ -118,6 +117,12 @@ a{
     background: url('../images/Splash_screen.png');
 }
 
+.lpage1-iamge{
+    width: 170%;
+    position: relative;
+    animation: float 3s infinite;   
+}
+
 .heading-div{
     display: flex;
     align-items: center;
@@ -162,6 +167,15 @@ a{
     margin-right: 40px;
 }
 
+.landing-btn-signup:hover{
+    background-color:rgba(255, 255, 255, 0.24);
+    color: white;
+}
+
+.landing-btn-signin:hover{
+    background-color:rgba(255, 255, 255, 0.24);
+    color: white;
+}
 
 .landing-subheading{
     color: white;
@@ -276,6 +290,15 @@ a{
     width: 300px;
     height: 200px;
     background-color:#272727;
+    border: 1px solid #1d1d1d;
+}
+
+.overlay{
+    width: 100px;
+    background-color: #5319a6;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
 }
 
 .lpage3-card-name{
@@ -283,6 +306,8 @@ a{
     text-align: center;
     padding: 10px;
     margin: 10px;
+    cursor: pointer;
+    
 }
 
 .lpage3-card-image{
@@ -311,7 +336,7 @@ a{
 
 .slider{
     position: relative;
-    z-index: -1;
+    z-index: 5;
     height: 100%;
     width: 400%;
     display: flex;
@@ -361,11 +386,17 @@ a{
     padding: 20px;
     margin-left: 10px;
     margin-right: 20px;
+    margin-bottom: 10px;
     background-color: #DBDDDD;
-    width: 50%;
-    height: 550px;   
+    width: 90%;
+    height: 550px;
 }
 
+.description {
+    display: none;
+
+}
+  
 .course-des-description{
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.500);
@@ -427,7 +458,17 @@ a{
     border: none;
     padding: 10px 20px;
     margin: 10px 10px;
+    transition: all 0.3s ease;
 
+}
+
+.lpage-4-button:hover{
+    transform: translateY(-5px);
+    background-color:#6D6D6D;
+}
+
+.lpage-4-button:active{
+    background-color:#6D6D6D;
 }
 
 .interest-jobpath{
@@ -442,10 +483,8 @@ a{
     box-shadow: #1d1d1d41 10px 10px 10px ;
     background-color: #DBDDDD;
     width: 90%;
-    height: 650px;
-    position: relative;
-    z-index: -1;
-    
+    height: 650px;    
+    display: none;
 }
 
 .job-path-heading{
@@ -469,6 +508,12 @@ a{
     height: 250px;
     width: 350px;
     border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.job-card:hover{
+    transform: translateY(-5px);
 }
 
 .job-card-heading{
@@ -551,6 +596,18 @@ a{
     display: flex;
     width: 550px;
 }
+
+@keyframes float {
+    0% {
+      top: 0px;
+    }
+    50% {
+      top: 50px;
+    }
+    100% {
+      top: 0px;
+    }
+  }
 
 
 @keyframes fadeInAnimation {

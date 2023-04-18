@@ -15,10 +15,12 @@
                 <p onclick="window.location.href='../../views/studentviews/student-dashboard.php'">Dashboard</p>
                 <p onclick="window.location.href='../../views/studentviews/availablecourses.php'">Course</p>
                 <p onclick="window.location.href='editProfile.php'">My Courses</p>
-                <p onclick="window.location.href='editProfile.php'">Cart</p>
+                
 
             </div>
             <div class="nav-user-tray">
+                <p onclick="window.location.href='../../views/studentviews/cartSudentView.php'"><i class="fas fa-shopping-cart"></i></p>
+                <p class="cart-count" id="cart-count">0</p>
                 <p><i class="fa-regular fa-bell"></i></p>
                 <p><i class="fa-solid fa-circle-user"></i></p>
                 <!-- <p><?php echo $_SESSION['name']; ?></p> -->
@@ -27,7 +29,7 @@
         </div>
     </div>
 
-    <script>
+    <script src ="student.js">
     const logout = document.getElementById("logout");
     const hidden = document.getElementById("hidden");
     const close = document.getElementById("close");

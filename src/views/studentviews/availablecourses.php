@@ -11,6 +11,9 @@
     unset($_SESSION['name']);
     header("location: ../student_login.php");
  }
+ require('../../config/studentconfig/studentCart.php')
+
+
 ?>
 
 <?php include('../../config/teacherconfig/teacher-backend.php') ?>
@@ -78,7 +81,8 @@
                                     <div class="price">
                                         <p><?php echo $course_row['price'];?> LKR</p>
                                     </div>
-                                    <button type="" name="cart-btn" class="cart-btn">Add to Cart</button>
+                                    <button type="" name="cart-btn" class="cart-btn" id="add-to-cart-button"> Add to Cart </button>
+                                    <span id="cart-count">0</span>
 
                                     
                                 </div>
@@ -107,7 +111,8 @@
 </body>
 
 
-<script>
+<script src ="../../assets/js/student.js">
+
     //------------------splash screens----------------------//
 
 

@@ -51,6 +51,7 @@ body {
 }
 
 .content-container{
+    z-index: 0;
     background: white;
     width: 90%;
     margin: auto;
@@ -181,6 +182,7 @@ body {
     font-family: 'Poppins', sans-serif;
     cursor: pointer; 
 }
+
 
 .lines{
     margin: auto;
