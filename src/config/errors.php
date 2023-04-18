@@ -11,20 +11,9 @@ function loginError(){
     endif;
     }
 
-
-
-function userError(){ 
-    require('server.php') ;
-    if (count($Username_Error) > 0) :
-  	foreach ($Username_Error as $user_error) :
-    echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$user_error."</span>" ;
-    endforeach;
-    endif;
-    }
-
-
 function passError(){ 
     require('server.php') ;
+    require('password-backend.php');
     if (count($Password_Error) > 0) :
   	foreach ($Password_Error as $pass_error) :
     echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$pass_error."</span>" ;
@@ -42,19 +31,9 @@ function FirstnameError(){
     endif;
     }
 
-
-function LastnameError(){ 
-    require('server.php') ;
-    if (count($Lastname_Error) > 0) :
-  	foreach ($Lastname_Error as $last_error) :
-    echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$last_error."</span>" ;
-    endforeach;
-    endif;
-    }
-
-
 function EmailError(){ 
     require('server.php') ;
+    require('password-backend.php');
     if (count($Email_Error) > 0) :
   	foreach ($Email_Error as $email_error) :
     echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$email_error."</span>" ;
@@ -72,26 +51,23 @@ function PhoneError(){
     endif;
     }
 
+    function rstpassError(){ 
+      require('password-backend.php');
+      if (count($rstPassword_Error) > 0) :
+      foreach ($rstPassword_Error as $rstpass_error) :
+      echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$rstpass_error."</span>" ;
+      endforeach;
+      endif;
+      }
 
-function DobError(){ 
-    require('server.php') ;
-    if (count($DOB_Error) > 0) :
-  	foreach ($DOB_Error as $dob_error) :
-    echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$dob_error."</span>" ;
-    endforeach;
-    endif;
-    }
-
-
-function AlError(){ 
-    require('server.php') ;
-    if (count($ALyear_Error) > 0) :
-  	foreach ($ALyear_Error as $al_error) :
-    echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$al_error."</span>" ;
-    endforeach;
-    endif;
-    }
-
+      function rstEmailError(){ 
+        require('password-backend.php');
+        if (count($rstEmail_Error) > 0) :
+        foreach ($rstEmail_Error as $rstemail_error) :
+        echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$rstemail_error."</span>" ;
+        endforeach;
+        endif;
+        }
 
 
 

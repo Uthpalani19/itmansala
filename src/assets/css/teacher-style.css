@@ -201,22 +201,39 @@ body
 {
     font-family: 'Poppins', sans-serif;
     border-collapse: separate;
-    width: 90%;
+    width: 95%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 8px 8px 0px rgba(90, 90, 90, 0.2);
 }
 
 table
 {
-    border-radius: 10%;
+    border-radius:  10px;
 }
 
-.addedQuestions td, .addedQuestions th
+.addedQuestions>td, .addedQuestions th
 {
-    font-size: 14px;
-    border: 1px solid #ddd;
-    padding: 12px;
+    border: 1px solid #8a8989;
+    margin-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #5c26a9;
+    color: white;
+    font-weight: 450;
+    font-size: 13px;
+}
+
+td
+{
+    padding: 1rem;
+    font-size: 0.85rem;
 }
   
-.addedQuestions th
+.addedQuestions>th
 {
     background-color: #5319a6;
     color: white;
@@ -351,6 +368,7 @@ tr:nth-child(odd)
     cursor: pointer;
     border-radius: 5%;
     padding: 0.3rem 1.5rem;
+    width: 200px;
 }
   
 .dropdown
@@ -773,7 +791,7 @@ tr:nth-child(odd)
     width: 50px;
     height: 20px;
     padding: 20px;
-    margin-top: 70px;
+    margin-top: 3rem;
     margin-left: 100px;
     background-color: #5319a6;
     position:relative;
@@ -791,14 +809,14 @@ tr:nth-child(odd)
     font-size: 14px;
     resize: none;
     margin-left: 200px;
-    margin-top: -68px;
+    margin-top: -20rem;
     margin-bottom: 10px;
 }
 
 .option
 {
     width: 75%;
-    height: 25px;
+    height: 22px;
     padding: 12px 20px;
     border-radius: 4px;
     border:none;
@@ -853,21 +871,34 @@ tr:nth-child(odd)
     margin: 0 250px 0 250px;
 } 
 
+.instruction
+{
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 10px;
+    font-style: italic !important;
+    font-size: 12px;
+    font-weight: 1000;
+    color: #818181;
+}
 /* Edit Course Content - TEMP */
 
 /* Body */
-.grey-bg
+#grey-bg
 {
-    background-color: #D9D9D9;
+    background: #D9D9D9;
 }
+
   /*Course Details*/
 .course-details-box
 {
-    height: 195px;
-    background-color: #5319a6;
-    align-items: center;
-    width: 100%;
-    border-radius: 0px 0px 150px 150px;
+    text-align: center;
+    background: linear-gradient(45deg,#7e58bc 5%, #5318a6);
+    margin-top: 3.8rem;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    color: white;
+    padding-bottom: 10px;
 }
 
 .course-details-box p
@@ -1025,7 +1056,7 @@ tr:nth-child(odd)
 
 .add-questions
 {
-    margin-left: 40%;
+    margin-left: 35%;
 }
 
 .view-questions
@@ -1071,12 +1102,17 @@ tr:nth-child(odd)
     margin: 0 0 0 1rem;
 }
 
-.dropdown1
+.dropdown-courses
 {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 10px;
+    padding: 0.5rem 0.75rem;
+    margin: 0 10px 0 10px;
+    background-color: #FFFFFF;
+    color: #5319a6;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    outline: none;
 }
 
 .container{
@@ -1109,12 +1145,10 @@ h4{
 
 /*--------------Table---------------------*/
 
-.content table{
+.tableStudent{
     margin-left: auto;
     margin-right: auto;
-    width: 85%;
     vertical-align: middle;
-    text-align: center;
     border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
@@ -1122,20 +1156,22 @@ h4{
     
 }
 
-.content table td{
+.tableStudent td{
     border: 1px solid #ebe9e9;
     padding-left: 10px;
     padding-right: 10px;
+    text-align: center;
     padding-top: 2px;
     background: #cacaca;
     font-size: 13px;
 }
 
-.content table th{
+.tableStudent th{
     border: 1px solid #8a8989;
     margin-bottom: 30px;
     padding-left: 10px;
     padding-right: 10px;
+    text-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
     background: #5c26a9;
@@ -1144,38 +1180,36 @@ h4{
     font-size: 13px;
 }  
 
-.content td:nth-child(1)
+.tableStudent td:nth-child(1)
 {
     width: 90px;
     height: 30px;
 }
 
-.content td:nth-child(2)
+.tableStudent td:nth-child(2)
 {
     width: 250px;
 }
 
-.content td:nth-child(3)
+.tableStudent td:nth-child(3)
 {
     width: 110px;
 }
 
-.content td:nth-child(4)
+.tableStudent td:nth-child(4)
 {
     width: 150px;
 }
 
-.content td:nth-child(5)
+.tableStudent td:nth-child(5)
 {
     width: 200px;
 }
 
-.content td:nth-child(6)
+.tableStudent td:nth-child(6)
 {
     width: 500px;
 }
-
-
 
 .statusButton{
     border-radius: 5px;
@@ -1194,4 +1228,240 @@ h4{
     color:#5319a6;
     margin-left: 8px;
     cursor: pointer;
+}
+
+/* no results found */
+
+.no-results-found
+{
+    width : 1100px;
+    height: 550px;
+    margin-top: 20px;
+    color: #5319a6;
+    background-image: url(../images/not-found.png);
+    background-repeat: no-repeat;
+    padding-right: 50px;
+    margin-left: 500px;
+}
+
+/* Pagination button */
+.pagination
+{
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    background-color: #6D6D6D;
+    border-radius: 5px;
+    border: none;
+    
+    cursor: pointer;
+    margin-bottom: 20px;
+    
+}
+
+.pagination:hover
+{
+    width: 27px;
+    height: 27px;
+    
+}
+
+.pagination-text
+{
+    color: white;
+    text-decoration: none;
+}
+
+.pagination-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+/* Todo list */
+.main-section {
+    background: transparent;
+    max-width: 500px;
+    width: 90%;
+    height: 500px;
+    margin: 30px auto;
+    border-radius: 10px;
+  }
+  
+  .add-section {
+    width: 100%;
+    background: #fff;
+    margin: 0px auto;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .add-section input {
+    display: block;
+    width: 95%;
+    height: 40px;
+    margin: 10px auto;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 0px 5px;
+  }
+  
+  .add-section button {
+    display: block;
+    width: 95%;
+    height: 40px;
+    margin: 0px auto;
+    border: none;
+    outline: none;
+    background: #0088FF;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-section button:hover {
+    box-shadow: 0 2px 2px 0 #ccc, 0 2px 3px 0 #ccc;
+    opacity: 0.7;
+  }
+  
+  .add-section button span {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+  }
+  
+  #errorMes {
+    display: block;
+    background: #f2dede;
+    width: 95%;
+    margin: 0px auto;
+    color: rgb(139, 19, 19);
+    padding: 10px;
+    height: 35px;
+  }
+  
+  .show-todo-section {
+    width: 100%;
+    background: #fff;
+    margin: 30px auto;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .todo-item {
+    width: 95%;
+    margin: 10px auto;
+    padding: 20px 10px;
+    box-shadow: 0 4px 8px 0 #ccc, 0 6px 20px 0 #ccc;
+    border-radius: 5px;
+  }
+  
+  .todo-item h2 {
+    display: inline-block;
+    padding: 5px 0px;
+    font-size: 17px;
+    font-family: sans-serif;
+    color: #555;
+  }
+  
+  .todo-item small {
+    display: block;
+    width: 100%;
+    padding: 5px 0px;
+    color: #888;
+    padding-left: 30px;
+    font-size: 14px;
+    font-family: sans-serif;
+  }
+  
+  .remove-to-do {
+    display: block;
+    float: right;
+    width: 20px;
+    height: 20px;
+    font-family: sans-serif;
+    color: rgb(139, 97, 93);
+    text-decoration: none;
+    text-align: right;
+    padding: 0px 5px 8px 0px;
+    border-radius: 50%;
+    transition: background 1s;
+    cursor: pointer;
+  }
+  
+  .remove-to-do:hover {
+    background: rgb(139, 97, 93);
+    color: #fff;
+  }
+  
+  .checked {
+    color: #999 !important;
+    text-decoration: line-through;
+  }
+  
+  .todo-item input {
+    margin: 0px 5px;
+  }
+  
+  .empty {
+    font-family: sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: #cccc;
+  }
+.error-msg{
+    color: white;
+    font-weight: 500;
+    font-size: 1.2rem;
+    background: rgb(224, 0, 0);
+    width: 50%;
+    margin: 215px auto;
+    padding: 50px;
+    text-align: center;
+    left:0;
+    right: 0;
+    border: 5px dashed white;
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in forwards;
+
+}
+
+.error{
+    font-size: 1rem;
+    color: rgb(224, 0, 0);
+  }
+  
+  
+  .fa-circle-exclamation{
+    margin-right: 5px;
+  }
+
+  .fa-rectangle-xmark{
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: -35px;
+    cursor: pointer;
+  }
+
+.error-msg-container{
+    width: 100%;
+    height: 141%;
+    /* backdrop-filter: url(filters.svg#filter) blur(5px) grayscale(50%); */
+    position: absolute;
+    z-index: 100;
+    overflow-y: hidden;
+}
+
+.stopscroll{
+    overflow: hidden;
+    background: #D9D9D9;
 }

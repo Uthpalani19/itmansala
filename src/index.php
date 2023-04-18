@@ -19,14 +19,22 @@
                 window.location.href="student_signup.php";
             }
     </script>
+    <script src="assets/js/counter.js"></script>
+
 
     <link rel="stylesheet" href="assets/css/style4.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" 
     integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- jQuery CDN for counter -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
     
 </head>
 <body>
+
 <div class="landing-page-1" id="section-1">
     <div class="heading-div">
         <div class="left-content">
@@ -89,11 +97,33 @@
 
     </div>
 
-    <div class="lpage-2-bar">
-        <div class="bar-item"><h2 class="lpage2-bar-heading">13 <br>courses </h2></div>
-        <div class="bar-item"><h2 class="lpage2-bar-heading">100 <br>Students </h2></div>
-        <div class="bar-item"><h2 class="lpage2-bar-heading">1500 <br>Questions </h2></div>
-    </div>
+    <section class="counters">
+        <div class="lpage-2-bar">
+            <!-- PHP part for page statistics -->
+            <?php
+            include('config/dbconnection.php');
+
+                $sql = "SELECT COUNT(*) FROM course";
+                $result = mysqli_query($connection, $sql);
+                $row = mysqli_fetch_array($result);
+                $totalCourse = (int)$row[0];
+
+                $sql = "SELECT COUNT(*) FROM student";
+                $result = mysqli_query($connection, $sql);
+                $row = mysqli_fetch_array($result);
+                $totalStudent = (int)$row[0];
+
+                $sql = "SELECT COUNT(*) FROM modelpaperquestion";
+                $result = mysqli_query($connection, $sql);
+                $row = mysqli_fetch_array($result);
+                $totalQuestions = (int)$row[0];
+            ?>
+
+            <div class="bar-item"><h2 class="lpage2-bar-heading"><?php echo $totalCourse ?> <br>Courses </h2></div>
+            <div class="bar-item"><h2 class="lpage2-bar-heading"><?php echo $totalStudent ?> <br>Students </h2></div>
+            <div class="bar-item"><h2 class="lpage2-bar-heading"><?php echo $totalQuestions ?> <br>Questions </h2></div>
+        </div>
+    </section>
 </div>
 
 <div class="landing-page-3" id="section-3">
@@ -210,6 +240,18 @@
 
     
     <!-- <?php include("../../assets/includes/footer.php"); ?>  -->
-<script src="assets/js/script.js"></script>    
+<script src="assets/js/script.js"></script>
+
+<!-- Counter -->
+<!-- <script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.lpage2-bar-heading').counterUp({
+            delay: 10,
+            time: 1000
+        });
+    });
+</script> -->
+
 </body>
 </html>

@@ -13,9 +13,9 @@
     </div>
     <div class="left signupleft">
         <div class="welcome">
-            <p class="message signupmessage">Fill your Info</p>
+            <p class="message signupmessage">Few clicks away from creating your account</p>
         </div>
-        <img class="avatar signupavatar "src="assets/images/avatar.png">     
+        <img class="avatar"src="assets/images/avatar.png">     
     </div>
 
     <div class="right">
@@ -25,6 +25,7 @@
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div id="form1">
                         <div class="login_field signupfield">
+                            <i class="login_icon fa-solid fa-user"></i>
                             <input type="text" class="login_input" placeholder="  Name" name="name" value="<?php echo $name;?>">
                             <div>
                                 <?php FirstnameError(); ?>
@@ -32,21 +33,23 @@
                         </div>
 
                         <div class="login_field signupfield">
-                            <input type="text" class="login_input" placeholder="  Username" name="username" value="<?php echo $Username;?>">
-                            <div>
-                                <?php userError(); ?>
-                            </div>
-                        </div>
-
-                        <div class="login_field signupfield">
+                            <i class="login_icon fa-solid fa-envelope"></i>
                             <input type="email" class="login_input" placeholder="  Email" name="email" value="<?php echo $Email;?>">
                             <div>
                                 <?php EmailError(); ?>
                             </div>
                         </div>
 
+                        <div class="login_field signupfield">
+                            <i class="login_icon fa-solid fa-phone"></i>
+                            <input type="text" class="login_input" placeholder="  Phone Number" name="phonenumber" id="phone" value="<?php echo $PhoneNumber;?>">
+                            <div>
+                                <?php PhoneError(); ?>
+                            </div>
+                        </div>
+
                         <div class="login">
-                            <button type="button" id="next1" class="loginbtn signupbtn">Next</button><br>
+                            <button disabled type="button" id="next1" class="loginbtn">Next</button><br>
                             <p>Already have an account? <a href="student_login.php" class="create-account">Sign In</a></p>
 
                         </div>  
@@ -58,15 +61,9 @@
                             <button type="button" id="back1"><i class="fa-solid fa-chevron-left"></i></button>
                         </div> 
 
-                        <div class="login_field signupfield">
-                            <input type="text" class="login_input" placeholder="  Phone Number" name="phonenumber" value="<?php echo $PhoneNumber;?>">
-                            <div>
-                                <?php PhoneError(); ?>
-                            </div>
-                        </div>
-
-                        <div class="login_field signupfield">
-                            <input type="password" class="login_input" id="psw1" placeholder="  Password" name="password_1" value="<?php echo $password;?>">
+                        <div class="login_field signupfield signup_padding">
+                            <i class="login_icon fa-solid fa-lock"></i>
+                            <input type="password" class="login_input" id="psw1" placeholder="  Password" name="password_1" value="<?php echo $password_1;?>">
                             <i class="fa-regular fa-eye-slash" id="hidePsw1"></i>
                             <div>
                                 <?php passError(); ?>
@@ -74,6 +71,7 @@
                         </div>
 
                         <div class="login_field signupfield">
+                            <i class="login_icon fa-solid fa-lock"></i>
                             <input type="password" class="login_input" id="psw2" placeholder="  Re-enter password" name="password_2">
                             <i class="fa-regular fa-eye-slash" id="hidePsw2"></i>
                             <div>
@@ -93,7 +91,6 @@
         </div>
     </div>
     
-
 
 <script type="text/javascript" src="assets/js/student.js"></script>
 </body>

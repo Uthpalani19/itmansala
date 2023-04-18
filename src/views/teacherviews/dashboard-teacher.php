@@ -58,7 +58,6 @@
                         <a href="#">C002</a>
                         <a href="#">C003</a>
                     </div>
-
                 </div>
 
                 <p id="course-name">Course - C001</p>
@@ -98,35 +97,51 @@
         </div>
 
         <!-- To do list -->
-        <div class="todo_container scroll">
-                <div class="todo_title">To do list</div>
-            <!-- To do work -->
-                <div class="todo">
-                    <div id="todo-work">Upload learning materials</div>
-                    <div id="tick"></div>
+        <div class="main-section">
+            <div class="add-section">
+                <form action="">
+                    <input type="text" name="title" placeholder="This field is required">
+                    <button type="Submit">Add &nbsp; <span>&#43; </span></button>
+                </form>
+            </div>
+            <div class="show-todo-section">
+                <div class="todo-item">
+                    <input type="checkbox">
+                    <h2>This is todo</h2>
+                    <br>
+                    <small>Created: 18/04/2023</small>
                 </div>
-                <div class="todo">
-                    <div id="todo-work">Add questions to the 3rd quiz</div>
-                    <div id="tick"></div>
-                </div>
-                <div class="todo">
-                    <div id="todo-work">Submit new course</div>
-                    <div id="tick"></div>
-                </div>
-                <div class="todo">
-                    <div id="todo-work">Check on students' performance</div>
-                    <div id="tick"></div>
-                </div>
-                <div class="todo">
-                    <div id="todo-work">Add a new course</div>
-                    <div id="tick"></div>
-                </div>
-                <!-- Add new work -->
-                <div class="todo">
-                    <div id="todo-work"><i class="fa-sharp fa-solid fa-circle-plus icon-add"></i></div>
-                    <div id="tick"></div>
-                </div>
+            </div>
         </div>
+        <!-- <div class="todo_container scroll">
+            <div class="todo_title">To do list</div>
+           
+            <div class="todo">
+                <div id="todo-work">Upload learning materials</div>
+                <div id="tick"></div>
+            </div>
+            <div class="todo">
+                <div id="todo-work">Add questions to the 3rd quiz</div>
+                <div id="tick"></div>
+            </div>
+            <div class="todo">
+                <div id="todo-work">Submit new course</div>
+                <div id="tick"></div>
+            </div>
+            <div class="todo">
+                <div id="todo-work">Check on students' performance</div>
+                <div id="tick"></div>
+            </div>
+            <div class="todo">
+                <div id="todo-work">Add a new course</div>
+                <div id="tick"></div>
+            </div>
+
+            <div class="todo">
+                <div id="todo-work"><i class="fa-sharp fa-solid fa-circle-plus icon-add"></i></div>
+                <div id="tick"></div>
+            </div>
+        </div> -->
     </div>
 
     <!-- Marks distribution -->
