@@ -94,4 +94,7 @@ discard.onclick = function(){
 }
 
 
+// Getting the selected course from the drop down menu
+
+
 
