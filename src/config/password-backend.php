@@ -6,12 +6,13 @@ if(!isset($_SESSION)){
 
 require('dbconnection.php');
 $email = "";
+$Password_Error = array();
 $rstpassword_1 = "";
 $rstpassword_2 = "";
 $chgpassword_1 = "";
 $chgpassword_2 = "";
-$Email_Error = array();
-$Password_Error = array();
+$rstEmail_Error = array();
+$rstPassword_Error = array();
 
 if(isset($_POST['send_email'])){
     $email = mysqli_real_escape_string($connection, $_POST['email']);
@@ -19,13 +20,13 @@ if(isset($_POST['send_email'])){
     $email_check = "SELECT * FROM student WHERE email = '$email'";
     $email_query = mysqli_query($connection, $email_check);
     $email_row = mysqli_fetch_assoc($email_query);
-    $name = $email_row['name'];
-    $phone = $email_row['phoneNumber'];
 
     if(mysqli_num_rows($email_query) == 0){
-        array_push($Email_Error, "Please enter the email <br>you used when signing up with IT Mansala");   
+        array_push($rstEmail_Error, "Please enter the email <br>you used when signing up with IT Mansala");   
         }
         else{
+            $name = $email_row['name'];
+            $phone = $email_row['phoneNumber'];
             // generate token by binaryhexa 
             $token = bin2hex(random_bytes(50));
 
@@ -90,18 +91,18 @@ if(isset($_POST["reset_pass"])){
                 $specialChars = preg_match('@[^\w]@', $rstpassword_1);
             
                 if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($rstpassword_1) < 8) {
-                    array_push($Password_Error, "Password should be minimum 8 characters long with <br>at least one upper case letter, one number and a special character!");
+                    array_push($rstPassword_Error, "Password should be minimum 8 characters long with <br>at least one upper case letter, one number and a special character!");
                 }
                 }
 
             if (empty($rstpassword_1)) {
-                array_push($Password_Error, "Password is required!");
+                array_push($rstPassword_Error, "Password is required!");
             }
             if ($rstpassword_1 != $rstpassword_2) {
-                array_push($Password_Error, "The two passwords do not match");
+                array_push($rstPassword_Error, "The two passwords do not match");
             }
 
-            if (count($Password_Error) == 0){
+            if (count($rstPassword_Error) == 0){
                 $encrypt = md5($rstpassword_1);
                 $student_table = "UPDATE student SET password='$encrypt' WHERE email='$rstEmail'";
                 $user_table = "UPDATE usertable SET password='$encrypt' WHERE phoneNumber='$phoneNumber'";

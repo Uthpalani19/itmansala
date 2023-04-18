@@ -25,10 +25,10 @@
 </head>
 <body>
 
-<!-- <div class="splashcourse">
+<div class="splashcourse">
         <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['name']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
         <img class="welcome-avatar fade-in" src="../../assets/images/welcome_avatar.png">
-</div> -->
+</div> 
 <div class="container">
     <?php include('../../assets/includes/navbar-student.php') ?>
 
@@ -69,14 +69,14 @@
                                     <img src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" class="cover-img">
                                 </div>
 
-                                <p><a href="viewsubtopic.php?lesson=<?php echo $number ?>">Lesson 0<?php echo $course_row['courseId'];?></a></p>
                                 <div class="course-name">
-                                    <?php echo $course_row['courseName'];?>
+                                    <a href="viewsubtopic.php?lesson=<?php echo $number ?>"><?php echo $course_row['courseName'];?></a>
+                                    
                                 </div>
                                 <div class ="price-username">
                                     
                                     <div class="price">
-                                        <p><?php echo $course_row['price'];?></p>
+                                        <p><?php echo $course_row['price'];?> LKR</p>
                                     </div>
                                     <button type="" name="cart-btn" class="cart-btn">Add to Cart</button>
 

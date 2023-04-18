@@ -18,21 +18,21 @@
         <img class="avatar "src="../assets/images/avatar.png">     
     </div>
     <div class="right">
-        <h1>Reset your password</h1>
+        <h1 class="pass-heading">Reset your password</h1>
 
           <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="login_field signupfield">
               <input type="email" class="login_input" placeholder="     Please enter your Email" name="email" value="<?php echo $email;?>">
               <div>
-                <?php EmailError(); ?>
+                <?php rstEmailError(); ?>
               </div>
             </div>
 
             <div class="login">
-              <button type="submit" name="send_email" class="loginbtn signupbtn">Continue</button><br>
+              <button type="submit" name="send_email" class="loginbtn signupbtn pass-btn">Continue</button><br>
+              <p>Back to <a href="../student_login.php" class="create-account">Sign In</a></p>
             </div> 
           </form>
-
     
     </div>
 

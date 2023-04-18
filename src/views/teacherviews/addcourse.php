@@ -25,7 +25,7 @@
   <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
 </head> 
 
-<body>
+<body id="body">
     <div class="content-container" id="content">
         <p class="welcome-msg">Welcome back <?php echo $_SESSION['name']; ?></p>
 
@@ -62,15 +62,13 @@
                                     <img src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" class="cover-img">
                                 </div>
 
-                                <p><a href="subtopic.php?lesson=<?php echo $number ?>">Course 0<?php echo $course_row['courseId'];?></a></p>
                                 <div class="course-name">
-                                    <?php echo $course_row['courseName'];?>
+                                    <a href="subtopic.php?lesson=<?php echo $number ?>"><?php echo $course_row['courseName'];?></a>
                                 </div>
                                 <div class ="price-username">
-                                    <div class="price">
-                                        <p>LKR <?php echo $course_row['price'];?></p>
-                                    </div>
+
                                    <div class="username">
+                                        <i class="fa-solid fa-chalkboard-user"></i>
                                         <p><?php echo $_SESSION['name']; ?></p>
                                    </div>
                                     
@@ -99,7 +97,17 @@
                             <p>Course Title</p>
                         </div>  
                         <div class="column2">
-                            <input type="text" class="course-input title" name="courseName">
+                            <select class="course-input dropdown" name="courseName">
+                                <?php
+                                    while($nameRow = mysqli_fetch_assoc($courseResult)){
+                                        $dbCourseName = $nameRow['course_name'];
+                                        ?>
+                                        <option value="<?php echo $dbCourseName ?>"><?php echo $dbCourseName ?></option>
+                                        <?php
+                                        }
+                                ?>
+                                
+                            </select>
                             <div>
                             <?php 
                                 if (count($Title_Error) > 0) :
@@ -116,7 +124,9 @@
                             <p>Description</p>
                         </div>  
                         <div class="column2">
-                            <textarea class="course-input" name="courseDescription" rows="5"></textarea>
+                            <textarea class="course-input" name="courseDescription" rows="5" placeholder="A brief introduction to the course and its content "></textarea>
+                            <input type="text" class="course-input" name="price" value="1000 LKR" readonly hidden>
+                            <input type="text" class="course-input" name="courseNumber" value="<?php echo $id;?>" readonly hidden>
                             <div>
                                 <?php
                                     if (count($Desc_Error) > 0) :
@@ -129,28 +139,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="column1-number">
-                            <p>Course number</p>
-                        </div>  
-                        <div class="column2-number">
-                            <input type="text" class="course-input" name="courseNumber" value="<?php echo $id;?>" readonly>
-                        </div>
-                        <div class="column3-number">
-                            <p>Course Price</p>
-                        </div>  
-                        <div class="column2-number">
-                            <input type="text" class="course-input" name="price" value="1000 LKR" readonly>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="column1">
                             <p>Cover Image</p>
                         </div>  
                         <div class="column2 upload">
                             <label>
-                                <input type="file" accept="image/*" name="coverPhoto1">
-                                <i class="fa-solid fa-file-import"></i> 
-                                <br>Select file
+                                <input type="file" accept="image/*" name="coverPhoto1" id="selectfile">
+                                <i class="fa-solid fa-file-import"></i> <br>
+                                <label id="selectlabel" for="selectfile">Select file</label>
                             </label>
                             </div>
                         </div>
@@ -168,12 +164,7 @@
 
 <?php include('../../assets/includes/footer.php') ?>
 
-
-<script type="text/javascript" src="../../assets/js/teacher.js">
-    function checkactive(){
-        
-    }
-</script>
+<script type="text/javascript" src="../../assets/js/teacher.js"></script>
 </body>
     
 </html>

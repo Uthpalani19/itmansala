@@ -857,9 +857,9 @@ tr:nth-child(odd)
 /* Edit Course Content - TEMP */
 
 /* Body */
-.grey-bg
+#grey-bg
 {
-    background-color: #D9D9D9;
+    background: #D9D9D9;
 }
   /*Course Details*/
 .course-details-box
@@ -1026,7 +1026,7 @@ tr:nth-child(odd)
 
 .add-questions
 {
-    margin-left: 40%;
+    margin-left: 35%;
 }
 
 .view-questions
@@ -1195,4 +1195,53 @@ h4{
     color:#5319a6;
     margin-left: 8px;
     cursor: pointer;
+}
+
+.error-msg{
+    color: white;
+    font-weight: 500;
+    font-size: 1.2rem;
+    background: rgb(224, 0, 0);
+    width: 50%;
+    margin: 215px auto;
+    padding: 50px;
+    text-align: center;
+    left:0;
+    right: 0;
+    border: 5px dashed white;
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in forwards;
+
+}
+
+.error{
+    font-size: 1rem;
+    color: rgb(224, 0, 0);
+  }
+  
+  
+  .fa-circle-exclamation{
+    margin-right: 5px;
+  }
+
+  .fa-rectangle-xmark{
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: -35px;
+    cursor: pointer;
+  }
+
+.error-msg-container{
+    width: 100%;
+    height: 141%;
+    backdrop-filter: url(filters.svg#filter) blur(5px) grayscale(50%);
+    position: absolute;
+    z-index: 100;
+    overflow-y: hidden;
+}
+
+.stopscroll{
+    overflow: hidden;
+    background: #D9D9D9;
 }
