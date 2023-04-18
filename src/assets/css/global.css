@@ -13,13 +13,14 @@ body {
     background-color: #D9D9D9;
 }
 .navbar{
+    height: 60px;
     width: 100%;
     color: white;
     font-weight: 500;
     font-size: 1rem;
     background: linear-gradient(45deg,#7e58bc 5%, #5319a6);
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
     opacity: 0;
@@ -32,9 +33,9 @@ body {
     color: #5319a6;
     background: #ffffff;
     border-radius: 10px;
-    padding: 5px 10px;
+    /* padding: 5px 10px;
     margin-top: -10px;
-    margin-left: -20px;
+    margin-left: -20px; */
 }
 
 .nav-left{
@@ -55,7 +56,8 @@ body {
 }
 
 .nav-links p{
-    margin-right: 4rem;
+    padding: 5px 10px;
+    margin-right: 2rem;
     cursor: pointer;
 }
 

@@ -17,7 +17,7 @@
 
 <div class="container">
             <div class="carousel">
-                <div class="slider">
+                <div class="slider">    
                 <section style="z-index:-1;">
                     <div class="four-cards">
                     <div class="lpage3-card-container">
@@ -28,7 +28,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card1.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card1.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
 
@@ -38,7 +38,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card2.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card2.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
                         </div> 
@@ -51,7 +51,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card3.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card3.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
 
@@ -61,7 +61,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card4.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card4.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
                         </div> 
@@ -79,7 +79,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card5.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card5.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
 
@@ -89,7 +89,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card6.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card6.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
                         </div> 
@@ -102,7 +102,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card7.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card7.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
 
@@ -112,7 +112,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card8.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card8.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
                         </div> 
@@ -130,7 +130,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card9.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card9.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
 
@@ -140,7 +140,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card10.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card10.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
                         </div> 
@@ -153,7 +153,7 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card11.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card11.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
 
@@ -162,7 +162,7 @@
                                     <h4>12 . වාපාර තුල තොරතුරු සන්නිවේදන තාෂණය</h4>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card12.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card12.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
                         </div> 
@@ -179,7 +179,7 @@
                                     <h4>13 . තොරතුරු සහ සන්නිවේදන තාෂණෙය් නව නැඹුරු</h4>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card13.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card13.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
 
@@ -189,32 +189,12 @@
                                     <br>
                                 </div>
                                 <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card14.jpg" alt="" class="lpage3-card-image">
+                                    <img src="assets/images/lpage3-card14.jpg" alt="" class="lpage3-card-image">
                                 </div>
                             </div>
                         </div> 
                     </div>
-                    <div class="lpage3-card-container">
-                        <div class="lpage3-card-container-1">
-                            <!-- <div class="lpage3-card">
-                                <div class="lpage3-card-name">
-                                    <h4>15 . ව්‍යාපෘතිය</h4>
-                                </div>
-                                <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card1.png" alt="" class="lpage3-card-image">
-                                </div>
-                            </div> -->
 
-                            <!-- <div class="lpage3-card">
-                                <div class="lpage3-card-name">
-                                    <h4>01.තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h4>
-                                </div>
-                                <div class="lpage3-card-1">
-                                    <img src="../../assets/images/lpage3-card1.png" alt="" class="lpage3-card-image">
-                                </div>
-                            </div> -->
-                        </div> 
-                    </div>
                     </div>
                 </section>
                 
@@ -241,6 +221,6 @@
                 </div>
             </div>
         </div>
-<script src="../../assets/js/script.js"></script>    
+<!-- <script src="assets/js/script.js"></script>     -->
 </body>
 </html>
