@@ -30,66 +30,75 @@
     </form>
 
     <?php
-        if(isset($_POST['input'])){
+        if(isset($_POST['input'])){  
             $input = $_POST['input'];
 
-            if(empty($input)){
-                $sql = "SELECT DISTINCT sc.phoneNumber, sc.lastaccesstime, s.name, s.email, s.profilePicture FROM student_course sc
-                INNER JOIN course c ON sc.courseID = c.courseID 
-                INNER JOIN student s ON sc.phoneNumber = s.phoneNumber
-                WHERE c.teacherPhoneNumber = '{$_SESSION['phone']}'";
-            }else{
-                $sql = "SELECT DISTINCT sc.phoneNumber, sc.lastaccesstime, s.name, s.email, s.profilePicture FROM student_course sc
-                INNER JOIN course c ON sc.courseID = c.courseID 
-                INNER JOIN student s ON sc.phoneNumber = s.phoneNumber
-                WHERE c.teacherPhoneNumber = '{$_SESSION['phone']}' AND s.name LIKE '%{$input}%'";
-            }
+                // $sql = "SELECT DISTINCT sc.phoneNumber, sc.lastaccesstime, s.name, s.email, s.profilePicture FROM student_course sc
+                //         INNER JOIN course c ON sc.courseID = c.courseID 
+                //         INNER JOIN student s ON sc.phoneNumber = s.phoneNumber
+                //         WHERE c.teacherPhoneNumber = '{$_SESSION['phone']}' AND c.courseName = '{$_POST['request']}'";
+            
 
-            $result = mysqli_query($connection, $sql);
-
-            if(mysqli_num_rows($result) > 0)
             {
-                ?>
-                <table class="tableStudent" id="student-details">
-                    <thead>
-                        <tr>
-                            <th>Profile</th>
-                            <th>Name</th>
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th>Enrollment Status</th>
-                            <th>Last logged in date & time</th>
-                        </tr>
-                    </thead>
+                    if(empty($input)){
+                        $sql = "SELECT DISTINCT sc.phoneNumber, sc.lastaccesstime, s.name, s.email, s.profilePicture FROM student_course sc
+                        INNER JOIN course c ON sc.courseID = c.courseID 
+                        INNER JOIN student s ON sc.phoneNumber = s.phoneNumber
+                        WHERE c.teacherPhoneNumber = '{$_SESSION['phone']}'";
+                    }
+                    else{
+                        $sql = "SELECT DISTINCT sc.phoneNumber, sc.lastaccesstime, s.name, s.email, s.profilePicture FROM student_course sc
+                        INNER JOIN course c ON sc.courseID = c.courseID 
+                        INNER JOIN student s ON sc.phoneNumber = s.phoneNumber
+                        WHERE c.teacherPhoneNumber = '{$_SESSION['phone']}' AND s.name LIKE '%{$input}%'";
+                    }
+                }
+                $result = mysqli_query($connection, $sql);
 
-                    <tbody>
-                        <?php
-                            while($row = mysqli_fetch_assoc($result))
-                            {
-                                $enrolstatus = 'Enrolled';
+                if(mysqli_num_rows($result) > 0)
+                {
+                    ?>
+                    <table class="tableStudent" id="student-details">
+                        <thead>
+                            <tr>
+                                <th>Profile</th>
+                                <th>Name</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th>Enrollment Status</th>
+                                <th>Last logged in date & time</th>
+                            </tr>
+                        </thead>
 
-                                echo '
-                                    <tr>
-                                        <td><img src="../../assets/images/profile/'.$row['profilePicture'].'" alt="profile" id="profile"></td>
-                                        <td>'.$row['name'].'</td>
-                                        <td>'.$row['phoneNumber'].'</td>
-                                        <td>'.$row['email'].'</td>
-                                        <td id="status">'.$enrolstatus.'</td>
-                                        <td>'.$row['lastaccesstime'].'</td>
-                                    </tr>
-                                ';
-                            }
-                        ?>
-                    </tbody>
-                </table>
+                        <tbody>
+                            <?php
+                                while($row = mysqli_fetch_assoc($result))
+                                {
+                                    $enrolstatus = 'Enrolled';
 
-                <?php
+                                    echo '
+                                        <tr>
+                                            <td><i class="fa-regular fa-user fa-lg"></i></td>
+                                            <td>'.$row['name'].'</td>
+                                            <td>'.$row['phoneNumber'].'</td>
+                                            <td>'.$row['email'].'</td>
+                                            <td id="status">'.$enrolstatus.'</td>
+                                            <td>'.$row['lastaccesstime'].'</td>
+                                        </tr>
+                                    ';
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+
+                    <?php
+                }
+                else
+                {?>
+                    <div class="no-results-found"></div>
+                    <?php
+                }
             }
-            else
-            {
-                echo "No result found";
-            }
-        }
         
     ?>
 </body>

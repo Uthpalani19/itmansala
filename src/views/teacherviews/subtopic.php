@@ -104,14 +104,17 @@
                             <i class="fa-solid fa-circle-plus"></i>
                             <p>Click here to add a lesson</p>
 
-                            <!--Add & view Questions button-->
-                            <form action = "addQuestions.php" method = "POST">
+                            <!-- <form action = "addQuestions.php" method = "POST">
                                 <input type="submit" value="Add Questions" class="btn-questions add-questions" name="addQuestions">
                             </form>
                             <form action = "ViewAddedQuestions.php" method = "POST">
                                 <input type="submit" value="View Questions" class="btn-questions view-questions" name="viewQuestions">
-                            </form>
+                            </form> -->
                         </div>
+
+                        <!--Add & view Questions button-->
+                        <a href="addQuestions.php"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
+                        <a href="viewAddedQuestions.php"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
             </form>
 
 
