@@ -111,9 +111,6 @@
             const <?php echo $closeonclick; ?> = document.getElementById("<?php echo $close; ?>");
             const <?php echo $bodyonclick; ?> = document.getElementById("grey-bg");
 
-            
-                            
-            </form>
             <?php echo $showonclick; ?>.onclick = function(){
                 <?php echo $pdfIDonclick; ?>.style.display = "block";
                 <?php echo $bodyonclick; ?>.classList.add("fixed");
@@ -137,7 +134,7 @@
             <!--Add & view Questions button-->
 
             <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
-            <a href="viewAddedQuestions.php"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
+            <a href="viewAddedQuestions.php"><input type="button" value="View Questions" class="btn-questions" name="viewQuestions"></a>
 
         </div>
 
