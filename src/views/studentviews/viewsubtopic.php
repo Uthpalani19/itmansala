@@ -82,19 +82,67 @@ if (!isset($_SESSION['name'])) {
                             $show = bin2hex(random_bytes(4));
                             $close = bin2hex(random_bytes(4));
                             $pdfid = bin2hex(random_bytes(4));
+                            $showvideo = bin2hex(random_bytes(4));
+                            $videoclose = bin2hex(random_bytes(4));
+                            $player = bin2hex(random_bytes(4));
+                            $showvideoclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $playerIDclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $videocloseclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $closeonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $showonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $pdfIDonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $bodyonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $videobody = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $videoContent = $retrieve_lesson_row['videoContent'];
+                            $url = "";
+                            if(!empty($videoContent)){
+                                $url = substr($videoContent, -11);  
+                            }   
                             ?>
         
                             <div class="dblesson <?php echo $class; ?>">
                                 <p><?php echo $retrieve_lesson_row['lessonName']; ?></p>
                                 <a class="show-pdf" id="<?php echo $show; ?>">Click here to learn</a>
-                                <i class="fa-solid fa-lock subtopic-lock subtopiclock2"></i>
+                                <i class="fa-solid fa-lock subtopic-lock subtopiclock2"></i><br>
+                                <?php
+                                if(!empty($url)){
+                                ?>
+                                <a class="show-pdf" id="<?php echo $showvideo; ?>">Lesson Video</a>
+                                <?php
+                                }
+                                ?>  
                             </div>
+
+                            <?php 
+                            if(!empty($url)){
+                            ?>
+                            <div class="youtubediv" id="<?php echo $player; ?>" style="display:none;">
+                                <i class="fa-regular fa-rectangle-xmark lesson-close" id="<?php echo $videoclose ?>"></i>
+                                <iframe width="900" height="640" src="https://www.youtube.com/embed/<?php echo $url; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <script>
+                                const <?php echo $showvideoclick; ?> = document.getElementById("<?php echo $showvideo; ?>");
+                                const <?php echo $playerIDclick; ?> = document.getElementById("<?php echo $player; ?>");
+                                const <?php echo $videocloseclick; ?> = document.getElementById("<?php echo $videoclose; ?>");
+                                const <?php echo $videobody; ?> = document.getElementById("body");
+
+                                <?php echo $showvideoclick; ?>.onclick = function(){
+                                    <?php echo $playerIDclick; ?>.style.display = "block";
+                                    <?php echo $videobody; ?>.classList.add("fixed");
+                                }
+
+                                <?php echo $videocloseclick; ?>.onclick = function(){
+                                    <?php echo $playerIDclick; ?>.style.display = "none";
+                                    <?php echo $videobody; ?>.classList.remove("fixed");
+                                }
+
+                            </script>
+                            <?php
+                                }
+                            ?>
+
                             <div class="pdfdiv" id="<?php echo $pdfid; ?>" style="display:none;">
-                                <i class="fa-regular fa-rectangle-xmark" id="<?php echo $close ?>"></i>
+                                <i class="fa-regular fa-rectangle-xmark lesson-close" id="<?php echo $close ?>"></i>
                                 <embed src="../../assets/uploads/<?php echo $content ?>" height="630" width="1000"/>
                             </div>
                             <script>

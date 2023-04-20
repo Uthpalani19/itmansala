@@ -13,7 +13,6 @@ function loginError(){
 
 function passError(){ 
     require('server.php') ;
-    require('password-backend.php');
     if (count($Password_Error) > 0) :
   	foreach ($Password_Error as $pass_error) :
     echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$pass_error."</span>" ;
@@ -33,7 +32,6 @@ function FirstnameError(){
 
 function EmailError(){ 
     require('server.php') ;
-    require('password-backend.php');
     if (count($Email_Error) > 0) :
   	foreach ($Email_Error as $email_error) :
     echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$email_error."</span>" ;
@@ -69,6 +67,7 @@ function PhoneError(){
         endif;
         }
 
+          
 
 
 ?>

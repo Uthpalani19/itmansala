@@ -22,7 +22,8 @@
 
           <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <div class="login_field signupfield">
-              <input type="email" class="login_input" placeholder="     Please enter your Email" name="email" value="<?php echo $email;?>">
+              <i class="login_icon fa-solid fa-envelope"></i>
+              <input type="email" class="login_input" placeholder="Please enter your Email" name="email" value="<?php echo $email;?>">
               <div>
                 <?php rstEmailError(); ?>
               </div>

@@ -13,8 +13,11 @@ $learningMaterial2="";
 $id="";
 $lessonName="";
 $lessonNumber="";
+$videoContent="";
 $Number_Error= array();
+$subName_Error= array();
 $Name_Error= array();
+$Pdf_Error= array();
 
 
 //retrieve course information to subtopic
@@ -74,6 +77,7 @@ if (isset($_POST['add_subtopic'])) {
             $upload_pdf2 ='../../assets/uploads/subtopicpdf'.$pdf_name;
             move_uploaded_file($pdf_tempname,$upload_pdf2);
     }
+    $subtopicPdf = "No content available";
 
     if(!empty($upload_pdf1)){
         $subtopicPdf = $upload_pdf1;
@@ -84,10 +88,10 @@ if (isset($_POST['add_subtopic'])) {
     }
   
     if (empty($subtopicName)) {
-        array_push($Name_Error, "Subtopic title is required!");
+        array_push($subName_Error, "Subtopic title is required!");
     }
 
-    $master_error = array_merge($Name_Error);
+    $master_error = array_merge($subName_Error);
     if (count($master_error) == 0) {
     $query = "INSERT INTO subtopic (subTopicId, courseId, subTopicName, content) 
                   VALUES('$subtopicNumber', '$lesson', '$subtopicName', '$subtopicPdf')";
@@ -119,6 +123,7 @@ if (isset($_POST['add_subtopic'])) {
 if (isset($_POST['add_lesson'])) {
     $lessonName = mysqli_real_escape_string($connection, $_POST['lessonName']);
     $lessonNumber = mysqli_real_escape_string($connection, $_POST['lessonNumber']);
+    $videoContent = mysqli_real_escape_string($connection, $_POST['videoContent']);
     $learningMaterial1 = $_FILES['learningMaterial1'];
     $learningMaterial2 = $_FILES['learningMaterial2'];
 
@@ -157,15 +162,19 @@ if (isset($_POST['add_lesson'])) {
     if(!empty($upload_pdf2)){
         $lessonPdf = $upload_pdf2;
     }
+
+    if(empty($lessonPdf)){
+        array_push($Pdf_Error, "Content is required!");
+    }
   
     if (empty($lessonName)) {
-        array_push($Name_Error, "Subtopic title is required!");
+        array_push($Name_Error, "Lesson title is required!");
     }
 
-    $master_error = array_merge($Name_Error);
+    $master_error = array_merge($Name_Error, $Pdf_Error);
     if (count($master_error) == 0) {
-    $query = "INSERT INTO lesson (subTopicId, lessonName, content) 
-                  VALUES('$lessonNumber', '$lessonName', '$lessonPdf')";
+    $query = "INSERT INTO lesson (subTopicId, lessonName, content, videoContent) 
+                  VALUES('$lessonNumber', '$lessonName', '$lessonPdf', '$videoContent')";
     mysqli_query($connection, $query);
 
     }else{
