@@ -110,8 +110,8 @@
 </div>
 </body>
 
-
-<script src ="../../assets/js/student.js">
+<script src ="../../assets/js/student.js"></script>
+<script>
 
     //------------------splash screens----------------------//
 

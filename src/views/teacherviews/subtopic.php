@@ -89,19 +89,65 @@
                 if(mysqli_num_rows($retrieve_lesson_result)){
                 while($retrieve_lesson_row = mysqli_fetch_array($retrieve_lesson_result)){
                     $show = bin2hex(random_bytes(4));
+                    $showvideo = bin2hex(random_bytes(4));
+                    $videoclose = bin2hex(random_bytes(4));
                     $close = bin2hex(random_bytes(4));
                     $pdfid = bin2hex(random_bytes(4));
+                    $player = bin2hex(random_bytes(4));
+                    $playerIDclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $videocloseclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $closeonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $showonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $showvideoclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $pdfIDonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
-                    $bodyonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));                                     
+                    $bodyonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));  
+                    $videobody = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $videoContent = $retrieve_lesson_row['videoContent'];
+                    $url = "";
+                    if(!empty($videoContent)){
+                        $url = substr($videoContent, -11);  
+                    }                                 
         ?>
         <div class="dblesson <?php echo $class ?>">
             <p><?php echo $retrieve_lesson_row['lessonName'];?></p>
             <a class="show-pdf" id="<?php echo $show; ?>">Resource</a>
+            <?php
+            if(!empty($url)){
+                ?>
+            <a class="show-pdf" id="<?php echo $showvideo; ?>">Video</a>
+            <?php
+            }
+            ?>
         </div>
+        <?php 
+            if(!empty($url)){
+            ?>
+        <div class="youtubediv" id="<?php echo $player; ?>" style="display:none;">
+            <i class="fa-regular fa-rectangle-xmark lesson-close" id="<?php echo $videoclose ?>"></i>
+            <iframe width="900" height="640" src="https://www.youtube.com/embed/<?php echo $url; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <script>
+            const <?php echo $showvideoclick; ?> = document.getElementById("<?php echo $showvideo; ?>");
+            const <?php echo $playerIDclick; ?> = document.getElementById("<?php echo $player; ?>");
+            const <?php echo $videocloseclick; ?> = document.getElementById("<?php echo $videoclose; ?>");
+            const <?php echo $videobody; ?> = document.getElementById("grey-bg");
+
+            <?php echo $showvideoclick; ?>.onclick = function(){
+                <?php echo $playerIDclick; ?>.style.display = "block";
+                <?php echo $videobody; ?>.classList.add("fixed");
+            }
+
+            <?php echo $videocloseclick; ?>.onclick = function(){
+                <?php echo $playerIDclick; ?>.style.display = "none";
+                <?php echo $videobody; ?>.classList.remove("fixed");
+            }
+
+        </script>
+        <?php
+            }
+        ?>
         <div class="pdfdiv" id="<?php echo $pdfid; ?>" style="display:none;">
-            <i class="fa-regular fa-rectangle-xmark" id="<?php echo $close ?>"></i>
+            <i class="fa-regular fa-rectangle-xmark lesson-close" id="<?php echo $close ?>"></i>
             <embed src="../../assets/uploads/<?php echo $retrieve_lesson_row['content'];?>" height="630" width="1000"/>
         </div>
         
@@ -110,8 +156,7 @@
             const <?php echo $pdfIDonclick; ?> = document.getElementById("<?php echo $pdfid; ?>");
             const <?php echo $closeonclick; ?> = document.getElementById("<?php echo $close; ?>");
             const <?php echo $bodyonclick; ?> = document.getElementById("grey-bg");
-                
-            </form>
+
             <?php echo $showonclick; ?>.onclick = function(){
                 <?php echo $pdfIDonclick; ?>.style.display = "block";
                 <?php echo $bodyonclick; ?>.classList.add("fixed");
@@ -133,10 +178,9 @@
             <p>Click here to add a lesson</p>
 
             <!--Add & view Questions button-->
-            <div class="add-view-questions">
-                <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
-                <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
-            </div>
+            <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
+            <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
+
         </div>
 
         <?php
@@ -153,13 +197,21 @@
                         </div>  
                         <div class="column2">
                             <input type="text" class="course-input title" name="lessonName">
+                            <?php
+                                        if (count($Name_Error) > 0) :
+                                        foreach ($Name_Error as $name_error) :
+                                        echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$name_error."</span>" ;
+                                        endforeach;
+                                        endif;
+                            
+                            ?>
                             <input type="text" class="course-input title" name="lessonNumber" value="<?php echo $subtopic; ?>" readonly hidden>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="column1">
-                            <p>Add learning material</p>
+                            <p>Add learning material (PDF)</p>
                         </div>  
                         <div class="column2 upload">
                             <label>
@@ -174,6 +226,24 @@
 		                    <span class="drop-zone-text">You can Drag & Drop files here to add them</span>
 		                    <input type="file" name="learningMaterial2" class="drop-zone-input">
 	                    </div>
+                        <div class="lesson-error">
+                        <?php
+                                    if (count($Pdf_Error) > 0) :
+                                    foreach ($Pdf_Error as $pdf_error) :
+                                    echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$pdf_error."</span>" ;
+                                    endforeach;
+                                    endif;
+                
+                        ?>
+                        </div>
+                    <div class="row">
+                        <div class="column1 videocolumn">
+                            <p>Video Content (Optional) </p>
+                        </div>  
+                        <div class="column2">
+                            <textarea class="course-input title videoContent" name="videoContent" rows="2" placeholder="  Copy and paste the link of the YouTube video here"></textarea>
+                        </div>
+                    </div>
                         <button type="submit" name="add_lesson" class="form-btn">Create Lesson</button>
                         <button type="reset" class="form-btn" id="<?php echo $discardid ?>">Discard</button>
                     </div>
@@ -243,6 +313,14 @@
                         </div>  
                         <div class="column2">
                             <input type="text" class="course-input title" name="subtopicName">
+                            <?php
+                                        if (count($subName_Error) > 0) :
+                                        foreach ($subName_Error as $sname_error) :
+                                        echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$sname_error."</span>" ;
+                                        endforeach;
+                                        endif;
+                            
+                            ?>
                         </div>
                     </div>
 
@@ -271,7 +349,7 @@
             </div>
         </div>
     </div>
-
 <script type="text/javascript" src="../../assets/js/subtopic.js"></script>
+
 </body>
 </html>
