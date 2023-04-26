@@ -1,12 +1,12 @@
 <?php
     session_start();
-    require_once('src\assets\includes\navbar-student.php');
-    require('dbconnection.php');
+    include('../../assets/includes/navbar-student.php');
+    require('../../config/dbconnection.php');
 
-    if(!isset($_SESSION['firstname']))
-    {
-        header('location:index.php');
+    if (!isset($_SESSION['name'])) {
+        header('location: ../student_login.php');
     }
+
     if(isset($_GET['logout']))
     {
         session_destroy();
@@ -23,54 +23,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Questions</title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="src/assets/css/questionsViewStudent.css"></link>
+    <link rel="stylesheet" href="../../assets/css/questionsViewStudent.css"></link>
+    <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
+    <link rel="stylesheet" href="../../assets/css/global.css"></link>
 </head>
 
     <body>
-        <!--Navigation Bar-->
-        <?php
-            require_once('navbar-student.php');
-        ?>
 
+    <?php
+        $courseId=$_GET['courseId'];
+        $sql = "SELECT * FROM course WHERE courseId='$courseId'";
+        $result = mysqli_query($connection,$sql);
+        $row = mysqli_fetch_assoc($result);
+        $courseName=$row['courseName'];
+
+        $subtopicId=$_GET['subId'];
+        $sql = "SELECT * FROM subtopic WHERE subtopicId='$subtopicId'";
+        $result = mysqli_query($connection,$sql);
+        $row = mysqli_fetch_assoc($result);
+        $subtopicName=$row['subTopicName'];
+    ?>
         <!--Course Details-->
         <div class="course-details-box">
-            <p id="title">Lesson 01: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p id="title"><?php echo $courseName; ?></p>
         </div>
 
         <!--Set Subtopic Name-->
         <div class="subtopic-title">
-            <p> 1.1 Basic building blocks of information and their characteristics </p>
+            <p> <?php echo $subtopicName; ?> </p>
         </div>
 
-        <!--Add a new Question-->
+        <!--Attempt a Question-->
         <div class="question">
-            <div class="question-number-box">
-                <label class="question-number" name="questionNumber" >Q001</label>
-            </div>
+                <?php
+                    $sql_questions = "SELECT * from modelpaperquestion where subTopicId='$subtopicId' ORDER BY RAND() LIMIT 5";
+                    $result = mysqli_query($connection, $sql_questions);
+                    $row = mysqli_fetch_assoc($result);
 
-            <div class="container">
-                <div class="question">
-                    <textarea readonly placeholder="What is Data?" name="question" rows="2" cols="100" ></textarea>
-                </div>
-                <div class="option">
-                    <textarea readonly placeholder="Enter the option 1 " name="option1"></textarea>
-                    <textarea readonly placeholder="Enter the option 2 " name="option2"></textarea>
-                    <textarea readonly placeholder="Enter the option 3 " name="option3"></textarea>
-                    <textarea readonly placeholder="Enter the option 4 " name="option4"></textarea>
-                </div>
-            </div>
+                    if($row > 0)
+                    {
+                        $questionId = $row['questionId'];
 
-            <div class="buttons">
-                <input type="submit" value="Previous" class="btn-question" name="Previous">
-                <input type="submit" value="Back to Lesson" class="btn-question" id="back" name="back">
-                <input type="submit" value="Next" class="btn-question" name="Next" onclick="window.location.href='quizReview.php'">
-            </div>
-            
+                        // Check whether a particular question has been done by a student or not
+                        $sql_check = "SELECT * from student_modelpaperquestion where questionId='$questionId' AND phoneNumber = '{$_SESSION['phone']}'";
+                        $result_check = mysqli_query($connection, $sql_check);
+                        $row_check = mysqli_fetch_assoc($result_check);
+
+                        if($row_check == 0)
+                        {?>
+                            <div class="question-number-box">
+                                <textarea class="question-number" name="questionNumber" readonly style="resize: none;"><?php echo $questionId; ?></textarea>
+                            </div>
+
+                            <div>
+                                <textarea class="question-add" name="question" rows="4" cols="100" readonly><?php echo $row['question'];?></textarea>
+                            </div>
+                            
+                            <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
+                            <input type="radio" class="input-option" name="answer" checked value="option1">
+                            <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
+                            <input type="radio" class="input-option" name="answer" value="option2">
+                            <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
+                            <input type="radio" class="input-option" name="answer" value="option3">
+                            <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
+                            <input type="radio" class="input-option" name="answer" value="option4">
+                            <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
+                            <input type="radio" class="input-option" name="answer" value="option5">
+
+                            <br />
+
+                            <div class="buttons">
+                                <input type="submit" value="Previous" class="btn-question" name="Previous">
+                                <input type="submit" value="Back to Lesson" class="btn-question" id="back" name="back">
+                                <input type="submit" value="Next" class="btn-question" name="Next" onclick="">
+                            </div>
+                        <?php 
+                        }
+                    }
+                ?>
         </div>
 
         <!-- Footer -->
         <?php
-            require_once('footer.php');
+            require_once('../../assets/includes/footer.php');
         ?>
     </body>
 </html>
