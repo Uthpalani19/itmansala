@@ -21,4 +21,23 @@
         }
     }
 
+    if(isset($_GET['deleteStuId'])){
+
+        $phoneNumber = $_GET['deleteStuId'];
+
+        $sql = "DELETE FROM student WHERE phoneNumber='$phoneNumber'";
+
+        $result=mysqli_query($connection,$sql);
+
+        if($result){
+
+            header('location:../../views/adminviews/viewStudents.php');
+
+        }else{
+
+            die(mysqli_error($connection));
+
+        }
+    }
+
 ?>

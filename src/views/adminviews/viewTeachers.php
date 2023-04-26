@@ -1,21 +1,3 @@
-<?php 
-//   session_start(); 
-
-//   if (!isset($_SESSION['name'])) {
-//   	header('location: index.php');
-//   }
-
-//   if (isset($_GET['logout'])) {
-//     session_destroy();
-//     unset($_SESSION['name']);
-//     header("location: index.php");
-//  } 
- ?>
-
- <?//php include('login.php') ?> 
-
-<!-- Navigation Bar -->
-
 <?php
     require '..\..\assets\includes\navbar-admin.php';
 ?>
@@ -27,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Teacher Details </title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href = "..\..\assets\css\viewTeachers.css">
+    <link rel="stylesheet" href="..\..\assets\css\viewTeachers.css">
 </head>
 
 <body>
@@ -35,8 +17,8 @@
     <!-- Search Teacher -->
     <div class="container">
         <div class="container-item">
-            <form class="searchBar">
-            <p><input type="text" placeholder="Search Teachers"  class="search-bar">
+            <form class="searchBar" method="POST">
+            <p><input type="text" placeholder="Search Teachers"  class="search-bar" name="search">
                 <button type="submit"><i class="fa-solid fa-search"></i></button></p>
             </form>
         </div>
@@ -59,7 +41,14 @@
             <?php
                 require_once '..\..\config\dbconnection.php';
 
-                $sql = "SELECT teacherImage,name,phoneNumber,email from teacher";
+                if(isset($_POST['search'])){
+                    $search_text = $_POST['search'];
+
+                    $sql = "SELECT teacherImage,name,phoneNumber,email from teacher WHERE phoneNumber LIKE '%$search_text%' OR name LIKE '%$search_text%' OR email LIKE '%$search_text%'";
+                } else {
+                    $sql = "SELECT teacherImage,name,phoneNumber,email from teacher";
+                }
+
                 $result = mysqli_query($connection,$sql);
 
                 while($row = mysqli_fetch_assoc($result))
