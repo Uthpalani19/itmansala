@@ -402,3 +402,27 @@ label{
     backdrop-filter: blur(5px);
     animation: fadeIn 0.3s ease-in forwards;
 }
+
+.lesson-edit{
+    position: absolute;
+    margin-left: 1000px;
+    margin-top: -15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.fa-folder{
+    font-size: 30px;
+    padding-left: 10px;
+}
+
+.edit-pdf{
+    text-align: center;
+    display: inline-block;
+    margin-left: 300px;
+    margin-top: 15px;
+    margin-bottom: 0;
+    width: 10%;
+}
+
+
