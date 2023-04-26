@@ -1,4 +1,3 @@
-
 <!-- Navigation Bar -->
 <?php
     require '../../assets/includes/navbar-admin.php';

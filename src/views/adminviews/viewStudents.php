@@ -11,59 +11,90 @@
     <title> Student Details </title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href = "../../assets/css/viewStudents.css">
+    <script>
+        function updateStatus(phoneNumber, checked) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+            };
+            xhttp.open("POST", "../../config/adminconfig/updateStatus.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("phoneNumber=" + phoneNumber + "&checked=" + checked);
+        }
+    </script>
+
 </head>
 
 <body>
-    <br />
-    <!-- Search Teacher -->
-    <div class="container">
-        <div class="container-item">
-            <form class="searchBar">
-            <p><input type="text" placeholder="Search Students"  class="search-bar">
-                <button type="submit"><i class="fa-solid fa-search"></i></button></p>
-            </form>
+    <div class="box">
+        <br />
+        <!-- Search Student -->
+        <div class="container1">
+            <div class="container-item">
+                <form class="searchBar" method="POST">
+                    <p><input type="text" placeholder="Search Students" name="search" class="search-bar">
+                    <button type="submit"><i class="fa-solid fa-search"></i></button></p>
+                </form>
+            </div>
+</div>
+
+        <!-- Table Content -->
+        <div class="content">
+            <table>
+                <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <!-- <th>Email</th> -->
+                <th>Active</th>
+                <!-- <th>Edit</th> -->
+                <th>Delete</th>
+                </tr>
+
+                <!-- PHP code -->
+                <?php
+                    require_once '../../config/dbconnection.php';
+
+                    if(isset($_POST['search'])) {
+                        $search_text = $_POST['search'];
+
+                        $sql = "SELECT phoneNumber, name FROM student WHERE name LIKE '%$search_text%' OR phoneNumber LIKE '%$search_text%'";
+                    }
+                    else {
+                        $sql = "SELECT phoneNumber, name, status FROM student";
+                    }
+
+                    $result = mysqli_query($connection, $sql);
+
+                    while($row = mysqli_fetch_assoc($result)) {
+                        echo '
+                            <tr>
+                                <td>'.$row['name'].'</td>
+                                <td>'.$row['phoneNumber'].'</td>
+                                <td>
+                                    <label class="switch">
+                                    <input type="checkbox" checked>
+
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <form action="../../config/adminconfig/delete.php?deleteStuId='.$row['phoneNumber'].'" method="POST">
+                                        <button type="submit" class="delete-btn" onclick="return confirm(\'Are you sure you want to delete this student?\')">
+                                            <i class="fa-solid fa-trash" id="icons"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                
+                            </tr>
+                        ';
+                    }
+                ?>
+            </table>
         </div>
     </div>
 
-    <!-- Table Content -->
-    <div class="content">
-        <table>
-            <tr>
-              <th>Name</th>
-              <th>Phone Number</th>
-              <!-- <th>Email</th> -->
-              <th>Active</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-
-            <!-- PHP code -->
-            <?php
-                require_once '../../config/dbconnection.php';
-
-                $sql = "SELECT phoneNumber, name from student";
-                $result = mysqli_query($connection,$sql);
-
-                while($row = mysqli_fetch_assoc($result))
-                {
-                    echo '
-                        <tr>
-                            <td>'.$row['name'].'</td>
-                            <td>'.$row['phoneNumber'].'</td>
-                            <td>
-                                <label class="switch">
-                                <input type="checkbox" checked>
-                                <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td><a href="../../config/adminconfig/update.php?updateId='.$row['phoneNumber'].'"><i class="fa-solid fa-file-pen" id="icons"></i></td>
-                            <td><a href="../../config/adminconfig/delete.php?deleteId='.$row['phoneNumber'].'"><i class="fa-solid fa-trash" id="icons"></i></a></td>
-                        </tr>
-                    ';
-                }
-            ?>
-        </table>
-    </div>
-
+    <?php include('../../assets/includes/footer.php') ?>
 </body>
 </html>
