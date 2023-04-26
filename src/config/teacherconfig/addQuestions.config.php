@@ -16,6 +16,11 @@
     // Add Question Button
     if(isset($_POST['addQuestions']))
     {
+        // Get course Id
+        $courseId = $_POST['courseId'];
+        // Get subtopic ID
+        $subId = $_POST['subId'];
+        
         // Check if the fields are not empty
         if(!empty($_POST['question']) && !empty($_POST['option1']) && !empty($_POST['option2']) && !empty($_POST['option3']) && !empty($_POST['option4']) && !empty($_POST['option5']))
         {
@@ -56,12 +61,12 @@
                 $answer = mysqli_real_escape_string($connection,$answer);
 
                 // Insert the question to the database
-                $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,option5,status) VALUES ('$id', '1.1','$question','$answer','$option1','$option2','$option3','$option4','$option5',1)";
+                $sql = "INSERT INTO modelpaperquestion (questionId, subtopicId,question, answer, option1,option2,option3,option4,option5,status) VALUES ('$id', '$subId','$question','$answer','$option1','$option2','$option3','$option4','$option5',1)";
                         
                 if ($connection->query($sql) === TRUE)
                 {?>
                     <script type="text/javascript">
-                        window.location.href="../../views/teacherviews/addQuestions.php";
+                        window.location.href="../../views/teacherviews/addQuestions.php?subId=<?php echo $subId; ?>&courseId=<?php echo $courseId?>";
                     </script>
                     
                     <?php

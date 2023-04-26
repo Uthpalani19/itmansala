@@ -2,17 +2,30 @@
     require('../../config/dbconnection.php');
     require('../../assets/includes/navbar-teacher.php');
 
-    // Auto generated ID
-    $sql = "SELECT questionId FROM modelpaperquestion ORDER BY questionId DESC LIMIT 1";
+    // Get Subtopic ID
+    $subId = $_GET['subId'];
+    $sql = "SELECT * FROM subtopic WHERE subTopicId = '$subId'";
     $result = mysqli_query($connection, $sql);
     $row = mysqli_fetch_array($result);
+    $subName = $row['subTopicName'];
+
+    // Get Course ID
+    $courseId = $row['courseId'];
+    $sql = "SELECT * FROM course WHERE courseId = '$courseId'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_array($result);
+    $courseName = $row['courseName'];
+
+    // Auto generated ID
+    $sql_id = "SELECT questionId FROM modelpaperquestion where subTopicId = '$subId'  ORDER BY questionId DESC LIMIT 1";
+    $result_id = mysqli_query($connection, $sql_id);
+    $row_id = mysqli_fetch_array($result_id);
     $lastid = "";
     
-    if(mysqli_num_rows($result) > 0)
-    {
-        $lastid = $row['questionId'];
+    if (!empty($row_id)) {
+        $lastid = $row_id['questionId'];
     }
-    
+
     if(empty($lastid))
     {
         $id = "Q001";
@@ -36,7 +49,6 @@
             $id = "Q" . $id;
         }
     }
-    
 ?>
 
 <html>
@@ -50,13 +62,16 @@
     <body>
         <!--Course Details-->
         <form action="../../config/teacherconfig/addQuestions.config.php" method="POST">
+            <input type="hidden" name="subId" value="<?php echo $subId; ?>">
+            <input type="hidden" name="courseId" value="<?php echo $courseId; ?>">
+            
             <div class="course-details-box">
-                <p id="title">Course 01: Course name should be loaded </p>
+                <p id="title">Course 01: <?php echo $courseName; ?> </p>
             </div>
 
             <!--Set Subtopic Name-->
             <div class="subtopic-title">
-                <p> Subtopic name should be loaded </p>
+                <p> <?php echo $subName?> </p>
             </div>
 
             <!--Add a new Question-->
