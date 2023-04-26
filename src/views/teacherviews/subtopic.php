@@ -110,9 +110,7 @@
             const <?php echo $pdfIDonclick; ?> = document.getElementById("<?php echo $pdfid; ?>");
             const <?php echo $closeonclick; ?> = document.getElementById("<?php echo $close; ?>");
             const <?php echo $bodyonclick; ?> = document.getElementById("grey-bg");
-
-            
-                            
+                
             </form>
             <?php echo $showonclick; ?>.onclick = function(){
                 <?php echo $pdfIDonclick; ?>.style.display = "block";
