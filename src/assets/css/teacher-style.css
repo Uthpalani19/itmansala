@@ -1465,3 +1465,27 @@ h4{
     overflow: hidden;
     background: #D9D9D9;
 }
+
+.add-view-questions
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+}
+
+.add-view-questions button
+{
+    width: 100px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: #0088FF;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0px 10px;
+}
