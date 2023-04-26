@@ -15,6 +15,20 @@
         unset($_SESSION['name']);
         header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
+
+    // Get Subtopic ID
+    $subId = $_GET['subId'];
+    $sql = "SELECT * FROM subtopic WHERE subTopicId = '$subId'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_array($result);
+    $subName = $row['subTopicName'];
+
+    // Get Course ID
+    $courseId = $row['courseId'];
+    $sql = "SELECT * FROM course WHERE courseId = '$courseId'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_array($result);
+    $courseName = $row['courseName'];
 ?>
 
 <head>
@@ -28,12 +42,12 @@
 
         <!--Course Details-->
         <div class="course-details-box">
-            <p id="title">Course 01: Course Name should be loaded </p>
+            <p id="title">Course 01: <?php echo $subName; ?> </p>
         </div>
 
         <!--Set Subtopic Name-->
         <div class="subtopic-title">
-            <p> 1.1 Subtopic name should be loaded </p>
+            <p> 1.1 <?php echo $courseName; ?> </p>
         </div>
 
 <!-- View Added Questions of a specific subtopic -->
@@ -85,7 +99,7 @@
                 }
 
                 $startinglimit = ($page-1)*$limit;
-                $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId='1.1' LIMIT ".$startinglimit.','.$limit;
+                $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId='$subId' LIMIT ".$startinglimit.','.$limit;
                 $result2 = mysqli_query($connection,$sql);
                 
                 while($row = mysqli_fetch_assoc($result2))

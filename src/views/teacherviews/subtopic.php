@@ -135,10 +135,10 @@
             <p>Click here to add a lesson</p>
 
             <!--Add & view Questions button-->
-
-            <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
-            <a href="viewAddedQuestions.php"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
-
+            <div class="add-view-questions">
+                <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
+                <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
+            </div>
         </div>
 
         <?php
