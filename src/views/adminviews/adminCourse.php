@@ -1,3 +1,17 @@
+<?php
+include('../../config/dbconnection.php');
+$courseName="";
+if (isset($_POST['addcourse'])){
+    $courseName = mysqli_real_escape_string($connection, $_POST['course_name']);
+    if($courseName != ""){
+        $query = "INSERT INTO course_name (course_name) 
+        VALUES('$courseName')";
+        mysqli_query($connection, $query);
+        header('location: admincourse.php');
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +21,6 @@
 </head>
 <body>
 
-<?php include('../../config/dbconnection.php') ?>
 <?php include('../../assets/includes/navbar-admin.php') ?>
     <div class="content-container" id="content">
 
@@ -59,6 +72,15 @@
                     }
                     ?>
             </div>
+            <div class="addcourse-name">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <div class="addcourse-div">
+                        <input type="text" class="addcourse-text" name="course_name">
+                        <button class="addcourse-button" name="addcourse" id="course">Add new Course</button>
+                </div>
+            </form>
+            </div>
+
         </div>
 
     </div>

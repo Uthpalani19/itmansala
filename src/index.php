@@ -19,14 +19,22 @@
                 window.location.href="student_signup.php";
             }
     </script>
+    <script src="assets/js/counter.js"></script>
+
 
     <link rel="stylesheet" href="assets/css/style4.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" 
     integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- jQuery CDN for counter -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
     
 </head>
 <body>
+
 <div class="landing-page-1" id="section-1">
     <div class="heading-div">
         <div class="left-content">
@@ -49,7 +57,7 @@
         </div>
 
         <div class="image-container-page1">
-            <img src="assets/images/robo-1.png" alt="">
+            <img class="lpage1-iamge" src="assets/images/eva2.png" alt="">
         </div>
     </div>
 </div>
@@ -89,11 +97,33 @@
 
     </div>
 
-    <div class="lpage-2-bar">
-        <div class="bar-item"><h2 class="lpage2-bar-heading">13 <br>courses </h2></div>
-        <div class="bar-item"><h2 class="lpage2-bar-heading">100 <br>Students </h2></div>
-        <div class="bar-item"><h2 class="lpage2-bar-heading">1500 <br>Questions </h2></div>
-    </div>
+    <section class="counters">
+        <div class="lpage-2-bar">
+            <!-- PHP part for page statistics -->
+            <?php
+            include('config/dbconnection.php');
+
+                $sql = "SELECT COUNT(*) FROM course";
+                $result = mysqli_query($connection, $sql);
+                $row = mysqli_fetch_array($result);
+                $totalCourse = (int)$row[0];
+
+                $sql = "SELECT COUNT(*) FROM student";
+                $result = mysqli_query($connection, $sql);
+                $row = mysqli_fetch_array($result);
+                $totalStudent = (int)$row[0];
+
+                $sql = "SELECT COUNT(*) FROM modelpaperquestion";
+                $result = mysqli_query($connection, $sql);
+                $row = mysqli_fetch_array($result);
+                $totalQuestions = (int)$row[0];
+            ?>
+
+            <div class="bar-item"><h2 class="lpage2-bar-heading"><?php echo $totalCourse ?> <br>Courses </h2></div>
+            <div class="bar-item"><h2 class="lpage2-bar-heading"><?php echo $totalStudent ?> <br>Students </h2></div>
+            <div class="bar-item"><h2 class="lpage2-bar-heading"><?php echo $totalQuestions ?> <br>Questions </h2></div>
+        </div>
+    </section>
 </div>
 
 <div class="landing-page-3" id="section-3">
@@ -101,38 +131,13 @@
     
     
     <div class="lpage3-courseses">
-    <?php include("views/landingPages/pi.php"); ?>
+    <?php include("views/landingPages/lpage-courses.php"); ?>
     </div>
 
-            <!-- this is jus a comment -->
-    <div class="lpage3-course-des">
-            <div class="course-des-heading">
-                <h3>01 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
-            </div>
-
-            <div class="course-des-description">
-                <h3>තොරතුරු හා සන්නිවේදන තාෂණයේ මූලික සංකල්ප, වර්තමාන දැනුම පාදක සමාජෙයහි ද යොදා ගන්නා ආකාරය,
-                     එහි භූමිකාව හා උජිත උපෙයෝගීතාව සමග ගවේෂණය කරයි  </h3>
-            </div>
-
-            <hr></hr>
-
-
-            <!-- Testing -->
-            <!-- this is a comment -->
-            <div class="course-des-subtopics">
-                    <h3>
-                    1.1 දත්තවල සහ තොරතුරුවල මූලක තැනුම් ඒකකය<br>
-                    1.2 දත්ත හා තොරතුරු, නිමාණය, බෙදාහැරීම හා කළමනාකරණය<br>
-                    1.3 තොරතුරු නිරමාණ කිරීමේ වියුක්ත ආකෘතිය<br>
-                    1.4  පරිඝණක පද්ධතියක මූලික සංරචක<br>
-                    1.5  දත්ත සැකසීමේ ක්‍රියාකාරකම්<br>
-                    1.6 විවිධ වසම් තළ, තොරත හා සන්නිදෙන තාෂණය යෙදම<br>
-                    1.7  සමාජය කෛරහි තොරත හා සන්නිදෙන තාෂණෙය් බලපෑම 
-                    </h3>
-            </div>
-    </div>
-
+    <div class="lpage3-course-des-container">
+    <?php include("views/landingPages/lpage-course-des.php"); ?>
+    </div> 
+    
 </div>
 
 <div class="landing-page-4" id="section-4">
@@ -147,170 +152,50 @@
     </div>
 
     <div class="lpage-4-des">
-        <!-- <div class="lpage-4-des-heading">
-            <h4>
-                Select your intrest
-            </h4>
-        </div> -->
         
         <div class="lpage-4-interests">
-            <button class="lpage-4-button">Programming</button>
-            <button class="lpage-4-button">Designing</button>
-            <button class="lpage-4-button">Web developping</button>
-            <button class="lpage-4-button">Programming</button>
-            <button class="lpage-4-button">Data analysing</button>
-            <button class="lpage-4-button">Artificial Intelligance</button>
-            <button class="lpage-4-button">Game Development</button>
+            <a href="#section-6"><button class="lpage-4-button">Programming</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Designing</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Web Development</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Cybersecurity</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Data analysis</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Artificial Intelligence</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Game Development</button></a>
         </div>
 
         <div class="lpage-4-interests">
-            <button class="lpage-4-button">Cyber Security</button>
-            <button class="lpage-4-button">Networking</button>
-            <button class="lpage-4-button">machine learning</button>
-            <button class="lpage-4-button">Bussiness IT</button>
-            <button class="lpage-4-button">Cloud computing</button>
-            <button class="lpage-4-button">Project Management</button>
-            <button class="lpage-4-button">Database</button>
+            <a href="#section-6"><button class="lpage-4-button">Mobile app development</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Networking</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Machine learning</button></a>
+            <a href="#section-6"><button class="lpage-4-button">E-commerce</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Cloud computing</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Project Management</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Big data</button></a>
         </div>
 
         <div class="lpage-4-interests">
-            <button class="lpage-4-button">Programming</button>
-            <button class="lpage-4-button">Designing</button>
-            <button class="lpage-4-button">Web developping</button>
-            <button class="lpage-4-button">Programming</button>
-            <button class="lpage-4-button">Data analysing</button>
-            <button class="lpage-4-button">Artificial Intelligance</button>
-            <button class="lpage-4-button">Game Development</button>
+            <a href="#section-6"><button class="lpage-4-button">Database management</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Technical writing</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Quality assurance</button></a>
+            <a href="#section-6"><button class="lpage-4-button">VR and AR</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Robotics</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Social media and marketing</button></a>
+            <a href="#section-6"><button class="lpage-4-button">It consulting</button></a>
         </div>
 
         <div class="lpage-4-interests">
-            <button class="lpage-4-button">Cyber Security</button>
-            <button class="lpage-4-button">Networking</button>
-            <button class="lpage-4-button">machine learning</button>
-            <button class="lpage-4-button">Bussiness IT</button>
-            <button class="lpage-4-button">Cloud computing</button>
-            <button class="lpage-4-button">Project Management</button>
-            <button class="lpage-4-button">Database</button>
+            <a href="#section-6"><button class="lpage-4-button">IT operations</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Quantum computing</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Cloud security</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Internet of Things</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Cloud computing</button></a>
+            <a href="#section-6"><button class="lpage-4-button">Blockchain</button></a>
+            <a href="#section-6"><button class="lpage-4-button">User experience</button></a>
         </div>  
     </div>
 
-    <div class="interest-jobpath">
-        <div class="job-paths">
-            <h4 class="job-path-heading">
-                Programming
-            </h4>
-            <hr class="job-path-hr">
-
-            <div class="job-paths-container">
-                <div class="job-path-line">
-                    <div class="job-card">
-                        <div class="job-card-heading">
-                        Computer Programmer
-                        </div>
-                        <div class="job-card-des">
-                            <h5>Skills Requierd</h5>
-                            <br>
-                            <ul>
-                                <li>Proficiency with programming languages.</li>
-                                <li>Learning concepts and applying them to problems.</li>
-                                <li>Data structures and algorithms.</li>
-                                <li>Database and SQL.</li>
-                                <li>Object-oriented programming (OOP) languages.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-card-heading">
-                            Web Developer
-                        </div>
-                        <div class="job-card-des">
-                            <h5>Skills Requierd</h5>
-                            <br>
-                            <ul>
-                                <li>Proficiency with programming languages.</li>
-                                <li>Learning concepts and applying them to problems.</li>
-                                <li>Data structures and algorithms.</li>
-                                <li>Database and SQL.</li>
-                                <li>Object-oriented programming (OOP) languages.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-card-heading">
-                            Front-End Developer
-                        </div>
-                        <div class="job-card-des">
-                            <h5>Skills Requierd</h5>
-                            <br>
-                            <ul>
-                                <li>Proficiency with programming languages.</li>
-                                <li>Learning concepts and applying them to problems.</li>
-                                <li>Data structures and algorithms.</li>
-                                <li>Database and SQL.</li>
-                                <li>Object-oriented programming (OOP) languages.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="job-path-line">
-                    <div class="job-card">
-                        <div class="job-card-heading">
-                            Back-End Developer
-                        </div>
-                        <div class="job-card-des">
-                            <h5>Skills Requierd</h5>
-                            <br>
-                            <ul>
-                                <li>Proficiency with programming languages.</li>
-                                <li>Learning concepts and applying them to problems.</li>
-                                <li>Data structures and algorithms.</li>
-                                <li>Database and SQL.</li>
-                                <li>Object-oriented programming (OOP) languages.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-card-heading">
-                        Full-Stack Developer
-                        </div>
-                        <div class="job-card-des">
-                            <h5>Skills Requierd</h5>
-                            <br>
-                            <ul>
-                                <li>Proficiency with programming languages.</li>
-                                <li>Learning concepts and applying them to problems.</li>
-                                <li>Data structures and algorithms.</li>
-                                <li>Database and SQL.</li>
-                                <li>Object-oriented programming (OOP) languages.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-card-heading">
-                        Software Application Developer
-                        </div>
-                        <div class="job-card-des">
-                            <h5>Skills Requierd</h5>
-                            <br>
-                            <ul>
-                                <li>Proficiency with programming languages.</li>
-                                <li>Learning concepts and applying them to problems.</li>
-                                <li>Data structures and algorithms.</li>
-                                <li>Database and SQL.</li>
-                                <li>Object-oriented programming (OOP) languages.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+    <div class="interest-jobpath" id="section-6">
+        <?php include ("views/landingPages/lpage-jobDes.php");?>
         <div class="footer">
             <div class="footer-upper">
 
@@ -355,6 +240,18 @@
 
     
     <!-- <?php include("../../assets/includes/footer.php"); ?>  -->
-<script src="assets/js/script.js"></script>    
+<script src="assets/js/script.js"></script>
+
+<!-- Counter -->
+<!-- <script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.lpage2-bar-heading').counterUp({
+            delay: 10,
+            time: 1000
+        });
+    });
+</script> -->
+
 </body>
 </html>

@@ -62,9 +62,14 @@ body {
 h1{
   color: #636363;
   margin-top: 5rem;
-  margin-bottom: 8.5rem;
 }
 
+.signin-icon{
+  width: 18%;
+  margin: auto;
+  margin-top: -2rem;
+  margin-bottom: 5.5rem;
+}
 
 .login_field{
   padding-bottom: 2.5rem;
@@ -100,7 +105,7 @@ h1{
 }
 
 .options{
-  margin-top: 2.9rem;
+  margin-top: 0.8rem;
   color: #848484;
 }
 
@@ -125,19 +130,26 @@ h1{
   color: #5C26A9;
 }
 
+.loginbtn:hover,
+.loginbtn:focus {
+  box-shadow: 3px 5px 10px #848484;
+  transform: translateY(-0.15em);
+}
+
 .loginbtn {
   width: 38.5%;
   font-size: 1.5rem;
   font-weight: 700;
   color: white;
-  background: #5C26A9;
+  background: #c5b5db;
   border: none;
   border-radius: 3px;
   padding: 12px 0 12px 0;
   margin: 12px 0 22px 0;
   box-shadow: 3px 5px 10px #848484;
-  cursor: pointer;
+  cursor: not-allowed;
   font-family: 'Poppins', sans-serif;
+  transition: 0.25s;
 }
 
 .login{
@@ -244,15 +256,6 @@ h1{
   padding-top: 10px;
 }
 
-@keyframes signupshake {
-  0% { transform: translateX(70px);}
-  100% {transform: translateY(-70px);}
-}
-
-.signupavatar{
-  animation: signupshake 1.5s infinite alternate;
-}
-
 .slider{
   position: relative;
   height: 100%;
@@ -265,22 +268,23 @@ h1{
 }
 
 .signupbtn{
-  width: 36%;
+  background: #5C26A9;
+  cursor: pointer;
 }
 
 #form2{
   display: none;
 }
 
-#form3{
-  display: none;
+.signup_padding{
+  padding-top: 45px;
 }
 
 .back{
   float: left;
   position: absolute;
   margin-left: 20%;
-  margin-top: 11%;
+  margin-top: 9%;
   z-index: 100;
 }
 
@@ -320,6 +324,14 @@ h1{
   padding-top: 5px;
   border-radius: 15px;
   margin: auto;
+}
+
+.pass-heading{
+  margin-bottom: 8.5rem;
+}
+
+.pass-btn{
+  margin-bottom: -0.3rem;
 }
 
 .column1{
@@ -451,3 +463,52 @@ h3{
   margin-left: 60px;
 }
 
+.email-right{
+  text-align: left;
+}
+
+.email-right h3{
+  margin-top: 180px;
+  margin-left: 119px;
+}
+
+.success-msg{
+  width: 65%;
+  margin: auto;
+}
+
+.top{
+  background: #f7f2ff;
+  border-left: 5px solid #5319a6;
+  border-radius: 5px;
+}
+
+.success-msg p{
+  font-size: 15px;
+  padding: 5px 0 5px 0;
+  margin-bottom: -10px;
+  margin-left: 38px;
+}
+
+.email-check{
+  position: absolute;
+  padding-top: 18px;
+  padding-left: 8px;
+  color: #5319a6;
+  font-size: 22px;
+}
+
+.bottom{
+  border-bottom: 2px solid #bfbfbf;
+}
+
+.bottom p{
+  font-size: 13px;
+  margin-top: 25px;
+  margin-left: -1px;
+  padding-bottom: 50px;
+}
+
+.chgpasstitle{
+  margin-bottom: 8rem;
+}

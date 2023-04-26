@@ -29,16 +29,44 @@ if (isset($_POST['add_course'])) {
     $courseName = mysqli_real_escape_string($connection, $_POST['courseName']);
     $courseDescription = mysqli_real_escape_string($connection, $_POST['courseDescription']);
     $Price = mysqli_real_escape_string($connection, $_POST['price']);
-    $coverPhoto1 = mysqli_real_escape_string($connection, $_FILES['coverPhoto1']['name']);
-    $coverPhoto2 = mysqli_real_escape_string($connection, $_FILES['coverPhoto2']['name']);
+    $coverPhoto1 = $_FILES['coverPhoto1'];
+    $coverPhoto2 = $_FILES['coverPhoto2'];
     $teacherNumber = $_SESSION['phone'];
-  
-    if(empty($coverPhoto1)){
-        $courseImage = $coverPhoto2;
+
+    //select file
+    $courseImage = $coverPhoto1;
+    $courseImage_name = $courseImage['name'];
+    $courseImage_error = $courseImage['error'];
+    $courseImage_tempname = $courseImage['tmp_name'];
+    $courseImage_separate =explode('.',$courseImage_name);
+    $file_extention = strtolower(end($courseImage_separate));
+    $extention = array('jpeg','jpg','png');
+    if(in_array($file_extention,$extention))
+    {
+            $upload_image ='../../assets/uploads/coursedp'.$courseImage_name;
+            move_uploaded_file($courseImage_tempname,$upload_image);
     }
 
-    if(empty($coverPhoto2)){
-        $courseImage = $coverPhoto1;
+    //drag and drop
+    $courseImage2 = $coverPhoto2;
+    $courseImage_name = $courseImage2['name'];
+    $courseImage_error = $courseImage2['error'];
+    $courseImage_tempname = $courseImage2['tmp_name'];
+    $courseImage_separate =explode('.',$courseImage_name);
+    $file_extention = strtolower(end($courseImage_separate));
+    $extention = array('jpeg','jpg','png');
+    if(in_array($file_extention,$extention))
+    {
+            $upload_image2 ='../../assets/uploads/coursedp'.$courseImage_name;
+            move_uploaded_file($courseImage_tempname,$upload_image2);
+    }
+
+    if(!empty($upload_image)){
+        $coursedp = $upload_image;
+    }
+
+    if(!empty($upload_image2)){
+        $coursedp = $upload_image2;
     }
 
     if (empty($courseName)) {
@@ -51,9 +79,8 @@ if (isset($_POST['add_course'])) {
     $master_error = array_merge($Title_Error, $Desc_Error);
     if (count($master_error) == 0) {
     $query = "INSERT INTO course (courseId, courseName, courseDescription, courseImage, price, teacherPhoneNumber, status) 
-    VALUES('$courseNumber', '$courseName', '$courseDescription', '$courseImage', '$Price', '$teacherNumber', '1')";
+    VALUES('$courseNumber', '$courseName', '$courseDescription', '$coursedp', '$Price', '$teacherNumber', '1')";
     mysqli_query($connection, $query);
-    move_uploaded_file($_FILES['courseImage']['tmp_name'], "../../uploads/$courseImage");
     header('location: addcourse.php');
 
     }else{
@@ -66,12 +93,24 @@ if (isset($_POST['add_course'])) {
                 <script>
                     const errorPopup = document.getElementById("errorPopup");
                     const close = document.getElementById("close");
-
+                    if (errorPopup != ""){
+                    document.body.classList.add("stopscroll");
+                    }
                     close.onclick = function(){
 	                errorPopup.style.display = "none";
+                    document.body.classList.remove("stopscroll");
                     }
                 </script>';
     }
+
+}
+
+
+//retrieve course name from database
+
+$courseQuery = "SELECT * FROM course_name WHERE course_name NOT IN (SELECT courseName FROM course)";
+$courseResult = mysqli_query($connection, $courseQuery);
+if(mysqli_num_rows($courseResult) > 0) {
 
 }
 ?>

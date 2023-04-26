@@ -51,6 +51,7 @@
                     <th>Option 02</th>
                     <th>Option 03</th>
                     <th>Option 04</th>
+                    <th>Option 05</th>
                     <th>Answer</th>
                     <th>Recover</th>
                 </tr>
@@ -59,6 +60,24 @@
             <?php
                 $sql="SELECT * FROM modelpaperquestion where status=0";
                 $result = mysqli_query($connection,$sql);
+                
+                // Paginations
+                $limit = 5;
+                $total_records = mysqli_num_rows($result);
+                $total_pages = ceil($total_records / $limit);
+
+                if(isset($_GET['page']))
+                {
+                    $page=$_GET['page'];
+                }
+                else
+                {
+                    $page='1';
+                }
+
+                $startinglimit = ($page-1)*$limit;
+                $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId='1.1' LIMIT ".$startinglimit.','.$limit;
+                $result2 = mysqli_query($connection,$sql);
 
                 while($row = mysqli_fetch_assoc($result))
                 {
@@ -70,6 +89,7 @@
                             <td>'.$row['option2'].'</td>
                             <td>'.$row['option3'].'</td>
                             <td>'.$row['option4'].'</td>
+                            <td>'.$row['option5'].'</td>
                             <td>'.$row['answer'].'</td>
                             <td><a href="viewDeletedQuestions.php?recoverId='.$row['questionId'].'"><i class="fa fa-reply fa-lg" aria-hidden="true" id="edit-icon"></i></td>
                         </tr>
@@ -78,12 +98,20 @@
             ?>
             </table>
             </center>
-        </div>
+            </div>
+            <div class="pagination-container">
+                <?php
+                for($i=1; $i<=$total_pages; $i++)
+                {
+                    echo '<button class="pagination"><a class="pagination-text" href="recoverQuestions.php?page='.$i.'">'.$i.'</a></button>';
+                }
+                ?>
+            </div>
 
     <!-- Footer -->
     <div class="footer">
             <?php
-                    require_once('footer.php');
+                    require_once('../../assets/includes/footer.php');
             ?>
         </div>
     </body>

@@ -6,8 +6,13 @@
 require('dbconnection.php');
 
 // initializing variables
-$Username = "";
+$Cookie_Username = "";
+$Cookie_Password = "";
+$remember = "";
+$User = "";
 $password = "";
+$password_1 = "";
+$password_2 = "";
 $name = "";
 $Email = "";
 $PhoneNumber = "";
@@ -18,12 +23,16 @@ $Password_Error = array();
 $PhoneNumber_Error = array();
 $Login_Error = array();
 
+if (isset($_COOKIE['ITPASSWORD']) && isset($_COOKIE['ITUSERNAME'])){
+    $Cookie_Username = $_COOKIE['ITUSERNAME'];
+    $Cookie_Password = $_COOKIE['ITPASSWORD']; 
+}
+
 // Register student
 
 if (isset($_POST['signup_student'])) {
     // get all input values from the form
     $name = mysqli_real_escape_string($connection, $_POST['name']);
-    $Username = mysqli_real_escape_string($connection, $_POST['username']);
     $Email = mysqli_real_escape_string($connection, $_POST['email']);
     $password_1 = mysqli_real_escape_string($connection, $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($connection, $_POST['password_2']);
@@ -68,11 +77,11 @@ if (isset($_POST['signup_student'])) {
         array_push($Firstname_Error, "Name is required!");
     }
 
-    if (empty($Username)) {
-        array_push($Username_Error, "Username is required!");
-    }
     if (empty($Email)) {
         array_push($Email_Error, "E-mail is required!");
+    }
+    if (empty($PhoneNumber)) {
+        array_push($PhoneNumber_Error, "Phone Number is required!");
     }
     if (empty($password_1)) {
         array_push($Password_Error, "Password is required!");
@@ -80,9 +89,6 @@ if (isset($_POST['signup_student'])) {
     if ($password_1 != $password_2) {
         array_push($Password_Error, "The two passwords do not match");
       }
-    if (empty($PhoneNumber)) {
-        array_push($PhoneNumber_Error, "Phone Number is required!");
-    }
 
   
     // check if same data already exists in database
@@ -98,7 +104,7 @@ if (isset($_POST['signup_student'])) {
 
 
     // register user if there are no errors in the form
-    $master_error = array_merge($Firstname_Error, $Username_Error, $Email_Error, $Password_Error, $PhoneNumber_Error);
+    $master_error = array_merge($Firstname_Error, $Email_Error, $Password_Error, $PhoneNumber_Error);
     if (count($master_error) == 0) {
         $password = md5($password_1);//encrypt the password before saving in the database
   
@@ -110,8 +116,8 @@ if (isset($_POST['signup_student'])) {
 
         $userquery = "INSERT INTO usertable (phoneNumber, password, role)
                         VALUES('$PhoneNumber', '$password', 'student')";
-        mysqli_query($db, $query);
-        mysqli_query($db, $userquery);
+        mysqli_query($connection, $query);
+        mysqli_query($connection, $userquery);
         $_SESSION['name'] = $name;
         header('location: views/studentviews/quizReview.php');
     }
@@ -122,6 +128,7 @@ if (isset($_POST['signup_student'])) {
 if (isset($_POST['login_student']))  {
     $User = mysqli_real_escape_string($connection, $_POST['user']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
+    $remember = isset($_POST['remember']);
   
     if (empty($User)) {
         array_push($PhoneNumber_Error, "Phone number is required!");
@@ -138,8 +145,13 @@ if (isset($_POST['login_student']))  {
             if (mysqli_num_rows($results) == 1){
                 $row = mysqli_fetch_assoc($results);
                 $role = $row['role'];
+        
+                if ($remember == true){
+                    setcookie('ITUSERNAME',$User, time()+604800);
+                    setcookie('ITPASSWORD',$password, time()+604800);
+                }
 
-              if ($role == 'student' || $role == 'Student'){
+              if ($role == 'student'){
                   $stdquery = "SELECT * FROM student WHERE phoneNumber = '$User'";
                   $stdresults = mysqli_query($connection, $stdquery);
                   $stdrow = mysqli_fetch_assoc($stdresults);
@@ -148,20 +160,24 @@ if (isset($_POST['login_student']))  {
                   echo $_SESSION['name'];
                   header('location: views/studentviews/student-dashboard.php');
               }
-              if ($role == 'Teacher' || $role == 'teacher'){
+              if ($role == 'Teacher'){
                 $tchquery = "SELECT * FROM teacher WHERE phoneNumber = '$User'";
                 $tchresults = mysqli_query($connection, $tchquery);
                 $tchrow = mysqli_fetch_assoc($tchresults);
                 $name = $tchrow['name'];
+                $status = $tchrow['status'];
                 $_SESSION['name'] = $name;
                 $_SESSION['phone']=$User;
                 $_SESSION['email']=$tchrow['email'];
 
-
-
-                header('location: views/teacherviews/dashboard-teacher.php');
+                if($status == 0){
+                    header('location: views/teacherviews/change-password.php'); 
+                }else{
+                    header('location: views/teacherviews/dashboard-teacher.php');
+                }
              }
-             if ($role == 'admin' || $role == 'Admin'){
+             
+             if ($role == 'admin'){
                 $admquery = "SELECT * FROM admin WHERE phoneNumber = '$User'";
                 $admresults = mysqli_query($connection, $admquery);
                 $admrow = mysqli_fetch_assoc($admresults);

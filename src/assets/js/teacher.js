@@ -1,3 +1,11 @@
+//------------------------------select file name------------------------------------//
+const selectfile = document.getElementById("selectfile");
+const selectlabel = document.getElementById("selectlabel");
+
+selectfile.addEventListener('change', function(event){
+	const selectfilename = event.target.files[0].name;
+	selectlabel.textContent = selectfilename;
+})
 
 //------------------------------drag and drop file upload---------------------------//
 
@@ -84,6 +92,9 @@ discard.onclick = function(){
 	footer.style.display = "block"
     formId.style.display = "none";
 }
+
+
+// Getting the selected course from the drop down menu
 
 
 

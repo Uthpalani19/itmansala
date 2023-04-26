@@ -7,23 +7,17 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     background: #d9d9d9;
+    padding-bottom: 50px;
 }
 
 .lesson-info{
     text-align: center;
     background: linear-gradient(45deg,#7e58bc 5%, #5318a6);
-    margin-top: 3.8rem;
+    margin-top: 3.75rem;
     border-bottom-left-radius: 100px;
     border-bottom-right-radius: 100px;
     color: white;
     padding-bottom: 10px;
-}
-
-.lesson-number{
-    display: inline-block;
-    font-size: 20px;
-    font-weight: 700;
-
 }
 
 .lesson-num{
@@ -33,8 +27,8 @@ body {
 
 .lesson-name{
     display: inline-block;
-    font-style: italic;
-    font-weight: 500;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .lesson-desc{
@@ -78,7 +72,7 @@ body {
 
 .db-subtopic p{
     display: inline-block;
-
+    font-weight: bold;
 }
 
 
@@ -121,10 +115,6 @@ body {
     margin-left: 50px;
 }
 
-#addlesson{
-    display: none;
-}
-
 .add-lesson{
     width: 80%;
     margin: auto;
@@ -151,7 +141,6 @@ body {
     margin-bottom: 50px;
     opacity: 0;
     animation: fadeIn 0.3s ease-in forwards;
-    display: none;
 }
 
 .dblesson p{
@@ -193,10 +182,6 @@ body {
     color: #636363;
     text-align: center;
 
-}
-
-#formId1{
-    display: none;
 }
 
 #formId2{
@@ -245,21 +230,6 @@ textarea{
     font-family: 'Poppins', sans-serif;
 }
 
-.column1-number{
-    display: inline-block;
-    width: 15%;
-}
-
-.column2-number{
-    display: inline-block;
-    
-}
-
-.column3-number{
-    display: inline-block;
-    margin-left: 18rem;
-}
-
 .upload-option{
     text-align: center;
     font-weight:700;
@@ -268,7 +238,7 @@ textarea{
 }
 
 .drop-zone{
-	width: 77%;
+	width: 76.5%;
 	height: 3rem;
 	padding: 25px;
 	display: flex;
@@ -282,6 +252,15 @@ textarea{
     color: #9ea0a2;
     margin-left: 15.5%;
 }
+
+.videocolumn{
+    vertical-align: bottom;
+}
+
+.videoContent{
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}  
 
 .drop-zone-hover{
 	border-style: solid;
@@ -360,8 +339,66 @@ label{
 }
 
 .subtopiclock2{
+    position: absolute;
     font-size: 30px;
-    padding-left: 58rem;
-    margin-top: -2.7rem;
+    padding-left: 60rem;
+    margin-top: -1.5rem;
 }
 
+.fixed{
+    overflow-y: hidden;
+}
+
+.pdfdiv{
+    position: fixed;
+    top: 10%;
+    padding-left: 260px;
+    padding-top: 150px;
+    margin-top: -152px;
+    height: 140%;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(94, 94, 94, 0.5);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-in forwards;
+}
+
+.show-pdf{
+    cursor: pointer;
+}
+
+.lesson-close{
+    font-size: 27px;
+    position: absolute;
+    left: 69.5%;
+    color: red;
+    top: 10%;
+    cursor: pointer;
+}
+
+.lesson-error{
+    margin-left: 140px;
+}
+
+.error-msg-container{
+    width: 100%;
+    height: 141%;
+    backdrop-filter: url(filters.svg#filter) blur(5px) grayscale(50%);
+    position: absolute;
+    z-index: 100;
+    overflow-y: hidden;
+}
+
+.youtubediv{
+    position: fixed;
+    top: 10%;
+    padding-left: 295px;
+    padding-top: 150px;
+    margin-top: -152px;
+    height: 140%;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(94, 94, 94, 0.5);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-in forwards;
+}

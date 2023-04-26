@@ -19,11 +19,10 @@ if (!isset($_SESSION['name'])) {
   <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
 </head>
 
-<body>
+<body id="body">
 
     <div class="lesson-info viewlessoninfo">
         <div class="lesson-num">
-            <p class="lesson-number">Course 0<?php echo $subtopic_row['courseId']; ?>:</p>
             <p class="lesson-name">
                 <?php echo $subtopic_row['courseName']; ?>
             </p>
@@ -44,99 +43,159 @@ if (!isset($_SESSION['name'])) {
         if ($check_retrieve_subtopic) {
             while ($retrieve_subtopic_row = mysqli_fetch_array($retrieve_subtopic_result)) {
                 $subtopic = $retrieve_subtopic_row['subTopicId'];
+                $subid = bin2hex(random_bytes(4));
+                $hideid = bin2hex(random_bytes(4)); 
+                $class = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                $subidonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                $dblessonIDonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                $hideIDonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                 ?>
+                <style>
+                    <?php echo '.'.$class ?>{
+                        display: none;
+                        padding-bottom: -100px;
+                    }
+                </style>
                 <div class="db-subtopic">
                     <div class="db-subtopic-left">
                         <i class="fa-solid fa-lock subtopic-lock"></i>
-                        <p>
-                            <?php echo $retrieve_subtopic_row['subTopicId']; ?>
-                        </p>
-                        <p id="dbsubtopic">
-                            <?php echo $retrieve_subtopic_row['subTopicName']; ?>
-                        </p>
+                        <p id="<?php echo $subid; ?>"><?php echo $retrieve_subtopic_row['subTopicName']; ?></p>
                     </div>
                     <div class="db-subtopic-right">
-                        <p id="hidediv"><i class="fa-solid fa-chevron-down"></i></p>
+                        <p id="<?php echo $hideid; ?>"><i class="fa-solid fa-chevron-down"></i></p>
                     </div>
 
                 </div>
 
+                <?php
+                if (empty($subtopic)) {
+        
+                } else {
+                    $retrieve_lesson = "SELECT * FROM lesson WHERE subTopicId = $subtopic";
+                    $retrieve_lesson_result = mysqli_query($connection, $retrieve_lesson);
+                    $check_retrieve_lesson = mysqli_num_rows($retrieve_lesson_result) > 0;
+        
+                    if ($check_retrieve_lesson) {
+                        while ($retrieve_lesson_row = mysqli_fetch_array($retrieve_lesson_result)) {
+                            $content = $retrieve_lesson_row['content'];
+                            $name = $retrieve_lesson_row['lessonName'];
+                            $show = bin2hex(random_bytes(4));
+                            $close = bin2hex(random_bytes(4));
+                            $pdfid = bin2hex(random_bytes(4));
+                            $showvideo = bin2hex(random_bytes(4));
+                            $videoclose = bin2hex(random_bytes(4));
+                            $player = bin2hex(random_bytes(4));
+                            $showvideoclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $playerIDclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $videocloseclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $closeonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $showonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $pdfIDonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $bodyonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $videobody = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $videoContent = $retrieve_lesson_row['videoContent'];
+                            $url = "";
+                            if(!empty($videoContent)){
+                                $url = substr($videoContent, -11);  
+                            }   
+                            ?>
+        
+                            <div class="dblesson <?php echo $class; ?>">
+                                <p><?php echo $retrieve_lesson_row['lessonName']; ?></p>
+                                <a class="show-pdf" id="<?php echo $show; ?>">Click here to learn</a>
+                                <i class="fa-solid fa-lock subtopic-lock subtopiclock2"></i><br>
+                                <?php
+                                if(!empty($url)){
+                                ?>
+                                <a class="show-pdf" id="<?php echo $showvideo; ?>">Lesson Video</a>
+                                <?php
+                                }
+                                ?>  
+                            </div>
 
+                            <?php 
+                            if(!empty($url)){
+                            ?>
+                            <div class="youtubediv" id="<?php echo $player; ?>" style="display:none;">
+                                <i class="fa-regular fa-rectangle-xmark lesson-close" id="<?php echo $videoclose ?>"></i>
+                                <iframe width="900" height="640" src="https://www.youtube.com/embed/<?php echo $url; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <script>
+                                const <?php echo $showvideoclick; ?> = document.getElementById("<?php echo $showvideo; ?>");
+                                const <?php echo $playerIDclick; ?> = document.getElementById("<?php echo $player; ?>");
+                                const <?php echo $videocloseclick; ?> = document.getElementById("<?php echo $videoclose; ?>");
+                                const <?php echo $videobody; ?> = document.getElementById("body");
+
+                                <?php echo $showvideoclick; ?>.onclick = function(){
+                                    <?php echo $playerIDclick; ?>.style.display = "block";
+                                    <?php echo $videobody; ?>.classList.add("fixed");
+                                }
+
+                                <?php echo $videocloseclick; ?>.onclick = function(){
+                                    <?php echo $playerIDclick; ?>.style.display = "none";
+                                    <?php echo $videobody; ?>.classList.remove("fixed");
+                                }
+
+                            </script>
+                            <?php
+                                }
+                            ?>
+
+                            <div class="pdfdiv" id="<?php echo $pdfid; ?>" style="display:none;">
+                                <i class="fa-regular fa-rectangle-xmark lesson-close" id="<?php echo $close ?>"></i>
+                                <embed src="../../assets/uploads/<?php echo $content ?>" height="630" width="1000"/>
+                            </div>
+                            <script>
+                                const <?php echo $showonclick; ?> = document.getElementById("<?php echo $show; ?>");
+                                const <?php echo $pdfIDonclick; ?> = document.getElementById("<?php echo $pdfid; ?>");
+                                const <?php echo $closeonclick; ?> = document.getElementById("<?php echo $close; ?>");
+                                const <?php echo $bodyonclick; ?> = document.getElementById("body");
+
+                                <?php echo $showonclick; ?>.onclick = function(){
+                                    <?php echo $pdfIDonclick; ?>.style.display = "block";
+                                    <?php echo $bodyonclick; ?>.classList.add("fixed");
+                                }
+
+                                <?php echo $closeonclick; ?>.onclick = function(){
+                                    <?php echo $pdfIDonclick; ?>.style.display = "none";
+                                    <?php echo $bodyonclick; ?>.classList.remove("fixed");
+                                }
+
+                            </script>
+                            <?php
+                        }
+        
+                    }
+                }
+                ?>
+                <script>
+                    const <?php echo $subidonclick; ?> = document.getElementById("<?php echo $subid; ?>");
+                    const <?php echo $dblessonIDonclick; ?> = document.getElementsByClassName("<?php echo $class; ?>"); 
+                    const <?php echo $hideIDonclick; ?> = document.getElementById("<?php echo $hideid; ?>");
+
+                    <?php echo $subidonclick; ?>.onclick = function(){
+                        var i;
+                        for (i=0; i< <?php echo $dblessonIDonclick; ?>.length; i++){
+                            <?php echo $dblessonIDonclick; ?>[i].style.display = "block";
+                        }
+                    }
+
+                    <?php echo $hideIDonclick; ?>.onclick =function(){
+                        var x;
+                        for (x=0; x< <?php echo $dblessonIDonclick; ?>.length; x++){
+                        <?php echo $dblessonIDonclick; ?>[x].style.display = "none";
+                        }
+                    }
+                </script>
+                
                 <?php
             }
         }
         ?>
-        <?php
-        if (empty($subtopic)) {
-
-        } else {
-            $retrieve_lesson = "SELECT * FROM lesson WHERE subTopicId = $subtopic";
-            $retrieve_lesson_result = mysqli_query($connection, $retrieve_lesson);
-            $check_retrieve_lesson = mysqli_num_rows($retrieve_lesson_result) > 0;
-
-            if ($check_retrieve_lesson) {
-                while ($retrieve_lesson_row = mysqli_fetch_array($retrieve_lesson_result)) {
-                    $content = $retrieve_lesson_row['content'];
-                    $name = $retrieve_lesson_row['lessonName'];
-                    $id = str_replace(' ', '', $name);
-                    $pdf = pathinfo($content, PATHINFO_FILENAME);
-                    $pdfId = str_replace(' ', '', $pdf);
-
-                    ?>
-
-                    <div class="dblesson">
-
-                        <p>
-                            <?php echo $retrieve_lesson_row['lessonName']; ?>
-                        </p>
-                        <p class="show-pdf" id="<?php echo $id ?>">Click here to learn</p>
-                        <i class="fa-solid fa-lock subtopic-lock subtopiclock2"></i>
-                        <div id="<?php echo $pdfId ?>">
-                            <embed src="../../assets/uploads/<?php echo $content ?>#toolbar=0" height="500" width="1000"/>
-                        </div>
-
-                    </div>
-                    <?php
-                }
-
-            }
-        }
-        ?>
+        
 
     </div>
 
-
-    <script>
-        const dbsubtopic = document.getElementById("dbsubtopic");
-        const dblesson = document.getElementsByClassName("dblesson");
-        const addlesson = document.getElementById("addlesson");
-        const hidediv = document.getElementById("hidediv");
-        const button = document.getElementById("<?php echo $id ?>");
-        const showfile = document.getElementById("<?php echo $pdfId ?>");
-
-        dbsubtopic.onclick = function () {
-            var i;
-            for (i = 0; i < dblesson.length; i++) {
-                dblesson[i].style.display = 'block';
-            }
-        }
-
-        hidediv.onclick = function () {
-            var x;
-            for (x = 0; x < dblesson.length; x++) {
-                dblesson[x].style.display = 'none';
-            }
-
-        }
-
-        button.onclick = function () {
-            
-        }
-
-
-
-
-    </script>
 </body>
 
 </html>

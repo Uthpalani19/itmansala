@@ -2,7 +2,7 @@
 <body>
 <div class="header">
     <div class="logo-container">
-        <img class="logo" src="assets/images/icon.png" alt="ggg">
+        <img class="lpage-logo" src="assets/images/icon.png" alt="logo-itmansala">
     </div>
 
     <div class="tabs-container">

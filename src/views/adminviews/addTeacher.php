@@ -7,16 +7,15 @@
     if(isset($_POST['addTeacher']))
     {
         // Check if the fields are not empty
-        if(!empty($_POST['telephone']) && !empty($_POST['name']) && !empty($_POST['password']) && !empty($_POST['expertise']) && !empty($_POST['email']))
+        if(!empty($_POST['telephone']) && !empty($_POST['name']) && !empty($_POST['expertise']) && !empty($_POST['email']))
         {
             $phoneNumber = mysqli_real_escape_string($connection,$_POST['telephone']);
             $name = mysqli_real_escape_string($connection,$_POST['name']);
             $email = mysqli_real_escape_string($connection,$_POST['email']);
-            $password = mysqli_real_escape_string($connection,$_POST['password']);
             $fieldOfExpertise = mysqli_real_escape_string($connection,$_POST['expertise']);
-            $status = mysqli_real_escape_string($connection,1);
 
-            $password = md5($password);
+            $password = bin2hex(random_bytes(4));
+            $encrypt = md5($password);
 
             $image =$_FILES['profilePhoto'];
             $image_name = $image['name'];
@@ -30,22 +29,58 @@
 
             if(in_array($file_extention,$extention))
             {
-                    $upload_image ='../../assets/images'.$image_name;
+                    $upload_image ='../../assets/uploads/teacherdp'.$image_name;
                     move_uploaded_file($image_tempname,$upload_image);
-
+            }
                 $sql = "INSERT into teacher (phoneNumber, name, email,password,teacherImage,fieldOfExpertise,status)
-                    VALUES('$phoneNumber','$name', '$email','$password','$upload_image','$fieldOfExpertise','$status')";
+                    VALUES('$phoneNumber','$name', '$email','$encrypt','$upload_image','$fieldOfExpertise','0')";
+                $userquery = "INSERT INTO usertable (phoneNumber, password, role)
+                    VALUES('$phoneNumber', '$encrypt', 'Teacher')";
+                mysqli_query($connection, $userquery);
 
                 if($connection->query($sql) === TRUE)
                 {
-                    echo 'Successful';
-                    header("location:viewTeachers.php");
+                    include('../../assets/phpmailer/PHPMailerAutoload.php');
+                    $mail = new PHPMailer;
+        
+                    $mail->isSMTP();
+                    $mail->Host='smtp.gmail.com';
+                    $mail->Port=587;
+                    $mail->SMTPAuth=true;
+                    $mail->SMTPSecure='tls';
+        
+                    // h-hotel account
+                    $mail->Username='itmansala@gmail.com';
+                    $mail->Password='luwhdtlomqauknsb';
+        
+                    // send by h-hotel email
+                    $mail->setFrom('itmansala@gmail.com', 'Teacher Password');
+                    // get email from input
+                    $mail->addAddress($_POST['email']);
+                  
+        
+                    // HTML body
+                    $mail->isHTML(true);
+                    $mail->Subject="Teacher Password - IT Mansala";
+                    $mail->Body="<b>Dear $name,</b>
+                    <p>You have been successfully registered as a teacher on IT Mansala,<p>
+                    <p>Please use the below mentioned credentials to login to the system.</p>
+                    <p><b>Phone Number: $phoneNumber</b></p>
+                    <p><b>Password: $password</b></p>
+                    <p>*Note: You will have to change your password on first login.</p>
+                    <br><br>
+                    <p>Thank You,</p>
+                    <b>IT Mansala</b>";
+        
+                    if($mail->send()){
+                        header('location: viewTeachers.php');
+                    }
                 }
                 else
                 {
                     echo mysqli_error($connection);
                 }
-            }
+            
         }
         else
         {
@@ -72,24 +107,17 @@
             {
                 var name = document.forms["teacherForm"]["name"].value;
                 var email = document.forms["teacherForm"]["email"].value;
-                var password = document.forms["teacherForm"]["password"].value;
                 var expertise = document.forms["teacherForm"]["expertise"].value;
 
-                var regName = /\d+$/g;                                          // JS reGex for Name validation
-                var regPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;      // JS reGex for password validation
+                var regName = /\d+$/g;                                          // JS reGex for Name validation     
 
-                if(name=="" || password=="" || expertise=="" || email=="")
+                if(name=="" || expertise=="" || email=="")
                 {
                     return false;
                 }
                 else if(regName.test(name))
                 {
                     alert("Please enter a valid first name without numbers.");
-                    return false;
-                }
-                else if(!regPassword.test(password))
-                {
-                    alert("Please enter a valid password.");
                     return false;
                 }
                 else
@@ -135,15 +163,6 @@
                         </div>
                     </div>
                             
-                    <div class="row">
-                        <div class="column1">
-                            <p>Password</p>
-                        </div>  
-                        <div class="column2">
-                            <input type="password" class="teacher-input title" name="password" required>
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="column1">
                             <p>Expertise Field</p>
