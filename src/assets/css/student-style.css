@@ -282,3 +282,20 @@
     margin-top: -5px;
     cursor : pointer;
 }
+
+.btn-questions
+{
+    padding : 10px 45px;
+    font-family: 'Poppins', sans-serif;
+    border :none;
+    color: #FFFFFF;
+    background-color: #636363;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.add-questions
+{
+    margin-left: 35%;
+}

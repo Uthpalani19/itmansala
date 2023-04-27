@@ -14,7 +14,7 @@
             <div class="nav-links">
                 <p onclick="window.location.href='../../views/studentviews/student-dashboard.php'">Dashboard</p>
                 <p onclick="window.location.href='../../views/studentviews/availablecourses.php'">Course</p>
-                <p onclick="window.location.href='editProfile.php'">My Courses</p>
+                <p onclick="window.location.href='../../views/studentviews/mycourses.php'">My Courses</p>
                 
 
             </div>
