@@ -24,10 +24,7 @@ if (isset($_POST['addcourse'])){
 <?php include('../../assets/includes/navbar-admin.php') ?>
     <div class="content-container" id="content">
 
-        <!-- <div class="edit tip-edit">
-            <p><i class="fa-solid fa-file-pen"></i></p>s
-        </div> -->
-
+        
         <div class="add-course">
             <h2 class="p">Publish a New Course</h2>
 
@@ -62,6 +59,7 @@ if (isset($_POST['addcourse'])){
                                     
                                 </div>
                                 <div class="activate">
+                                    <button type="" class="revise-course" onClick="">Send for revision</button>
                                     <button type="" class="activate-course" onClick="approveCourse.php">Publish to students</button>
                                 </div>
                                 
@@ -72,14 +70,7 @@ if (isset($_POST['addcourse'])){
                     }
                     ?>
             </div>
-            <div class="addcourse-name">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <div class="addcourse-div">
-                        <input type="text" class="addcourse-text" name="course_name">
-                        <button class="addcourse-button" name="addcourse" id="course">Add new Course</button>
-                </div>
-            </form>
-            </div>
+            
 
         </div>
 
