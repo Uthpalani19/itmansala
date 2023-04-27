@@ -50,6 +50,7 @@
                                 </div>
                                 <div class="activate">
                                     <button type="" class="activate-course" onClick="approveCourse.php">Publish to students</button>
+                                    <button type="" class="activate-course" onClick="approveCourse.php">Send to revision</button>
                                 </div>
                                 
                             </div>

@@ -10,21 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Student Details </title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href = "../../assets/css/viewStudents.css">
-    <script>
-        function updateStatus(phoneNumber, checked) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-            }
-            };
-            xhttp.open("POST", "../../config/adminconfig/updateStatus.php", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("phoneNumber=" + phoneNumber + "&checked=" + checked);
-        }
-    </script>
-
 </head>
 
 <body>
@@ -38,7 +25,7 @@
                     <button type="submit"><i class="fa-solid fa-search"></i></button></p>
                 </form>
             </div>
-</div>
+        </div>
 
         <!-- Table Content -->
         <div class="content">
@@ -74,8 +61,7 @@
                                 <td>'.$row['phoneNumber'].'</td>
                                 <td>
                                     <label class="switch">
-                                    <input type="checkbox" checked>
-
+                                        <input type="checkbox" '.($row['status'] == 1 ? "checked" : "").' onchange="updateStatus(\''.$row['phoneNumber'].'\', this.checked)">
                                         <span class="slider round"></span>
                                     </label>
                                 </td>

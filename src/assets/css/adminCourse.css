@@ -75,7 +75,7 @@ body {
 .db-lesson{
     width: 25%;
     margin: 15px 20px;
-    height: 29.5rem;
+    height: 32.5rem;
     display: inline-block;
     border: 1px solid  black;
     border-radius: 10px;
@@ -165,6 +165,19 @@ body {
 }
 
 .activate-course{
+    cursor: pointer;
+    background: #09c919;
+    border: none;
+    color: white;
+    font-weight: 700;
+    width: 90%;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 15px;
+
+}
+
+.revise-course{
     cursor: pointer;
     background: #636363;
     border: none;

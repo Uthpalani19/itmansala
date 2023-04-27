@@ -113,32 +113,6 @@ h4{
     cursor: pointer;
 }
 
-/* -------------Add Teacher Button---------- */
-
-/* .addTeacher{
-    margin-top: 40px;
-    margin-left: 105px;
-    background: #5c26a9 ;
-    outline: none;
-    border: none; 
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 7px;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-}
-
-.addTeacher:hover{
-    background-color: #5319a6;
-    color: #929292;
-}
-
-.addTeacher a{
-    color: #fff;
-    text-decoration: none;
-} */
 
 /*----------------toggle---------------*/
 
