@@ -254,12 +254,12 @@ textarea{
 }
 
 .videocolumn{
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 
-.videoContent{
-    margin-top: 3rem;
-    margin-bottom: 1rem;
+.videotitle{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }  
 
 .drop-zone-hover{
@@ -423,6 +423,10 @@ label{
     margin-top: 15px;
     margin-bottom: 0;
     width: 10%;
+}
+
+.edit-form{
+    margin-top: -1rem;
 }
 
 

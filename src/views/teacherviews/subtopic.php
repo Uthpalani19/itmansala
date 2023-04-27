@@ -100,6 +100,10 @@
                     $editpdfbtn = bin2hex(random_bytes(4));
                     $contentRow = bin2hex(random_bytes(4));
                     $discardedit = bin2hex(random_bytes(4));
+                    $editfile = bin2hex(random_bytes(4));
+                    $editlabel = bin2hex(random_bytes(4));
+                    $editlabelclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $editfileclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
 
                     $lessoneditClick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $editformidClick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
@@ -122,7 +126,7 @@
                     if(!empty($videoContent)){
                         $url = substr($videoContent, -11);  
                     }else{
-                        $videoContent = "  Copy and paste the link of the YouTube video here";
+                        $videoplaceholder = "  Copy and paste the link of the YouTube video here";
                     }                               
         ?>
         <div class="dblesson <?php echo $class ?>">
@@ -138,7 +142,7 @@
             <i class="fa-solid fa-file-pen lesson-edit" id="<?php echo $lessonedit; ?>"></i>
         </div>
 
-        <div class="form-container lesson-form" id="<?php echo $editformid; ?>" style="display:none; margin-bottom:50px;">
+        <div class="form-container lesson-form edit-form" id="<?php echo $editformid; ?>" style="display:none; margin-bottom:50px;">
             <div class="course-form">
                 <p class="form-title">Edit Lesson Details</p>
                 <form method="post" action="subtopic.php?lesson=<?php echo $subtopic_row['courseId'];?>" enctype="multipart/form-data">
@@ -147,7 +151,8 @@
                             <p>Lesson Title</p>
                         </div>  
                         <div class="column2">
-                            <input type="text" class="course-input title" name="lessonName" placeholder="<?php echo $retrieve_lesson_row['lessonName'];?>">
+                            <input type="text" class="course-input title" name="editlessonName" placeholder="<?php echo $retrieve_lesson_row['lessonName'];?>" value="<?php echo $retrieve_lesson_row['lessonName'];?>">
+                            <input type="text" hidden name="lessonpk" value="<?php echo $retrieve_lesson_row['lessonName'];?>">
                             <?php
                                         if (count($Name_Error) > 0) :
                                         foreach ($Name_Error as $name_error) :
@@ -156,7 +161,7 @@
                                         endif;
                             
                             ?>
-                            <input type="text" class="course-input title" name="lessonNumber" value="<?php echo $subtopic; ?>" readonly hidden>
+                            <input type="text" class="course-input title" name="editlessonNumber" value="<?php echo $subtopic; ?>" readonly hidden>
                         </div>
                     </div>
 
@@ -168,6 +173,7 @@
                             <i class="fa-solid fa-folder"></i>
                             <p id="<?php echo $editpdfbtn; ?>" class="form-btn edit-pdf">Edit PDF</p><br>
                             <a><?php echo $content;?></a>
+                            <input type="text" name="editcontent" value="<?php echo $retrieve_lesson_row['content']; ?>" hidden readonly>
                         </div>
                     </div>    
                     
@@ -178,16 +184,16 @@
                             </div>  
                             <div class="column2 upload">
                                 <label>
-                                    <input type="file" name="learningMaterial1" id="<?php echo $selectfile; ?>">
+                                    <input type="file" name="editlearningMaterial1" id="<?php echo $editfile; ?>">
                                     <i class="fa-solid fa-file-import"></i> <br>
-                                    <label id="<?php echo $selectlabel; ?>" for="<?php echo $selectfile; ?>">Select file</label>
+                                    <label id="<?php echo $editlabel; ?>" for="<?php echo $editfile; ?>">Select file</label>
                                 </label>
                             </div>
                         </div>
                         <p class="upload-option">OR</p>
                             <div class="drop-zone">
                                 <span class="drop-zone-text">You can Drag & Drop files here to add them</span>
-                                <input type="file" name="learningMaterial2" class="drop-zone-input">
+                                <input type="file" name="editlearningMaterial2" class="drop-zone-input">
                             </div>
                             <div class="lesson-error">
                                 <?php
@@ -205,7 +211,7 @@
                             <p>Video Content (Optional) </p>
                         </div>  
                         <div class="column2">
-                            <textarea class="course-input title videoContent" name="videoContent" rows="2" placeholder="<?php echo $videoContent;?>"></textarea>
+                            <input class="course-input title videotitle" name="editvideoContent" placeholder="<?php echo $videoplaceholder;?>" value="<?php echo $videoContent;?>">
                         </div>
                     </div>
                         <button type="submit" name="edit_lesson" class="form-btn">Save Changes</button>
@@ -258,6 +264,8 @@
             const <?php echo $editpdfbtnClick; ?> = document.getElementById("<?php echo $editpdfbtn; ?>");
             const <?php echo $editpdfClick; ?> = document.getElementById("<?php echo $editpdf; ?>");
             const <?php echo $contentRowclick; ?> = document.getElementById("<?php echo $contentRow; ?>");
+            const <?php echo $editfileclick; ?> = document.getElementById("<?php echo $editfile; ?>");
+            const <?php echo $editlabelclick; ?> = document.getElementById("<?php echo $editlabel; ?>");
 
             <?php echo $showonclick; ?>.onclick = function(){
                 <?php echo $pdfIDonclick; ?>.style.display = "block";
@@ -281,6 +289,11 @@
                 <?php echo $editpdfClick; ?>.style.display = "block";
                 <?php echo $contentRowclick; ?>.style.display = "none";
             }
+            
+            <?php echo $editfileclick; ?>.addEventListener('change', function(event){
+	            const name = event.target.files[0].name;
+	            <?php echo $editlabelclick; ?>.textContent = name;
+                })
 
         </script>
 
@@ -294,7 +307,7 @@
 
             <!--Add & view Questions button-->
             <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
-            <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
+            <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions view-questions" name="viewQuestions"></a>
 
         </div>
 
