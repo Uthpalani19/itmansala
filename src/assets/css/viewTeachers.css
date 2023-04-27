@@ -5,32 +5,36 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    background: #d9d9d9;
-    
+    background: #d9d9d9;   
+}
+
+.box{
+    min-height: calc(100vh - 183.953px);
 }
 
 /*--------Search Bar-----*/
-.container{
+.container1{
     margin-top: 100px;
     margin-bottom: 40px;
     margin-left: 7.8%;
 }
 
-.container .container-item{
-    padding-left: 46%;
+.container1 .container-item{
+    padding-left: 67%;
 }
-.container .container-item .searchBar input{
+
+.container1 .container-item .searchBar input{
     padding-top: 10px;
     padding-bottom: 10px;
-    /* padding-right: 80px; */
-    /* padding-left: 13px; */
+    padding-right: 80px;
+    padding-left: 13px;
     background: transparent;
     border: 0; 
     outline: none;
     
 }
 
-.container .container-item form button{
+.container1 .container-item form button{
     border: 0;
     border-radius: 50%;
     background: transparent;
@@ -39,7 +43,7 @@ body {
 }
 
 .searchBar{
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 20px;
     width: 310px;
 }
@@ -47,6 +51,7 @@ body {
 h4{
     color: rgb(54, 53, 53);
 }
+
 
 /*--------------Table---------------------*/
 
@@ -109,6 +114,7 @@ h4{
 
 .addTeacher{
     margin-top: 40px;
+    margin-bottom: 50px;
     margin-left: 105px;
     background: #5c26a9 ;
     outline: none;
