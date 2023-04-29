@@ -38,19 +38,39 @@
     <div class="dboard-header">
         <div class="dboard-header-container1">
             <div class="header-box">
-                <h2>128h</h2>
+                <h2>_ _ </h2>
                 <h5>Total time spent</h5>
             </div>
 
+            <!-- Getting enrolled number of courses -->
+            <?php
+                $sqlNoofCourses = "SELECT count(*) as total from student_course where phoneNumber = '{$_SESSION['phone']}' and status = '1'";
+                $resultNoofCourses = mysqli_query($connection,$sqlNoofCourses);
+                $dataNoofCourses = mysqli_fetch_assoc($resultNoofCourses);
+            ?>
             <div class="header-box">
-                <h2>05</h2>
+                <h2><?php echo $dataNoofCourses['total']; ?></h2>
                 <h5>Courses enrolled</h5>
             </div>
 
-            <div class="header-box">
-                <h2>112</h2>
-                <h5>Rank score</h5>
-            </div>
+            <!-- Getting rank score -->
+            <?php
+                $sqlRank = "SELECT phoneNumber, AVG(marks) AS average_marks, RANK() OVER (ORDER BY AVG(marks) DESC) AS rank FROM student_modelpaperquiz GROUP BY phoneNumber;";
+                $resultRank = mysqli_query($connection, $sqlRank);
+                $studentRank = 0;
+                
+                while ($rowRank = mysqli_fetch_assoc($resultRank)) {
+                    if ($rowRank['phoneNumber'] == $_SESSION['phone']) {
+                        $studentRank = $rowRank['rank'];
+                    }
+                }
+                
+                echo "<div class='header-box'>";
+                echo "<h2>" . $studentRank . "</h2>";
+                echo "<h5>Rank score</h5>";
+                echo "</div>";
+            ?>
+           
         </div>
 
         <div class="dboard-header-container2">
@@ -66,7 +86,40 @@
                 <h5>75 % completed on what you bought so far</h5>
             </div>
         </div>
+        
     </div>
+
+    <!-- Courses student does -->
+    <?php
+        // Getting the course name from the database
+        $sql_dropdown = "SELECT c.courseName from course c,student_course sc where c.courseID = sc.courseID and sc.phoneNumber = '{$_SESSION['phone']}' and sc.status = '1'";
+        $result_dropdown = mysqli_query($connection,$sql_dropdown);
+    ?>
+
+    <!-- Dropdown content -->
+    <?php
+        if(mysqli_num_rows($result_dropdown) > 0)
+        {?>
+            <div id="filters">
+            <select id="courses" class="courseName dropdown-courses">
+            <option value="" disabled="" selected="">Select your course </option>
+        <?php
+            while($row = mysqli_fetch_assoc($result_dropdown))
+            {
+        ?>
+            <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName'];?> </option>
+        <?php
+            }
+        ?>
+            </select>
+        </div>
+    <?php
+        }
+        else
+        {
+            echo '<a href="#">No Courses</a>';
+        }
+    ?>
 
     <div class="dboard-middle-container">
         <div class="middle-conatiner-heading">

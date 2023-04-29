@@ -1489,3 +1489,8 @@ h4{
     cursor: pointer;
     margin: 0px 10px;
 }
+
+.btn-questions:hover
+{
+    background-color: #848484;
+}
