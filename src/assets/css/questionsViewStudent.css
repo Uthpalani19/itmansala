@@ -166,3 +166,10 @@ body {
 {
     background-color: #B3B3B3;
 }
+
+/* Questions count */
+.questions-count
+{
+    margin: 0px 0px 0px 100px;
+    color: #636363;
+}
