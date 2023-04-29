@@ -198,4 +198,76 @@ if (isset($_POST['add_lesson'])) {
     }
 
 }
+
+
+// edit lesson content
+
+if (isset($_POST['edit_lesson'])) {
+    $lessonName = mysqli_real_escape_string($connection, $_POST['editlessonName']);
+    $lessonNumber = mysqli_real_escape_string($connection, $_POST['editlessonNumber']);
+    $videoContent = mysqli_real_escape_string($connection, $_POST['editvideoContent']);
+    $editlearningMaterial1 = $_FILES['editlearningMaterial1'];
+    $editlearningMaterial2 = $_FILES['editlearningMaterial2'];
+    $lessonpk = mysqli_real_escape_string($connection, $_POST['lessonpk']);
+    $editcontent = mysqli_real_escape_string($connection, $_POST['editcontent']);
+
+    //select file
+    $pdf1 = $editlearningMaterial1;
+    $pdf_name = $pdf1['name'];
+    $pdf_error = $pdf1['error'];
+    $pdf_tempname = $pdf1['tmp_name'];
+    $pdf_separate =explode('.',$pdf_name);
+    $file_extention = strtolower(end($pdf_separate));
+    $extention = array('pdf');
+    if(in_array($file_extention,$extention))
+    {
+            $upload_pdf1 ='../../assets/uploads/lessonpdf'.$pdf_name;
+            move_uploaded_file($pdf_tempname,$upload_pdf1);
+    }
+
+    //drag and drop
+    $pdf2 = $editlearningMaterial2;
+    $pdf_name = $pdf2['name'];
+    $pdf_error = $pdf2['error'];
+    $pdf_tempname = $pdf2['tmp_name'];
+    $pdf_separate =explode('.',$pdf_name);
+    $file_extention = strtolower(end($pdf_separate));
+    $extention = array('pdf');
+    if(in_array($file_extention,$extention))
+    {
+            $upload_pdf2 ='../../assets/uploads/lessonpdf'.$pdf_name;
+            move_uploaded_file($pdf_tempname,$upload_pdf2);
+    }
+
+    if(!empty($upload_pdf1)){
+        $editcontent = $upload_pdf1;
+    }
+
+    if(!empty($upload_pdf2)){
+        $editcontent = $upload_pdf2;
+    }
+
+    $query = "UPDATE lesson 
+                    SET subTopicId = '$lessonNumber', lessonName = '$lessonName' , content = '$editcontent', videoContent = '$videoContent'
+                    WHERE lessonName ='$lessonpk' AND subTopicId ='$lessonNumber'";
+    mysqli_query($connection, $query);
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
+
+

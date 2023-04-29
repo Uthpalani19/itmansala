@@ -75,7 +75,7 @@
                 <p id="<?php echo $subid; ?>"><?php echo $retrieve_subtopic_row['subTopicName']; ?></p>
             </div>
             <div class="db-subtopic-right">
-                <p><i class="fa-solid fa-file-pen subtopic-edit"></i></p>                
+                <p><i class="fa-solid fa-file-pen subtopic-edit" id=></i></p>                
                 <p id="<?php echo $hideid ?>"><i class="fa-solid fa-chevron-down" ></i></p>
             </div>
         </div>
@@ -94,6 +94,24 @@
                     $close = bin2hex(random_bytes(4));
                     $pdfid = bin2hex(random_bytes(4));
                     $player = bin2hex(random_bytes(4));
+                    $lessonedit = bin2hex(random_bytes(4));
+                    $editformid = bin2hex(random_bytes(4));
+                    $editpdf = bin2hex(random_bytes(4));
+                    $editpdfbtn = bin2hex(random_bytes(4));
+                    $contentRow = bin2hex(random_bytes(4));
+                    $discardedit = bin2hex(random_bytes(4));
+                    $editfile = bin2hex(random_bytes(4));
+                    $editlabel = bin2hex(random_bytes(4));
+                    $editlabelclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $editfileclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+
+                    $lessoneditClick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $editformidClick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $editpdfClick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $editpdfbtnClick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $contentRowclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $discardeditClick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+
                     $playerIDclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $videocloseclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $closeonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
@@ -103,10 +121,13 @@
                     $bodyonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));  
                     $videobody = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $videoContent = $retrieve_lesson_row['videoContent'];
+                    $content = substr($retrieve_lesson_row['content'], 21);
                     $url = "";
                     if(!empty($videoContent)){
                         $url = substr($videoContent, -11);  
-                    }                                 
+                    }else{
+                        $videoplaceholder = "  Copy and paste the link of the YouTube video here";
+                    }                               
         ?>
         <div class="dblesson <?php echo $class ?>">
             <p><?php echo $retrieve_lesson_row['lessonName'];?></p>
@@ -118,7 +139,88 @@
             <?php
             }
             ?>
+            <i class="fa-solid fa-file-pen lesson-edit" id="<?php echo $lessonedit; ?>"></i>
         </div>
+
+        <div class="form-container lesson-form edit-form" id="<?php echo $editformid; ?>" style="display:none; margin-bottom:50px;">
+            <div class="course-form">
+                <p class="form-title">Edit Lesson Details</p>
+                <form method="post" action="subtopic.php?lesson=<?php echo $subtopic_row['courseId'];?>" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="column1">
+                            <p>Lesson Title</p>
+                        </div>  
+                        <div class="column2">
+                            <input type="text" class="course-input title" name="editlessonName" placeholder="<?php echo $retrieve_lesson_row['lessonName'];?>" value="<?php echo $retrieve_lesson_row['lessonName'];?>">
+                            <input type="text" hidden name="lessonpk" value="<?php echo $retrieve_lesson_row['lessonName'];?>">
+                            <?php
+                                        if (count($Name_Error) > 0) :
+                                        foreach ($Name_Error as $name_error) :
+                                        echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$name_error."</span>" ;
+                                        endforeach;
+                                        endif;
+                            
+                            ?>
+                            <input type="text" class="course-input title" name="editlessonNumber" value="<?php echo $subtopic; ?>" readonly hidden>
+                        </div>
+                    </div>
+
+                    <div class="row" id="<?php echo $contentRow; ?>" style="display:block;">
+                        <div class="column1">
+                            <p>Content</p>
+                        </div>  
+                        <div class="column2 upload">
+                            <i class="fa-solid fa-folder"></i>
+                            <p id="<?php echo $editpdfbtn; ?>" class="form-btn edit-pdf">Edit PDF</p><br>
+                            <a><?php echo $content;?></a>
+                            <input type="text" name="editcontent" value="<?php echo $retrieve_lesson_row['content']; ?>" hidden readonly>
+                        </div>
+                    </div>    
+                    
+                    <div id="<?php echo $editpdf; ?>" style="display:none;">
+                        <div class="row">
+                            <div class="column1">
+                                <p>Change learning material (PDF)</p>
+                            </div>  
+                            <div class="column2 upload">
+                                <label>
+                                    <input type="file" name="editlearningMaterial1" id="<?php echo $editfile; ?>">
+                                    <i class="fa-solid fa-file-import"></i> <br>
+                                    <label id="<?php echo $editlabel; ?>" for="<?php echo $editfile; ?>">Select file</label>
+                                </label>
+                            </div>
+                        </div>
+                        <p class="upload-option">OR</p>
+                            <div class="drop-zone">
+                                <span class="drop-zone-text">You can Drag & Drop files here to add them</span>
+                                <input type="file" name="editlearningMaterial2" class="drop-zone-input">
+                            </div>
+                            <div class="lesson-error">
+                                <?php
+                                            if (count($Pdf_Error) > 0) :
+                                            foreach ($Pdf_Error as $pdf_error) :
+                                            echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$pdf_error."</span>" ;
+                                            endforeach;
+                                            endif;
+                        
+                                ?>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="column1 videocolumn">
+                            <p>Video Content (Optional) </p>
+                        </div>  
+                        <div class="column2">
+                            <input class="course-input title videotitle" name="editvideoContent" placeholder="<?php echo $videoplaceholder;?>" value="<?php echo $videoContent;?>">
+                        </div>
+                    </div>
+                        <button type="submit" name="edit_lesson" class="form-btn">Save Changes</button>
+                        <button type="reset" class="form-btn" id="<?php echo $discardedit; ?>">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
         <?php 
             if(!empty($url)){
             ?>
@@ -156,6 +258,14 @@
             const <?php echo $pdfIDonclick; ?> = document.getElementById("<?php echo $pdfid; ?>");
             const <?php echo $closeonclick; ?> = document.getElementById("<?php echo $close; ?>");
             const <?php echo $bodyonclick; ?> = document.getElementById("grey-bg");
+            const <?php echo $lessoneditClick; ?> = document.getElementById("<?php echo $lessonedit; ?>");
+            const <?php echo $editformidClick; ?> = document.getElementById("<?php echo $editformid; ?>");
+            const <?php echo $discardeditClick; ?> = document.getElementById("<?php echo $discardedit; ?>");
+            const <?php echo $editpdfbtnClick; ?> = document.getElementById("<?php echo $editpdfbtn; ?>");
+            const <?php echo $editpdfClick; ?> = document.getElementById("<?php echo $editpdf; ?>");
+            const <?php echo $contentRowclick; ?> = document.getElementById("<?php echo $contentRow; ?>");
+            const <?php echo $editfileclick; ?> = document.getElementById("<?php echo $editfile; ?>");
+            const <?php echo $editlabelclick; ?> = document.getElementById("<?php echo $editlabel; ?>");
 
             <?php echo $showonclick; ?>.onclick = function(){
                 <?php echo $pdfIDonclick; ?>.style.display = "block";
@@ -166,6 +276,24 @@
                 <?php echo $pdfIDonclick; ?>.style.display = "none";
                 <?php echo $bodyonclick; ?>.classList.remove("fixed");
             }
+
+            <?php echo $lessoneditClick?>.onclick = function(){
+                <?php echo $editformidClick; ?>.style.display = "block";
+            }
+
+            <?php echo $discardeditClick; ?>.onclick = function(){
+                <?php echo $editformidClick; ?>.style.display = "none";
+            }
+
+            <?php echo $editpdfbtnClick ?>.onclick = function(){
+                <?php echo $editpdfClick; ?>.style.display = "block";
+                <?php echo $contentRowclick; ?>.style.display = "none";
+            }
+            
+            <?php echo $editfileclick; ?>.addEventListener('change', function(event){
+	            const name = event.target.files[0].name;
+	            <?php echo $editlabelclick; ?>.textContent = name;
+                })
 
         </script>
 
@@ -179,7 +307,7 @@
 
             <!--Add & view Questions button-->
             <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
-            <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions add-questions" name="viewQuestions"></a>
+            <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions view-questions" name="viewQuestions"></a>
 
         </div>
 
