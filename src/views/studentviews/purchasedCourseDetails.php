@@ -8,7 +8,8 @@
         header('location: ../student_login.php');
     }
 
-    include('../../config/studentconfig/viewsubtopic-backend.php') 
+    include('../../config/studentconfig/viewsubtopic-backend.php') ;
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,7 @@
     <title>IT Mansala</title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/student-style.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
 
@@ -220,6 +222,115 @@
             <input type="button" value="Exit Quiz" class="btn-questions add-questions" name="exitQuiz" id="exitQuizbtn">
         </div>
     </div>
+    
+    <!-- this contains course ratings -->
+    <?php
+        $student_id = $_SESSION['phone'];
+        $course_id = $lesson;
 
+        // Check if the student has already rated the course
+        $check_rating_sql = "SELECT * FROM course_ratings WHERE phoneNumber = '$student_id' AND courseId = '$course_id'";
+        $check_rating_result = mysqli_query($connection, $check_rating_sql);
+                        
+        if (mysqli_num_rows($check_rating_result) > 0) {
+    ?>
+            <div class="rating_container">
+                <div class="rating_prompt" onclick="showPopup()">
+                    <p>Rate this course !</p>
+                </div>
+
+                <div class="rating_form" id="rating_form" role="document">
+                <div class="rt-popup">
+                    <div class="rt-popup-head">
+                       <div> <span>Review submitted</span></div>
+                       <div> <button class="close-btn" onclick="closePopup()"><i class="fas fa-times-circle"></i></button></div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+
+                    <div class="rt-popup-correct">
+                    <i class="far fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                </div>
+                </div>
+            </div>
+    <?php
+        } else {
+    ?>
+            <div class="rating_container">
+
+            <div class="rating_prompt" onclick="showPopup()">
+                <p>Click here to rate this course !</p>
+            </div>
+    
+            <div class="rating_form" id="rating_form" role="document">
+                <form  method="POST">
+                <div class="rt-popup">
+                    <div class="rt-popup-head">
+                       <div> <span>Write a review</span></div>
+                       <div> <button class="close-btn" onclick="closePopup()"><i class="fas fa-times-circle"></i></button></div>
+                    </div>
+                    
+                    <div class="rt-popup-stars">
+                        <div>
+                        <i class="fas fa-star star-light " id="submit_star_1" data-index="0"></i>
+                        <i class="fas fa-star star-light " id="submit_star_2" data-index="1"></i>
+                        <i class="fas fa-star star-light " id="submit_star_3" data-index="2"></i>
+                        <i class="fas fa-star star-light " id="submit_star_4" data-index="3"></i>
+                        <i class="fas fa-star star-light " id="submit_star_5" data-index="4"></i>
+                        </div>
+                    </div>
+    
+                    <div class="rt-popup-messge">
+                    <div> <textarea name="reviewMessage" id="review-message" cols="40" rows="5"></textarea></div>
+                    <!-- <input type="text" name="rating" id="rating" class="popup-messge" > -->
+                    </div>
+    
+                    <div class="rt-popup-btn">
+                        <button type="submit" name="rating-submit" id="submit-btn" class="rt-submit-btn">Submit Review</button>
+                    </div>
+                    
+                    <?php
+                        if (isset($_POST["rating"]) && isset($_POST["reviewMessage"])) {
+                            $rating = $_POST['rating'];
+                            $reviewMessage = $_POST['reviewMessage'];
+                            $student_id = $_SESSION['phone'];
+                            $course_id = $lesson;
+    
+                            // Check if the student has already rated the course
+                            $check_rating_sql = "SELECT * FROM course_ratings WHERE phoneNumber = '$student_id' AND courseId = '$course_id'";
+                            $check_rating_result = mysqli_query($connection, $check_rating_sql);
+                            
+                            if (mysqli_num_rows($check_rating_result) > 0) {
+                            } else {
+                                // Insert the new rating
+                                $rating_insert = "INSERT INTO course_ratings(phoneNumber, courseId, rating, reviewMessage) VALUES ('$student_id', '$course_id', '$rating', '$reviewMessage')";
+                                $result = mysqli_query($connection, $rating_insert);
+    
+                                // Check if the query was successful
+                                if ($result) {
+                                    echo "Rating added successfully!";
+                                } else {
+                                    echo "Error: " . mysqli_error($connection);
+                                }
+                            }
+                        }
+                    ?>
+                </div>
+                </form>
+    
+                
+            </div>
+        </div>
+    <?php    
+        }
+    ?>
+   
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src ="../../assets/js/student.js"></script>
 </body>
 </html>
