@@ -105,7 +105,7 @@
             $marks = $row_marks['marks'];
 
             //Store the attempt
-            $sql_quizAttempt = "INSERT into student_modelpaperquiz (phoneNumber, subTopicId, attempt,marks) VALUES ('$phoneNumber','$subtopicId','$attempt','$marks')";
+            $sql_quizAttempt = "INSERT into student_modelpaperquiz (phoneNumber, subTopicId, courseId, attempt,marks) VALUES ('$phoneNumber','$subtopicId','$courseId','$attempt','$marks')";
             $result_quizAttempt = mysqli_query($connection,$sql_quizAttempt);
 
             header('location: ../../views/studentviews/quizReviewSummary.php?courseId='.$courseId.'&subId='.$subtopicId.'');
