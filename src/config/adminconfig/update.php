@@ -44,8 +44,7 @@
             <div class="teacher-form">
                 <p class="form-title">Teacher Details</p>
     <?php
-    if($row['status']==1)
-    {
+
         $name=$row['name'];
         $fieldOfExpertise=$row['fieldOfExpertise'];
         $email=$row['email'];
@@ -94,11 +93,8 @@
     </form>
 
             <?php
-    }
-    else
-    {
-        echo "No data found";
-    }
+    
+
     ?>
     </div>
 </div>

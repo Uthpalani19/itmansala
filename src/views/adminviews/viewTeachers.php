@@ -33,7 +33,7 @@
 
     <!-- Table Content -->
     <div class="content">
-        <table class="tableStudent" id="student-details">
+        <table class="tableTeacher" id="teacher-details">
             <tr>
               <th>Teacher Image</th>
               <th>Name</th>
@@ -82,7 +82,13 @@
                                 </label>
                             </td>
                             <td><a href="../../config/adminconfig/update.php?updateId='.$row['phoneNumber'].'"><i class="fa-solid fa-file-pen" id="icons"></i></td>
-                            <td><a href="../../config/adminconfig/delete.php?deleteId='.$row['phoneNumber'].'"><i class="fa-solid fa-trash" id="icons"></i></a></td>
+                            <td>
+                                <form action="../../config/adminconfig/delete.php?deleteId='.$row['phoneNumber'].'" method="POST">
+                                    <button type="submit" class="delete" onclick="return confirm(\'Are you sure you want to delete this teacher?\')">
+                                        <i class="fa-solid fa-trash" id="icons"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     ';
                 }

@@ -146,7 +146,7 @@ label{
 .fa-file-import{
     color: #636363;
     font-size: 25px;
-    margin-left: 30px;
+    margin-left: 15px;
 }
 
 
@@ -161,5 +161,6 @@ label{
     border-radius: 5px;
     cursor: pointer;
     margin-top: 2rem;
+    margin-bottom: 20px;
     margin-right: 1rem;
 }

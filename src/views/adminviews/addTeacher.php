@@ -16,6 +16,7 @@
 
             $password = bin2hex(random_bytes(4));
             $encrypt = md5($password);
+// Select file
 
             $image =$_FILES['profilePhoto'];
             $image_name = $image['name'];
@@ -23,7 +24,6 @@
             $image_tempname = $image['tmp_name'];
             $img_separate =explode('.',$image_name);
             $file_extention = strtolower(end($img_separate));
-            print_r($image);
             
             $extention = array('jpeg','jpg','png');
 
@@ -32,8 +32,34 @@
                     $upload_image ='../../assets/uploads/teacherdp'.$image_name;
                     move_uploaded_file($image_tempname,$upload_image);
             }
+
+// drag & drop
+$image2 =$_FILES['profilePhoto2'];
+$image_name = $image2['name'];
+$imagefileerror = $image2['error'];
+$image_tempname = $image2['tmp_name'];
+$img_separate =explode('.',$image_name);
+$file_extention = strtolower(end($img_separate));
+
+$extention = array('jpeg','jpg','png');
+
+if(in_array($file_extention,$extention))
+{
+        $upload_image2 ='../../assets/uploads/teacherdp'.$image_name;
+        move_uploaded_file($image_tempname,$upload_image2);
+}
+
+if(!empty($upload_image)){
+    $teacherdp = $upload_image;
+}
+
+if(!empty($upload_image2)){
+    $teacherdp = $upload_image2;
+}
+
+
                 $sql = "INSERT into teacher (phoneNumber, name, email,password,teacherImage,fieldOfExpertise,status)
-                    VALUES('$phoneNumber','$name', '$email','$encrypt','$upload_image','$fieldOfExpertise','0')";
+                    VALUES('$phoneNumber','$name', '$email','$encrypt','$teacherdp','$fieldOfExpertise','0')";
                 $userquery = "INSERT INTO usertable (phoneNumber, password, role)
                     VALUES('$phoneNumber', '$encrypt', 'Teacher')";
                 mysqli_query($connection, $userquery);
@@ -168,7 +194,14 @@
                             <p>Expertise Field</p>
                         </div>  
                         <div class="column2">
-                            <input type="text" class="teacher-input title" name="expertise" required>
+                            <select class="teacher-input title" name="expertise" required>
+                                <option value="">Select Expertise</option>
+                                <option value="Web development">Web development</option>
+                                <option value="Database management systems">Database management systems</option>
+                                <option value="Networking">Networking</option>
+                                <option value="Programming languages">Programming languages</option>
+                                <option value="Operating systems">Operating systems</option>
+                            </select>
                         </div>
                     </div>
                             
@@ -178,20 +211,21 @@
                         </div>  
                         <div class="column2 upload">
                             <label>
-                                <input type="file" class="teacher-input" name="profilePhoto">
+                                <input type="file" class="teacher-input" name="profilePhoto" id="selectfile">
                                 <i class="fa-solid fa-file-import"></i> 
                                 <br>
-                                <div class="select">Select file</div>
+                                <label id="selectlabel" for="selectfile">Select File</label>
                             </label>
                         </div>
+                            <p class="upload-option">OR</p>
+                        <div class="drop-zone">
+                            <span class="drop-zone-text">You can Drag & Drop files here to add them</span>
+                            <input type="file" accept="img/*" name="profilePhoto2" class="drop-zone-input">
+                        </div>                       
                     </div>
                                
                     <!-- Drag and Drop -->
-                    <!-- <p class="upload-option">OR</p>
-                    <div class="drop -zone">
-                        <span class="drop-zone-text">You can Drag & Drop files here to add them</span>
-                        <input type="file" accept="img/*" name="profilePhoto" class="drop-zone-input">
-                    </div> -->
+
 
                     <button type="submit" name="addTeacher" class="form-btn">Add Teacher</button>
                     <button type="reset" class="form-btn" onclick="window.location.href='viewTeachers.php'">Discard</a></button>
@@ -199,6 +233,8 @@
             </div>
         </div>
 
-        
+        <script type="text/javascript" src="../../assets/js/admin.js"></script>
+
     </body>
+
 </html>
