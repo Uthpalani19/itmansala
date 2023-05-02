@@ -8,7 +8,8 @@
         header('location: ../student_login.php');
     }
 
-    include('../../config/studentconfig/viewsubtopic-backend.php') 
+    include('../../config/studentconfig/viewsubtopic-backend.php') ;
+
 ?>
 
 <!DOCTYPE html>
@@ -17,9 +18,11 @@
     <title>IT Mansala</title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/student-style.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
 
-  <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body id="body">
@@ -65,7 +68,6 @@
                     <div class="db-subtopic-right">
                         <p id="<?php echo $hideid; ?>"><i class="fa-solid fa-chevron-down"></i></p>
                     </div>
-
                 </div>
 
                 <?php
@@ -105,16 +107,18 @@
                                 <p><?php echo $retrieve_lesson_row['lessonName']; ?></p>
                                 <a class="show-pdf" id="<?php echo $show; ?>">Click here to learn</a>
                                 <br>
-
-                                <!-- Attempt quiz button -->
-                                <a href="questionsViewStudent.php?subId=<?php echo $subtopic;?>&courseId=<?php echo $lesson;?>"><input type="button" value="Attempt Quiz" class="btn-questions add-questions" name="attemptQuiz"></a>
+                                
                                 <?php
                                 if(!empty($url)){
                                 ?>
                                 <a class="show-pdf" id="<?php echo $showvideo; ?>">Lesson Video</a>
                                 <?php
                                 }
-                                ?>  
+                                ?>
+
+                                <!-- Attempt quiz button -->
+                                <a href="questionsViewStudent.php?subId=<?php echo $subtopic;?>&courseId=<?php echo $lesson;?>&attempt=1">
+                                <input type="button" value="Attempt Quiz" class="btn-questions add-questions attemptBtn" name="attemptQuiz" id="attemptQuizbtn"></a>
                             </div>
 
                             <?php 
@@ -166,6 +170,7 @@
                                 }
 
                             </script>
+                            
                             <?php
                         }
         
@@ -196,10 +201,136 @@
             }
         }
         ?>
-        
-
     </div>
+    
+    <!-- Quiz instructions -->
+    <div class="info-box">
+        <div class="info-title">
+            <span>Instructions for the quiz</span>
+        </div>
 
+        <div class="info-list">
+            <div class="info">1. You'll be given with 2 minutes to attempt each question. </div>
+            <div class="info">2. You can't exit from the quiz until you complete it.</div>
+            <div class="info">3. You can't go back to the previous question.</div>
+            <div class="info">4. You can't skip any question.</div>
+            <div class="info">5. If you don't score 90%, you'll have to attempt the quiz once again.</div>
+        </div>
+
+        <div class="buttons">
+            <input type="button" value="Start Quiz" class="btn-questions add-questions" name="startQuiz" id="startQuizbtn">
+            <input type="button" value="Exit Quiz" class="btn-questions add-questions" name="exitQuiz" id="exitQuizbtn">
+        </div>
+    </div>
+    
+    <!-- this contains course ratings -->
+    <?php
+        $student_id = $_SESSION['phone'];
+        $course_id = $lesson;
+
+        // Check if the student has already rated the course
+        $check_rating_sql = "SELECT * FROM course_ratings WHERE phoneNumber = '$student_id' AND courseId = '$course_id'";
+        $check_rating_result = mysqli_query($connection, $check_rating_sql);
+                        
+        if (mysqli_num_rows($check_rating_result) > 0) {
+    ?>
+            <div class="rating_container">
+                <div class="rating_prompt" onclick="showPopup()">
+                    <p>Rate this course !</p>
+                </div>
+
+                <div class="rating_form" id="rating_form" role="document">
+                <div class="rt-popup">
+                    <div class="rt-popup-head">
+                       <div> <span>Review submitted</span></div>
+                       <div> <button class="close-btn" onclick="closePopup()"><i class="fas fa-times-circle"></i></button></div>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+
+                    <div class="rt-popup-correct">
+                    <i class="far fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                </div>
+                </div>
+            </div>
+    <?php
+        } else {
+    ?>
+            <div class="rating_container">
+
+            <div class="rating_prompt" onclick="showPopup()">
+                <p>Click here to rate this course !</p>
+            </div>
+    
+            <div class="rating_form" id="rating_form" role="document">
+                <form  method="POST">
+                <div class="rt-popup">
+                    <div class="rt-popup-head">
+                       <div> <span>Write a review</span></div>
+                       <div> <button class="close-btn" onclick="closePopup()"><i class="fas fa-times-circle"></i></button></div>
+                    </div>
+                    
+                    <div class="rt-popup-stars">
+                        <div>
+                        <i class="fas fa-star star-light " id="submit_star_1" data-index="0"></i>
+                        <i class="fas fa-star star-light " id="submit_star_2" data-index="1"></i>
+                        <i class="fas fa-star star-light " id="submit_star_3" data-index="2"></i>
+                        <i class="fas fa-star star-light " id="submit_star_4" data-index="3"></i>
+                        <i class="fas fa-star star-light " id="submit_star_5" data-index="4"></i>
+                        </div>
+                    </div>
+    
+                    <div class="rt-popup-messge">
+                    <div> <textarea name="reviewMessage" id="review-message" cols="40" rows="5"></textarea></div>
+                    <!-- <input type="text" name="rating" id="rating" class="popup-messge" > -->
+                    </div>
+    
+                    <div class="rt-popup-btn">
+                        <button type="submit" name="rating-submit" id="submit-btn" class="rt-submit-btn">Submit Review</button>
+                    </div>
+                    
+                    <?php
+                        if (isset($_POST["rating"]) && isset($_POST["reviewMessage"])) {
+                            $rating = $_POST['rating'];
+                            $reviewMessage = $_POST['reviewMessage'];
+                            $student_id = $_SESSION['phone'];
+                            $course_id = $lesson;
+    
+                            // Check if the student has already rated the course
+                            $check_rating_sql = "SELECT * FROM course_ratings WHERE phoneNumber = '$student_id' AND courseId = '$course_id'";
+                            $check_rating_result = mysqli_query($connection, $check_rating_sql);
+                            
+                            if (mysqli_num_rows($check_rating_result) > 0) {
+                            } else {
+                                // Insert the new rating
+                                $rating_insert = "INSERT INTO course_ratings(phoneNumber, courseId, rating, reviewMessage) VALUES ('$student_id', '$course_id', '$rating', '$reviewMessage')";
+                                $result = mysqli_query($connection, $rating_insert);
+    
+                                // Check if the query was successful
+                                if ($result) {
+                                    echo "Rating added successfully!";
+                                } else {
+                                    echo "Error: " . mysqli_error($connection);
+                                }
+                            }
+                        }
+                    ?>
+                </div>
+                </form>
+    
+                
+            </div>
+        </div>
+    <?php    
+        }
+    ?>
+   
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src ="../../assets/js/student.js"></script>
 </body>
-
 </html>
