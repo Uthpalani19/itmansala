@@ -78,6 +78,10 @@
                                         <div class ="price-username">
                                             <button type="" name="cart-btn" class="cart-btn" id="add-to-cart-button"> A progress bar should be added. </button>
                                         </div>
+                            
+                                        <div class="course-ratings">
+                                        <h4 class="course rating">gg</h4>
+                                        </div>
                                     </div>
                                     <?php
                                 }
