@@ -121,6 +121,7 @@ body {
     border: 2px solid #c5c5c5;
     border-radius: 10px;
     text-align: center;
+    padding-bottom: 10px;
 }
 
 .db-lesson p{
@@ -158,6 +159,18 @@ body {
     align-items: center;
 }
 
+.rt-display-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.star-gold {
+    color: #F39C12;
+ }
+.star-light{
+    color: #636363;
+}
 .price-username p{
     color: #636363;
     font-size: 1rem;
@@ -274,4 +287,8 @@ body {
 .db-lesson a{
     color: black;
     text-decoration: none;
+}
+
+.cart-form{
+    display: inline-block;
 }

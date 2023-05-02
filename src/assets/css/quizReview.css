@@ -46,6 +46,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-top: -100px;
 }
 
 .container > div
@@ -59,6 +60,37 @@ body {
     text-align: center;
     font-size: large;
     color: #7735D5;
+}
+
+.encouragement-msg #percentage
+{
+    color: #a52222;
+    font-size: 4rem;
+    animation: increment 1s ease-in-out;
+}
+
+.encouragement-msg #percentage-increment
+{
+    color: #0f6828;
+    font-size: 4rem;
+    animation: increment 1s ease-in-out;
+}
+
+.fa-solid
+{
+    animation: increment 1s ease-in-out;
+}
+
+.encouragement-msg
+{
+    text-align: center;
+    font-size: large;
+    color: #7735D5;
+}
+
+.top-margin
+{
+    margin-top: 25px;
 }
 
 .encouragement-msg #marks
@@ -143,6 +175,7 @@ body {
 .container-question > .option > #answer
 {
     background-color:#81E979;
+    font-weight: 1000;
 }
 
 .container-question > .option > #stu-answer
@@ -215,3 +248,82 @@ body {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24);
 }
 
+.btn-questions
+{
+    background-color: #5319a6;
+    border: none;
+    color: white;
+    padding: 10px 50px;
+    border-radius: 5%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 650px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24);
+}
+
+.btn-questions:hover
+{
+    transform: scale(1.1); 
+}
+
+.backToLessons
+{
+    
+    margin-left: 300px;
+}
+
+.btnBack
+{
+    width: 10%;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: white;
+    background: #5319a6;
+    border: none;
+    border-radius: 3px;
+    padding: 12px 0 12px 0;
+    margin: 60px 500px 22px 675px;
+    box-shadow: 3px 5px 10px #848484;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.25s;
+    cursor: pointer;
+
+}
+
+.btnBack:hover, .review-btn:hover
+{
+    transform: scale(1.1); 
+}
+
+.review-btn
+{
+    width: 100px;
+    height: 20px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #5319a6;
+    margin: 5% 0 0 -2%;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 3px 5px 10px #848484;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.25s;
+    cursor: pointer;
+
+}
+
+/* Link styling */
+.summary-table a
+{
+    text-decoration: none;
+    color: #5319a6;
+}
+
+.summary-table a:hover
+{
+    color: #0BA7FF;
+}

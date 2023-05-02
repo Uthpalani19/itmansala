@@ -38,144 +38,54 @@
 
         <div class="cart-heading">
             <h4 >
-                2 Courses in cart 
+                <?php 
+                echo sizeof($_SESSION['cart']);
+                ?> Courses in cart  
+                <br>
             </h4>
         </div>
+        <?php
+foreach($_SESSION['cart'] as $cid) {
+            $element = $cid;
+            $key = array_search($cid, $_SESSION['cart'],true);         
+            $course_query= "SELECT * FROM course WHERE courseID = $element";
+            $course_result = mysqli_query($connection, $course_query);
+            
+                $course_row = mysqli_fetch_array($course_result);
 
-        <div class="cart">
-            <div class="cart-items">
-                
-                <div class="cart-item1">
+                    ?>
+                    <div class="cart-item1">
                     <div class="item-image">
-                        <img class="item-img" src="img/lesson1.jpg" alt="">
+                        <img class="item-img" src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" alt="">
                     </div>
 
                     <div class="item-content">
-                        <h4>lesson 7</h4>
-                        <h3 class="item-title">පද්ධති විශ්ලේෂණය හා පරිසැලසුම</h3>
-                        <div class="item-detail">
-                            <div>20 students</div>
-                            <div><i class="fas fa-circle" style="font-size: 10px;"></i></div>
-                            <div>20 Subtopics</div>
-                            <div><i class="fas fa-circle" style="font-size: 10px;"></i></div>
-                            <div>20 Quizes</div>
-                        </div>   
+                        <h3 class="item-title"><?php echo $course_row['courseName'];?></h3>
+                        <button class="btn-item1">1000 LKR <i class="fas fa-tag"></i></button>
                     </div>
 
                     <div class="item-buttons">
-                        <button class="btn-item1">Remove</button>
-                        <button class="btn-item1">1000 LKR <i class="fas fa-tag"></i></button>
-
+                        <form method="post">
+                        <button type="submit" name="remove_btn" class="btn-item1">Remove</button>
+                        <input type="text" value="<?php echo $key; ?>" name="delete_key" hidden readonly>
+                        </form>
                     </div>
+                    <?php
+                    if(isset($_POST['remove_btn'])){
+                            $delete = mysqli_real_escape_string($connection, $_POST['delete_key']);
+                            unset($_SESSION['cart'][$delete]);
+                            header('location: cartSudentView.php');
+                            exit();
+                        }
+                    ?>
                     
                 </div>
+                    <?php
+        }
 
-                
-            </div>
+        ?>
 
-            <div class="cart-checkout">
-                <div>
-                    <h4>Total :</h4>
-                </div>
-
-                <div>
-                    <h2>2000 LKR</h2>
-                    <h5>2 Courses</h5>
-                </div>
-
-                <!-- Checkout Form -->
-                <form class="checkout-form" >
-                    <div>
-                        <input type="radio" value="card" name="select">
-                        <label for="">Online payment</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" value="cash" name="select">
-                        <label for="">Offline payment</label>
-                    </div>
-                    <div class="btncheckout">
-                        <input type="button" value="checkout" class="btn-checkout" id="btn-checkout" name="checkout">
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
-    <div class="bg-modal">
-            <div class="modal-content">
-                <div>
-                    <div class="pop-header">
-                        <h4>Payment details</h4>
-                    </div>
-                    
-                    <div class="box-container">
-                        <!-- Payment Pop up -->
-                    <form action="" method="POST" enctype="multipart/form-data">
-
-                        <div class="name-fields">
-                            <div class="telNo">
-                                <label for="telNo">Tel-Number</label>
-                                <?php if (isset($_SESSION['phoneNumber'])) { ?>
-                                    <input type="number" class="tel input" name="contactNumber" readonly value="<?php echo $_SESSION['phoneNumber']; ?>">
-                                <?php } ?>  
-                            </div>
-                            <div class="paidDate">
-                                <label for="paidDate">Paid-Date</label>
-                                <input type="date" class="p-date input" name="paidDate" required>
-                            </div>
-                        </div>
-
-                        <div class="other-fields">
-                            <div class="nic-field">
-                                <label for="NIC-No">NIC</label>
-                                <input type="number" class="nic input" name="nic" required>
-                            </div>
-
-                            <div class="payment-field">
-                                <div class="amount">
-                                    <label for="payment-amount">Paid-amount</label>
-                                    <input type="number" class="c-amount input" name="paidAmount" value="2000" readonly>
-                                </div>
-
-                                <div class="no-courses">
-                                    <label for="no-courses">No of Courses</label>
-                                    <input type="number" class="c-number input" name="noOfCourses"value="2" readonly>
-                                </div>  
-                            </div>
-
-                            <div class="select-container">
-                                <div class="slip-label">
-                                    <label for="slip">Payment Slip</label>
-                                </div>
-                                <div class="slip-select">
-                                    <input type="file" name="imgSlip" clas="slip_select">
-                                      
-                                </div>
-                            </div>
-
-                            <div class="drop-container">
-                                <div class="drop-zone">
-                                    <input type="file" name="imgSlip" class="drop-zone__input">
-                                    <span class="drop-zone__prompt"> <i class="fas fa-upload"></i> Drag & drop files here</span>
-
-                                    <!-- <div class="drop-zone__thumb" data-label="imagefile.txt"></div> -->
-                                </div>                         
-                            </div>
-                        </div>
-
-                        <div class="button-container">
-                            <input type="submit" id="payment-submit" value="Submit" class="pop-submit" name="submit">
-                            <input type="button" class="pop-discard"  value="Discard">
-                            <!-- <button class="pop-discard" id="payment-submit">Discard</button> -->
-                        </div>
-                    </form>
-                    </div>
-                </div>
-                
-
-            </div>
-    </div>
+   
 
 <script src="js/script.js"></script>
 </body>

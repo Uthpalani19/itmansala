@@ -23,8 +23,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Step 1</title>
+    <title>Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../../assets/css/global.css" >
     <link rel="stylesheet" href="../../assets/css/style3.css" >
     
@@ -38,19 +39,39 @@
     <div class="dboard-header">
         <div class="dboard-header-container1">
             <div class="header-box">
-                <h2>128h</h2>
+                <h2>_ _ </h2>
                 <h5>Total time spent</h5>
             </div>
 
+            <!-- Getting enrolled number of courses -->
+            <?php
+                $sqlNoofCourses = "SELECT count(*) as total from student_course where phoneNumber = '{$_SESSION['phone']}' and status = '1'";
+                $resultNoofCourses = mysqli_query($connection,$sqlNoofCourses);
+                $dataNoofCourses = mysqli_fetch_assoc($resultNoofCourses);
+            ?>
             <div class="header-box">
-                <h2>05</h2>
+                <h2><?php echo $dataNoofCourses['total']; ?></h2>
                 <h5>Courses enrolled</h5>
             </div>
 
-            <div class="header-box">
-                <h2>112</h2>
-                <h5>Rank score</h5>
-            </div>
+            <!-- Getting rank score -->
+            <?php
+                $sqlRank = "SELECT phoneNumber, AVG(marks) AS average_marks, RANK() OVER (ORDER BY AVG(marks) DESC) AS rank FROM student_modelpaperquiz GROUP BY phoneNumber;";
+                $resultRank = mysqli_query($connection, $sqlRank);
+                $studentRank = 0;
+                
+                while ($rowRank = mysqli_fetch_assoc($resultRank)) {
+                    if ($rowRank['phoneNumber'] == $_SESSION['phone']) {
+                        $studentRank = $rowRank['rank'];
+                    }
+                }
+                
+                echo "<div class='header-box'>";
+                echo "<h2>" . $studentRank . "</h2>";
+                echo "<h5>Rank score</h5>";
+                echo "</div>";
+            ?>
+           
         </div>
 
         <div class="dboard-header-container2">
@@ -66,7 +87,40 @@
                 <h5>75 % completed on what you bought so far</h5>
             </div>
         </div>
+        
     </div>
+
+    <!-- Courses student does -->
+    <?php
+        // Getting the course name from the database
+        $sql_dropdown = "SELECT c.courseName from course c,student_course sc where c.courseID = sc.courseID and sc.phoneNumber = '{$_SESSION['phone']}' and sc.status = '1'";
+        $result_dropdown = mysqli_query($connection,$sql_dropdown);
+    ?>
+
+    <!-- Dropdown content -->
+    <?php
+        if(mysqli_num_rows($result_dropdown) > 0)
+        {?>
+            <div id="filters">
+            <select id="courses" class="courseName dropdown-courses">
+            <option value="" disabled="" selected="">Select your course </option>
+        <?php
+            while($row = mysqli_fetch_assoc($result_dropdown))
+            {
+        ?>
+            <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName'];?> </option>
+        <?php
+            }
+        ?>
+            </select>
+        </div>
+    <?php
+        }
+        else
+        {
+            echo '<a href="#">No Courses</a>';
+        }
+    ?>
 
     <div class="dboard-middle-container">
         <div class="middle-conatiner-heading">
@@ -116,14 +170,53 @@
                                     21% +
                                 </div>
                             </div>
-                            
+                            <div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Leaderboard -->
             <div class="middle-conatiner-piechart">
                 <div class="pie-chart-header">
-                    <h4 class="graph-header">Overall Question Analysis</h4>
+                    <h4 class="graph-header">Leaderboard</h4>
+                </div>
+                <div>
+                    <table id="leaderboard">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Profile Picture</th>
+                            <th>Name</th>
+                            <th>Average</th>
+                        </tr>
+                        <?php
+                            $sqlLeaderboard = "SELECT phoneNumber, AVG(marks) AS average_marks, RANK() OVER (ORDER BY AVG(marks) DESC) AS rank FROM student_modelpaperquiz GROUP BY phoneNumber;";
+                            $resultLeaderboard = mysqli_query($connection, $sqlLeaderboard);
+                            $studentRank = 0;
+                            
+                            while ($rowLeaderboard = mysqli_fetch_assoc($resultLeaderboard)) {
+                                $sqlLeaderboardName = "SELECT * FROM student WHERE phoneNumber = '{$rowLeaderboard['phoneNumber']}'";
+                                $resultLeaderboardName = mysqli_query($connection, $sqlLeaderboardName);
+                                $rowLeaderboardName = mysqli_fetch_assoc($resultLeaderboardName);
+                                $studentRank = $rowLeaderboard['rank'];
+                                echo "<tr>";
+                                echo "<td>" . $studentRank . "</td>";
+                                echo "<td><img src='../../images/student/" . $rowLeaderboardName['profilePicture'] . "' alt='Profile Picture' class='leaderboard-profile-picture'></td>";
+                                echo "<td>" . $rowLeaderboardName['name'] . "</td>";
+                                echo "<td>" . $rowLeaderboard['average_marks'] . "</td>";
+                                echo "</tr>";
+                            }
+                        ?>
+                    </table>
+                </div>
+            </div>
+            
+           
+        </div>
+        <div class="middle-conatiner-piechart">
+                <div class="pie-chart-header">
+                    <h4 class="std-bargrapgh-head">Overall Question Analysis</h4>
                 </div>
 
                 <div class="pie-chart-container">
@@ -139,8 +232,6 @@
                 </div>
             
             </div>
-        </div>
-        
     </div>
 
     <!-- <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
@@ -185,6 +276,24 @@ new Chart("myChart2", {
     }
   }
 });
+
+    $(document).ready(function(){
+            $("#courses").on('change',function(){
+                var value = $(this).val();
+
+                $.ajax({
+                    url: '../../config/studentconfig/leaderboard-coursewise.php',
+                    type: 'POST',
+                    data: 'request='+value,
+                    beforeSend: function(){
+                        $('#leaderboard').html('<img src="../../assets/images/loading.gif" alt="loading" id="loading">');
+                    },
+                    success: function(data){
+                        $('#leaderboard').html(data);
+                    }
+                });
+            });
+    });
 </script>
 </body>
 </html>

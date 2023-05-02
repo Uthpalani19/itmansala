@@ -11,8 +11,6 @@
     unset($_SESSION['name']);
     header("location: ../student_login.php");
  }
- require('../../config/studentconfig/studentCart.php')
-
 
 ?>
 
@@ -28,10 +26,10 @@
 </head>
 <body>
 
-<div class="splashcourse">
+<!----<div class="splashcourse">
         <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['name']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
         <img class="welcome-avatar fade-in" src="../../assets/images/welcome_avatar.png">
-</div> 
+</div> ---->
 <div class="container">
     <?php include('../../assets/includes/navbar-student.php') ?>
 
@@ -54,6 +52,7 @@
                 <p>We have many different languages. Different people like different languages. Also, different languages let you do different things. If python does not stick into your head, maybe Javascript will. And vice versa.</p>
             </div>
             
+            <form method="post" action="">
             <div class="lesson-container">
                 <?php
                     $course_query= "SELECT * FROM course";
@@ -64,6 +63,7 @@
                         while($course_row = mysqli_fetch_array($course_result)){
                             $number= $course_row['courseId'];
                             ?>
+                            
                             <div class="db-lesson">
                                 <div class="img-container">
                                     <div class="lock">
@@ -81,11 +81,52 @@
                                     <div class="price">
                                         <p><?php echo $course_row['price'];?> LKR</p>
                                     </div>
-                                    <button type="" name="cart-btn" class="cart-btn" id="add-to-cart-button"> Add to Cart </button>
-                                    <span id="cart-count">0</span>
+                                    <form class="cart-form" method="post">
+                                            <button type="submit" name="cart_btn" class="cart-btn" value="<?php echo $number ?>" id="<?php echo $cartbtnclick;?>"> Add to Cart </button>
+                                    </form>
 
+                                    <?php
+                                    if(isset($_POST['cart_btn'])) {
+                                        $formnum = mysqli_real_escape_string($connection, $_POST['cart_btn']);
+                                        if($formnum == $number){
+                                            array_push( $_SESSION['cart'], $number);
+                                        
+                                        }
+                                        
+                                    }
+                                    ?>
                                     
+                                    
+
                                 </div>
+
+                                <div class="rt-display-container">
+                                
+                                <?php        
+                                    $rating_sql = "SELECT AVG(rating) AS avg_rating FROM course_ratings WHERE courseId = $number";
+                                    $rating_result = mysqli_query($connection, $rating_sql);
+                                                                        
+                                    // Get the average rating from the result set
+                                    $row = mysqli_fetch_assoc($rating_result);
+                                    $avg_rating = round($row['avg_rating'], 1);
+                                                                            
+                                    // Display the average rating and stars
+                                    echo "<div>";
+                                    echo "<a href='courseReview.php'>";
+                                    echo " $avg_rating &nbsp;";
+                                    echo "</div>";
+                                    echo "<div>";
+                                    for ($i = 1; $i <= 5; $i++) {
+                                        $class = ($i <= round($avg_rating)) ? 'star-gold' : 'star-light';
+                                        echo '<i class="fas fa-star ' . $class . '" id="submit_star_' . $i . '" data-index="' . ($i-1) . '"></i>';
+                                    }
+                                    echo "</div>";
+                                    echo "</a>";
+                                ?>
+                                
+
+                                </div>
+                                
 
                                 
                             </div>
@@ -97,6 +138,7 @@
 
 
             </div>
+            </form>
         </div>
         <div class="lines">
             

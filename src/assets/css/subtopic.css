@@ -254,12 +254,12 @@ textarea{
 }
 
 .videocolumn{
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 
-.videoContent{
-    margin-top: 3rem;
-    margin-bottom: 1rem;
+.videotitle{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }  
 
 .drop-zone-hover{
@@ -402,3 +402,31 @@ label{
     backdrop-filter: blur(5px);
     animation: fadeIn 0.3s ease-in forwards;
 }
+
+.lesson-edit{
+    position: absolute;
+    margin-left: 1000px;
+    margin-top: -15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.fa-folder{
+    font-size: 30px;
+    padding-left: 10px;
+}
+
+.edit-pdf{
+    text-align: center;
+    display: inline-block;
+    margin-left: 300px;
+    margin-top: 15px;
+    margin-bottom: 0;
+    width: 10%;
+}
+
+.edit-form{
+    margin-top: -1rem;
+}
+
+
