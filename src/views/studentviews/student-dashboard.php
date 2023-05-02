@@ -23,8 +23,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Step 1</title>
+    <title>Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../../assets/css/global.css" >
     <link rel="stylesheet" href="../../assets/css/style3.css" >
     
@@ -169,14 +170,53 @@
                                     21% +
                                 </div>
                             </div>
-                            
+                            <div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Leaderboard -->
             <div class="middle-conatiner-piechart">
                 <div class="pie-chart-header">
-                    <h4 class="graph-header">Overall Question Analysis</h4>
+                    <h4 class="graph-header">Leaderboard</h4>
+                </div>
+                <div>
+                    <table id="leaderboard">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Profile Picture</th>
+                            <th>Name</th>
+                            <th>Average</th>
+                        </tr>
+                        <?php
+                            $sqlLeaderboard = "SELECT phoneNumber, AVG(marks) AS average_marks, RANK() OVER (ORDER BY AVG(marks) DESC) AS rank FROM student_modelpaperquiz GROUP BY phoneNumber;";
+                            $resultLeaderboard = mysqli_query($connection, $sqlLeaderboard);
+                            $studentRank = 0;
+                            
+                            while ($rowLeaderboard = mysqli_fetch_assoc($resultLeaderboard)) {
+                                $sqlLeaderboardName = "SELECT * FROM student WHERE phoneNumber = '{$rowLeaderboard['phoneNumber']}'";
+                                $resultLeaderboardName = mysqli_query($connection, $sqlLeaderboardName);
+                                $rowLeaderboardName = mysqli_fetch_assoc($resultLeaderboardName);
+                                $studentRank = $rowLeaderboard['rank'];
+                                echo "<tr>";
+                                echo "<td>" . $studentRank . "</td>";
+                                echo "<td><img src='../../images/student/" . $rowLeaderboardName['profilePicture'] . "' alt='Profile Picture' class='leaderboard-profile-picture'></td>";
+                                echo "<td>" . $rowLeaderboardName['name'] . "</td>";
+                                echo "<td>" . $rowLeaderboard['average_marks'] . "</td>";
+                                echo "</tr>";
+                            }
+                        ?>
+                    </table>
+                </div>
+            </div>
+            
+           
+        </div>
+        <div class="middle-conatiner-piechart">
+                <div class="pie-chart-header">
+                    <h4 class="std-bargrapgh-head">Overall Question Analysis</h4>
                 </div>
 
                 <div class="pie-chart-container">
@@ -192,8 +232,6 @@
                 </div>
             
             </div>
-        </div>
-        
     </div>
 
     <!-- <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
@@ -238,6 +276,24 @@ new Chart("myChart2", {
     }
   }
 });
+
+    $(document).ready(function(){
+            $("#courses").on('change',function(){
+                var value = $(this).val();
+
+                $.ajax({
+                    url: '../../config/studentconfig/leaderboard-coursewise.php',
+                    type: 'POST',
+                    data: 'request='+value,
+                    beforeSend: function(){
+                        $('#leaderboard').html('<img src="../../assets/images/loading.gif" alt="loading" id="loading">');
+                    },
+                    success: function(data){
+                        $('#leaderboard').html(data);
+                    }
+                });
+            });
+    });
 </script>
 </body>
 </html>
