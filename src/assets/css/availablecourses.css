@@ -288,3 +288,7 @@ body {
     color: black;
     text-decoration: none;
 }
+
+.cart-form{
+    display: inline-block;
+}
