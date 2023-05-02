@@ -28,10 +28,10 @@
 </head>
 <body>
 
-<div class="splashcourse">
+<!----<div class="splashcourse">
         <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['name']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
         <img class="welcome-avatar fade-in" src="../../assets/images/welcome_avatar.png">
-</div> 
+</div> ---->
 <div class="container">
     <?php include('../../assets/includes/navbar-student.php') ?>
 
@@ -81,8 +81,22 @@
                                     <div class="price">
                                         <p><?php echo $course_row['price'];?> LKR</p>
                                     </div>
-                                    <button type="" name="cart-btn" class="cart-btn" id="add-to-cart-button"> Add to Cart </button>
-                                    <span id="cart-count">0</span>
+                                    <form class="cart-form" method="post">
+                                            <button type="submit" name="cart_btn" class="cart-btn" value="<?php echo $number ?>" id="<?php echo $cartbtnclick;?>"> Add to Cart </button>
+                                    </form>
+
+                                    <?php
+                                    if(isset($_POST['cart_btn'])) {
+                                        $formnum = mysqli_real_escape_string($connection, $_POST['cart_btn']);
+                                        if($formnum == $number){
+                                            array_push( $_SESSION['cart'], $number);
+                                        
+                                        }
+                                        
+                                    }
+                                    ?>
+                                    
+                                    
 
                                     
                                 </div>
