@@ -170,6 +170,7 @@ td{
 }
 
 .header-box{
+    width: 100%;
     background-color: white;
     box-shadow:#0000003b 3px 3px 5px ;
     margin: 10px;
@@ -202,6 +203,7 @@ td{
 
 .dboard-header-container2{
     display: flex;
+    width: 35%;
     color: #737677;
     flex-direction: column;
     background-color: #ffffff;
@@ -353,4 +355,22 @@ td{
     text-align: center;
     margin-top: 10px;
 }
+
+/* Student dashboard - course dropdown */
+.dropdown-courses
+{
+    width: 25%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    padding: 0.5rem 1.5rem;
+    margin: 10px 10px 0 50px;
+    background-color: #5319a6;
+    color: #ffffff;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    outline: none;
+} 
 

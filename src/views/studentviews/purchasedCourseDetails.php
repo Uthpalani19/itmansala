@@ -20,8 +20,9 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/student-style.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
 
-  <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body id="body">
@@ -67,7 +68,6 @@
                     <div class="db-subtopic-right">
                         <p id="<?php echo $hideid; ?>"><i class="fa-solid fa-chevron-down"></i></p>
                     </div>
-
                 </div>
 
                 <?php
@@ -107,16 +107,18 @@
                                 <p><?php echo $retrieve_lesson_row['lessonName']; ?></p>
                                 <a class="show-pdf" id="<?php echo $show; ?>">Click here to learn</a>
                                 <br>
-
-                                <!-- Attempt quiz button -->
-                                <a href="questionsViewStudent.php?subId=<?php echo $subtopic;?>&courseId=<?php echo $lesson;?>"><input type="button" value="Attempt Quiz" class="btn-questions add-questions" name="attemptQuiz"></a>
+                                
                                 <?php
                                 if(!empty($url)){
                                 ?>
                                 <a class="show-pdf" id="<?php echo $showvideo; ?>">Lesson Video</a>
                                 <?php
                                 }
-                                ?>  
+                                ?>
+
+                                <!-- Attempt quiz button -->
+                                <a href="questionsViewStudent.php?subId=<?php echo $subtopic;?>&courseId=<?php echo $lesson;?>&attempt=1">
+                                <input type="button" value="Attempt Quiz" class="btn-questions add-questions attemptBtn" name="attemptQuiz" id="attemptQuizbtn"></a>
                             </div>
 
                             <?php 
@@ -168,6 +170,7 @@
                                 }
 
                             </script>
+                            
                             <?php
                         }
         
@@ -198,8 +201,26 @@
             }
         }
         ?>
-        
+    </div>
+    
+    <!-- Quiz instructions -->
+    <div class="info-box">
+        <div class="info-title">
+            <span>Instructions for the quiz</span>
+        </div>
 
+        <div class="info-list">
+            <div class="info">1. You'll be given with 2 minutes to attempt each question. </div>
+            <div class="info">2. You can't exit from the quiz until you complete it.</div>
+            <div class="info">3. You can't go back to the previous question.</div>
+            <div class="info">4. You can't skip any question.</div>
+            <div class="info">5. If you don't score 90%, you'll have to attempt the quiz once again.</div>
+        </div>
+
+        <div class="buttons">
+            <input type="button" value="Start Quiz" class="btn-questions add-questions" name="startQuiz" id="startQuizbtn">
+            <input type="button" value="Exit Quiz" class="btn-questions add-questions" name="exitQuiz" id="exitQuizbtn">
+        </div>
     </div>
     
     <!-- this contains course ratings -->
@@ -312,5 +333,4 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src ="../../assets/js/student.js"></script>
 </body>
-
 </html>

@@ -407,4 +407,68 @@
     margin-top: 30px;
     margin-bottom: 20px;
   }
+/* Quiz information popup */
+.attemptBtn,.info-box
+{
+    position: absolute;
+    margin-top: -1px;
+    transform: translate(-50%, -50%);
+}
+
+.info-box
+{
+    background-color: #fff;
+    width: 750px;
+    padding-left: 150px;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+}
+
+.info-box .info-title
+{
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 20px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.info-box .info
+{
+    font-size: 15px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.info-box .buttons
+{
+    display: flex;
+    margin-left: -750px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.info-box .buttons .btn-questions
+{
+    padding : 10px 45px;
+    font-family: 'Poppins', sans-serif;
+    border :none;
+    color: #FFFFFF;
+    background-color: #636363;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    margin-left: 25px;
+}
+
+.btn-questions:hover
+{
+    background-color: #848484;
+}
+
 
