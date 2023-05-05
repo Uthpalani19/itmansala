@@ -25,14 +25,8 @@
                 <p onclick="window.location.href='adminCourse.php'">Course</p>
             </div>
             <div class="nav-user-tray">
-                <!-- <p><i class="fa-regular fa-bell"></i></p> -->
-                <div class="dropdown">
-                    <!-- <span><p><i class="fa-solid fa-circle-user"></i></p></span> -->
-                    <!-- <div class="dropdown-content">
-                        <p><a href="viewTeachers.php?logout='1'">Logout</a></p>
-                        <p><a href="adminProfile.php">Profile</a></p>
-                    </div> -->
-                </div>
+                <p><i class="fa-regular fa-bell"></i></p>
+
             </div>
         </div>
 </div>

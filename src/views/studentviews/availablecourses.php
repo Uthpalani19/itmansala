@@ -2,14 +2,18 @@
   session_start(); 
   require('../../config/dbconnection.php');
 
-  if (!isset($_SESSION['name'])) {
-  	header('location: ../student_login.php');
+  if(!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = array();
+  }
+
+  if (!isset($_SESSION['studentname'])) {
+  	header('location: ../../student_login.php');
   }
 
   if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['name']);
-    header("location: ../student_login.php");
+    unset($_SESSION['studentname']);
+    header("location: ../../student_login.php");
  }
 
 ?>
@@ -27,7 +31,7 @@
 <body>
 
 <!----<div class="splashcourse">
-        <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['name']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
+        <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['studentname']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
         <img class="welcome-avatar fade-in" src="../../assets/images/welcome_avatar.png">
 </div> ---->
 <div class="container">
@@ -55,13 +59,14 @@
             <form method="post" action="">
             <div class="lesson-container">
                 <?php
-                    $course_query= "SELECT * FROM course";
+                    $course_query= "SELECT * FROM course WHERE status=1";
                     $course_result = mysqli_query($connection, $course_query);
                     $check_course_result = mysqli_num_rows($course_result) > 0;
 
                     if($check_course_result){
                         while($course_row = mysqli_fetch_array($course_result)){
                             $number= $course_row['courseId'];
+                            
                             ?>
                             
                             <div class="db-lesson">
@@ -132,6 +137,13 @@
                             </div>
                             <?php
                         }
+                    }else{
+                        ?>
+                        <div class="emptydiv">
+                            <p>Sorry! No courses are currently available.</p>
+                            <img class="empty-img" src="../../assets/images/welcome_avatar.png">
+                        </div>
+                        <?php
                     }
                     ?>
 

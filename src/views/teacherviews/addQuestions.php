@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require('../../config/dbconnection.php');
     require('../../assets/includes/navbar-teacher.php');
 

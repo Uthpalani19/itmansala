@@ -2,15 +2,10 @@
   session_start(); 
   require('../../config/dbconnection.php');
 
-  if (!isset($_SESSION['name'])) {
-  	header('location: ../student_login.php');
+  if (!isset($_SESSION['studentname'])) {
+  	header('location: ../../student_login.php');
   }
 
-  if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['name']);
-    header("location: ../student_login.php");
- }
  require('../../config/studentconfig/studentCart.php');
  include('../../config/teacherconfig/teacher-backend.php');
  include('../../assets/includes/navbar-student.php');
