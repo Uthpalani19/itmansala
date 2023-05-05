@@ -8,9 +8,9 @@
   <link rel="stylesheet" type="text/css" href="assets/css/student.css">
 </head>
 <body>
-    <div class="splash" id="hide">
+    <!-- <div class="splash" id="hide">
         <img class="logo fade-in" src="assets/images/logo.png">
-    </div>
+    </div> -->
     <div class="left signupleft">
         <div class="welcome">
             <p class="message signupmessage">Few clicks away from creating your account</p>

@@ -46,7 +46,7 @@
             <div class="lesson-container">
                 <?php
 
-                    $studentCourse_query = "SELECT * from student_course where phoneNumber = '{$_SESSION['phone']}'";
+                    $studentCourse_query = "SELECT * from student_course where phoneNumber = '{$_SESSION['studentphone']}'";
                     $studentCourse_result = mysqli_query($connection, $studentCourse_query);
                     $check_studentCourse_result = mysqli_num_rows($studentCourse_result) > 0;
 
@@ -75,7 +75,7 @@
                                         </div>
                             
                                         <div class="course-ratings">
-                                        <h4 class="course rating">gg</h4>
+                                        <h4 class="course rating"></h4>
                                         </div>
                                     </div>
                                     <?php

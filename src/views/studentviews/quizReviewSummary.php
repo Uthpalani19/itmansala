@@ -87,7 +87,7 @@
                             echo '
                                 <tr>
                                     <td>2</td>
-                                    <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=2">Click here to reattempt</a></button></td>
+                                    <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=2&questionNumber=0">Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';
@@ -95,7 +95,7 @@
                             echo '
                                 <tr>
                                     <td>3</td>
-                                    <td><button disabled><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3">Click here to reattempt</a></button></td>
+                                    <td><button disabled><a>Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';
@@ -105,7 +105,7 @@
                             echo '
                                 <tr>
                                     <td>2</td>
-                                    <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=2">Click here to reattempt</a></button></td>
+                                    <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=2&questionNumber=0">Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';
@@ -113,7 +113,7 @@
                             echo '
                                 <tr>
                                     <td>3</td>
-                                    <td><button disabled><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3">Click here to reattempt</a></button></td>
+                                    <td><button disabled><a>Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';
@@ -126,7 +126,7 @@
                         echo '
                             <tr>
                                 <td>3</td>
-                                <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3">Click here to reattempt</a></button></td>
+                                <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3&questionNumber=0">Click here to reattempt</a></button></td>
                                 <td>Not available</td>
                             </tr>
                         ';
@@ -136,7 +136,7 @@
                             echo '
                                 <tr>
                                     <td>3</td>
-                                    <td><button disabled><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3">Click here to reattempt</a></button></td>
+                                    <td><button disabled><a>Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';

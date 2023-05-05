@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../../assets/includes/navbar-student.php');
+    //include('../../assets/includes/navbar-student.php');
     require('../../config/dbconnection.php');
 
     if (!isset($_SESSION['studentname'])) {
@@ -40,6 +40,8 @@
         $subtopicName=$row['subTopicName'];
 
         $attempt = $_GET['attempt'];
+        
+        $questionNumber = $_GET['questionNumber'];
     ?>
         <!--Course Details-->
         <div class="course-details-box">
@@ -61,9 +63,12 @@
                         $sql_questions = "SELECT COUNT(*) AS num_questions_done FROM student_modelpaperquestion WHERE subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['studentphone']}' AND attempt = '$attempt'";
                         $result_questions = mysqli_query($connection, $sql_questions);
                         $row_questions = mysqli_fetch_assoc($result_questions);
-                        
+
+                    // Check whether back button was clicked or not
+                    if($questionNumber == 0)
+                    {
                         ?>
-                        <p class="questions-count"> <?php echo $row_questions['num_questions_done']+1 . " out of 5"; ?></p>
+                            <p class="questions-count"> <?php echo $row_questions['num_questions_done']+1 . " out of 5"; ?></p>
                         <?php
 
                         // Check whether it is under 5 or not
@@ -87,33 +92,43 @@
                                         <input type="text" class="course-input title" name="attempt" value="<?php echo $attempt; ?>" readonly hidden>
                                         <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['studentphone']; ?>" readonly hidden>
 
-                                        <div class="question-number-box">
-                                            <textarea class="question-number" name="questionNumber" readonly style="resize: none;"><?php echo $questionId; ?></textarea>
-                                        </div>
+                                                <div class="question-number-box">
+                                                    <textarea class="question-number" name="questionId" readonly style="resize: none;"><?php echo $row['questionId']; ?></textarea>
+                                                </div>
 
-                                        <div>
-                                            <textarea class="question-add" name="question" rows="4" cols="100" readonly><?php echo $row['question'];?></textarea>
-                                        </div>
-                                                    
-                                        <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
-                                        <input type="radio" class="input-option" name="answer" checked value="option1">
-                                        <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
-                                        <input type="radio" class="input-option" name="answer" value="option2">
-                                        <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
-                                        <input type="radio" class="input-option" name="answer" value="option3">
-                                        <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
-                                        <input type="radio" class="input-option" name="answer" value="option4">
-                                        <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
-                                        <input type="radio" class="input-option" name="answer" value="option5">
+                                                <div>
+                                                    <textarea class="question-add" name="question" rows="4" cols="100" readonly><?php echo $row['question'];?></textarea>
+                                                </div>
+                                                            
+                                                <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option1">
+                                                <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option2">
+                                                <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option3">
+                                                <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option4">
+                                                <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option5">
 
-                                        <br />
+                                                <br />
 
-                                        <div class="buttons">
-                                            <!-- Not sure about implementing this -->
-                                            <input type="submit" value="Previous" class="btn-question" name="Previous">
-                                            <input type="submit" value="Back to Lesson" class="btn-question" id="back" name="back">
-                                            <input type="submit" value="Next" class="btn-question" name="Next">
-                                        </div>
+                                                <?php
+                                                    if($row_questions['num_questions_done']==0  || $questionNumber%5 == 1)
+                                                    {
+                                                        ?>
+                                                            <input type="submit" value="Previous" class="btn-question" name="Previous" disabled>
+                                                            <input type="submit" value="Next" class="btn-question" name="Next">
+                                                        <?php
+                                                    }
+                                                    else
+                                                    {
+                                                        ?>
+                                                            <input type="submit" value="Previous" class="btn-question" name="Previous">
+                                                            <input type="submit" value="Next" class="btn-question" name="Next">
+                                                        <?php
+                                                    }
+                                                ?>
                                     </form>
                                 <?php
                             }
@@ -142,7 +157,7 @@
                                 }
                             }
                         }
-                        else if((int)$row_questions['num_questions_done']%5 == 4)
+                        else if((int)$row_questions['num_questions_done']%5 == 4 || $questionNumber%5 == 0)
                         {
                                 $sql = "SELECT q.* FROM modelpaperquestion q LEFT JOIN student_modelpaperquestion smq ON q.questionId = smq.questionId
                                 AND smq.subTopicId = q.subTopicId AND smq.phoneNumber = '{$_SESSION['studentphone']}' WHERE q.subTopicId = '$subtopicId' AND smq.questionId IS NULL
@@ -161,9 +176,10 @@
                                             <input type="text" class="course-input title" name="courseId" value="<?php echo $courseId; ?>" readonly hidden>
                                             <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['studentphone']; ?>" readonly hidden>
                                             <input type="text" class="course-input-title" name="attempt" value="<?php echo $attempt?>" readonly hidden>
+                                            <input type="text" class="course-input title" name="questionNumber" value="<?php echo $questionNumber; ?>" readonly hidden>
 
                                             <div class="question-number-box">
-                                                <textarea class="question-number" name="questionNumber" readonly style="resize: none;"><?php echo $questionId; ?></textarea>
+                                                <textarea class="question-number" name="questionId" readonly style="resize: none;"><?php echo $questionId; ?></textarea>
                                             </div>
 
                                             <div>
@@ -184,9 +200,7 @@
                                             <br />
 
                                             <div class="buttons">
-                                                <!-- Not sure about implementing this -->
                                                 <input type="submit" value="Previous" class="btn-question" name="Previous">
-                                                <input type="submit" value="Back to Lesson" class="btn-question" id="back" name="back">
                                                 <input type="submit" value="Finish" class="btn-question" name="Finish">
                                             </div>
                                         </form>
@@ -197,6 +211,153 @@
                         {
                             header('location: ../../views/studentviews/quizReviewSummary.php?courseId='.$courseId.'&subId='.$subtopicId.'');
                         }
+                    }
+                    else
+                    {
+                        ?>
+                            <p class="questions-count"> <?php echo $row_questions['num_questions_done'] . " out of 5"; ?></p>
+                        <?php
+
+                        $sqlPreviousQuestion = "SELECT * from student_modelpaperquestion where subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['studentphone']}' AND questionNumber = '$questionNumber'";
+                        
+                        $resultPreviousQuestion = mysqli_query($connection, $sqlPreviousQuestion);
+                        $rowPreviousQuestion = mysqli_fetch_assoc($resultPreviousQuestion);
+
+                        $questionId = $rowPreviousQuestion['questionId'];
+
+                        $sql = "SELECT * from modelpaperquestion where subTopicId='$subtopicId' AND questionId = '$questionId'";
+                        $result = mysqli_query($connection, $sql);
+                        $row = mysqli_fetch_assoc($result);
+
+                        ?>
+                            <form action="../../config/studentconfig/questionsViewStudent.config.php" method="POST">
+                                        <!-- Getting variable values -->
+                                        <input type="text" class="course-input title" name="subtopicId" value="<?php echo $subtopicId; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="courseId" value="<?php echo $courseId; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="attempt" value="<?php echo $attempt; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['studentphone']; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="questionNumber" value="<?php echo $questionNumber; ?>" readonly hidden>
+
+
+                                        <div class="question-number-box">
+                                            <textarea class="question-number" name="questionId" readonly style="resize: none;"><?php echo $questionId; ?></textarea>
+                                        </div>
+
+                                        <div>
+                                            <textarea class="question-add" name="question" rows="4" cols="100" readonly><?php echo $row['question'];?></textarea>
+                                        </div>
+                                        <?php  
+                                            $sqlBack = "SELECT * from student_modelpaperquestion WHERE subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['studentphone']}' AND attempt = '$attempt' AND questionNumber = '$questionNumber'";
+                                            $resultBack = mysqli_query($connection, $sqlBack);
+                                            $rowBack = mysqli_fetch_assoc($resultBack);
+                                                                                   
+                                            if($rowBack['answer'] == $row['option1'])
+                                            {?>
+                                                <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" checked value="option1">
+                                                <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option2">
+                                                <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option3">
+                                                <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option4">
+                                                <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option5">
+                                                <?php
+                                            }
+                                            elseif($rowBack['answer'] == $row['option2'])
+                                            {?>
+                                                <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option1">
+                                                <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" checked value="option2">
+                                                <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option3">
+                                                <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option4">
+                                                <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option5">
+                                                <?php
+                                            }
+                                            elseif($rowBack['answer'] == $row['option3'])
+                                            {?>
+                                                <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option1">
+                                                <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option2">
+                                                <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" checked value="option3">
+                                                <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option4">
+                                                <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option5">
+                                                <?php
+                                            }
+                                            elseif($rowBack['answer'] == $row['option4'])
+                                            {?>
+                                                <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option1">
+                                                <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option2">
+                                                <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option3">
+                                                <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" checked value="option4">
+                                                <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option5">
+                                                <?php
+                                            }
+                                            elseif($rowBack['answer'] == $row['option5'])
+                                            {?>
+                                                <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option1">
+                                                <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option2">
+                                                <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option3">
+                                                <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option4">
+                                                <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" checked value="option5">
+                                            <?php
+                                            }
+                                            else
+                                            {?>
+                                                <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option1">
+                                                <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option2">
+                                                <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option3">
+                                                <textarea class="option" name="option4" rows="4" cols="60" readonly><?php echo $row['option4'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option4">
+                                                <textarea class="option" name="option5" rows="4" cols="60" readonly><?php echo $row['option5'];?></textarea>
+                                                <input type="radio" class="input-option" name="answer" value="option5">
+                                            <?php
+                                            }
+                                        ?>
+
+                                        <br />
+
+                                        <?php
+                                            if($row_questions['num_questions_done']==0  || $questionNumber%5 == 1)
+                                            {
+                                                ?>
+                                                    <input type="submit" value="Previous" class="btn-question" name="Previous" disabled>
+                                                    <input type="submit" value="Next" class="btn-question" name="Next">
+                                                <?php
+                                            }
+                                            else
+                                            {
+                                                ?>
+                                                    <input type="submit" value="Previous" class="btn-question" name="Previous">
+                                                    <input type="submit" value="Next" class="btn-question" name="Next">
+                                                <?php
+                                            }
+                                        ?>
+                            </form>
+                        <?php
+                    }
                 ?>  
         </div>
 

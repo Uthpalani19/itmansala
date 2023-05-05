@@ -72,24 +72,24 @@ $(document).ready(function() {
 
 //--------------show initial splash screen only once--------------//
 
-const splash = document.querySelector('.splash');
+// const splash = document.querySelector('.splash');
 
-document.addEventListener('DOMContentLoaded', (e)=>{
-setTimeout(()=>{
-    splash.classList.add('display-none');
-}, 1500);
-})
+// document.addEventListener('DOMContentLoaded', (e)=>{
+// setTimeout(()=>{
+//     splash.classList.add('display-none');
+// }, 1500);
+// })
 
-document.cookie;
-let z = document.cookie;
+// document.cookie;
+// let z = document.cookie;
 
-const hide = document.getElementById("hide");
-    if(z == document.cookie.match(/PHPSESSID=[^;]+/)){
-        hide.style.display = "content";
-        document.cookie = 1;
-    }else{
-        hide.style.display = "none";    
-    }
+// const hide = document.getElementById("hide");
+//     if(z == document.cookie.match(/PHPSESSID=[^;]+/)){
+//         hide.style.display = "content";
+//         document.cookie = 1;
+//     }else{
+//         hide.style.display = "none";    
+//     }
     
 
 //---------------------sign-up form---------------------//
