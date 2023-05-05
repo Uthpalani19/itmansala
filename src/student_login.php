@@ -12,9 +12,9 @@
   <link rel="stylesheet" type="text/css" href="assets/css/student.css">
 </head>
 <body>
-    <div class="splash" id="hide">
+    <!-- <div class="splash" id="hide">
         <img class="logo fade-in" src="assets/images/logo.png">
-    </div>
+    </div> -->
     <div class="left">
         <div class="welcome">
             <p class="message">Hi!<br>Welcome to IT Mansala</p>

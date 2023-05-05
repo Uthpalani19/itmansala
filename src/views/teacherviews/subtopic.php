@@ -1,5 +1,5 @@
 <?php 
-  session_start(); 
+    session_start(); 
 
     if (!isset($_SESSION['name'])) {
   	    header('location: ../student_login.php');
@@ -87,6 +87,7 @@
                 $retrieve_lesson= "SELECT * FROM lesson WHERE subTopicId = $subtopic";
                 $retrieve_lesson_result = mysqli_query($connection, $retrieve_lesson);
                 if(mysqli_num_rows($retrieve_lesson_result)){
+                    // JS for subtopic hide and show
                 while($retrieve_lesson_row = mysqli_fetch_array($retrieve_lesson_result)){
                     $show = bin2hex(random_bytes(4));
                     $showvideo = bin2hex(random_bytes(4));
@@ -369,7 +370,7 @@
                             <p>Video Content (Optional) </p>
                         </div>  
                         <div class="column2">
-                            <textarea class="course-input title videoContent" name="videoContent" rows="2" placeholder="  Copy and paste the link of the YouTube video here"></textarea>
+                            <textarea class="course-input title videoContent" name="videoContent" rows="2" placeholder="Copy and paste the link of the YouTube video here"></textarea>
                         </div>
                     </div>
                         <button type="submit" name="add_lesson" class="form-btn">Create Lesson</button>
