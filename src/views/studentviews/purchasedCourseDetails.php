@@ -4,8 +4,8 @@
     include('../../assets/includes/navbar-student.php');
 
 
-    if (!isset($_SESSION['name'])) {
-        header('location: ../student_login.php');
+    if (!isset($_SESSION['studentname'])) {
+        header('location: ../../student_login.php');
     }
 
     include('../../config/studentconfig/viewsubtopic-backend.php') ;

@@ -4,17 +4,11 @@
     session_start();
     require('../../config/dbconnection.php');
 
-    if(!isset($_SESSION['name']))
+    if(!isset($_SESSION['studentname']))
     {
         header('location:index.php');
     }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['name']);
-        header('location:index.php');
-    }
 ?>
 
 <!DOCTYPE html>

@@ -1,19 +1,19 @@
 <?php 
     // Navigation Bar
-    require_once('../../assets/includes/navbar-teacher.php');
     session_start();
+    require_once('../../assets/includes/navbar-teacher.php');
     require('../../config/dbconnection.php');
 
     if(!isset($_SESSION['name']))
     {
-        header('location:index.php');
+        header('location: ../../student_login.php');
     }
 
     if(isset($_GET['logout']))
     {
         session_destroy();
         unset($_SESSION['name']);
-        header('location:index.php');
+        header('location: ../../student_login.php');
     }
 ?>
 

@@ -3,23 +3,17 @@
     //include('../../assets/includes/navbar-student.php');
     require('../../config/dbconnection.php');
 
-    if (!isset($_SESSION['name'])) {
-        header('location: ../student_login.php');
+    if (!isset($_SESSION['studentname'])) {
+        header('location: ../../student_login.php');
     }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
-    }
 
     // Add Question Button
     if(isset($_POST['Next']) || isset($_POST['Finish']))
     {
        $courseId = $_POST['courseId'];
        $subtopicId = $_POST['subtopicId'];
-       $phoneNumber = $_SESSION['phone'];
+       $phoneNumber = $_SESSION['studentphone'];
        $questionNumber = $_POST['questionNumber'];
        $answerOption = $_POST['answer'];
        $attempt = $_POST['attempt'];

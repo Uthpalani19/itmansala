@@ -156,9 +156,9 @@ if (isset($_POST['login_student']))  {
                   $stdresults = mysqli_query($connection, $stdquery);
                   $stdrow = mysqli_fetch_assoc($stdresults);
                   $Username = $stdrow['name'];
-                  $_SESSION['name'] = $Username;
-                  $_SESSION['phone'] = $User;
-                  echo $_SESSION['name'];
+                  $_SESSION['studentname'] = $Username;
+                  $_SESSION['studentphone'] = $User;
+                  echo $_SESSION['studentname'];
                   header('location: views/studentviews/student-dashboard.php');
               }
               if ($role == 'Teacher'){

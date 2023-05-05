@@ -1,7 +1,7 @@
 <?php 
     // Navigation Bar
-    require_once('../../assets/includes/navbar-teacher.php');
     session_start();
+    require_once('../../assets/includes/navbar-teacher.php');
     require('../../config/dbconnection.php');
 
     if(!isset($_SESSION['name']))

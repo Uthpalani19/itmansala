@@ -1,14 +1,4 @@
-<?php
-
-session_start();
-require('../../config/dbconnection.php');
-include('../../assets/includes/navbar-student.php');
-
-
-if (!isset($_SESSION['studentname'])) {
-    header('location: ../../student_login.php');
-}
-?>
+<?php include('../../assets/includes/navbar-admin.php') ?>
 <?php include('../../config/studentconfig/viewsubtopic-backend.php') ?>
 <html>
 
@@ -19,7 +9,7 @@ if (!isset($_SESSION['studentname'])) {
   <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
 </head>
 
-<body id="body">
+<body id="body" class="adminbody">
 
     <div class="lesson-info viewlessoninfo">
         <div class="lesson-num">
@@ -58,7 +48,7 @@ if (!isset($_SESSION['studentname'])) {
                 </style>
                 <div class="db-subtopic">
                     <div class="db-subtopic-left">
-                        <i class="fa-solid fa-lock subtopic-lock"></i>
+                        <i class="fa-regular fa-circle"></i>
                         <p id="<?php echo $subid; ?>"><?php echo $retrieve_subtopic_row['subTopicName']; ?></p>
                     </div>
                     <div class="db-subtopic-right">
@@ -103,7 +93,7 @@ if (!isset($_SESSION['studentname'])) {
                             <div class="dblesson <?php echo $class; ?>">
                                 <p><?php echo $retrieve_lesson_row['lessonName']; ?></p>
                                 <a class="show-pdf" id="<?php echo $show; ?>">Click here to learn</a>
-                                <i class="fa-solid fa-lock subtopic-lock subtopiclock2"></i><br>
+                                <br>
                                 <?php
                                 if(!empty($url)){
                                 ?>
@@ -191,7 +181,38 @@ if (!isset($_SESSION['studentname'])) {
                 <?php
             }
         }
+        if($subtopic_row['status'] == 0){
         ?>
+        <div class="reviewBtns">
+            <form method="post">
+                <button type="submit" name="publish_to_students" class="form-btn">Publish to students</button>
+                <button type="reset" id="showrevision" class="form-btn" >Send to Revision</button>
+            </form>
+        </div>
+        <?php
+        }
+        ?>
+        <div class="revisionfield" id="revisionfield">
+            <form method="post">
+                <textarea rows="20" cols="130" name="reason" class="reason-text" placeholder="The reasons for not publishing the course to students" value="The course was not published to students"></textarea><br>
+                <button type="submit" name="send_to_revision" class="form-btn revisionbtn">Notify Teacher</button>
+                <button type="reset" id="hiderevision" class="form-btn revisionbtn" >Cancel</button>
+            </form>
+        </div>
+
+        <script>
+            const revisionbtn = document.getElementById("showrevision"); 
+            const revisionfieldclick = document.getElementById("revisionfield");
+            const hiderevisionbtn =  document.getElementById("hiderevision");
+
+            revisionbtn.onclick = function(){
+                revisionfieldclick.style.display = "block";
+            }
+
+            hiderevisionbtn.onclick = function(){
+                revisionfieldclick.style.display = "none";
+            }
+        </script>
         
 
     </div>

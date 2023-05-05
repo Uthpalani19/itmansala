@@ -72,10 +72,32 @@
                                         <p><?php echo $_SESSION['name']; ?></p>
                                    </div>
                                     
-                                </div>   
-                                <div class="activate">
-                                    <button type="" class="activate-course">Publish this course</button>
                                 </div>
+                                <?php
+                                if($course_row['review'] == 0 && $course_row['status'] == 0){
+                                ?>   
+                                <div class="activate">
+                                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                        <input type="text" name="publish_id" value="<?php echo $course_row['courseId']; ?>" hidden readonly>
+                                        <button type="submit" class="activate-course" name="publish_course">Publish</button>
+                                    </form>
+                                </div>
+                                <?php
+                                }if($course_row['review'] == 1 && $course_row['status'] == 0){
+                                ?>
+                                <div class="activate">
+                                    <button type="" class="activate-course reviewBtn" name="">Sent to Review</button>
+                                </div>
+                                <?php
+                                }
+                                if($course_row['review'] == 0 && $course_row['status'] == 1){
+                                ?>
+                                <div class="activate">
+                                    <button type="" class="activate-course reviewBtn" name="">Published to students</button>
+                                </div>
+                                <?php
+                                }
+                                ?>
                                 
                             </div>
                             <?php
