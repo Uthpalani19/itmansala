@@ -3,16 +3,10 @@
     //include('../../assets/includes/navbar-student.php');
     require('../../config/dbconnection.php');
 
-    if (!isset($_SESSION['name'])) {
-        header('location: ../student_login.php');
+    if (!isset($_SESSION['studentname'])) {
+        header('location: ../../student_login.php');
     }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
-    }
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +60,7 @@
         <div class="question" id="new-question">
                 <?php
                         // Number of questions attempted
-                        $sql_questions = "SELECT COUNT(*) AS num_questions_done FROM student_modelpaperquestion WHERE subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['phone']}' AND attempt = '$attempt'";
+                        $sql_questions = "SELECT COUNT(*) AS num_questions_done FROM student_modelpaperquestion WHERE subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['studentphone']}' AND attempt = '$attempt'";
                         $result_questions = mysqli_query($connection, $sql_questions);
                         $row_questions = mysqli_fetch_assoc($result_questions);
 
@@ -81,7 +75,7 @@
                         if((int)$row_questions['num_questions_done']%5 > 0 && (int)$row_questions['num_questions_done']%5 != 4 && (int)$row_questions['num_questions_done'] <=5 || (int)$row_questions['num_questions_done'] == 0 )
                         {
                             $sql = "SELECT q.* FROM modelpaperquestion q LEFT JOIN student_modelpaperquestion smq ON q.questionId = smq.questionId
-                            AND smq.subTopicId = q.subTopicId AND smq.phoneNumber = '{$_SESSION['phone']}' WHERE q.subTopicId = '$subtopicId' AND smq.questionId IS NULL
+                            AND smq.subTopicId = q.subTopicId AND smq.phoneNumber = '{$_SESSION['studentphone']}' WHERE q.subTopicId = '$subtopicId' AND smq.questionId IS NULL
                             ORDER BY RAND() LIMIT 1";
 
                             $result = mysqli_query($connection, $sql);
@@ -93,10 +87,10 @@
                                 ?>
                                     <form action="../../config/studentconfig/questionsViewStudent.config.php" method="POST">
                                         <!-- Getting variable values -->
-                                                <input type="text" class="course-input title" name="subtopicId" value="<?php echo $subtopicId; ?>" readonly hidden>
-                                                <input type="text" class="course-input title" name="courseId" value="<?php echo $courseId; ?>" readonly hidden>
-                                                <input type="text" class="course-input title" name="attempt" value="<?php echo $attempt; ?>" readonly hidden>
-                                                <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['phone']; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="subtopicId" value="<?php echo $subtopicId; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="courseId" value="<?php echo $courseId; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="attempt" value="<?php echo $attempt; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['studentphone']; ?>" readonly hidden>
 
                                                 <div class="question-number-box">
                                                     <textarea class="question-number" name="questionId" readonly style="resize: none;"><?php echo $row['questionId']; ?></textarea>
@@ -143,7 +137,7 @@
                                 // This whole part is for not getting empty pages because of rand function
 
                                 // Number of questions attempted
-                                $sql_questionsCount1 = "SELECT count(*) from student_modelpaperquestion where subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['phone']}'";
+                                $sql_questionsCount1 = "SELECT count(*) from student_modelpaperquestion where subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['studentphone']}'";
                                 $result_questionsCount1 = mysqli_query($connection, $sql_questionsCount1);
                                 $row_questionsCount1 = mysqli_fetch_assoc($result_questionsCount1);
 
@@ -166,7 +160,7 @@
                         else if((int)$row_questions['num_questions_done']%5 == 4 || $questionNumber%5 == 0)
                         {
                                 $sql = "SELECT q.* FROM modelpaperquestion q LEFT JOIN student_modelpaperquestion smq ON q.questionId = smq.questionId
-                                AND smq.subTopicId = q.subTopicId AND smq.phoneNumber = '{$_SESSION['phone']}' WHERE q.subTopicId = '$subtopicId' AND smq.questionId IS NULL
+                                AND smq.subTopicId = q.subTopicId AND smq.phoneNumber = '{$_SESSION['studentphone']}' WHERE q.subTopicId = '$subtopicId' AND smq.questionId IS NULL
                                 ORDER BY RAND() LIMIT 1";
 
                                 $result = mysqli_query($connection, $sql);
@@ -180,7 +174,7 @@
                                             <!-- Getting variable values -->
                                             <input type="text" class="course-input title" name="subtopicId" value="<?php echo $subtopicId; ?>" readonly hidden>
                                             <input type="text" class="course-input title" name="courseId" value="<?php echo $courseId; ?>" readonly hidden>
-                                            <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['phone']; ?>" readonly hidden>
+                                            <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['studentphone']; ?>" readonly hidden>
                                             <input type="text" class="course-input-title" name="attempt" value="<?php echo $attempt?>" readonly hidden>
                                             <input type="text" class="course-input title" name="questionNumber" value="<?php echo $questionNumber; ?>" readonly hidden>
 
@@ -193,7 +187,7 @@
                                             </div>
                                                         
                                             <textarea class="option" name="option1" rows="4" cols="60" readonly><?php echo $row['option1'];?></textarea>
-                                            <input type="radio" class="input-option" name="answer" checked value="option1">
+                                            <input type="radio" class="input-option" name="answer" value="option1">
                                             <textarea class="option" name="option2" rows="4" cols="60" readonly><?php echo $row['option2'];?></textarea>
                                             <input type="radio" class="input-option" name="answer" value="option2">
                                             <textarea class="option" name="option3" rows="4" cols="60" readonly><?php echo $row['option3'];?></textarea>
@@ -224,7 +218,7 @@
                             <p class="questions-count"> <?php echo $row_questions['num_questions_done'] . " out of 5"; ?></p>
                         <?php
 
-                        $sqlPreviousQuestion = "SELECT * from student_modelpaperquestion where subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['phone']}' AND questionNumber = '$questionNumber'";
+                        $sqlPreviousQuestion = "SELECT * from student_modelpaperquestion where subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['studentphone']}' AND questionNumber = '$questionNumber'";
                         
                         $resultPreviousQuestion = mysqli_query($connection, $sqlPreviousQuestion);
                         $rowPreviousQuestion = mysqli_fetch_assoc($resultPreviousQuestion);
@@ -241,7 +235,7 @@
                                         <input type="text" class="course-input title" name="subtopicId" value="<?php echo $subtopicId; ?>" readonly hidden>
                                         <input type="text" class="course-input title" name="courseId" value="<?php echo $courseId; ?>" readonly hidden>
                                         <input type="text" class="course-input title" name="attempt" value="<?php echo $attempt; ?>" readonly hidden>
-                                        <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['phone']; ?>" readonly hidden>
+                                        <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['studentphone']; ?>" readonly hidden>
                                         <input type="text" class="course-input title" name="questionNumber" value="<?php echo $questionNumber; ?>" readonly hidden>
 
 
@@ -253,7 +247,7 @@
                                             <textarea class="question-add" name="question" rows="4" cols="100" readonly><?php echo $row['question'];?></textarea>
                                         </div>
                                         <?php  
-                                            $sqlBack = "SELECT * from student_modelpaperquestion WHERE subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['phone']}' AND attempt = '$attempt' AND questionNumber = '$questionNumber'";
+                                            $sqlBack = "SELECT * from student_modelpaperquestion WHERE subTopicId='$subtopicId' AND phoneNumber = '{$_SESSION['studentphone']}' AND attempt = '$attempt' AND questionNumber = '$questionNumber'";
                                             $resultBack = mysqli_query($connection, $sqlBack);
                                             $rowBack = mysqli_fetch_assoc($resultBack);
                                                                                    

@@ -2,15 +2,10 @@
   session_start(); 
   require('../../config/dbconnection.php');
 
-  if (!isset($_SESSION['name'])) {
-  	header('location: ../student_login.php');
+  if (!isset($_SESSION['studentname'])) {
+  	header('location: ../../student_login.php');
   }
 
-  if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['name']);
-    header("location: ../student_login.php");
- }
  require('../../config/studentconfig/studentCart.php');
  include('../../config/teacherconfig/teacher-backend.php');
  include('../../assets/includes/navbar-student.php');
@@ -51,7 +46,7 @@
             <div class="lesson-container">
                 <?php
 
-                    $studentCourse_query = "SELECT * from student_course where phoneNumber = '{$_SESSION['phone']}'";
+                    $studentCourse_query = "SELECT * from student_course where phoneNumber = '{$_SESSION['studentphone']}'";
                     $studentCourse_result = mysqli_query($connection, $studentCourse_query);
                     $check_studentCourse_result = mysqli_num_rows($studentCourse_result) > 0;
 

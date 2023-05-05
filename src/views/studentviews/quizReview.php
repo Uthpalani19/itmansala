@@ -3,16 +3,11 @@
     include('../../assets/includes/navbar-student.php');
     require('../../config/dbconnection.php');
 
-    if (!isset($_SESSION['name'])) {
-        header('location: ../student_login.php');
+    if (!isset($_SESSION['studentname'])) {
+        header('location: ../../student_login.php');
     }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
-    }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +38,7 @@
             $row = mysqli_fetch_assoc($result);
             $subtopicName=$row['subTopicName'];
 
-            $phoneNumber = $_SESSION['phone'];
+            $phoneNumber = $_SESSION['studentphone'];
             $attempt = $_GET['attempt'];
         ?>
         <!--Course Details-->

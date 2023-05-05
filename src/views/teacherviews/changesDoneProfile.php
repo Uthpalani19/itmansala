@@ -14,6 +14,7 @@
     <!-- Student main details -->
     <div class="draken-area">
         <?php 
+            session_start();
             require_once('../../assets/includes/navbar-student.php');
         ?>
 

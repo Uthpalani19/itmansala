@@ -96,6 +96,7 @@ if (isset($_POST['add_subtopic'])) {
     $query = "INSERT INTO subtopic (subTopicId, courseId, subTopicName, content) 
                   VALUES('$subtopicNumber', '$lesson', '$subtopicName', '$subtopicPdf')";
     mysqli_query($connection, $query);
+    
 
     }else{
         echo   '<div class="error-msg-container" id="errorPopup">

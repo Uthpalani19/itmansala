@@ -9,6 +9,10 @@ body {
     background: #d9d9d9;
 }
 
+.stopscroll{
+    overflow: hidden;
+}
+
 .content-container{
     background: white;
     width: 90%;
@@ -21,6 +25,12 @@ body {
     padding-bottom: 10rem;
     opacity: 0;
     animation: fadeIn 0.2s ease-in forwards;
+}
+
+.welcome-msg{
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding-top: 1.7rem;
 }
 
 .tip{
@@ -75,7 +85,7 @@ body {
 .db-lesson{
     width: 25%;
     margin: 15px 20px;
-    height: 32.5rem;
+    height: 26.5rem;
     display: inline-block;
     border: 1px solid  black;
     border-radius: 10px;
@@ -92,12 +102,10 @@ body {
     text-decoration: none; 
 }
 
-
-
 .fa-circle-plus{
     font-size: 10rem;
     margin: 15px 20px;
-    padding: 156px 62px;
+    padding: 148px 62px;
     color: #d9d9d9;
     display: inline-block;
     border-radius: 10px;
@@ -111,6 +119,7 @@ body {
     width: 100%;
     height: 175px;
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .cover-img{
@@ -134,105 +143,69 @@ body {
     align-items: center;
 }
 
+.course-name a{
+    font-weight: bold;
+}
+
+.username{
+    margin: 15px 0px 10px 0;
+}
+
 .price-username p{
     color: #636363;
-    font-size: 1rem;
+    font-size: 13px;
+    width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 50px;
+    margin-right: -30px;
 }
 
 .price-username{
     margin-top: 10px;
 }
 
-.price{
-    width: 40%;
-    display: inline-block;
-    margin-left: -10px;
+.fa-chalkboard-user{
+    color: #968ea2;
 }
 
-.username{
-    display: inline-block;
-    width: 40%;
-    margin-left: 40px;
+.approval-heading{
+    padding-top: 2.5rem;
 }
 
-.fa-circle-plus:hover{
-    color: #5C26A9;
-    transition: 0.3s;
+.lines{
+    width: 95%;
+    margin: auto;
+    margin-bottom: 30px;
+    margin-top: -15px;
+    border-bottom: 1px solid #a8a8a8;
 }
 
-.p{
-    margin-top: 10px;
+.no-pending{
+    width: 50%;
+    margin: auto;
+    margin-right: 21rem;
+    margin-top: 6rem;
 }
 
-.activate-course{
-    cursor: pointer;
-    background: #09c919;
-    border: none;
-    color: white;
-    font-weight: 700;
-    width: 90%;
-    border-radius: 5px;
-    padding: 5px;
-    margin-top: 15px;
+.no-pending p{
+    color: #838282;
+    font-size: 1.2rem;
 
 }
 
-.revise-course{
-    cursor: pointer;
-    background: #636363;
-    border: none;
-    color: white;
-    font-weight: 700;
-    width: 90%;
-    border-radius: 5px;
-    padding: 5px;
-    margin-top: 15px;
-
+.fa-circle-check{
+    color: chartreuse;
+    font-size: 4rem;
+    vertical-align: middle;
 }
 
-@keyframes fadeIn{
-    to{
-      opacity: 1;
-    } 
-  }
-
-.addcourse-name{
-    margin: 25px 0 0 140px;
-    text-align: left;
+.fa-ban{
+    color: red;
+    font-size: 4rem;
+    vertical-align: middle;
 }
 
-.addcourse-button{
-    margin-top: 40px;
-    background: #5c26a9 ;
-    outline: none;
-    border: none; 
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 7px;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    color: #fff;
+.published-div{
+    margin-top: 5rem;
 }
-
-.addcourse-div{
-    display: inline;
-    background: #cccccc;
-    padding: 25px 15px 25px 15px;
-    border-radius: 7px;
-}
-
-.addcourse-text{
-    width: 45%;
-    padding: 13px 0 13px 7px;
-    border: #cccccc 1px solid;
-    border-radius: 7px;
-    margin-right: 7px;
-    font-size: 17px;
-}
-
-.addcourse-text:hover, :active, :focus{
-    outline: none;
-	border-color: #5C26A9;
-} 

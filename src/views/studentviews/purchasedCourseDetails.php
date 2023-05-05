@@ -4,8 +4,8 @@
     include('../../assets/includes/navbar-student.php');
 
 
-    if (!isset($_SESSION['name'])) {
-        header('location: ../student_login.php');
+    if (!isset($_SESSION['studentname'])) {
+        header('location: ../../student_login.php');
     }
 
     include('../../config/studentconfig/viewsubtopic-backend.php') ;
@@ -230,7 +230,7 @@
     
     <!-- this contains course ratings -->
     <?php
-        $student_id = $_SESSION['phone'];
+        $student_id = $_SESSION['studentphone'];
         $course_id = $lesson;
 
         // Check if the student has already rated the course
@@ -303,7 +303,7 @@
                         if (isset($_POST["rating"]) && isset($_POST["reviewMessage"])) {
                             $rating = $_POST['rating'];
                             $reviewMessage = $_POST['reviewMessage'];
-                            $student_id = $_SESSION['phone'];
+                            $student_id = $_SESSION['studentphone'];
                             $course_id = $lesson;
     
                             // Check if the student has already rated the course

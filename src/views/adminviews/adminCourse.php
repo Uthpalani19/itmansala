@@ -25,18 +25,25 @@ if (isset($_POST['addcourse'])){
     <div class="content-container" id="content">
 
         
-        <div class="add-course">
-            <h2 class="p">Publish a New Course</h2>
+    <div class="add-course">
+            <p class="approval-heading">Courses awaiting approval</p>
+            <div class="lines"></div>
+            <div class="lines"></div>
 
             <div class="lesson-container">
                 <?php
-                    $course_query= "SELECT * FROM course";
+                    $course_query= "SELECT * FROM course WHERE review = '1'";
                     $course_result = mysqli_query($connection, $course_query);
                     $check_course_result = mysqli_num_rows($course_result) > 0;
 
                     if($check_course_result){
                         while($course_row = mysqli_fetch_array($course_result)){
                             $number= $course_row['courseId'];
+                            $phoneNo = $course_row['teacherPhoneNumber'];
+
+                            $teacher_query= "SELECT * FROM teacher WHERE phoneNumber = '$phoneNo'";
+                            $teacher_result = mysqli_query($connection, $teacher_query);
+                            $teacher_row = mysqli_fetch_array($teacher_result);
                             ?>
                             <div class="db-lesson">
                                 
@@ -44,32 +51,86 @@ if (isset($_POST['addcourse'])){
                                     <img src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" class="cover-img">
                                 </div>
 
-                                <p>Lesson 0<?php echo $course_row['courseId'];?></p>
                                 <div class="course-name">
-                                    <?php echo $course_row['courseName'];?>
+                                    <a href="adminSubtopic.php?lesson=<?php echo $number ?>"><?php echo $course_row['courseName'];?></a>
                                 </div>
                                 <div class ="price-username">
-                                    
-                                    <div class="price">
-                                        <p><?php echo $course_row['price'];?></p>
-                                    </div>
+
                                    <div class="username">
-                                        <p>Uthpalani</p>
+                                        <i class="fa-solid fa-chalkboard-user"></i>
+                                        <p><?php echo $teacher_row['name']; ?></p>
                                    </div>
                                     
                                 </div>
-                                <div class="activate">
-                                    <button type="" class="revise-course" onClick="">Send for revision</button>
-                                    <button type="" class="activate-course" onClick="approveCourse.php">Publish to students</button>
-                                </div>
-                                
+ 
                             </div>
-                            
                             <?php
                         }
+                    }else{
+                        ?>
+                        <div class="no-pending">
+                            <p><i class="fa-solid fa-circle-check"></i> No Courses are currently awaiting for approval</p>
+                        </div>
+                        <?php
                     }
                     ?>
             </div>
+        </div>
+            
+
+
+
+        <div class="add-course published-div">
+            <p class="approval-heading">Courses Published to Students</p>
+            <div class="lines"></div>
+            <div class="lines"></div>
+
+            <div class="lesson-container">
+                <?php
+                    $course_query= "SELECT * FROM course WHERE status = '1'";
+                    $course_result = mysqli_query($connection, $course_query);
+                    $check_course_result = mysqli_num_rows($course_result) > 0;
+
+                    if($check_course_result){
+                        while($course_row = mysqli_fetch_array($course_result)){
+                            $number= $course_row['courseId'];
+                            $phoneNo = $course_row['teacherPhoneNumber'];
+
+                            $teacher_query= "SELECT * FROM teacher WHERE phoneNumber = '$phoneNo'";
+                            $teacher_result = mysqli_query($connection, $teacher_query);
+                            $teacher_row = mysqli_fetch_array($teacher_result);
+                            ?>
+                            <div class="db-lesson">
+                                
+                                <div class="img-container">
+                                    <img src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" class="cover-img">
+                                </div>
+
+                                <div class="course-name">
+                                    <a href="adminSubtopic.php?lesson=<?php echo $number ?>"><?php echo $course_row['courseName'];?></a>
+                                </div>
+                                <div class ="price-username">
+
+                                   <div class="username">
+                                        <i class="fa-solid fa-chalkboard-user"></i>
+                                        <p><?php echo $teacher_row['name']; ?></p>
+                                   </div>
+                                    
+                                </div>
+ 
+                            </div>
+                            <?php
+                        }
+                    }else{
+                        ?>
+                        <div class="no-pending">
+                            <p><i class="fa-solid fa-ban"></i> No Courses are currently available for students</p>
+                        </div>
+                        <?php
+                    }
+                    ?>
+            </div>
+        </div>
             
 
         </div>

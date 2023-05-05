@@ -396,13 +396,18 @@ label{
 
 .activate-course{
     cursor: pointer;
-    background: #968ea2;
+    background: #8054c4;
     border: none;
     color: white;
     font-weight: 700;
     width: 90%;
     border-radius: 5px;
     padding: 7px;
+}
+
+.reviewBtn{
+    background: chartreuse;
+    cursor:no-drop;
 }
 
 

@@ -1,20 +1,12 @@
 <?php 
     // Navigation Bar
-    require_once('../../assets/includes/navbar-student.php');
     session_start();
+    require_once('../../assets/includes/navbar-student.php');
     require('../../config/dbconnection.php');
 
-    if(!isset($_SESSION['name']))
-    {
-        header('location:index.php');
-    }
-
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['name']);
-        header('location:index.php');
-    }
+  if (!isset($_SESSION['studentname'])) {
+  	header('location: ../../student_login.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +37,7 @@
 
             <!-- Getting enrolled number of courses -->
             <?php
-                $sqlNoofCourses = "SELECT count(*) as total from student_course where phoneNumber = '{$_SESSION['phone']}' and status = '1'";
+                $sqlNoofCourses = "SELECT count(*) as total from student_course where phoneNumber = '{$_SESSION['studentphone']}' and status = '1'";
                 $resultNoofCourses = mysqli_query($connection,$sqlNoofCourses);
                 $dataNoofCourses = mysqli_fetch_assoc($resultNoofCourses);
             ?>
@@ -61,7 +53,7 @@
                 $studentRank = 0;
                 
                 while ($rowRank = mysqli_fetch_assoc($resultRank)) {
-                    if ($rowRank['phoneNumber'] == $_SESSION['phone']) {
+                    if ($rowRank['phoneNumber'] == $_SESSION['studentphone']) {
                         $studentRank = $rowRank['rank'];
                     }
                 }
@@ -93,7 +85,7 @@
     <!-- Courses student does -->
     <?php
         // Getting the course name from the database
-        $sql_dropdown = "SELECT c.courseName from course c,student_course sc where c.courseID = sc.courseID and sc.phoneNumber = '{$_SESSION['phone']}' and sc.status = '1'";
+        $sql_dropdown = "SELECT c.courseName from course c,student_course sc where c.courseID = sc.courseID and sc.phoneNumber = '{$_SESSION['studentphone']}' and sc.status = '1'";
         $result_dropdown = mysqli_query($connection,$sql_dropdown);
     ?>
 

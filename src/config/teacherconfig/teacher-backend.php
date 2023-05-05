@@ -78,8 +78,8 @@ if (isset($_POST['add_course'])) {
 
     $master_error = array_merge($Title_Error, $Desc_Error);
     if (count($master_error) == 0) {
-    $query = "INSERT INTO course (courseId, courseName, courseDescription, courseImage, price, teacherPhoneNumber, status) 
-    VALUES('$courseNumber', '$courseName', '$courseDescription', '$coursedp', '$Price', '$teacherNumber', '1')";
+    $query = "INSERT INTO course (courseId, courseName, courseDescription, courseImage, price, teacherPhoneNumber, status, review) 
+    VALUES('$courseNumber', '$courseName', '$courseDescription', '$coursedp', '$Price', '$teacherNumber', '0', '0')";
     mysqli_query($connection, $query);
     header('location: addcourse.php');
 
@@ -112,6 +112,17 @@ $courseQuery = "SELECT * FROM course_name WHERE course_name NOT IN (SELECT cours
 $courseResult = mysqli_query($connection, $courseQuery);
 if(mysqli_num_rows($courseResult) > 0) {
 
+}
+
+
+//publish course
+if (isset($_POST['publish_course'])){
+    $publishId = mysqli_real_escape_string($connection, $_POST['publish_id']);
+    $query = "UPDATE course
+                        SET review = '1'
+                        WHERE courseID = '$publishId'";
+    mysqli_query($connection, $query);
+    header('location: addcourse.php');
 }
 ?>
 
