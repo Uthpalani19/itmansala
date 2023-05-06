@@ -471,4 +471,38 @@
     background-color: #848484;
 }
 
+/* ----------------------- Student posted reviw starts here ---------------------------- */
 
+.posted-rt-header{
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.rt-header-title{
+    width: 80%;
+    height: 120px;
+    display: flex;
+    background-color: #D9D9D9;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.rt-header-icon{
+    height: 120px;
+    width: 200px;
+    background-color: #5C26A9;
+}
+
+.rt-course-name{
+    height: 120px;
+    width: 350px;
+    background-color: #b63e3e;
+}
+
+.rt-course-review{
+    height: 120px;
+    width: 500px;
+    background-color: #6b4e4e;
+}
