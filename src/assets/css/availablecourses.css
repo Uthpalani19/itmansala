@@ -288,3 +288,18 @@ body {
     color: black;
     text-decoration: none;
 }
+
+.cart-form{
+    display: inline-block;
+}
+
+.emptydiv{
+    width: 75%;
+    padding-left: 17rem;
+    color: #4a4a4a;
+}
+
+.empty-img{
+    margin-left: 3rem;
+    width: 40%;
+}

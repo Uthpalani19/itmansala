@@ -3,16 +3,10 @@
     include('../../assets/includes/navbar-student.php');
     require('../../config/dbconnection.php');
 
-    if (!isset($_SESSION['name'])) {
-        header('location: ../student_login.php');
+    if (!isset($_SESSION['studentname'])) {
+        header('location: ../../student_login.php');
     }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['firstname']);
-        header('location:index.php');
-    }
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +38,7 @@
             $row = mysqli_fetch_assoc($result);
             $subtopicName=$row['subTopicName'];
 
-            $phoneNumber = $_SESSION['phone'];
+            $phoneNumber = $_SESSION['studentphone'];
         ?>
         <!--Course Details-->
         <div class="course-details-box">
@@ -93,7 +87,7 @@
                             echo '
                                 <tr>
                                     <td>2</td>
-                                    <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=2">Click here to reattempt</a></button></td>
+                                    <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=2&questionNumber=0">Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';
@@ -101,7 +95,7 @@
                             echo '
                                 <tr>
                                     <td>3</td>
-                                    <td><button disabled><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3">Click here to reattempt</a></button></td>
+                                    <td><button disabled><a>Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';
@@ -111,7 +105,7 @@
                             echo '
                                 <tr>
                                     <td>2</td>
-                                    <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=2">Click here to reattempt</a></button></td>
+                                    <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=2&questionNumber=0">Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';
@@ -119,7 +113,7 @@
                             echo '
                                 <tr>
                                     <td>3</td>
-                                    <td><button disabled><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3">Click here to reattempt</a></button></td>
+                                    <td><button disabled><a>Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';
@@ -132,7 +126,7 @@
                         echo '
                             <tr>
                                 <td>3</td>
-                                <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3">Click here to reattempt</a></button></td>
+                                <td><button><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3&questionNumber=0">Click here to reattempt</a></button></td>
                                 <td>Not available</td>
                             </tr>
                         ';
@@ -142,7 +136,7 @@
                             echo '
                                 <tr>
                                     <td>3</td>
-                                    <td><button disabled><a href="questionsViewStudent.php?courseId='.$courseId.'&subId='.$subtopicId.'&attempt=3">Click here to reattempt</a></button></td>
+                                    <td><button disabled><a>Click here to reattempt</a></button></td>
                                     <td>Not available</td>
                                 </tr>
                             ';

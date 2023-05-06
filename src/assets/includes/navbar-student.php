@@ -20,16 +20,21 @@
             </div>
             <div class="nav-user-tray">
                 <p onclick="window.location.href='../../views/studentviews/cartSudentView.php'"><i class="fas fa-shopping-cart"></i></p>
-                <p class="cart-count" id="cart-count">0</p>
                 <p><i class="fa-regular fa-bell"></i></p>
-                <p><i class="fa-solid fa-circle-user"></i></p>
-                <!-- <p><?php echo $_SESSION['name']; ?></p> -->
+                <p><i id="logout" class="fa-solid fa-circle-user"></i></p>
+                <div class="hidden" id="hidden">
+                    <p><i id="close" class="fa-solid fa-xmark"></i></p>
+                    <p><i class="fa-solid fa-circle-user user2"></i></p>
+                    <p><?php echo $_SESSION['studentname']; ?></p>
+                    <a href="">My Profile</a><br><br>
+                    <a href="availablecourses.php?logout='1'">Logout</a>
+                </div>
             </div>
 
         </div>
     </div>
 
-    <script src ="student.js">
+    <script>
     const logout = document.getElementById("logout");
     const hidden = document.getElementById("hidden");
     const close = document.getElementById("close");

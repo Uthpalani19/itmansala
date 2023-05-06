@@ -410,9 +410,13 @@
 /* Quiz information popup */
 .attemptBtn,.info-box
 {
-    position: absolute;
-    margin-top: -1px;
-    transform: translate(-50%, -50%);
+    margin-top: -1rem;
+    margin-left: 41rem;
+    margin-bottom: 2rem;
+}
+
+.purhasedBody{
+    overflow-x: hidden;
 }
 
 .info-box

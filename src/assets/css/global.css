@@ -195,8 +195,8 @@ body {
     background: #b8b8b8;
     text-align: center;
     box-shadow: 3px 5px 10px #848484;
-    right: 35px;
-    height: 235px;
+    right: 15px;
+    height: 300px;
     display: none;
 }
 
@@ -212,13 +212,12 @@ body {
 }
 
 .fa-xmark:hover{
-    color: #5C26A9;
+    color: #f20000;
 }
 
 .user2{
     color: rgb(54, 54, 54);
     font-size: 100px;
-    margin-bottom: 15px;
 }
 
 .hidden a{

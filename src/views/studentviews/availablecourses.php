@@ -2,14 +2,18 @@
   session_start(); 
   require('../../config/dbconnection.php');
 
-  if (!isset($_SESSION['name'])) {
-  	header('location: ../student_login.php');
+  if(!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = array();
+  }
+
+  if (!isset($_SESSION['studentname'])) {
+  	header('location: ../../student_login.php');
   }
 
   if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['name']);
-    header("location: ../student_login.php");
+    unset($_SESSION['studentname']);
+    header("location: ../../student_login.php");
  }
 
 ?>
@@ -26,10 +30,10 @@
 </head>
 <body>
 
-<div class="splashcourse">
-        <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['name']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
+<!----<div class="splashcourse">
+        <p class="fade-in">Hi <?php echo "<span class='welcome-msg'>".$_SESSION['studentname']."</span>"; ?>,<br>Welcome to IT Mansala</p> 
         <img class="welcome-avatar fade-in" src="../../assets/images/welcome_avatar.png">
-</div> 
+</div> ---->
 <div class="container">
     <?php include('../../assets/includes/navbar-student.php') ?>
 
@@ -55,13 +59,14 @@
             <form method="post" action="">
             <div class="lesson-container">
                 <?php
-                    $course_query= "SELECT * FROM course";
+                    $course_query= "SELECT * FROM course WHERE status=1";
                     $course_result = mysqli_query($connection, $course_query);
                     $check_course_result = mysqli_num_rows($course_result) > 0;
 
                     if($check_course_result){
                         while($course_row = mysqli_fetch_array($course_result)){
                             $number= $course_row['courseId'];
+                            
                             ?>
                             
                             <div class="db-lesson">
@@ -81,8 +86,22 @@
                                     <div class="price">
                                         <p><?php echo $course_row['price'];?> LKR</p>
                                     </div>
-                                    <button type="submit" name="cart-btn" class="cart-btn" id="add-to-cart-button"> Add to Cart </button>
-                                    <input type="hidden" name="course_id" value= "<?php echo $course_row['courseId'];?>" >
+                                    <form class="cart-form" method="post">
+                                            <button type="submit" name="cart_btn" class="cart-btn" value="<?php echo $number ?>" id="<?php echo $cartbtnclick;?>"> Add to Cart </button>
+                                    </form>
+
+                                    <?php
+                                    if(isset($_POST['cart_btn'])) {
+                                        $formnum = mysqli_real_escape_string($connection, $_POST['cart_btn']);
+                                        if($formnum == $number){
+                                            array_push( $_SESSION['cart'], $number);
+                                        
+                                        }
+                                        
+                                    }
+                                    ?>
+                                    
+                                    
 
                                 </div>
 
@@ -118,6 +137,13 @@
                             </div>
                             <?php
                         }
+                    }else{
+                        ?>
+                        <div class="emptydiv">
+                            <p>Sorry! No courses are currently available.</p>
+                            <img class="empty-img" src="../../assets/images/welcome_avatar.png">
+                        </div>
+                        <?php
                     }
                     ?>
 

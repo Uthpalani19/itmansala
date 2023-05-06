@@ -80,16 +80,11 @@ label{
 }
 
 .item-img{
-    width: 120px;
-}
-
-.item-image{
-    flex-grow: 1;
-
+    width: 120px
 }
 
 .item-content{
-    flex-grow: 2;
+margin-left: 50px;
 
 }
 
@@ -118,7 +113,8 @@ label{
     border: none;
     background-color: #0BA7FF;
     color: aliceblue;
-    box-shadow:#0000007c 0 0 0 1px;   
+    box-shadow:#0000007c 0 0 0 1px; 
+    cursor: pointer;  
 
 }
 
