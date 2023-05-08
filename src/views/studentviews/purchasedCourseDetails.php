@@ -25,7 +25,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
-<body id="body">
+<body id="body" class="purhasedBody">
 
     <div class="lesson-info viewlessoninfo">
         <div class="lesson-num">
@@ -88,6 +88,8 @@
                             $showvideo = bin2hex(random_bytes(4));
                             $videoclose = bin2hex(random_bytes(4));
                             $player = bin2hex(random_bytes(4));
+                            $quizbtn = bin2hex(random_bytes(4));
+                            $quizbtnclik = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $showvideoclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $playerIDclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $videocloseclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
@@ -115,10 +117,6 @@
                                 <?php
                                 }
                                 ?>
-
-                                <!-- Attempt quiz button -->
-                                <a href="questionsViewStudent.php?subId=<?php echo $subtopic;?>&courseId=<?php echo $lesson;?>&attempt=1">
-                                <input type="button" value="Attempt Quiz" class="btn-questions add-questions attemptBtn" name="attemptQuiz" id="attemptQuizbtn"></a>
                             </div>
 
                             <?php 
@@ -173,7 +171,11 @@
                             
                             <?php
                         }
-        
+                        ?>
+                        <!-- Attempt quiz button -->
+                                <a id="<?php echo $quizbtn; ?>" style="display:none;" href="questionsViewStudent.php?subId=<?php echo $subtopic;?>&courseId=<?php echo $lesson;?>&attempt=1&questionNumber=0">
+                                <input type="button" value="Attempt Quiz" class="btn-questions add-questions attemptBtn" name="attemptQuiz" id="attemptQuizbtn"></a>
+                        <?php
                     }
                 }
                 ?>
@@ -181,12 +183,14 @@
                     const <?php echo $subidonclick; ?> = document.getElementById("<?php echo $subid; ?>");
                     const <?php echo $dblessonIDonclick; ?> = document.getElementsByClassName("<?php echo $class; ?>"); 
                     const <?php echo $hideIDonclick; ?> = document.getElementById("<?php echo $hideid; ?>");
+                    const <?php echo $quizbtnclik; ?> = document.getElementById("<?php echo $quizbtn; ?>");
 
                     <?php echo $subidonclick; ?>.onclick = function(){
                         var i;
                         for (i=0; i< <?php echo $dblessonIDonclick; ?>.length; i++){
                             <?php echo $dblessonIDonclick; ?>[i].style.display = "block";
                         }
+                        <?php echo $quizbtnclik; ?>.style.display = "block";
                     }
 
                     <?php echo $hideIDonclick; ?>.onclick =function(){
@@ -194,6 +198,7 @@
                         for (x=0; x< <?php echo $dblessonIDonclick; ?>.length; x++){
                         <?php echo $dblessonIDonclick; ?>[x].style.display = "none";
                         }
+                        <?php echo $quizbtnclik; ?>.style.display = "none";
                     }
                 </script>
                 
@@ -298,7 +303,7 @@
                         if (isset($_POST["rating"]) && isset($_POST["reviewMessage"])) {
                             $rating = $_POST['rating'];
                             $reviewMessage = $_POST['reviewMessage'];
-                            $student_id = $_SESSION['phone'];
+                            $student_id = $_SESSION['studentphone'];
                             $course_id = $lesson;
     
                             // Check if the student has already rated the course

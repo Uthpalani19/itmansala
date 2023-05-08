@@ -75,7 +75,7 @@
                                         </div>
                             
                                         <div class="course-ratings">
-                                        <h4 class="course rating">gg</h4>
+                                        <h4 class="course rating"></h4>
                                         </div>
                                     </div>
                                     <?php
