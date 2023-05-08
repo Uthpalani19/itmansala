@@ -857,8 +857,7 @@ tr:nth-child(odd)
 
 .btn-question:hover
 {
-    background-color: #6D6D6D;
-    color: #5319a6;
+    transform: scale(1.1); 
 }
 
 #question
@@ -1042,6 +1041,21 @@ tr:nth-child(odd)
 }
 
 /*Add questions button*/
+.question-options-container
+{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-left: 300px;
+    margin-right: 400px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.question-options-container > .btn-question
+{
+    text-align: center;
+}
+
 .btn-questions
 {
     padding : 10px 45px;

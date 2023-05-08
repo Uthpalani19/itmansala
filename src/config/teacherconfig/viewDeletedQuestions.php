@@ -13,13 +13,20 @@
 
 <body>
     <?php   
+        // Get Subtopic ID
+        $subId = $_GET['subId'];
+    
+        // Get Course ID
+        $courseId = $row['courseId'];
+
         $questionID = $_GET['recoverId'];
         $sql = "UPDATE modelpaperquestion set status=1 WHERE questionId='$questionID'";
         $result = mysqli_query($connection,$sql);
 
         if($result)
         {
-            echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php'</script>";        }
+            echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php?subId=".$subId."&courseId=".$courseId."';</script>";
+        }
         else
         {
             echo "Question Deletion Failed";
