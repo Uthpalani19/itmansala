@@ -46,7 +46,7 @@
             <div class="lesson-container">
                 <?php
 
-                    $studentCourse_query = "SELECT * from student_course where phoneNumber = '{$_SESSION['phone']}'";
+                    $studentCourse_query = "SELECT * from student_course where phoneNumber = '{$_SESSION['studentphone']}'";
                     $studentCourse_result = mysqli_query($connection, $studentCourse_query);
                     $check_studentCourse_result = mysqli_num_rows($studentCourse_result) > 0;
 

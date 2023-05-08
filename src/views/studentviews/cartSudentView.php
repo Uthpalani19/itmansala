@@ -2,7 +2,7 @@
   session_start(); 
   require('../../config/dbconnection.php');
 
-  if (!isset($_SESSION['name'])) {
+  if (!isset($_SESSION['studentname'])) {
   	header('location: ../../student_login.php');
   }
 

@@ -225,7 +225,7 @@
     
     <!-- this contains course ratings -->
     <?php
-        $student_id = $_SESSION['phone'];
+        $student_id = $_SESSION['studentphone'];
         $course_id = $lesson;
 
         // Check if the student has already rated the course
