@@ -334,3 +334,16 @@ label{
 .success-msg-2{
     color: #525252;
 }
+
+.form-btn{
+    color: white;
+    background: #5319a6;
+    width: 15%;
+    padding: 7px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 2rem;
+    margin-left: 1rem;
+}

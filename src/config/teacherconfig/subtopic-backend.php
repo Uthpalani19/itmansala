@@ -253,11 +253,19 @@ if (isset($_POST['edit_lesson'])) {
                     WHERE lessonName ='$lessonpk' AND subTopicId ='$lessonNumber'";
     mysqli_query($connection, $query);
 
-
-
-
 }
 
+
+if (isset($_POST['quiz_time'])){
+    $quizsubtopic = mysqli_real_escape_string($connection, $_POST['quiz_subtopic']);
+    $quizduration = mysqli_real_escape_string($connection, $_POST['quiz_duration']);
+
+    $query = "UPDATE subtopic 
+    SET time = '$quizduration'
+    WHERE subTopicId ='$quizsubtopic'";
+    mysqli_query($connection, $query);
+
+}
 
 
 

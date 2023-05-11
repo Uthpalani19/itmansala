@@ -1,4 +1,4 @@
-body {
+body{
     font-family: 'Poppins', sans-serif;
     margin: 0;
     background: #FFFFFF;
@@ -38,6 +38,8 @@ body {
 {
     text-align: center;
     color: #636363;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 /*Add Questions*/
@@ -172,4 +174,16 @@ body {
 {
     margin: 0px 0px 0px 100px;
     color: #636363;
+}
+
+.timer{
+    position: absolute;
+    font-size: 15px;
+    top: 37.5%;
+    right: 9.2%;
+    font-weight: 700;
+    color: #5319a6;
+    background: #f7f1ff;
+    border-radius: 4px;
+    padding: 3px;
 }
