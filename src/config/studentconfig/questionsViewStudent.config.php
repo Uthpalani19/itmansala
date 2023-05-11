@@ -113,7 +113,6 @@
             }
             elseif($resultUpdate && $rowCheckQuestion1<=0)
             {
-                echo "yaay";
                 ?>
                     <script>
                         window.location.href = "../../views/studentviews/questionsViewStudent.php?courseId=<?php echo $courseId; ?>&subId=<?php echo $subtopicId?>&attempt=<?php echo $attempt;?>&questionNumber=0";
@@ -121,18 +120,30 @@
                 <?php
             }
             else
-            {
-                echo "Error: " . $sqlUpdate . "<br>" . mysqli_error($connection);
-            }
+            {}
         }
         
     }
 
     if(isset($_POST['Finish']))
     {
-        // Storing the answer
-        $sqlAnswer = "INSERT into student_modelpaperquestion (phoneNumber, subTopicId, questionId, answer, attempt, score) VALUES ('$phoneNumber','$subtopicId','$questionId','$answer','$attempt','$score')";
-        $result = mysqli_query($connection,$sqlAnswer);
+        $sqlCheckQuestion = "SELECT * from student_modelpaperquestion where questionNumber = '$questionNumber'";
+        $resultCheckQuestion = mysqli_query($connection,$sqlCheckQuestion);
+        $rowCheckQuestion = mysqli_fetch_assoc($resultCheckQuestion);
+
+        // If the question is not answered before
+        if($rowCheckQuestion<=0)
+        {
+            // Storing the answer
+            $sqlAnswer = "INSERT into student_modelpaperquestion (phoneNumber, subTopicId, questionId, answer, attempt, score) VALUES ('$phoneNumber','$subtopicId','$questionId','$answer','$attempt','$score')";
+            $result = mysqli_query($connection,$sqlAnswer);
+        }
+        else
+        {
+            // Updating the answer
+            $sqlUpdate = "UPDATE student_modelpaperquestion SET answer = '$answer', score = '$score' where phoneNumber = '$phoneNumber' and subTopicId = '$subtopicId' and questionId = '$questionId' and attempt = '$attempt'";
+            $result = mysqli_query($connection,$sqlUpdate);
+        }
 
         if($result)
         {

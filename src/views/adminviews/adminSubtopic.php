@@ -1,5 +1,7 @@
-<?php include('../../assets/includes/navbar-admin.php') ?>
-<?php include('../../config/studentconfig/viewsubtopic-backend.php') ?>
+<?php 
+    include('../../assets/includes/navbar-admin.php');    
+    include('../../config/studentconfig/viewsubtopic-backend.php')
+?>
 <html>
 
 <head>
@@ -153,8 +155,10 @@
 
                             </script>
                             <?php
-                        }
-        
+                        }?>
+                        <!--Add & view Questions button-->
+                         <a href="../adminviews/viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions view-questions" name="viewQuestions"></a>
+                    <?php
                     }
                 }
                 ?>

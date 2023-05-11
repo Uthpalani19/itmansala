@@ -102,12 +102,12 @@ if (!isset($_SESSION['studentname'])) {
         
                             <div class="dblesson <?php echo $class; ?>">
                                 <p><?php echo $retrieve_lesson_row['lessonName']; ?></p>
-                                <a class="show-pdf" id="<?php echo $show; ?>">Click here to learn</a>
+                                <a class="show-pdf locked-content" id="">Click here to learn</a>
                                 <i class="fa-solid fa-lock subtopic-lock subtopiclock2"></i><br>
                                 <?php
                                 if(!empty($url)){
                                 ?>
-                                <a class="show-pdf" id="<?php echo $showvideo; ?>">Lesson Video</a>
+                                <a class="show-pdf locked-content" id="">Lesson Video</a>
                                 <?php
                                 }
                                 ?>  

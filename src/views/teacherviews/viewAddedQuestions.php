@@ -39,7 +39,7 @@
         <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
     </head>
 
-    <body class="body-2">
+    <body>
 
         <!--Course Details-->
         <div class="course-details-box">
@@ -55,8 +55,7 @@
 
         <!-- Questions Recovery -->
         <div class="recover"> 
-            <button class="recover-btn"  onclick="window.location.href='../../config/teacherconfig/recoverQuestions.php'"> <i class="fa-large fas fa-trash-restore" id="recover-icon"
-            ></i> Recover Questions</button>
+        <button class="recover-btn" onclick="window.location.href='../../config/teacherconfig/recoverQuestions.php?subId=<?php echo $subId ?>&courseId=<?php echo $courseId ?>'"><i class="fa-large fas fa-trash-restore" id="recover-icon"></i> Recover Questions</button>
         </div>
 
         <div>
@@ -77,18 +76,13 @@
 
             <!--PHP Code-->
             <?php
-                $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId='1.1'";
+                $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId='$subId'";
                 $result = mysqli_query($connection,$sql);
 
                 // Paginations
                 $limit = 5;
                 $total_records = mysqli_num_rows($result);
                 $total_pages = ceil($total_records / $limit);
-
-                // for($i=1; $i<=$total_pages; $i++)
-                // {
-                //     echo '<button class="pagination"><a class="pagination-text" href="viewAddedQuestions.php?page='.$i.'">'.$i.'</a></button>';
-                // }
 
                 if(isset($_GET['page']))
                 {
@@ -115,8 +109,8 @@
                             <td>'.$row['option4'].'</td>
                             <td>'.$row['option5'].'</td>
                             <td>'.$row['answer'].'</td>
-                            <td><a href="../../config/teacherconfig/editQuestions.config.php?editId='.$row['questionId'].'"><i class="fa-solid fa-large fa-file-pen" id="edit-icon" ></i></td>
-                            <td><a href="../../config/teacherconfig/deleteQuestions.config.php?deleteId='.$row['questionId'].'"><i class="fa-solid fa-large fa-trash" id="edit-icon"></i></td>
+                            <td><a href="../../config/teacherconfig/editQuestions.config.php?editId='.$row['questionId'].'&courseId='.$courseId.'&subId='.$subId.'"><i class="fa-solid fa-large fa-file-pen" id="edit-icon" ></i></td>
+                            <td><a href="../../config/teacherconfig/deleteQuestions.config.php?deleteId='.$row['questionId'].'&courseId='.$courseId.'&subId='.$subId.'"><i class="fa-solid fa-large fa-trash" id="edit-icon"></i></td>
                         </tr>
                     ';
                 }
@@ -128,7 +122,7 @@
             <?php
             for($i=1; $i<=$total_pages; $i++)
             {
-                echo '<button class="pagination"><a class="pagination-text" href="viewAddedQuestions.php?page='.$i.'">'.$i.'</a></button>';
+                echo '<button class="pagination"><a class="pagination-text" href="viewAddedQuestions.php?page='.$i.'&courseId='.$courseId.'&subId='.$subId.'">'.$i.'</a></button>';
             }
             ?>
         </div>

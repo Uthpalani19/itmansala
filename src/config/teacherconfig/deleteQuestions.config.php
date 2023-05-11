@@ -12,18 +12,22 @@
 </head>
 
 <body>
-    <?php   
-        $questionID = $_GET['deleteId'];
-        $sql = "UPDATE modelpaperquestion set status=0 WHERE questionId='$questionID'";
-        $result = mysqli_query($connection,$sql);
+<?php   
+    $courseId = $_GET['courseId'];
+    $subId = $_GET['subId'];
+    $questionID = $_GET['deleteId'];
+    $sql = "UPDATE modelpaperquestion SET status=0 WHERE questionId='$questionID'";
+    $result = mysqli_query($connection, $sql);
 
-        if($result)
-        {
-            echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php'</script>";        }
-        else
-        {
-            echo "Question Deletion Failed";
-        }
-    ?>
+    if($result)
+    {
+        echo "<script>window.location.href='../../views/teacherviews/viewAddedQuestions.php?subId=".$subId."&courseId=".$courseId."';</script>";
+    }
+    else
+    {
+        echo "Question Deletion Failed";
+    }
+?>
+
 </body>
 </html>

@@ -86,6 +86,7 @@
                                     <div class="price">
                                         <p><?php echo $course_row['price'];?> LKR</p>
                                     </div>
+                                    
                                     <form class="cart-form" method="post">
                                             <button type="submit" name="cart_btn" class="cart-btn" value="<?php echo $number ?>" id="<?php echo $cartbtnclick;?>"> Add to Cart </button>
                                     </form>

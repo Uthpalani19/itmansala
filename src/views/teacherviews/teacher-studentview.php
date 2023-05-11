@@ -89,7 +89,7 @@
 
             <tbody>
                 <?php
-                    $sql = "SELECT DISTINCT phoneNumber, lastaccesstime FROM student_course INNER JOIN course ON student_course.courseID = course.courseID WHERE course.teacherPhoneNumber = '{$_SESSION['phone']}' GROUP BY student_course.phoneNumber";
+                    $sql = "SELECT DISTINCT phoneNumber, enrolmentDateTime FROM student_course INNER JOIN course ON student_course.courseID = course.courseID WHERE course.teacherPhoneNumber = '{$_SESSION['phone']}' GROUP BY student_course.phoneNumber";
                     $result = mysqli_query($connection,$sql);
 
                     while($row = mysqli_fetch_assoc($result))
@@ -114,7 +114,7 @@
                                 <td>'.$row_studentDetails['phoneNumber'].'</td>
                                 <td>'.$row_studentDetails['email'].'</td>
                                 <td id="status">'.$enrolstatus.'</td>
-                                <td>'.$row['lastaccesstime'].'</td>
+                                <td>'.$row['enrolmentDateTime'].'</td>
                             </tr>
                         ';
                     }

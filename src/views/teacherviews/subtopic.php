@@ -45,14 +45,21 @@
             if($check_retrieve_subtopic){
                 while($retrieve_subtopic_row = mysqli_fetch_array($retrieve_subtopic_result)){
                     $subtopic = $retrieve_subtopic_row['subTopicId'];
+                    $time = $retrieve_subtopic_row['time'];
                     $subid = bin2hex(random_bytes(4));
                     $addlessonid = bin2hex(random_bytes(4));
+                    $clicktoadd = bin2hex(random_bytes(4));
                     $dblessonid = bin2hex(random_bytes(4));
                     $formid = bin2hex(random_bytes(4));
                     $hideid = bin2hex(random_bytes(4)); 
                     $discardid = bin2hex(random_bytes(4)); 
                     $selectfile = bin2hex(random_bytes(4));
                     $selectlabel = bin2hex(random_bytes(4));
+                    $quizdiv = bin2hex(random_bytes(4));
+                    $quizdivbtn = bin2hex(random_bytes(4));
+                    $quizdivclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $quizdivbtnclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                    $clicktoaddjs = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $selctlabelclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $selectfileclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                     $discardIDonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
@@ -304,12 +311,27 @@
         ?>
         <div class="add-lesson" id="<?php echo $addlessonid; ?>" style="display:none;">
             <i class="fa-solid fa-circle-plus"></i>
-            <p>Click here to add a lesson</p>
+            <p id="<?php echo $clicktoadd; ?>">Click here to add a lesson</p>
 
             <!--Add & view Questions button-->
             <a href="addQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="Add Questions" class="btn-questions add-questions" name="addQuestions"></a>
             <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions view-questions" name="viewQuestions"></a>
+            <button id="<?php echo $quizdivbtn; ?>" class="btn-questions quiz-time">Quiz Settings</button>
 
+        </div>
+        
+        <div class="quiz-div" style="display:none;" id="<?php echo $quizdiv; ?>">
+            <form method="post" action="subtopic.php?lesson=<?php echo $subtopic_row['courseId'];?>">
+              <p>Quiz Duration <br> (in minutes):</p>
+              <input type="text" name="quiz_subtopic" value="<?php echo $subtopic; ?>" hidden readonly>
+              <input type="text" name="quiz_duration" value="<?php echo $time; ?>">  
+              <div class="btn-div">
+                    <button type="submit" name="quiz_time" class="quiztime-btn">Save</button>
+              </div>
+            </form>
+            <div class="quiz-note">
+                <p>*Note: To create a quiz without a time limit, set the quiz duration to zero (0).</p>
+            </div>
         </div>
 
         <?php
@@ -383,12 +405,15 @@
         <script>
             const <?php echo $subidonclick; ?> = document.getElementById("<?php echo $subid; ?>");
             const <?php echo $addlessonIDonclick; ?> = document.getElementById("<?php echo $addlessonid; ?>");
+            const <?php echo $clicktoaddjs; ?> = document.getElementById("<?php echo $clicktoadd; ?>");
             const <?php echo $dblessonIDonclick; ?> = document.getElementsByClassName("<?php echo $class; ?>");
             const <?php echo $formIDonclick; ?> = document.getElementById("<?php echo $formid; ?>");
             const <?php echo $hideIDonclick; ?> = document.getElementById("<?php echo $hideid; ?>");
             const <?php echo $discardIDonclick; ?> = document.getElementById("<?php echo $discardid; ?>");
             const <?php echo $selectfileclick; ?> = document.getElementById("<?php echo $selectfile; ?>");
             const <?php echo $selctlabelclick; ?> = document.getElementById("<?php echo $selectlabel; ?>");
+            const <?php echo $quizdivbtnclick; ?> = document.getElementById("<?php echo $quizdivbtn; ?>");
+            const <?php echo $quizdivclick; ?> = document.getElementById("<?php echo $quizdiv; ?>");
                                 
             <?php echo $subidonclick; ?>.onclick = function(){
                 var i;
@@ -398,10 +423,14 @@
                 <?php echo $addlessonIDonclick; ?>.style.display = "block";
                 }
 
-            <?php echo $addlessonIDonclick; ?>.onclick = function(){
+            <?php echo $clicktoaddjs; ?>.onclick = function(){
                 <?php echo $formIDonclick; ?>.style.display = "block";
                 }
-
+            
+            <?php echo $quizdivbtnclick; ?>.onclick = function(){
+                <?php echo $quizdivclick; ?>.style.display = "block";
+            }
+            
             <?php echo $hideIDonclick; ?>.onclick =function(){
                 var x;
                 for (x=0; x< <?php echo $dblessonIDonclick; ?>.length; x++){
@@ -409,6 +438,7 @@
                     }
                 <?php echo $addlessonIDonclick; ?>.style.display = "none";
                 <?php echo $formIDonclick; ?>.style.display = "none";
+                <?php echo $quizdivclick; ?>.style.display = "none";
                 }
 
             <?php echo $discardIDonclick; ?>.onclick = function(){

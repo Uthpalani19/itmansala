@@ -629,6 +629,8 @@ tr:nth-child(odd)
     padding: 0px 0 0 30px;
 }
 
+/* Dashboard */
+
 /* Marks distribution */
 .subtopic-dashboard
 {
@@ -857,8 +859,7 @@ tr:nth-child(odd)
 
 .btn-question:hover
 {
-    background-color: #6D6D6D;
-    color: #5319a6;
+    transform: scale(1.1); 
 }
 
 #question
@@ -1042,6 +1043,21 @@ tr:nth-child(odd)
 }
 
 /*Add questions button*/
+.question-options-container
+{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-left: 300px;
+    margin-right: 400px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.question-options-container > .btn-question
+{
+    text-align: center;
+}
+
 .btn-questions
 {
     padding : 10px 45px;
@@ -1056,12 +1072,20 @@ tr:nth-child(odd)
 
 .add-questions
 {
-    margin-left: 35%;
+    margin-left: 26%;
 }
 
 .view-questions
 {
     margin-left: 15px;
+}
+
+.quiz-time{
+    margin-left: 15px;
+}
+
+.quiz-form{
+    display: inline;
 }
 
 .btn-questions:hover
@@ -1106,7 +1130,7 @@ tr:nth-child(odd)
 {
     display: flex;
     padding: 0.5rem 0.75rem;
-    margin: 0 10px 0 10px;
+    margin: 0 10px 0 300px;
     background-color: #FFFFFF;
     color: #5319a6;
     border-radius: 10px;

@@ -1,9 +1,10 @@
-<?php
+<!-- Common -->
+<?php 
     // Navigation Bar
-    require_once('../../assets/includes/navbar-teacher.php');
     session_start();
-    require('../../config/dbconnection.php');
+    require_once('../../assets/includes/navbar-admin.php');
 
+    require('../../config/dbconnection.php');
     if(!isset($_SESSION['name']))
     {
         header('location:C:\xampp\htdocs\itmansala\src\index.php');
@@ -16,34 +17,30 @@
         header('location:C:\xampp\htdocs\itmansala\src\index.php');
     }
 
-     // Get Subtopic ID
-     $subId = $_GET['subId'];
-     $sql = "SELECT * FROM subtopic WHERE subTopicId = '$subId'";
-     $result = mysqli_query($connection, $sql);
-     $row = mysqli_fetch_array($result);
-     $subName = $row['subTopicName'];
- 
-     // Get Course ID
-     $courseId = $row['courseId'];
-     $sql = "SELECT * FROM course WHERE courseId = '$courseId'";
-     $result = mysqli_query($connection, $sql);
-     $row = mysqli_fetch_array($result);
-     $courseName = $row['courseName'];
+    // Get Subtopic ID
+    $subId = $_GET['subId'];
+    $sql = "SELECT * FROM subtopic WHERE subTopicId = '$subId'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_array($result);
+    $subName = $row['subTopicName'];
+
+    // Get Course ID
+    $courseId = $row['courseId'];
+    $sql = "SELECT * FROM course WHERE courseId = '$courseId'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_array($result);
+    $courseName = $row['courseName'];
 ?>
 
-<html>
-    <head>
+<head>
         <title>View Questions</title>
         <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-                
-        </script>
-        <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
         <link rel="stylesheet" href="../../assets/css/global.css"></link>
-
+        <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
     </head>
 
     <body>
+
         <!--Course Details-->
         <div class="course-details-box">
             <p id="title">Course 01: <?php echo $subName; ?> </p>
@@ -54,10 +51,16 @@
             <p> 1.1 <?php echo $courseName; ?> </p>
         </div>
 
+<!-- View Added Questions of a specific subtopic -->
+
+        <!-- Questions Recovery -->
+        <div class="recover"> 
+        <button class="recover-btn" onclick="window.location.href='../../config/teacherconfig/recoverQuestions.php?subId=<?php echo $subId ?>&courseId=<?php echo $courseId ?>'"><i class="fa-large fas fa-trash-restore" id="recover-icon"></i> Recover Questions</button>
+        </div>
+
         <div>
             <center>
-                <p id="purple-text">Deleted Questions</p>
-                <table class="addedQuestions">
+            <table class="addedQuestions">
                 <tr>
                     <th>No:</th>
                     <th>Question</th>
@@ -67,14 +70,13 @@
                     <th>Option 04</th>
                     <th>Option 05</th>
                     <th>Answer</th>
-                    <th>Recover</th>
                 </tr>
 
             <!--PHP Code-->
             <?php
-                $sql="SELECT * FROM modelpaperquestion where status=0";
+                $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId='$subId'";
                 $result = mysqli_query($connection,$sql);
-                
+
                 // Paginations
                 $limit = 5;
                 $total_records = mysqli_num_rows($result);
@@ -92,8 +94,8 @@
                 $startinglimit = ($page-1)*$limit;
                 $sql="SELECT * FROM modelpaperquestion where status=1 having subtopicId='$subId' LIMIT ".$startinglimit.','.$limit;
                 $result2 = mysqli_query($connection,$sql);
-
-                while($row = mysqli_fetch_assoc($result))
+                
+                while($row = mysqli_fetch_assoc($result2))
                 {
                     echo '
                         <tr>
@@ -105,28 +107,25 @@
                             <td>'.$row['option4'].'</td>
                             <td>'.$row['option5'].'</td>
                             <td>'.$row['answer'].'</td>
-                            <td><a href="viewDeletedQuestions.php?recoverId='.$row['questionId'].'&courseId='.$courseId.'&subId='.$subId.'"><i class="fa fa-reply fa-lg" aria-hidden="true" id="edit-icon"></i></td>
                         </tr>
                     ';
                 }
             ?>
             </table>
             </center>
-            </div>
-            <div class="pagination-container">
-                <?php
-                for($i=1; $i<=$total_pages; $i++)
-                {
-                    echo '<button class="pagination"><a class="pagination-text" href="recoverQuestions.php?page='.$i.'">'.$i.'</a></button>';
-                }
-                ?>
-            </div>
-
-    <!-- Footer -->
-    <div class="footer">
+        </div>
+        <div class="pagination-container">
             <?php
-                    require_once('../../assets/includes/footer.php');
+            for($i=1; $i<=$total_pages; $i++)
+            {
+                echo '<button class="pagination"><a class="pagination-text" href="viewAddedQuestions.php?page='.$i.'&courseId='.$courseId.'&subId='.$subId.'">'.$i.'</a></button>';
+            }
             ?>
         </div>
-    </body>
-</html>
+
+<!-- Footer -->
+<div class="footer">
+            <?php
+                require_once('../../assets/includes/footer.php');
+            ?>
+</div>
