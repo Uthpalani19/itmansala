@@ -89,6 +89,10 @@
                             $videoclose = bin2hex(random_bytes(4));
                             $player = bin2hex(random_bytes(4));
                             $quizbtn = bin2hex(random_bytes(4));
+                            $instructionbox = bin2hex(random_bytes(4));
+                            $closeinstruction = bin2hex(random_bytes(4));
+                            $closeinstructionclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $instructionboxclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $quizbtnclik = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $showvideoclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $playerIDclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
@@ -173,8 +177,29 @@
                         }
                         ?>
                         <!-- Attempt quiz button -->
-                                <a id="<?php echo $quizbtn; ?>" style="display:none;" href="questionsViewStudent.php?subId=<?php echo $subtopic;?>&courseId=<?php echo $lesson;?>&attempt=1&questionNumber=0">
-                                <input type="button" value="Attempt Quiz" class="btn-questions add-questions attemptBtn" name="attemptQuiz" id="attemptQuizbtn"></a>
+                                <a id="<?php echo $quizbtn; ?>" style="display:none;">
+                                <input type="button" value="Attempt Quiz" class="btn-questions add-questions attemptBtn" name="attemptQuiz" ></a>
+
+                                <!-- Quiz instructions -->
+                                
+                                <div class="info-box" id="<?php echo $instructionbox; ?>" style="display:none;">
+                                    <div class="info-title">
+                                        <span>Instructions for the quiz</span>
+                                    </div>
+
+                                    <div class="info-list">
+                                        <div class="info">1. You'll be given with 2 minutes to attempt each question. </div>
+                                        <div class="info">2. You can't exit from the quiz until you complete it.</div>
+                                        <div class="info">3. You can't go back to the previous question.</div>
+                                        <div class="info">4. You can't skip any question.</div>
+                                        <div class="info">5. If you don't score 90%, you'll have to attempt the quiz once again.</div>
+                                    </div>
+
+                                    <div class="buttons">
+                                        <a href="questionsViewStudent.php?subId=<?php echo $subtopic;?>&courseId=<?php echo $lesson;?>&attempt=1&questionNumber=0"><input type="button" value="Start Quiz" class="btn-questions add-questions" name="startQuiz" id="startQuizbtn"></a>
+                                        <input type="button" value="Exit Quiz" class="btn-questions add-questions" name="exitQuiz" id="<?php echo $closeinstruction; ?>">
+                                    </div>
+                                </div>
                         <?php
                     }
                 }
@@ -184,6 +209,8 @@
                     const <?php echo $dblessonIDonclick; ?> = document.getElementsByClassName("<?php echo $class; ?>"); 
                     const <?php echo $hideIDonclick; ?> = document.getElementById("<?php echo $hideid; ?>");
                     const <?php echo $quizbtnclik; ?> = document.getElementById("<?php echo $quizbtn; ?>");
+                    const <?php echo $instructionboxclick; ?> = document.getElementById("<?php echo $instructionbox; ?>");
+                    const <?php echo $closeinstructionclick; ?> = document.getElementById("<?php echo $closeinstruction; ?>");
 
                     <?php echo $subidonclick; ?>.onclick = function(){
                         var i;
@@ -200,6 +227,15 @@
                         }
                         <?php echo $quizbtnclik; ?>.style.display = "none";
                     }
+
+                    <?php echo $quizbtnclik; ?>.onclick = function(){
+                        <?php echo $instructionboxclick; ?>.style.display = "block"; 
+                    }
+
+                    <?php echo $closeinstructionclick; ?>.onclick = function(){
+                        <?php echo $instructionboxclick; ?>.style.display = "none"; 
+                    }
+
                 </script>
                 
                 <?php
@@ -208,25 +244,6 @@
         ?>
     </div>
     
-    <!-- Quiz instructions -->
-    <div class="info-box">
-        <div class="info-title">
-            <span>Instructions for the quiz</span>
-        </div>
-
-        <div class="info-list">
-            <div class="info">1. You'll be given with 2 minutes to attempt each question. </div>
-            <div class="info">2. You can't exit from the quiz until you complete it.</div>
-            <div class="info">3. You can't go back to the previous question.</div>
-            <div class="info">4. You can't skip any question.</div>
-            <div class="info">5. If you don't score 90%, you'll have to attempt the quiz once again.</div>
-        </div>
-
-        <div class="buttons">
-            <input type="button" value="Start Quiz" class="btn-questions add-questions" name="startQuiz" id="startQuizbtn">
-            <input type="button" value="Exit Quiz" class="btn-questions add-questions" name="exitQuiz" id="exitQuizbtn">
-        </div>
-    </div>
     
     <!-- this contains course ratings -->
     <?php

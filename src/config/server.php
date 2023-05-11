@@ -156,8 +156,10 @@ if (isset($_POST['login_student']))  {
                   $stdresults = mysqli_query($connection, $stdquery);
                   $stdrow = mysqli_fetch_assoc($stdresults);
                   $Username = $stdrow['name'];
+                  $email = $stdrow['email']; 
                   $_SESSION['studentname'] = $Username;
                   $_SESSION['studentphone'] = $User;
+                  $_SESSION['studentemail'] = $email;
                   echo $_SESSION['studentname'];
                   header('location: views/studentviews/student-dashboard.php');
               }

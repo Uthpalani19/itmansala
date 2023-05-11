@@ -367,6 +367,10 @@ label{
     cursor: pointer;
 }
 
+.locked-content{
+    cursor: not-allowed;
+}
+
 .lesson-close{
     font-size: 27px;
     position: absolute;
@@ -476,4 +480,59 @@ label{
     display: none;
 }
 
+.quiz-div{
+    background: #ffffff;
+    width: 77.5%;
+    margin: auto;
+    padding: 25px 35px;
+    margin-bottom: 25px;
 
+}
+
+.quiz-div p{
+    display: inline;
+    font-weight: bold;
+    font-size: 15px;
+    color: #636363;
+}
+
+.quiz-div input{
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    vertical-align: top; 
+    padding: 10px;
+    margin-left: 25px;
+    margin-top: -18px;
+    padding-right: 50px;
+}
+
+.quiz-div input:hover, :active, :focus{
+    outline: none;
+	border-color: #5C26A9;
+}
+
+.quiztime-btn{
+    color: white;
+    background: #5319a6;
+    width: 7%;
+    padding: 7px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+ 
+}
+
+.btn-div{
+    margin-left: 455px;
+    margin-top: -40px;
+}
+
+.quiz-note{
+    margin-top: 1rem;
+}
+
+.quiz-note p{
+    font-size: 12px;
+    font-weight: 400;
+}

@@ -1070,12 +1070,20 @@ tr:nth-child(odd)
 
 .add-questions
 {
-    margin-left: 35%;
+    margin-left: 26%;
 }
 
 .view-questions
 {
     margin-left: 15px;
+}
+
+.quiz-time{
+    margin-left: 15px;
+}
+
+.quiz-form{
+    display: inline;
 }
 
 .btn-questions:hover
