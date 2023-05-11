@@ -31,41 +31,67 @@
 
 <body>
     <!-- Static Data -->
-    <div class="static_data_container">
+    <div class="static_data_container" id="top-header-data">
         <!-- Stat -->
         <div class="static_data">
             <div class="static_data_item">
-                <div class="static_data_item_value">100</div>
+                <div class="static_data_item_value"><?php $sqlTotalSubtopics = "SELECT COUNT(*) from subtopic";
+                                                          $resultTotalSubtopic = mysqli_query($connection,$sqlTotalSubtopics);
+                                                          $rowTotalSubtopic = mysqli_fetch_array($resultTotalSubtopic);
+                                                          echo $rowTotalSubtopic['COUNT(*)'];
+                                                          ?></div>
                 <div class="static_data_item_title">Total Subtopics</div>
             </div>
             <div class="static_data_item">
-                <div class="static_data_item_value">10</div>
+            <div class="static_data_item_value"><?php $sqlLessons = "SELECT COUNT(*) from lesson";
+                                                          $resultLessons = mysqli_query($connection,$sqlLessons);
+                                                          $rowLessons = mysqli_fetch_array($resultLessons);
+                                                          echo $rowLessons['COUNT(*)'];
+                                                          ?></div>
                 <div class="static_data_item_title">Total Lessons</div>
             </div>
             <div class="static_data_item">
-                <div class="static_data_item_value">5</div>
-                <div class="static_data_item_title">Total Quizzes</div>
+            <div class="static_data_item_value"><?php $sqlQuestions = "SELECT COUNT(*) from modelpaperquestion";
+                                                          $resultQuestions = mysqli_query($connection,$sqlQuestions);
+                                                          $rowQuestions = mysqli_fetch_array($resultQuestions);
+                                                          echo $rowQuestions['COUNT(*)'];
+                                                          ?></div>
+                <div class="static_data_item_title">Total Questions</div>
             </div>
         </div>
 
-        <!-- Choose the course -->
-        <div class="white-box">
-            <div class="white-box-div">
-                <div class="dropdown">
-                    <button class="dropbtn">Select <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">C001</a>
-                        <a href="#">C002</a>
-                        <a href="#">C003</a>
-                    </div>
-                </div>
+    <!-- Dropdown content -->
 
-                <p id="course-name">Course - C001</p>
-            </div>
-            <div class="white-box-course-name"> 
-                <p>තොරතුරු වල මූලික තැනුම් ඒකක හා ඒවායේ ගති ලක්ෂණ</p>
-            </div>
+    <!-- Courses teacher teaches -->
+    <?php
+        // Getting the course name from the database
+        $sql_dropdown = "SELECT courseName from course where teacherPhoneNumber = '{$_SESSION['phone']}' and status = '1'";
+        $result_dropdown = mysqli_query($connection,$sql_dropdown);
+    ?>
+
+    <?php
+        if(mysqli_num_rows($result_dropdown) > 0)
+        {?>
+            <div id="filters">
+            <select id="courses" class="courseName dropdown-courses">
+            <option value="" disabled="" selected="">Select your course </option>
+        <?php
+            while($row = mysqli_fetch_assoc($result_dropdown))
+            {
+        ?>
+            <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName'];?> </option>
+        <?php
+            }
+        ?>
+            </select>
         </div>
+    <?php
+        }
+        else
+        {
+            echo '<a href="#">No Courses</a>';
+        }
+    ?>
     </div>
 
     <!-- Progress -->
@@ -168,4 +194,23 @@
 
 </body>
 
+<script>
+    $(document).ready(function(){
+                $("#courses").on('change',function(){
+                    var value = $(this).val();
+
+                    $.ajax({
+                        url: '../../config/teacherconfig/teacherDashboard-load.php',
+                        type: 'POST',
+                        data: 'request='+value,
+                        beforeSend: function(){
+                            $('#top-header-data').html('<img src="../../assets/images/loading.gif" alt="loading" id="loading">');
+                        },
+                        success: function(data){
+                            $('#top-header-data').html(data);
+                        }
+                    });
+                });
+    });
+</script>
 </html>

@@ -83,7 +83,7 @@
                                 <td>'.$row['phoneNumber'].'</td>
                                 <td>'.$row['email'].'</td>
                                 <td id="status">'.$enrolstatus.'</td>
-                                <td>'.$row['lastaccesstime'].'</td>
+                                <td>'.$row['enrolmentDateTime'].'</td>
                             </tr>
                         ';
                 }
