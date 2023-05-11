@@ -18,7 +18,6 @@
         $result = mysqli_query($connection, $sql);
 
         if($result){
-           
         }
         else{
            

@@ -15,7 +15,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Student Dashboard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../../assets/css/global.css" >
@@ -76,7 +76,7 @@
                 </div> 
             </div>
             <div>
-                <h5>75 % completed on what you bought so far</h5>
+                <h5>75 % completed on what you bought so far. This is not done yet. </h5>
             </div>
         </div>
         
@@ -106,7 +106,7 @@
         ?>
             </select>
         </div>
-    <?php
+        <?php
         }
         else
         {
@@ -114,6 +114,7 @@
         }
     ?>
 
+    <!-- Course content -->
     <div class="dboard-middle-container">
         <div class="middle-conatiner-heading">
             <h4>Activity</h4>
@@ -203,8 +204,6 @@
                     </table>
                 </div>
             </div>
-            
-           
         </div>
         <div class="middle-conatiner-piechart">
                 <div class="pie-chart-header">

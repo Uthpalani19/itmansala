@@ -629,6 +629,8 @@ tr:nth-child(odd)
     padding: 0px 0 0 30px;
 }
 
+/* Dashboard */
+
 /* Marks distribution */
 .subtopic-dashboard
 {
@@ -1128,7 +1130,7 @@ tr:nth-child(odd)
 {
     display: flex;
     padding: 0.5rem 0.75rem;
-    margin: 0 10px 0 10px;
+    margin: 0 10px 0 300px;
     background-color: #FFFFFF;
     color: #5319a6;
     border-radius: 10px;

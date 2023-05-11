@@ -24,11 +24,6 @@
 </head>
 
 <body>
-    <form method="POST" action="">
-        <input type="text" name="input" placeholder="Search by name...">
-        <input type="submit" value="Search">
-    </form>
-
     <?php
         if(isset($_POST['input'])){  
             $input = $_POST['input'];
@@ -41,16 +36,16 @@
 
             {
                     if(empty($input)){
-                        $sql = "SELECT DISTINCT sc.phoneNumber, sc.lastaccesstime, s.name, s.email, s.profilePicture FROM student_course sc
+                        $sql = "SELECT DISTINCT sc.phoneNumber, sc.enrolmentDateTime, s.name, s.email, s.profilePicture FROM student_course sc
                         INNER JOIN course c ON sc.courseID = c.courseID 
                         INNER JOIN student s ON sc.phoneNumber = s.phoneNumber
                         WHERE c.teacherPhoneNumber = '{$_SESSION['phone']}'";
                     }
                     else{
-                        $sql = "SELECT DISTINCT sc.phoneNumber, sc.lastaccesstime, s.name, s.email, s.profilePicture FROM student_course sc
+                        $sql = "SELECT DISTINCT sc.phoneNumber, sc.enrolmentDateTime, s.name, s.email, s.profilePicture FROM student_course sc
                         INNER JOIN course c ON sc.courseID = c.courseID 
                         INNER JOIN student s ON sc.phoneNumber = s.phoneNumber
-                        WHERE c.teacherPhoneNumber = '{$_SESSION['phone']}' AND s.name LIKE '%{$input}%'";
+                        WHERE c.teacherPhoneNumber = '{$_SESSION['phone']}' AND s.name LIKE '%{$input}%' GROUP BY sc.phoneNumber";
                     }
                 }
                 $result = mysqli_query($connection, $sql);
@@ -83,7 +78,7 @@
                                             <td>'.$row['phoneNumber'].'</td>
                                             <td>'.$row['email'].'</td>
                                             <td id="status">'.$enrolstatus.'</td>
-                                            <td>'.$row['lastaccesstime'].'</td>
+                                            <td>'.$row['enrolmentDateTime'].'</td>
                                         </tr>
                                     ';
                                 }

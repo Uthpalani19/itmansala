@@ -374,3 +374,30 @@ td{
     outline: none;
 } 
 
+/* Leaderboard styling */
+#leaderboard
+{
+    margin: 20px 50px 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+th
+{
+    color: #0d7497;
+    padding: 10px;
+}
+
+td
+{
+    color: #737677;
+    text-align: left;
+    padding: 10px;
+}
+
+tr:hover
+{
+    background-color: #ddd;
+}

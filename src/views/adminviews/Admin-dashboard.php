@@ -1,20 +1,20 @@
 <?php 
     //Navigation Bar
     require_once('../../assets/includes/navbar-admin.php');
-    // session_start();
-    // require('../../config/dbconnection.php');
+    session_start();
+    require('../../config/dbconnection.php');
 
-    // if(!isset($_SESSION['name']))
-    // {
-    //     header('location:index.php');
-    // }
+    if(!isset($_SESSION['name']))
+    {
+        header('location:index.php');
+    }
 
-    // if(isset($_GET['logout']))
-    // {
-    //     session_destroy();
-    //     unset($_SESSION['name']);
-    //     header('location:index.php');
-    // }
+    if(isset($_GET['logout']))
+    {
+        session_destroy();
+        unset($_SESSION['name']);
+        header('location:index.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/css/global.css"></link>
     <link rel="stylesheet" href="../../assets/css/adminDashboard.css"></link>
+    <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <title>Admin Dashboard</title>
 </head>
 
@@ -47,6 +49,9 @@
                 $sql3 = "SELECT COUNT(*) AS total FROM student_course";
                 $result3 = mysqli_query($connection, $sql3);
 
+                $sql4 = "SELECT COUNT(*) AS total FROM course";
+                $result4 = mysqli_query($connection, $sql4);
+
                 if (mysqli_num_rows($result1) > 0) {
                     // output data of each row
                     while($row = mysqli_fetch_assoc($result1)) {
@@ -61,6 +66,10 @@
                         $total_entries3 = $row["total"];
                     }
 
+                    while($row = mysqli_fetch_assoc($result4)) {
+                        $total_entries4 = $row["total"];
+                    }
+
                 } else {
                     $total_entries = 0;
                 }
@@ -71,6 +80,10 @@
                 <div class="static_data_item">
                     <div class="static_data_item_value"><?php echo $total_entries; ?></div>
                     <div class="static_data_item_title">Total Teachers</div>
+                </div>
+                <div class="static_data_item">
+                    <div class="static_data_item_value"><?php echo $total_entries4; ?></div>
+                    <div class="static_data_item_title">Total Courses</div>
                 </div>
                 <div class="static_data_item">
                     <div class="static_data_item_value"><?php echo $total_entries2; ?></div>
@@ -85,17 +98,13 @@
         <!-- Total Revenue -->
         <div class="white-box">
             <div class="white-box-div">
-                <p id="course-name">550 000 LKR</p>
+                <p class="static_data_item_value"><?php 
+                    //Get the course price
+                    $sqlCoursePrice = "SELECT * from course";
+                    $resultCoursePrice = mysqli_query($connection, $sqlCoursePrice);
+                    $rowCoursePrice = mysqli_fetch_assoc($resultCoursePrice);
 
-                <div class="dropdown">
-                    <button class="dropbtn">2022 <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">2021</a>
-                        <a href="#">2020</a>
-                        <a href="#">2019</a>
-                    </div>
-
-                </div>
+                    echo $total_entries3*$rowCoursePrice['price']; ?> LKR</p> <i class="fa-solid fa-sack-dollar fa-xl"></i>
             </div>
             <div class="white-box-course-name"> 
                 <p >Total revenue generated</p>
@@ -103,120 +112,228 @@
         </div>
     </div>
 
-    <div class="container-main">
+    <br />
+    <!-- Reports generation -->
+    <div class="report-container">
+        <button type="submit" class="btn-view-pdf"><a href="revenueReport.php?ACTION=VIEW"><i class="fa fa-file-pdf-o"></i> View income report</a></button> &nbsp;&nbsp; 
+        <button type="submit" class="btn-view-pdf"><a href="courseReport.php?ACTION=DOWNLOAD"><i class="fa fa-file-pdf-o"></i> View course performance report</a></button> 
+    </div>
 
+    <div class="container-main">
         <!--- Progress cards --->
         <div class="progress_container">
-
             <!--- Top cards --->
             <div class="progress">
-
+                <!-- Students Percentage -->
                 <div class="progress_item_top">
-                    <div class="static_data_item_number_top">10</div>
+                    <div class="static_data_item_number_top">
+                    <?php
+                        // Get the number of new students
+                        $sqlEnrollments = "SELECT count(*) from student where firstAccessDate >= DATE(NOW()) - INTERVAL 7 DAY";
+                        $resultEnrollments = mysqli_query($connection, $sqlEnrollments);
+                        $rowEnrollments = mysqli_fetch_assoc($resultEnrollments);
+
+                        echo $rowEnrollments['count(*)'];
+                    ?>
+                    </div>
                     <div class="static_data_item_text_top">New Students</div>
                     <div class="static_data_item_week">this week</div>
 
-                    <div class="new-enrollment-count-lower">15.00% -</div>
-                </div>
+                    <?php
+                         // Get the number of new students last week
+                        $sqlEnrollmentsLastWeek = "SELECT count(*) from student where firstAccessDate >= DATE(NOW()) - INTERVAL 14 DAY and firstAccessDate < DATE(NOW()) - INTERVAL 7 DAY";
+                        $resultEnrollmentsLastWeek = mysqli_query($connection, $sqlEnrollmentsLastWeek);
+                        $rowEnrollmentsLastWeek = mysqli_fetch_assoc($resultEnrollmentsLastWeek);
 
-                <div class="progress_item_top">
-                    <div class="static_data_item_number_top">25</div>
-                    <div class="static_data_item_text_top">New Students</div>
-                    <div class="static_data_item_week">this week</div>
-
-                    <div class="new-enrollment-count-upper">10.00% +</div>
-                </div>
-                
-            </div>
-
-            <!--- Bottom cards --->
-            <div class="progress">
-                <div class="progress_item">
-                    <div class="static_data_item_number">350</div>
-                    <div class="static_data_item_text">Total Students in</div>
-                    <div class="static_data_item_course">C001</div>
-                </div>
-
-                <div class="progress_item">
-                    <div class="static_data_item_number">253</div>
-                    <div class="static_data_item_text">Total Students in</div>
-                    <div class="static_data_item_course">C003</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bar Chart -->
-
-        <div class="chart">
-            <?php 
-                require_once '..\..\config\dbconnection.php';
-
-                $sql = "SELECT courseId, COUNT(*) as count FROM student_course GROUP BY courseId";
-                $result = $connection->query($sql);
-
-                // Create arrays for the data
-                $labels = ['Data and Information', 'Networking', 'ICT Networking'];
-                $data = [0, 0, 0];
-
-                // Loop through the result and populate the data arrays
-                while ($row = $result->fetch_assoc()) {
-                switch ($row['courseId']) {
-                    case "1":
-                    $data[0] = $row['count'];
-                    break;
-                    case "2":
-                    $data[1] = $row['count'];
-                    break;
-                    case "4":
-                    $data[2] = $row['count'];
-                    break;
-                }
-                }
-
-
-            ?>
-
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-
-            <!-- Create canvas element for the chart -->
-            <canvas id="myChart"></canvas>
-
-            <!-- Create JavaScript code to create the chart -->
-            <script>
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                labels: <?php echo json_encode($labels); ?>,
-                datasets: [{
-                    label: 'Number of Students in each course',
-                    data: <?php echo json_encode($data); ?>,
-                    backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    ],
-                    borderColor: [
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    ],
-                    borderWidth: 1
-                }]
-                },
-                options: {
-                scales: {
-                    yAxes: [{
-                    ticks: {
-                        beginAtZero: true
+                        $percentage = round(($rowEnrollments['count(*)'] - $rowEnrollmentsLastWeek['count(*)'])*100/$rowEnrollmentsLastWeek['count(*)']);
+                        
+                    
+                    if($percentage < 0){
+                        ?>
+                        <div class="new-enrollment-count-lower"><?php echo $percentage.".00 %";?>
+                        <i class="fa-solid fa-down-long"></i></div>
+                        <?php
                     }
-                    }]
-                }
-                }
-            });
-            </script> 
+                    else{
+                        ?>
+                        <div class="new-enrollment-count-upper"><?php echo $percentage.".00 %";?>
+                        <i class="fa-solid fa-up-long"></i></div>
+                        <?php
+                    }
+                    ?>
+                </div>
+
+                <!-- Enrollments Percentage -->
+                <div class="progress_item_top">
+                    <div class="static_data_item_number_top">
+                    <?php
+                        // Get the number of new enrollments
+                        $sqlEnrollments = "SELECT count(*) from student_course where enrolmentDateTime >= DATE(NOW()) - INTERVAL 7 DAY";
+                        $resultEnrollments = mysqli_query($connection, $sqlEnrollments);
+                        $rowEnrollments = mysqli_fetch_assoc($resultEnrollments);
+
+                        echo $rowEnrollments['count(*)'];
+                    ?>
+                    </div>
+                    <div class="static_data_item_text_top">New Enrollments</div>
+                    <div class="static_data_item_week">this week</div>
+
+                    <?php
+                         // Get the number of enrollments last week
+                        $sqlEnrollmentsLastWeek = "SELECT count(*) from student_course where enrolmentDateTime >= DATE(NOW()) - INTERVAL 14 DAY and enrolmentDateTime < DATE(NOW()) - INTERVAL 7 DAY";
+                        $resultEnrollmentsLastWeek = mysqli_query($connection, $sqlEnrollmentsLastWeek);
+                        $rowEnrollmentsLastWeek = mysqli_fetch_assoc($resultEnrollmentsLastWeek);
+
+                        $percentage = ($rowEnrollments['count(*)'] - $rowEnrollmentsLastWeek['count(*)'])*100/$rowEnrollmentsLastWeek['count(*)'];
+                        
+                    
+                    if($percentage < 0){
+                        ?>
+                        <div class="new-enrollment-count-lower"><?php echo $percentage.".00 %";?>
+                        <i class="fa-solid fa-down-long"></i></div>
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <div class="new-enrollment-count-upper"><?php echo $percentage.".00 %";?>
+                        <i class="fa-solid fa-up-long"></i></div>
+                        <?php
+                    }
+                    ?>
+                </div>
+
+                <!-- Income Percentage -->
+                <div class="progress_item_top">
+                    <div class="static_data_item_number_top">
+                    <?php
+                        // Get the number of new enrollments
+                        $sqlEnrollments = "SELECT count(*) from student_course where enrolmentDateTime >= DATE(NOW()) - INTERVAL 7 DAY";
+                        $resultEnrollments = mysqli_query($connection, $sqlEnrollments);
+                        $rowEnrollments = mysqli_fetch_assoc($resultEnrollments);
+
+                        echo ($rowEnrollments['count(*)']*1000)." LKR";
+                    ?>
+                    </div>
+                    <div class="static_data_item_text_top">Income</div>
+                    <div class="static_data_item_week">this week</div>
+
+                    <?php
+                         // Get the number of enrollments last week
+                        $sqlEnrollmentsLastWeek = "SELECT count(*) from student_course where enrolmentDateTime >= DATE(NOW()) - INTERVAL 14 DAY and enrolmentDateTime < DATE(NOW()) - INTERVAL 7 DAY";
+                        $resultEnrollmentsLastWeek = mysqli_query($connection, $sqlEnrollmentsLastWeek);
+                        $rowEnrollmentsLastWeek = mysqli_fetch_assoc($resultEnrollmentsLastWeek);
+
+                        $percentage = ($rowEnrollments['count(*)'] - $rowEnrollmentsLastWeek['count(*)'])*100/$rowEnrollmentsLastWeek['count(*)'];
+                        
+                    
+                    if($percentage < 0){
+                        ?>
+                        <div class="new-enrollment-count-lower"><?php echo $percentage.".00 %";?>
+                        <i class="fa-solid fa-down-long"></i></div>
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <div class="new-enrollment-count-upper"><?php echo $percentage.".00 %";?>
+                        <i class="fa-solid fa-up-long"></i></div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+            <div>
+                <!-- Course Details summary table -->
+                <table class="course-details">
+                    <h4>Income Breakdown</h4>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Enrollments</th>
+                        <th>Income</th>
+                    </tr>
+                        <?php
+                            $sql = "SELECT * from course where status='1'";
+                            $result = mysqli_query($connection, $sql);
+                            while($row = mysqli_fetch_assoc($result)){
+                                ?>
+                                <tr>
+                                    <td><?php echo $row['courseName'];?></td>
+                                    <td><?php $sqlEnrollments = "SELECT count(*) FROM student_course WHERE courseId = '" . $row['courseId'] . "'";
+                                              $resultEnrollments = mysqli_query($connection,$sqlEnrollments);
+                                              $rowEnrollments = mysqli_fetch_assoc($resultEnrollments);
+
+                                              echo $rowEnrollments['count(*)'];
+                                        ?></td>
+                                    <td><?php echo $rowEnrollments['count(*)']*1000; ?></td>
+                                </tr>
+                                <?php
+                            }
+                        ?>
+                </table>
+            </div>
         </div>
+        
+        <!-- Bar Chart -->
+        <div class="chart">
+            <canvas id="myChart"></canvas>
+                <?php 
+                    // Retrieve data from database
+                    $sql = "SELECT courseId,count(*) as total FROM student_course group by courseId";
+                    $result = mysqli_query($connection, $sql);
 
+                    // Create arrays to store data
+                    $labels = array();
+                    $data = array();
 
+                    // Loop through data and store in arrays
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $sqlCourseName = "SELECT courseName FROM course WHERE courseId = '" . $row['courseId'] . "'";
+                        $resultCourseName = mysqli_query($connection, $sqlCourseName);
+                        $rowCourseName = mysqli_fetch_assoc($resultCourseName);
+
+                        $labels[] = $rowCourseName['courseName'];
+                        $data[] = $row['total'];
+                    }
+
+                    // Convert arrays to JSON format
+                    $labels = json_encode($labels);
+                    $data = json_encode($data);
+                ?>
+
+                <!-- Create JavaScript code to create the chart -->
+                <script>
+                    // Get data from PHP using AJAX
+                    var labels = <?php echo $labels; ?>;
+                    var data = <?php echo $data; ?>;
+
+                    // Create new chart using Chart.js
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Students',
+                                data: data,
+                                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Number of Students per Course'
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script> 
+        </div>
 </body>
 </html>

@@ -17,7 +17,7 @@
 
 .static_data_container > .static_data
 {
-  width: 50%;
+  width: 60%;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -82,22 +82,39 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 20px;
   align-items: center;
   background-color: #FFF;
 }
 
-.static_data_item
+.fa-sack-dollar
 {
-  width : 150px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  border-radius: 10px;
-  margin-left: 50px;
+  color: #5319a6;
+
 }
 
-.static_data_item_value{
-color: #0BA7FF;
-font-weight: bold;
+.static_data_item
+{
+    width : 150px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-radius: 10px;
+    margin-left: 50px;
+}
+
+/* Card styling */
+.static_data_item_value
+{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #5319a6;
+}
+
+.static_data_item_title
+{
+    font-size: 1rem;
+    font-weight: 2REM;
+    color: #696969;
 }
 
 /* White box */
@@ -117,9 +134,12 @@ font-weight: bold;
 .white-box-div{
   margin-top: 9px;
 }
+
 .white-box-course-name
 {
   font-size: 1rem;
+  margin-top: -10px;
+  color: #696969;
 }
 
 /* Lower part */
@@ -131,7 +151,7 @@ font-weight: bold;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 65px;
+  margin-top: 25px;
 }
 
 
@@ -351,4 +371,83 @@ margin-top: 43px;
 margin-left: 65px;
 font-weight: bold;
 font-size: large;
+}
+
+/* Table - course details summary */
+.course-details
+{
+  margin-bottom: 2rem;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid #5319a6;
+  font-size: 0.9rem;
+}
+
+h4
+{
+  color: #4d4d4d;
+}
+
+th
+{
+  padding: 0.5rem;
+  background-color: #5319a6;
+  color: #ffffff;
+}
+
+td
+{
+  text-align: center;
+  padding: 7px;
+}
+
+tr
+{
+  border-bottom: 1px dotted #878787;
+}
+
+/* Report generation */
+.report-container
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.report-container > .btn-view-pdf
+{
+  background-color: #2196F3 ;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.report-container > .btn-view-pdf:hover,.btn-download-pdf:hover
+{
+  transform: scale(1.05);
+}
+
+.report-container > .btn-download-pdf
+{
+  background-color: #2196F3 ;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+a
+{
+  color: white;
+    text-decoration: none;
 }
