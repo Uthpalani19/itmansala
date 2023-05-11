@@ -101,9 +101,6 @@
                                         
                                     }
                                     ?>
-                                    
-                                    
-
                                 </div>
 
                                 <div class="rt-display-container">
@@ -117,8 +114,10 @@
                                     $avg_rating = round($row['avg_rating'], 1);
                                                                             
                                     // Display the average rating and stars
+                                    $url = "coursereview.php";
                                     echo "<div>";
-                                    echo "<a href='courseReview.php'>";
+                                    echo "<a href='$url'>";
+                                    echo "<a href='courseReview.php?courseId=$number'>";
                                     echo " $avg_rating &nbsp;";
                                     echo "</div>";
                                     echo "<div>";

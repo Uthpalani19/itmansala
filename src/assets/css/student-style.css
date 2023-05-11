@@ -474,4 +474,157 @@
     background-color: #848484;
 }
 
+/* ----------------------- Student posted reviw starts here ---------------------------- */
+
+.content-container{
+    z-index: 0;
+    background: white;
+    width: 90%;
+    height: 100%;
+    margin-top: 90px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding-bottom: 5rem;
+    padding-top: 20px;
+    opacity: 0;
+    animation: fadeIn 0.2s ease-in forwards;
+}
+
+
+.rt-body{
+    background-color: #d9d9d9;
+}
+
+.posted-rt-header{
+    margin-top: 45px;
+    display: flex;
+    justify-content: center;
+}
+
+.rt-header-title{
+    width: 70%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #D9D9D9;
+    align-items: center;
+    justify-content: center;
+    justify-content: flex-start;
+}
+
+.rt-header-name{
+    height: 50px;
+    width: 100%;
+    background-color: #D9D9D9;
+}
+
+
+.rating-course-name{
+    margin-left: 10px;
+}
+
+.course-rating-avg ,.stars{
+    color: #F39C12;
+}
+
+.course-rating-all{
+    color: #6D6D6D;
+}
+
+.course-rating-con2{
+    margin: 14px 20px 20px 20px;
+}
+
+.course-rating-con1{
+margin-right: 100px;
+}
+
+.rt-course-rating{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.rating-pbar {
+    margin-top: 6px;
+}
+
+.course-rating-pbar{
+    display: flex;
+    height: 12px;
+    width: 250px;
+    margin-top: 15px;
+    margin-right: 5px;
+    background-color:#D9D9D9;
+    border-radius: 2px;
+
+}
+
+.pbar-star{
+    margin-bottom: 7px;
+}
+
+.pbar-fil{
+    height: 100%;
+    background-color: #F39C12;;
+    border-radius: 2px;
+}
+
+.merge-ray{
+    display: flex;
+}
+
+.rating-pbar-star{
+    margin-right: 70px;
+}
+
+
+.fa-star-pbar{
+    color: #F39C12;
+    margin-left: 5px;
+}
+
+.rating-pbar-count{
+    margin-top: 10px;
+}
+
+.pbar-fil-count{
+    margin-top: 7px;
+}
+
+.rating-msg{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+   
+}
+
+.fa-user-circle{
+    font-size: xx-large;
+    color: #5C26A9;
+}
+.rating-msg-container{
+    margin-left: 30px;
+    width: 700px;
+    border: 1px #D9D9D9 solid;
+}
+.rating-msg-head{
+    background-color: #D9D9D9;
+    height: 20px;
+    padding: 10px;  
+}
+
+.rating-msg-body{
+    padding: 20px;
+    height: 60px;
+}
+
+.rating-msg-footer{
+    background-color: #f0f0f0a1;
+    display: flex;
+    justify-content: flex-end;
+    padding: 2px 14px 2px 2px;
+    font-size: 13px;
+}
 
