@@ -34,7 +34,7 @@
 
                         <div class="login_field signupfield">
                             <i class="login_icon fa-solid fa-envelope"></i>
-                            <input type="email" class="login_input" placeholder="  Email" name="email" value="<?php echo $Email;?>">
+                            <input type="text" class="login_input" placeholder="  Email" name="email" value="<?php echo $Email;?>">
                             <div>
                                 <?php EmailError(); ?>
                             </div>
@@ -83,7 +83,6 @@
                             <button type="submit" name="signup_student" class="loginbtn signupbtn">Sign Up</button><br>
                         </div> 
 
-
                     </div>
                 </form>
 
@@ -92,7 +91,7 @@
     </div>
     
 
-<script type="text/javascript" src="assets/js/student.js"></script>
+<script type="text/javascript" src="assets/js/signup.js"></script>
 </body>
 </html>
 

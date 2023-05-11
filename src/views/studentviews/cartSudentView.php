@@ -2,7 +2,7 @@
   session_start(); 
   require('../../config/dbconnection.php');
 
-  if (!isset($_SESSION['name'])) {
+  if (!isset($_SESSION['studentname'])) {
   	header('location: ../../student_login.php');
   }
 
@@ -47,6 +47,7 @@ foreach($_SESSION['cart'] as $cid) {
             $course_result = mysqli_query($connection, $course_query);
             
                 $course_row = mysqli_fetch_array($course_result);
+                $_SESSION['prod_name'] = $course_row['courseName'];
 
                     ?>
                     <div class="cart-item1">
@@ -77,11 +78,12 @@ foreach($_SESSION['cart'] as $cid) {
                 </div>
                     <?php
         }
-
         ?>
+        <button onclick="paymentGateway();" class="form-btn">Checkout</button>
 
    
 
-<script src="js/script.js"></script>
+<script src="../../assets/js/payhere.js"></script>
+<script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
 </body>
 </html>

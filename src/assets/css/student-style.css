@@ -421,15 +421,13 @@
 
 .info-box
 {
-    background-color: #fff;
-    width: 750px;
-    padding-left: 150px;
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
+    position: fixed;
+    top: 30%;
+    width: 50%;
+    margin: auto;
+    z-index: 10;
+    background-color: #c8c8c8;
+    margin-left: 400px;
 }
 
 .info-box .info-title
@@ -447,14 +445,15 @@
     font-size: 15px;
     font-weight: 400;
     text-align: left;
+    margin-left: 130px;
 }
 
 .info-box .buttons
 {
     display: flex;
-    margin-left: -750px;
     justify-content: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .info-box .buttons .btn-questions

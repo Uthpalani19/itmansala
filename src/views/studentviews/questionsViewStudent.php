@@ -1,11 +1,12 @@
 <?php
     session_start();
-    //include('../../assets/includes/navbar-student.php');
+    include('../../assets/includes/navbar-student.php');
     require('../../config/dbconnection.php');
 
     if (!isset($_SESSION['studentname'])) {
         header('location: ../../student_login.php');
     }
+
 
 ?>
 
@@ -20,6 +21,10 @@
     <link rel="stylesheet" href="../../assets/css/questionsViewStudent.css"></link>
     <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
     <link rel="stylesheet" href="../../assets/css/global.css"></link>
+    <script
+  src="https://code.jquery.com/jquery-3.6.4.js"
+  integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+  crossorigin="anonymous"></script>
 </head>
 
     <body>
@@ -27,6 +32,7 @@
     <!-- Loading Course ID and Subtopic ID -->
     <?php
         $courseId=$_GET['courseId'];
+        $_SESSION['courseId'] = $courseId;
         $sql = "SELECT * FROM course WHERE courseId='$courseId'";
         $result = mysqli_query($connection,$sql);
         $row = mysqli_fetch_assoc($result);
@@ -34,14 +40,35 @@
         $courseDescription = $row['courseDescription'];
 
         $subtopicId=$_GET['subId'];
+        $_SESSION['subtopicId'] = $subtopicId;
         $sql = "SELECT * FROM subtopic WHERE subtopicId='$subtopicId'";
         $result = mysqli_query($connection,$sql);
         $row = mysqli_fetch_assoc($result);
         $subtopicName=$row['subTopicName'];
+        $phoneNumber = $_SESSION['studentphone'];
 
         $attempt = $_GET['attempt'];
+       
         
         $questionNumber = $_GET['questionNumber'];
+
+        if($row['time'] != 0){
+            $_SESSION['timed_quiz'] = "true";
+        }
+
+        if(!isset( $_SESSION['start_time'])){
+            $quizTime = $row['time'];
+            $_SESSION['start_time'] = time();
+            $_SESSION['quiz_time'] = $quizTime;
+            $_SESSION['attempt'] = $attempt;
+        }
+
+        if($attempt != $_SESSION['attempt'] ){
+            $quizTime = $row['time'];
+            $_SESSION['start_time'] = time();
+            $_SESSION['quiz_time'] = $quizTime;
+            $_SESSION['attempt'] = $attempt;
+        }
     ?>
         <!--Course Details-->
         <div class="course-details-box">
@@ -68,7 +95,7 @@
                     if($questionNumber == 0)
                     {
                         ?>
-                            <p class="questions-count"> <?php echo $row_questions['num_questions_done']+1 . " out of 5"; ?></p>
+                    <p class="questions-count"> <?php echo $row_questions['num_questions_done']+1 . " out of 5"; ?></p>
                         <?php
 
                         // Check whether it is under 5 or not
@@ -313,6 +340,20 @@
                     }
                 ?>  
         </div>
+        <?php
+            if(isset($_SESSION['timed_quiz'])){
+        ?>
+        <script>
+            $(document).ready(function(){
+                setInterval(function(){
+                    $("#timer").load("timer.php");
+                }, 1000);
+            });
+        </script>
+        <p id="timer" class="timer"></p>
+        <?php
+            }
+        ?>
 
         <!-- Footer -->
         <?php
