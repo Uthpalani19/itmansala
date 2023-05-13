@@ -53,11 +53,6 @@
 
 <!-- View Added Questions of a specific subtopic -->
 
-        <!-- Questions Recovery -->
-        <div class="recover"> 
-        <button class="recover-btn" onclick="window.location.href='../../config/teacherconfig/recoverQuestions.php?subId=<?php echo $subId ?>&courseId=<?php echo $courseId ?>'"><i class="fa-large fas fa-trash-restore" id="recover-icon"></i> Recover Questions</button>
-        </div>
-
         <div>
             <center>
             <table class="addedQuestions">

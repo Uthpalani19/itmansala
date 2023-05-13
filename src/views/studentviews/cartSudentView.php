@@ -6,6 +6,10 @@
   	header('location: ../../student_login.php');
   }
 
+  if(empty($_SESSION['cart'])){
+    header('location: availablecourses.php');
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +61,7 @@ foreach($_SESSION['cart'] as $cid) {
 
                     <div class="item-content">
                         <h3 class="item-title"><?php echo $course_row['courseName'];?></h3>
-                        <button class="btn-item1">1000 LKR <i class="fas fa-tag"></i></button>
+                        <button class="btn-item1"><?php echo $_SESSION['price']; ?> LKR <i class="fas fa-tag"></i></button>
                     </div>
 
                     <div class="item-buttons">
