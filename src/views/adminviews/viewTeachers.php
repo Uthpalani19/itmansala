@@ -132,7 +132,7 @@
 
             // Handle the cancel button click event
             $("#cancel-button").click(function(){
-                confirmClicked = false; 
+                confirmClicked = false;
                 $("#confirmation-dialog").css("display", "none");
             });
 

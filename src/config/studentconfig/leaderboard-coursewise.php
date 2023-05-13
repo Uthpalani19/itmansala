@@ -33,7 +33,8 @@
     <?php
     if(isset($_POST['request'])){
     ?>
-        <table class="leaderboard" id="leaderboard">
+    <div id="leaderboard" class="leaderboard">
+        <table>
         <tr>
             <th>Rank</th>
             <th>Profile Picture</th>
@@ -70,6 +71,6 @@
     <?php
     }
     ?>
+    </div>
 </body>
 </html>
-</table>

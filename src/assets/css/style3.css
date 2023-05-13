@@ -228,7 +228,7 @@ td{
 
 
 .dboard-middle-container{
-    margin: 20px 50px 20px 50px;
+    margin: 20px 110px 20px 110px;
 }
 
 .middle-conatiner-heading h4{
@@ -237,10 +237,12 @@ td{
 
 .middle-conatiner-content{
     display: flex;
+    margin-bottom: 50px;
     justify-content: space-between;
 }
 
 .middle-conatiner-bargraph{
+    display: flex;
     box-shadow:#0000003b 0px 0px 5px  ;
     border-radius: 15px;
     height: 360px;
@@ -271,25 +273,23 @@ td{
 
 .std-bargrapgh-head{
     display: flex;
-    padding: 20px;
+    width: 450px;
+    padding: 20px 20px 0px 20px;
     justify-content: space-between;
 }
 
 .std-bargrapgh-head h4{
-   text-align: center;
-   margin-left: 130px;
     color: #636363;
 }
 
 .std-bargraph{
-    /* width: 300px; */
+    width: 300px;
 }
 
 .grpah-progress-card{
     width: 150px;
     border-radius: 10px;
-    margin: 15px;
-    padding: 5px;
+    margin: 14px 15px 21px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -312,6 +312,7 @@ td{
 
 .progress-card-body h2{
     color: #5319a6;
+    margin: 0;
 }
 
 .progress-card-percentage{
@@ -400,4 +401,10 @@ td
 tr:hover
 {
     background-color: #ddd;
+}
+
+
+.leaderboard
+{
+    width:5000px;
 }

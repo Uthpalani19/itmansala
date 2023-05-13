@@ -134,13 +134,15 @@
                         $rowEnrollments = mysqli_fetch_assoc($resultEnrollments);
 
                         echo $rowEnrollments['count(*)'];
+
+                        $dateTime = date('Y-m-d H:i:s');
                     ?>
                     </div>
                     <div class="static_data_item_text_top">New Students</div>
                     <div class="static_data_item_week">this week</div>
 
                     <?php
-                         // Get the number of new students last week
+                        // Get the number of new students last week
                         $sqlEnrollmentsLastWeek = "SELECT count(*) from student where firstAccessDate >= DATE(NOW()) - INTERVAL 14 DAY and firstAccessDate < DATE(NOW()) - INTERVAL 7 DAY";
                         $resultEnrollmentsLastWeek = mysqli_query($connection, $sqlEnrollmentsLastWeek);
                         $rowEnrollmentsLastWeek = mysqli_fetch_assoc($resultEnrollmentsLastWeek);
@@ -148,18 +150,18 @@
                         $percentage = round(($rowEnrollments['count(*)'] - $rowEnrollmentsLastWeek['count(*)'])*100/$rowEnrollmentsLastWeek['count(*)']);
                         
                     
-                    if($percentage < 0){
-                        ?>
-                        <div class="new-enrollment-count-lower"><?php echo $percentage.".00 %";?>
-                        <i class="fa-solid fa-down-long"></i></div>
-                        <?php
-                    }
-                    else{
-                        ?>
-                        <div class="new-enrollment-count-upper"><?php echo $percentage.".00 %";?>
-                        <i class="fa-solid fa-up-long"></i></div>
-                        <?php
-                    }
+                        if($percentage < 0){
+                            ?>
+                            <div class="new-enrollment-count-lower"><?php echo $percentage.".00 %";?>
+                            <i class="fa-solid fa-down-long"></i></div>
+                            <?php
+                        }
+                        else{
+                            ?>
+                            <div class="new-enrollment-count-upper"><?php echo $percentage.".00 %";?>
+                            <i class="fa-solid fa-up-long"></i></div>
+                            <?php
+                        }
                     ?>
                 </div>
 
@@ -241,10 +243,11 @@
                     ?>
                 </div>
             </div>
-            <div>
+            
+            <h4>Income Breakdown</h4>
+            <div class="scrollable">
                 <!-- Course Details summary table -->
                 <table class="course-details">
-                    <h4>Income Breakdown</h4>
                     <tr>
                         <th>Course Name</th>
                         <th>Enrollments</th>
