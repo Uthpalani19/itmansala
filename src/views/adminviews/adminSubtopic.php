@@ -1,7 +1,8 @@
 <?php 
+    session_start();
     include('../../assets/includes/navbar-admin.php');    
     include('../../config/studentconfig/viewsubtopic-backend.php');
-    session_start();
+
 if(!isset($_SESSION['adminname']))
 {
     header('location:../../student_login.php');
