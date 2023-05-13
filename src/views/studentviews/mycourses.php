@@ -76,24 +76,26 @@
                                         </div>
         
                                         <div class="course-name">
-                                            <a href=""><?php echo $course_row['courseName'];?></a>
+                                            <a><?php echo $course_row['courseName'];?></a>
                                         </div>
                                         <div class ="price-username">
                                             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                                <input type="text" value="<?php echo $number; ?>" name="updateNo" readonly hidden>
                                                 <button class="course-btn" name="updateTime" type="submit">Go to Course</button>
                                             </form>
                                         </div>
                                         <?php
                                          if (isset($_POST['updateTime'])){
                                             $dateTime = date('Y-m-d H:i:s');
+                                            $updateNo = mysqli_real_escape_string($connection, $_POST['updateNo']);
                                             $phoneNumber = $_SESSION['studentphone'];
                                             $query = "UPDATE student_course
                                                             SET lastAccessDate = '$dateTime'
-                                                            WHERE phoneNumber = '$phoneNumber' AND courseId = '$number' ";
+                                                            WHERE phoneNumber = '$phoneNumber' AND courseId = '$updateNo' ";
                                             mysqli_query($connection, $query);
                                             ?>
                                             <script>
-                                                window.location.href = "purchasedCourseDetails.php?lesson=<?php echo $number; ?>";
+                                                window.location.href = "purchasedCourseDetails.php?lesson=<?php echo $updateNo; ?>"
                                             </script>
                                             <?php
                                          }

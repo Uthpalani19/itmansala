@@ -163,7 +163,7 @@ if(!isset($_SESSION['adminname']))
                             <?php
                         }?>
                         <!--Add & view Questions button-->
-                         <a href="../adminviews/viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>" id="<?php echo $quizbtn; ?>" style="display:none;">
+                         <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>" id="<?php echo $quizbtn; ?>" style="display:none;">
                          <input type="button" value="View Questions" class="btn-questions add-questions attemptBtn" name="viewQuestions"></a>
                     <?php
                     }
