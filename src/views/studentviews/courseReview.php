@@ -29,7 +29,7 @@
 
 </head>
 <?php
-    include('../../assets/includes/navbar-student.php') 
+  include('../../assets/includes/navbar-student.php') 
 ?>
 <body class="rt-body">
   <?php
@@ -130,8 +130,7 @@
   <?php
   if ($course['numRatings'] > 0) {
     // Fetch all student review messages for the course
-  $query = "SELECT s.name, cr.rating, cr.reviewMessage, cr.timeStamp
-  FROM student s left join course_ratings cr on s.phoneNumber = cr.phoneNumber WHERE cr.courseId = '$courseId'";
+  $query = "SELECT * FROM student s left join course_ratings cr on s.phoneNumber = cr.phoneNumber WHERE cr.courseId = '$courseId'";
   $result = mysqli_query($connection, $query);
 
     while($reviews = mysqli_fetch_assoc($result))
@@ -160,12 +159,11 @@
               <?php echo $reviews['reviewMessage']; ?>
         </div>
         <div class="rating-msg-footer">
-            <div><?php echo $reviews['timeStamp']; ?></div> 
+            <div><?php echo $reviews['created_at']; ?></div> 
         </div>
       </div>
     </div>
 <?php
-      // Methnin card eka iwaray
     }
   }
   ?>
