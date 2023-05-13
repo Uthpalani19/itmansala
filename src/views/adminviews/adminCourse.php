@@ -1,14 +1,9 @@
 <?php
 include('../../config/dbconnection.php');
-$courseName="";
-if (isset($_POST['addcourse'])){
-    $courseName = mysqli_real_escape_string($connection, $_POST['course_name']);
-    if($courseName != ""){
-        $query = "INSERT INTO course_name (course_name) 
-        VALUES('$courseName')";
-        mysqli_query($connection, $query);
-        header('location: admincourse.php');
-    }
+session_start();
+if(!isset($_SESSION['adminname']))
+{
+    header('location:../../student_login.php');
 }
 ?>
 

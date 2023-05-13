@@ -34,10 +34,10 @@ body {
 }
 
 .tip{
-    width: 90%;
+
     border-top: 2px solid #dedede;
     border-bottom: 2px solid #dedede;
-    margin: auto;
+
 }
 
 .tip-left{
@@ -208,4 +208,58 @@ body {
 
 .published-div{
     margin-top: 5rem;
+}
+
+.addcourse-name{
+    margin: 55px 0 0 140px;
+    text-align: left;
+}
+
+.addcourse-button{
+    margin-top: 40px;
+    background: #5c26a9 ;
+    outline: none;
+    border: none; 
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 7px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    color: #fff;
+}
+
+.addcourse-div{
+    display: inline;
+    background: #cccccc;
+    padding: 25px 15px 25px 15px;
+    border-radius: 7px;
+}
+
+.addcourse-text{
+    width: 45%;
+    padding: 13px 0 13px 7px;
+    border: #cccccc 1px solid;
+    border-radius: 7px;
+    margin-right: 7px;
+    font-size: 17px;
+}
+
+.addcourse-text:hover, :active, :focus{
+    outline: none;
+	border-color: #5C26A9;
+} 
+
+.addtextarea{
+    border: 1px solid #e7e7e7;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    vertical-align: middle; 
+    padding: 10px;
+    font-size: 15px;
+}
+
+.addtextdiv{
+    padding: 130px 15px 130px 15px;
 }

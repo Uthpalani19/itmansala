@@ -47,6 +47,11 @@
 
             <div class="lesson-container">
                 <?php
+                    $price_query = "SELECT price FROM course_name"; 
+                    $price_result = mysqli_query($connection, $price_query);
+                    $price_row = mysqli_fetch_array($price_result);
+                    $price = $price_row["price"];
+
                     $phoneNumber = $_SESSION['phone'];
                     $course_query= "SELECT * FROM course WHERE teacherPhoneNumber = $phoneNumber";
                     $course_result = mysqli_query($connection, $course_query);
@@ -147,7 +152,7 @@
                         </div>  
                         <div class="column2">
                             <textarea class="course-input" name="courseDescription" rows="5" placeholder="A brief introduction to the course and its content "></textarea>
-                            <input type="text" class="course-input" name="price" value="1000 LKR" readonly hidden>
+                            <input type="text" class="course-input" name="price" value="<?php echo $price;?>" readonly hidden>
                             <input type="text" class="course-input" name="courseNumber" value="<?php echo $id;?>" readonly hidden>
                             <div>
                                 <?php
