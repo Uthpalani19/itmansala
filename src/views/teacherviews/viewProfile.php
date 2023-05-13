@@ -2,8 +2,8 @@
     // Navigation Bar
     session_start();
     require_once('../../assets/includes/navbar-teacher.php');
-
     require('../../config/dbconnection.php');
+    include('../../config/teacherconfig/editProfile.config.php');
 
     if(!isset($_SESSION['name']))
     {
@@ -16,8 +16,6 @@
         unset($_SESSION['name']);
         header('location:index.php');
     }
-
-    // Retrieve email address of the current user
 ?>
 
 <!-- Navigation Bar -->
@@ -36,18 +34,18 @@
     <title>View Profile</title>
 </head>
 <body>
-
-    <!-- Student main details -->
+<?php $user = getUserById($_SESSION['phone'], $connection); ?>
+    
     <div class="container-profile">
         <div class="profilepicture">
-            <img src="../../assets/images/propic.jpg" class="rounded-circle" width="150">
+            
+            <img src="<?php echo $user['teacherImage'];?>" class="rounded-circle" width="150">
         </div>
 
         <div class="student-details">
             <div class="student-name">
-                <p id="student-name"> <?php echo $_SESSION['name'] ?></p>
+                <p id="student-name"> <?php echo $user['name'];?></p>
             </div>
-
 
             <div class = "std-details">
                 <p id="student-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna</p>
@@ -55,7 +53,8 @@
         </div>
     </div>
 
-    <!-- Student Details -->
+    <!-- Teacher Details -->
+
     <div class="user-container">
         <div class="user-details">
             <table class="tbl-user-details">
@@ -66,20 +65,20 @@
                     <td>Email address</td>
                 </tr>
                 <tr>
-                    <!-- ?php echo $_SESSION['email']; ?-->
-                    <td>uthpalanijayasinghe19@gmail.com</td>
+                    
+                    <td><?php echo $user['email'];?></td>
                 </tr>
                 <tr>
                     <td>Telephone Number</td>
                 </tr>
                 <tr>
-                    <td> 0763361822</td>
+                    <td> <?php echo $user['phoneNumber'];?></td>
                 </tr>
                 <tr>
                     <td>Field of expertise</td>
                 </tr>
                 <tr>
-                    <td id="last-row">Networking</td>
+                    <td id="last-row"><?php echo $user['fieldOfExpertise'];?></td>
                 </tr>
             </table>
         </div>
@@ -106,7 +105,6 @@
             </table>
         </div>
     </div>
-
     <!-- Edit Details button -->
     <div class="edit-details">
         <button type="button" class="btn-edit" onclick="window.location.href='editProfile.php'">Edit Details</button>

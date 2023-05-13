@@ -40,7 +40,12 @@
                 <p>My Courses</p>
             </div>
             <div class="tip">
-                <p>We have many different languages. Different people like different languages. Also, different languages let you do different things. If python does not stick into your head, maybe Javascript will. And vice versa.</p>
+            <?php
+                $tip_query ="SELECT * FROM tips ORDER BY RAND() LIMIT 1";
+                $tip_result = mysqli_query($connection, $tip_query);
+                $tip_row = mysqli_fetch_array($tip_result);
+                ?>
+                <p><?php echo $tip_row["tip"]; ?></p>
             </div>
             
             <div class="lesson-container">
@@ -64,15 +69,35 @@
                                     ?>
                                     <div class="db-lesson">
                                         <div class="img-container">
+                                            <div class="lock">
+                                                <p><i class="fa-solid fa-lock" style="opacity:0;"></i></p>
+                                            </div>
                                             <img src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" class="cover-img">
                                         </div>
         
                                         <div class="course-name">
-                                            <a href="purchasedCourseDetails.php?lesson=<?php echo $number ?>"><?php echo $course_row['courseName'];?></a>
+                                            <a href=""><?php echo $course_row['courseName'];?></a>
                                         </div>
                                         <div class ="price-username">
-                                            <button type="" name="cart-btn" class="cart-btn" id="add-to-cart-button"> A progress bar should be added. </button>
+                                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                                <button class="course-btn" name="updateTime" type="submit">Go to Course</button>
+                                            </form>
                                         </div>
+                                        <?php
+                                         if (isset($_POST['updateTime'])){
+                                            $dateTime = date('Y-m-d H:i:s');
+                                            $phoneNumber = $_SESSION['studentphone'];
+                                            $query = "UPDATE student_course
+                                                            SET lastAccessDate = '$dateTime'
+                                                            WHERE phoneNumber = '$phoneNumber' AND courseId = '$number' ";
+                                            mysqli_query($connection, $query);
+                                            ?>
+                                            <script>
+                                                window.location.href = "purchasedCourseDetails.php?lesson=<?php echo $number; ?>";
+                                            </script>
+                                            <?php
+                                         }
+                                        ?>
                             
                                         <div class="course-ratings">
                                         <h4 class="course rating"></h4>
@@ -85,7 +110,12 @@
                     }
                     else
                     {
-                        echo "You have not enrolled to any courses yet";
+                    ?>
+                        <div class="emptydiv">
+                            <p>You have not enrolled to any courses yet!</p>
+                            <img class="empty-img" src="../../assets/images/welcome_avatar.png">
+                        </div>
+                    <?php
                     }
                     
                     ?>
@@ -98,7 +128,12 @@
             
         </div>
         <div class="page-end">
-            <p>We have many different languages. Different people like different languages. Also, different languages let you do different things. If python does not stick into your head, maybe Javascript will. And vice versa.</p>
+        <?php
+                $tip_query ="SELECT * FROM tips ORDER BY RAND() LIMIT 1";
+                $tip_result = mysqli_query($connection, $tip_query);
+                $tip_row = mysqli_fetch_array($tip_result);
+                ?>
+                <p><?php echo $tip_row["tip"]; ?></p>
             <a id="scroll"><i class="fa-solid fa-circle-chevron-up"></i></a>
         </div>
     </div>

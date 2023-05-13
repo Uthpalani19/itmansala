@@ -185,7 +185,7 @@ if (isset($_POST['login_student']))  {
                 $admresults = mysqli_query($connection, $admquery);
                 $admrow = mysqli_fetch_assoc($admresults);
                 $name = $admrow['name'];
-                $_SESSION['name'] = $name;
+                $_SESSION['adminname'] = $name;
                 header('location: views/adminviews/Admin-dashboard.php');
              }
             }else {

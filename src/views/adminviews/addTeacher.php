@@ -2,6 +2,11 @@
 <?php
     require '../../assets/includes/navbar-admin.php';
     require_once '../../config/dbconnection.php';
+    session_start();
+if(!isset($_SESSION['adminname']))
+{
+    header('location:../../student_login.php');
+}
 
     // Add Teacher 
     if(isset($_POST['addTeacher']))
@@ -195,12 +200,16 @@ if(!empty($upload_image2)){
                         </div>  
                         <div class="column2">
                             <select class="teacher-input title" name="expertise" required>
-                                <option value="">Select Expertise</option>
-                                <option value="Web development">Web development</option>
-                                <option value="Database management systems">Database management systems</option>
-                                <option value="Networking">Networking</option>
-                                <option value="Programming languages">Programming languages</option>
-                                <option value="Operating systems">Operating systems</option>
+                                <?php
+                                $expertiseQuery = "SELECT * FROM teacher_expertise";
+                                $expertiseResult = mysqli_query($connection, $expertiseQuery);
+                                while($expertiseRow = mysqli_fetch_assoc($expertiseResult)){
+                                    $expertise = $expertiseRow['expertise'];
+                                ?>
+                                <option value="<?php echo $expertise ?>"><?php echo $expertise ?></option>
+                                <?php
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>

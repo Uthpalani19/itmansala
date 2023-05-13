@@ -62,7 +62,7 @@ body {
     color: white;
     font-weight: 500;
     font-size: 1rem;
-    background: linear-gradient(45deg,#7e58bc 5%, #5319a6);
+    background:#5319a6;
 }
 
 .nav-bar{
@@ -148,14 +148,14 @@ a{
 }
 
 .blue-text{
-    color: #0BA7FF;
+    color: #F99417;
 }
 .landing-btn-signup ,.landing-btn-signin {
     padding: 5px 10px;
     height: 40px;
     width: 140px;
-    background-color: white;
-    color: 5319A6;
+    background-color: #F99417;
+    color: white;
     border: none;
     font-size: 1rem;
     font-weight: 550;
@@ -226,7 +226,6 @@ a{
     border-radius: 20px;
     color: white;
     background-color: #5319a6;
-    box-shadow: 5px 5px 10px 1px rgba(100, 100, 100, 0.692);
 }
 
 
@@ -250,8 +249,10 @@ a{
 /* Landing page 3 */
 
 .landing-page-3{
-    padding-top: 80px;
+    padding-top: 80px;  
+    padding-bottom: 20px;
     display: flex;
+    background: url('../images/lpage3.png');
 }
 
 .lpage-3-courses{
@@ -289,8 +290,7 @@ a{
     margin: 10px;
     width: 300px;
     height: 200px;
-    background-color:#272727;
-    border: 1px solid #1d1d1d;
+    background-color:#5319a6;
 }
 
 .overlay{
@@ -305,7 +305,6 @@ a{
     color: #FFFFFF;
     text-align: center;
     padding: 10px;
-    margin: 10px;
     cursor: pointer;
     
 }
@@ -383,13 +382,15 @@ a{
   }
 
   .lpage3-course-des{
+    color: #1d1d1d;
     padding: 20px;
     margin-left: 10px;
     margin-right: 20px;
     margin-bottom: 10px;
-    background-color: #DBDDDD;
     width: 90%;
     height: 550px;
+    border-radius: 25px;
+    border: 5px solid #DBDDDD;
 }
 
 .description {
@@ -399,7 +400,7 @@ a{
   
 .course-des-description{
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.500);
+    background-color: rgba(95, 95, 95, 0.123);   
     padding: 30px 15px;
     margin: 10px 0px;
 }
@@ -411,8 +412,8 @@ a{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.500);
+    border-radius: 2px;
+    background-color: rgba(95, 95, 95, 0.123);   
     padding: 30px 15px;
     margin: 10px 0px;
     height: 300px;

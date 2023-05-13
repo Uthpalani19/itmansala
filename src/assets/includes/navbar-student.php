@@ -19,7 +19,22 @@
 
             </div>
             <div class="nav-user-tray">
-                <p onclick="window.location.href='../../views/studentviews/cartSudentView.php'"><i class="fas fa-shopping-cart"></i></p>
+                <?php
+                    if(!empty($_SESSION['cart'])){
+                ?>
+                <p><i class="fa-solid fa-circle cartactive"></i></p>
+                <?php
+                    }
+                ?>
+                <p 
+                <?php
+                    if(!empty($_SESSION['cart'])){
+                ?>
+                onclick="window.location.href='../../views/studentviews/cartSudentView.php'"
+                <?php
+                    }
+                ?>
+                ><i class="fas fa-shopping-cart"></i></p>
                 <p><i class="fa-regular fa-bell"></i></p>
                 <p><i id="logout" class="fa-solid fa-circle-user"></i></p>
                 <div class="hidden" id="hidden">

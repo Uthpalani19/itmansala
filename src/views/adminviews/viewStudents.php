@@ -1,6 +1,11 @@
 <?php
     require '..\..\assets\includes\navbar-admin.php';
     require_once '..\..\config\dbconnection.php';
+    session_start();
+if(!isset($_SESSION['adminname']))
+{
+    header('location:../../student_login.php');
+}
 ?>
 
 <!DOCTYPE html>

@@ -23,10 +23,37 @@
                 <p onclick="window.location.href='viewTeachers.php'">Teacher</p>
                 <p onclick="window.location.href='viewStudents.php'">Student</p>
                 <p onclick="window.location.href='adminCourse.php'">Course</p>
+                <p onclick="window.location.href='controls.php'">Controls</p>
             </div>
             <div class="nav-user-tray">
                 <p><i class="fa-regular fa-bell"></i></p>
+                <p id="logout"><i class="fa-solid fa-circle-user"></i></p>
+
+                <!-- Logout button -->
+                <div class="hidden" id="hidden">
+                    <p><i id="close" class="fa-solid fa-xmark"></i></p>
+                    <p><i class="fa-solid fa-circle-user user2"></i></p>
+                    <p><?php echo $_SESSION['adminname']; ?></p>
+                    <a href="Admin-dashboard.php?logout='1'">Logout</a>
+                </div>
 
             </div>
         </div>
 </div>
+
+<script>
+    const logout = document.getElementById("logout");
+    const hidden = document.getElementById("hidden");
+    const close = document.getElementById("close");
+
+    logout.onclick = function(){
+        hidden.style.display = "block";
+    }
+
+    close.onclick = function(){
+        hidden.style.display = "none"
+    }
+</script>
+
+</body>
+</html>
