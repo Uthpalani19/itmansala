@@ -1,7 +1,8 @@
 <?php 
     //Navigation Bar
-    require_once('../../assets/includes/navbar-admin.php');
     session_start();
+    require_once('../../assets/includes/navbar-admin.php');
+
     require('../../config/dbconnection.php');
 
     if(!isset($_SESSION['name']))
