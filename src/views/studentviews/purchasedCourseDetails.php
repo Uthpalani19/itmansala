@@ -61,8 +61,29 @@
                     }
                 </style>
                 <div class="db-subtopic">
+                    <?php
+                    $check_query = "SELECT * FROM student_subtopic WHERE subtopicId = $subtopic";
+                    $check_result = mysqli_query($connection, $check_query);
+                    $check_row = mysqli_fetch_array($check_result);
+                    ?>
                     <div class="db-subtopic-left">
-                    <i class="fa-regular fa-circle"></i>
+                    <?php
+                    if($check_row['status'] == 1){
+                        ?>
+                    <form class="checkbox" method="post">
+                        <input type="text" value="<?php echo $subtopic; ?>" name="remove" readonly hidden>
+                        <button type="submit" name="uncheckbtn"><i class="fa-regular fa-circle-check"></i></button>
+                    </form>
+                        <?php
+                    }else{
+                    ?>
+                    <form class="checkbox" method="post">
+                        <input type="text" value="<?php echo $subtopic; ?>" name="subtopicNo" readonly hidden>
+                        <button type="submit" name="checkbtn"><i class="fa-regular fa-circle"></i></button>
+                    </form>
+                    <?php
+                    }
+                    ?>
                         <p id="<?php echo $subid; ?>"><?php echo $retrieve_subtopic_row['subTopicName']; ?></p>
                     </div>
                     <div class="db-subtopic-right">
