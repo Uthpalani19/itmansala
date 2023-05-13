@@ -1,4 +1,3 @@
-
 <!-- Navigation Bar -->
 <!DOCTYPE html>
 <html lang="en">

@@ -4,16 +4,16 @@
     session_start();
     require('../../config/dbconnection.php');
 
-    if(!isset($_SESSION['adminname']))
+    if(!isset($_SESSION['name']))
     {
-        header('location:../../student_login.php');
+        header('location:index.php');
     }
 
     if(isset($_GET['logout']))
     {
         session_destroy();
-        unset($_SESSION['adminname']);
-        header('location:../../student_login.php');
+        unset($_SESSION['name']);
+        header('location:index.php');
     }
 ?>
 
@@ -142,7 +142,7 @@
                     <div class="static_data_item_week">this week</div>
 
                     <?php
-                        // Get the number of new students last week
+                         // Get the number of new students last week
                         $sqlEnrollmentsLastWeek = "SELECT count(*) from student where firstAccessDate >= DATE(NOW()) - INTERVAL 14 DAY and firstAccessDate < DATE(NOW()) - INTERVAL 7 DAY";
                         $resultEnrollmentsLastWeek = mysqli_query($connection, $sqlEnrollmentsLastWeek);
                         $rowEnrollmentsLastWeek = mysqli_fetch_assoc($resultEnrollmentsLastWeek);
