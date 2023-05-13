@@ -68,7 +68,7 @@
     </h1>
 
     <p class="lpage-2-paragraph">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br> sed do eiusmod tempor incididunt ut labore et dolore magna 
+    Welcome to our ICT Learning Management System! We provide a comprehensive platform,<br> for learners to enhance their skills and knowledge in the field of information and communication technology. <br> Our user-friendly interface and interactive tools make learning enjoyable and efficient.
     </p>
 
     <div class="lpage-2-cards">
