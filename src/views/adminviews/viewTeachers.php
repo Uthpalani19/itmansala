@@ -86,7 +86,7 @@ if(!isset($_SESSION['adminname']))
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
-                                <td><a href="../../config/adminconfig/update.php?updateId='.$row['phoneNumber'].'"><i class="fa-solid fa-file-pen" id="icons"></i></a></td>
+                                <td><a href="update.php?updateId='.$row['phoneNumber'].'"><i class="fa-solid fa-file-pen" id="icons"></i></a></td>
                             </tr>
                         ';
                 }
