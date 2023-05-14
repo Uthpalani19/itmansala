@@ -5,16 +5,9 @@
     require_once('../../assets/includes/navbar-admin.php');
 
     require('../../config/dbconnection.php');
-    if(!isset($_SESSION['name']))
+    if(!isset($_SESSION['adminname']))
     {
-        header('location:C:\xampp\htdocs\itmansala\src\index.php');
-    }
-
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['name']);
-        header('location:C:\xampp\htdocs\itmansala\src\index.php');
+        header('location:../../student_login.php');
     }
 
     // Get Subtopic ID
@@ -43,20 +36,15 @@
 
         <!--Course Details-->
         <div class="course-details-box">
-            <p id="title">Course 01: <?php echo $subName; ?> </p>
+            <p id="title"><?php echo $courseName; ?> </p>
         </div>
 
         <!--Set Subtopic Name-->
         <div class="subtopic-title">
-            <p> 1.1 <?php echo $courseName; ?> </p>
+            <p> <?php echo $subName; ?> </p>
         </div>
 
 <!-- View Added Questions of a specific subtopic -->
-
-        <!-- Questions Recovery -->
-        <div class="recover"> 
-        <button class="recover-btn" onclick="window.location.href='../../config/teacherconfig/recoverQuestions.php?subId=<?php echo $subId ?>&courseId=<?php echo $courseId ?>'"><i class="fa-large fas fa-trash-restore" id="recover-icon"></i> Recover Questions</button>
-        </div>
 
         <div>
             <center>

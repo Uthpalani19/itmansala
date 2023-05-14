@@ -1,6 +1,12 @@
 <?php 
+    session_start();
     include('../../assets/includes/navbar-admin.php');    
-    include('../../config/studentconfig/viewsubtopic-backend.php')
+    include('../../config/studentconfig/viewsubtopic-backend.php');
+
+if(!isset($_SESSION['adminname']))
+{
+    header('location:../../student_login.php');
+}
 ?>
 <html>
 
@@ -8,7 +14,6 @@
     <title>IT Mansala</title>
     <script src="https://kit.fontawesome.com/a87d6dd22b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../../assets/css/subtopic.css">
-  <link rel="stylesheet" type="text/css" href="../../assets/css/global.css">
 </head>
 
 <body id="body" class="adminbody">
@@ -77,7 +82,9 @@
                             $showvideo = bin2hex(random_bytes(4));
                             $videoclose = bin2hex(random_bytes(4));
                             $player = bin2hex(random_bytes(4));
+                            $quizbtn = bin2hex(random_bytes(4));
                             $showvideoclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
+                            $quizbtnclik = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $playerIDclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $videocloseclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
                             $closeonclick = chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122)).chr(rand(97,122));
@@ -157,7 +164,8 @@
                             <?php
                         }?>
                         <!--Add & view Questions button-->
-                         <a href="../adminviews/viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>"><input type="button" value="View Questions" class="btn-questions view-questions" name="viewQuestions"></a>
+                         <a href="viewAddedQuestions.php?subId=<?php echo $subtopic; ?>&courseId=<?php echo $subtopic_row['courseId']?>" id="<?php echo $quizbtn; ?>" style="display:none;">
+                         <input type="button" value="View Questions" class="btn-questions add-questions attemptBtn" name="viewQuestions"></a>
                     <?php
                     }
                 }
@@ -166,12 +174,14 @@
                     const <?php echo $subidonclick; ?> = document.getElementById("<?php echo $subid; ?>");
                     const <?php echo $dblessonIDonclick; ?> = document.getElementsByClassName("<?php echo $class; ?>"); 
                     const <?php echo $hideIDonclick; ?> = document.getElementById("<?php echo $hideid; ?>");
+                    const <?php echo $quizbtnclik; ?> = document.getElementById("<?php echo $quizbtn; ?>");
 
                     <?php echo $subidonclick; ?>.onclick = function(){
                         var i;
                         for (i=0; i< <?php echo $dblessonIDonclick; ?>.length; i++){
                             <?php echo $dblessonIDonclick; ?>[i].style.display = "block";
                         }
+                        <?php echo $quizbtnclik; ?>.style.display = "block";
                     }
 
                     <?php echo $hideIDonclick; ?>.onclick =function(){
@@ -179,6 +189,7 @@
                         for (x=0; x< <?php echo $dblessonIDonclick; ?>.length; x++){
                         <?php echo $dblessonIDonclick; ?>[x].style.display = "none";
                         }
+                        <?php echo $quizbtnclik; ?>.style.display = "none";
                     }
                 </script>
                 

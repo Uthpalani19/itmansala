@@ -332,13 +332,28 @@ tr:nth-child(odd)
 }
 
 /* Dashboard Teacher */
+.course-dropdown
+{
+    width: 25%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    padding: 0.5rem 1.5rem;
+    margin: 75px 10px 0 50px;
+    background-color: #5319a6;
+    color: #ffffff;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    outline: none;
+}
+
 .static_data_container
 {
     width: 90%;
     height: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 85px;
+    margin: 30px auto 0 50px;
     background-color: #D9D9D9;
     border-radius: 15px 15px 0px 0px;
     padding: 10px;
@@ -352,7 +367,7 @@ tr:nth-child(odd)
 
 .static_data_container > .static_data
 {
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -427,6 +442,8 @@ tr:nth-child(odd)
     padding-bottom: 25px;
     border-radius: 10px;
     margin-left: 50px;
+    margin-right: 50px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24);
 }
 
 /* White box */
@@ -459,6 +476,11 @@ tr:nth-child(odd)
     margin-top: 85px;
 }
 
+.scatterplot
+{
+    width: 750px;
+    height: 750px;
+}
 /* To do list */
 .container-main > .todo_container
 {
@@ -632,24 +654,95 @@ tr:nth-child(odd)
 /* Dashboard */
 
 /* Marks distribution */
+
+.new-enrollment-count-lower
+{
+    color: #f71818;
+    padding: 0px 49px 0 49px;
+}
+
+.new-enrollment-count-upper
+{
+    color: #028513;
+    padding: 0px 49px 0 49px;
+} 
+
+.new-enrollment-count-upper > .progress_item_title2
+{
+    color: #ffffff;
+}
+
+.new-enrollment-count-upper > .progress_item_value2
+{
+    color: #ffffff;
+}
+
+.new-enrollment-count-similar
+{
+    color: #F99417;
+    padding: 0px 49px 0 49px;
+}
+
+.sentence
+{
+    font-size: 1.5rem;
+    font-weight: 1rem;
+    color: #ffffff;
+}
+
 .subtopic-dashboard
 {
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
+    margin: -400px auto 0 auto;
     font-weight: bold;
     color: #636363;
+}
+
+.course-performance-stat
+{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0 0 10px;
+    padding: 0 0 0 0;
+    width: 100%;
+    height: 22%;
+}
+
+.course-performance-stat > .course-performance-topic
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 10px 0px 39px 35px;
+    width: 90%;
+    height: 15%;
+    background-color: #5318a6;
+    border-radius: 10px;
+    color: white;
+}
+
+.course-performance-stat > .course-performance-value
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px 29px 0px -32px;
+    padding: 10px 10px 39px 10px;
+    width: 60%;
+    height: 15%;
+    background-color: #F99417;
+    border-radius: 10px;
+    color: white;
 }
 
 .marks-distribution-box
 {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    height: 350px;
-    background-color: #D9D9D9;
-    margin: 1rem 0 0 0;
+    height: 425px;
+    margin: 10px 0 0 0;
+    background-color: #eeeeee;
     padding: 0 0 0 0;
     align-content: center;
     flex-wrap: wrap;
@@ -657,26 +750,35 @@ tr:nth-child(odd)
     justify-content: space-between;
 }
 
-.marks-distribution-box > .attempts-pie-chart
+.marks-distribution-box > .attempts-pie-chart .piechart
 {
-    flex: auto;
-    /* width: 50px; */
-    height: 300px;
-    background-color: #FFFFFF;
-    margin: 0 0 1rem 8rem;
-    padding: 0 0 0 0;
+    width: 349px;
+    height: 362px;
+    margin-left: 194px;
+    margin-top: 0px;
     border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24);
+}
+
+.chart-topic
+{
+    font-size: 1rem;
+    color: #636363;
+    margin: 400px 0 0 -375px;
+    padding: 0 0 0 0;
+    text-align: center;
 }
 
 .marks-distribution-box > .attempts-statistics
 {
     flex: auto;
-    width: 100px;
-    height: 300px;
+    width: 159px;
+    height: 382px;
     background-color: #FFFFFF;
-    margin: 0 8rem 1rem 3rem;
+    margin: 0 2rem -1rem 6rem;
     border-radius: 10px;
-    padding: 0 0 0 0;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24);
 } 
 
 /* Students details */
@@ -1517,4 +1619,28 @@ h4{
 .btn-questions:hover
 {
     background-color: #848484;
+}
+
+.instructions
+{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #5318a6;
+    font-size: 1.2rem;
+    margin: 50px 0px;
+}
+
+.instructions img
+{
+    margin: 20px 0px;
+    width: 200px;
+    height: 200px;
 }

@@ -16,6 +16,16 @@ body {
 
 }
 
+.error{
+    font-size: 13px;
+    color: rgb(224, 0, 0);
+  }
+  
+  
+.fa-circle-exclamation{
+    margin-right: 5px;
+  }
+
 input{
     font-family: 'Poppins', sans-serif;
 }

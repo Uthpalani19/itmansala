@@ -483,6 +483,16 @@ h3{
   border-radius: 5px;
 }
 
+.signup-top{
+  width: 75%;
+  margin: auto;
+  margin-top: -55px;
+  margin-bottom: 55px;
+  background: #fffafa;
+  border-left: 5px solid #de0f0f;
+  border-radius: 5px;
+}
+
 .success-msg p{
   font-size: 15px;
   padding: 5px 0 5px 0;

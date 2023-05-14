@@ -6,6 +6,28 @@
     $subtopic_result = mysqli_query($connection, $subtopic_query);
     $subtopic_row = mysqli_fetch_assoc($subtopic_result);
 
+    if(isset($_POST['checkbtn'])){
+        $subtopicNo = mysqli_real_escape_string($connection, $_POST['subtopicNo']);
+        $dateTime = date('Y-m-d H:i:s');
+        $phoneNumber = $_SESSION['studentphone'];
+
+        $updateQuery = "UPDATE student_subtopic
+                        SET status = '1', lastaccesstime = '$dateTime'
+                        WHERE subtopicId = '$subtopicNo' AND phoneNumber = '$phoneNumber'";
+        mysqli_query($connection, $updateQuery);
+        header("location: purchasedCourseDetails.php?lesson=".$lesson);
+    }
+
+    if(isset($_POST['uncheckbtn'])){
+        $subtopicNo = mysqli_real_escape_string($connection, $_POST['remove']);
+        $phoneNumber = $_SESSION['studentphone'];
+        $removeQuery = "UPDATE student_subtopic
+                        SET status = '0'
+                        WHERE subtopicId = '$subtopicNo' AND phoneNumber = '$phoneNumber'";
+        mysqli_query($connection, $removeQuery);
+        header("location: purchasedCourseDetails.php?lesson=".$lesson);
+    }
+
 
     if (isset($_POST['publish_to_students'])){
         $query = "UPDATE course

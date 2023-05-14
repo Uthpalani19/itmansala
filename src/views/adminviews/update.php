@@ -65,7 +65,7 @@
                     <p>Tel-No</p>
                 </div>  
                 <div class="column2">
-                    <input type="text" class="teacher-input title" name="telephone" readonly value="<?php echo $id; ?>">
+                    <input type="text" class="teacher-input title" name="telephone" readonly value="0<?php echo $id; ?>">
                 </div>
             </div>
 

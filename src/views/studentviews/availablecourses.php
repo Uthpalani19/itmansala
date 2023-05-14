@@ -53,7 +53,12 @@
                 <p>Available Courses</p>
             </div>
             <div class="tip">
-                <p>We have many different languages. Different people like different languages. Also, different languages let you do different things. If python does not stick into your head, maybe Javascript will. And vice versa.</p>
+                <?php
+                $tip_query ="SELECT * FROM tips ORDER BY RAND() LIMIT 1";
+                $tip_result = mysqli_query($connection, $tip_query);
+                $tip_row = mysqli_fetch_array($tip_result);
+                ?>
+                <p><?php echo $tip_row["tip"]; ?></p>
             </div>
             
             <form method="post" action="">
@@ -65,43 +70,91 @@
 
                     if($check_course_result){
                         while($course_row = mysqli_fetch_array($course_result)){
-                            $number= $course_row['courseId'];
-                            
+                            $number= $course_row['courseId']; 
+                            $_SESSION['price'] = $course_row['price'];
                             ?>
                             
                             <div class="db-lesson">
-                                <div class="img-container">
+
+<?php
+$PhoneNumber = $_SESSION["studentphone"];
+$query = "SELECT * FROM student_course WHERE phoneNumber = $PhoneNumber AND courseID = $number";
+$result = mysqli_query($connection, $query);
+$check_result = mysqli_num_rows($result) > 0;
+if($check_result){
+    ?>
+                                    <div class="img-container">
+                                    <div class="lock">
+                                        <p><i class="fa-solid fa-lock" style="opacity:0;"></i></p>
+                                    </div>
+                                    <img src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" class="cover-img">
+                                </div>
+                                    <div class="course-name">
+                                    <a><?php echo $course_row['courseName'];?></a>
+                                    
+                                </div>
+                                <div class ="price-username">
+                                    
+    <button class="course-btn" type="reset"><a href="purchasedCourseDetails.php?lesson=<?php echo $number ?>">Go to Course</a></button>
+</div>
+    <?php
+}else{
+    ?>
+                                    <div class="img-container">
                                     <div class="lock">
                                         <p><i class="fa-solid fa-lock"></i></p>
                                     </div>
                                     <img src="../../assets/uploads/<?php echo $course_row['courseImage'];?>" class="cover-img">
                                 </div>
-
-                                <div class="course-name">
+                                    <div class="course-name">
                                     <a href="viewsubtopic.php?lesson=<?php echo $number ?>"><?php echo $course_row['courseName'];?></a>
                                     
                                 </div>
                                 <div class ="price-username">
-                                    
                                     <div class="price">
                                         <p><?php echo $course_row['price'];?> LKR</p>
                                     </div>
-                                    
+                                    <?php
+                                    if(!empty($_SESSION['cart'])){
+                                        if(in_array($number, $_SESSION['cart'])){
+                                            ?>
+                                        <button type="reset" class="cart-btn add-cart"> Added to Cart </button>
+                                            <?php
+                                        }else{
+                                            ?>
                                     <form class="cart-form" method="post">
-                                            <button type="submit" name="cart_btn" class="cart-btn" value="<?php echo $number ?>" id="<?php echo $cartbtnclick;?>"> Add to Cart </button>
+                                        <button type="submit" name="cart_btn" class="cart-btn" value="<?php echo $number ?>" id="<?php echo $cartbtnclick;?>"> Add to Cart </button>
                                     </form>
+                                            <?php
+                                        }
+                                    }else{
+                                    ?>
+                                    <form class="cart-form" method="post">
+                                        <button type="submit" name="cart_btn" class="cart-btn" value="<?php echo $number ?>" id="<?php echo $cartbtnclick;?>"> Add to Cart </button>
+                                    </form>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+    <?php                               
+}
 
+?>
                                     <?php
                                     if(isset($_POST['cart_btn'])) {
                                         $formnum = mysqli_real_escape_string($connection, $_POST['cart_btn']);
                                         if($formnum == $number){
                                             array_push( $_SESSION['cart'], $number);
-                                        
-                                        }
-                                        
+                                            ?>
+                                            <script>
+                                                window.location.href = "availablecourses.php";
+                                            </script>
+                                            <?php
+                                        }         
                                     }
                                     ?>
-                                </div>
+                                    
+                                
 
                                 <div class="rt-display-container">
                                 
@@ -156,7 +209,12 @@
             
         </div>
         <div class="page-end">
-            <p>We have many different languages. Different people like different languages. Also, different languages let you do different things. If python does not stick into your head, maybe Javascript will. And vice versa.</p>
+        <?php
+                $tip_query ="SELECT * FROM tips ORDER BY RAND() LIMIT 1";
+                $tip_result = mysqli_query($connection, $tip_query);
+                $tip_row = mysqli_fetch_array($tip_result);
+                ?>
+                <p><?php echo $tip_row["tip"]; ?></p>
             <a id="scroll"><i class="fa-solid fa-circle-chevron-up"></i></a>
         </div>
     </div>

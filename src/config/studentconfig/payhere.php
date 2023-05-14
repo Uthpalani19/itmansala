@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-$total = count($_SESSION['cart'])*1000;
+$total = count($_SESSION['cart']) * $_SESSION['price'];
 
 $amount = $total;
 $merchant_id = "1223133";

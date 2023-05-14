@@ -60,13 +60,8 @@ if (isset($_POST['signup_student'])) {
         
             //name validation
             $namenum = preg_match('@[0-9]@', $name);
-            $namespc = preg_match('@[^\w]@', $name);
-        
-            if ($namenum != NULL){
-                array_push($Firstname_Error, "Name cannot contain numbers <br> or special characters!");
-            }
-        
-            if ($namespc != NULL){
+            $namespc = preg_match('/[-+\/*!@#$%^&()_=.?|\\><{}\[\]":;,]/', $name);
+            if ($namenum != NULL || $namespc != NULL){
                 array_push($Firstname_Error, "Name cannot contain numbers <br> or special characters!");
             }
             
@@ -92,14 +87,25 @@ if (isset($_POST['signup_student'])) {
 
   
     // check if same data already exists in database
-    $user_check_query = "SELECT * FROM usertable WHERE phoneNumber='$PhoneNumber' LIMIT 1";
+    $checkphone = substr($PhoneNumber, -9); 
+    $user_check_query = "SELECT * FROM usertable WHERE phoneNumber='$checkphone' LIMIT 1";
     $result = mysqli_query($connection, $user_check_query);
     $user = mysqli_fetch_assoc($result);
+
+    $email_check_query = "SELECT * FROM student WHERE email='$Email' LIMIT 1";
+    $email_result = mysqli_query($connection, $email_check_query);
+    $email_user = mysqli_fetch_assoc($email_result);    
     
     if ($user) {
-      if ($user['phoneNumber'] === $PhoneNumber) {
+      if ($user['phoneNumber'] === $checkphone) {
         array_push($PhoneNumber_Error, "Phone number already exists");
       }
+    }
+    
+    if($email_user){
+        if($email_user['email'] === $Email) {
+            array_push($Email_Error, "Email already exists");
+          }
     }
 
 
@@ -108,8 +114,6 @@ if (isset($_POST['signup_student'])) {
     if (count($master_error) == 0) {
         $password = md5($password_1);//encrypt the password before saving in the database
   
-        // $query = "INSERT INTO student (name, userName, email, password, phoneNumber) 
-        //           VALUES('$name', '$Username', '$Email', '$password', '$PhoneNumber')";
 
         $query = "INSERT INTO student (name, email, password, phoneNumber, status) 
                   VALUES('$name', '$Email', '$password', '$PhoneNumber', '1')";
@@ -185,7 +189,7 @@ if (isset($_POST['login_student']))  {
                 $admresults = mysqli_query($connection, $admquery);
                 $admrow = mysqli_fetch_assoc($admresults);
                 $name = $admrow['name'];
-                $_SESSION['name'] = $name;
+                $_SESSION['adminname'] = $name;
                 header('location: views/adminviews/Admin-dashboard.php');
              }
             }else {

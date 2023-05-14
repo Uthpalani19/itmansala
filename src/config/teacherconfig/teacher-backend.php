@@ -110,9 +110,6 @@ if (isset($_POST['add_course'])) {
 
 $courseQuery = "SELECT * FROM course_name WHERE course_name NOT IN (SELECT courseName FROM course)";
 $courseResult = mysqli_query($connection, $courseQuery);
-if(mysqli_num_rows($courseResult) > 0) {
-
-}
 
 
 //publish course
