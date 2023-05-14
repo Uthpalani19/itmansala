@@ -5,16 +5,16 @@
 
     require('../../config/dbconnection.php');
 
-    if(!isset($_SESSION['name']))
+    if(!isset($_SESSION['adminname']))
     {
-        header('location:index.php');
+        header('location:../../student_login.php');
     }
 
     if(isset($_GET['logout']))
     {
         session_destroy();
-        unset($_SESSION['name']);
-        header('location:index.php');
+        unset($_SESSION['adminname']);
+        header('location:../../student_login.php');
     }
 ?>
 
