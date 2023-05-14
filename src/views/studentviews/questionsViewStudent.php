@@ -69,6 +69,12 @@
             $_SESSION['quiz_time'] = $quizTime;
             $_SESSION['attempt'] = $attempt;
         }
+
+        $phoneNumber = $_SESSION['studentphone'];
+
+        $student_course= "SELECT * FROM student_course WHERE courseID = $courseId AND phoneNumber = $phoneNumber";
+        $student_result = mysqli_query($connection, $student_course);
+        $check_student = mysqli_num_rows($student_result) > 0;
     ?>
         <!--Course Details-->
         <div class="course-details-box">
@@ -77,6 +83,10 @@
             <?php echo $courseDescription; ?>
         </p>
         </div>
+
+        <?php
+        if($check_student){
+        ?>
 
         <!--Set Subtopic Name-->
         <div class="subtopic-title">
@@ -353,6 +363,14 @@
         <p id="timer" class="timer"></p>
         <?php
             }
+        }else{
+            ?>
+        <div class="notpurchased">
+            <p>Sorry! You have not purchased this course.</p>
+            <img class="empty-img" src="../../assets/images/welcome_avatar.png">
+        </div>
+            <?php
+        }
         ?>
 
         <!-- Footer -->

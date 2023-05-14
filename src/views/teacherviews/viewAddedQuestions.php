@@ -7,15 +7,9 @@
     require('../../config/dbconnection.php');
     if(!isset($_SESSION['name']))
     {
-        header('location:C:\xampp\htdocs\itmansala\src\index.php');
+        header('location: ../../student_login.php');
     }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['name']);
-        header('location:C:\xampp\htdocs\itmansala\src\index.php');
-    }
 
     // Get Subtopic ID
     $subId = $_GET['subId'];

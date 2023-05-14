@@ -6,15 +6,9 @@
 
     if(!isset($_SESSION['name']))
     {
-        header('location:C:\xampp\htdocs\itmansala\src\index.php');
+        header('location: ../../student_login.php');
     }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['name']);
-        header('location:C:\xampp\htdocs\itmansala\src\index.php');
-    }
 
     // Get Subtopic ID
     $subId = $_GET['subId'];
@@ -44,12 +38,12 @@
         <form action="" method="POST">
             <!--Course Details-->
             <div class="course-details-box">
-                <p id="title">Course 01: <?php echo $subName; ?> </p>
+                <p id="title"><?php echo $subName; ?> </p>
             </div>
 
             <!--Set Subtopic Name-->
             <div class="subtopic-title">
-                <p> 1.1 <?php echo $courseName; ?> </p>
+                <p><?php echo $courseName; ?> </p>
             </div>
 
             <div class="question">
@@ -61,7 +55,7 @@
 
                 <!-- Load Question Details -->
                 <?php
-                    $sql="SELECT * FROM modelpaperquestion where questionId='$questionID'";
+                    $sql="SELECT * FROM modelpaperquestion where questionId='$questionID' AND subtopicId = '$subId'";
                     $result = mysqli_query($connection,$sql);
                     $row = mysqli_fetch_assoc($result);
                 

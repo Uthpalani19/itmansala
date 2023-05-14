@@ -67,7 +67,7 @@
             <input type="hidden" name="courseId" value="<?php echo $courseId; ?>">
             
             <div class="course-details-box">
-                <p id="title">Course 01: <?php echo $courseName; ?> </p>
+                <p id="title"> <?php echo $courseName; ?> </p>
             </div>
 
             <!--Set Subtopic Name-->
