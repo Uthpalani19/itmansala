@@ -154,8 +154,6 @@ if($check_result){
                                     }
                                     ?>
                                     
-                                </div>
-
                                 <div class="rt-display-container">
                                 
                                 <?php        

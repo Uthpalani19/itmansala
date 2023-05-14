@@ -438,18 +438,18 @@
         <!-- End of marks distribution -->
 
         <!-- Student Performances -->
-        <!-- <div class="subtopic-dashboard">Student Performances</div>
-
-        <div class="students-details-table">
-            <table>
-                <tr>
-                    <th>Student Profile Picture</th>
-                    <th>Name</th>
-                    <th>Contact</th>
-                    <th>Total marks</th>
-                    <th>Quizzes completed</th>
-                </tr>
-        </div> -->
+        <div class="subtopic-dashboard-2">Student Performances</div>
+            <div class="student-table-performance">
+                <table class="student-table">
+                    <tr>
+                        <th>Student Profile Picture</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Total marks</th>
+                        <th>Quizzes completed</th>
+                    </tr>
+            </div>
+        </div>
         <!-- End of student performances -->
 
 
