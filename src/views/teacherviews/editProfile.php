@@ -3,6 +3,7 @@
     session_start();
     require_once('../../assets/includes/navbar-teacher.php');
     require('../../config/dbconnection.php');
+    include('../../config/errors.php');
     include('../../config/teacherconfig/editProfile.config.php');
 
     if(!isset($_SESSION['name']))
@@ -16,6 +17,7 @@
         unset($_SESSION['name']);
         header('location:index.php');
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +35,9 @@
 <body class="body-2">
 
 
-<?php 
-$user = getUserById($_SESSION['phone'],$connection); 
 
-?>
-<form method="POST" action="../../views/teacherviews/viewProfile.php" enctype="multipart/form-data">
+<!-- action="../../views/teacherviews/viewProfile.php" -->
+<form method="POST" enctype="multipart/form-data" >
     <div class="container-editprofile">
         <div class="heading">
             <p class="heading-p">Eidt Profile</p>
@@ -66,62 +66,16 @@ $user = getUserById($_SESSION['phone'],$connection);
         <div class="edit-image">
             <div><img src="<?php echo $user['teacherImage'];?>" class="change-image" ></div>
             <div class="edit-image-container" id="preview-image">
-                <input type="file" name="image" class="edit-image-btn" onchange="displayImage(this)">
+                <input type="file" name="image" class="edit-image-btn">
             </div>
         </div>
         <div class="btn-container">
-            <button type="submit" class="btn btn-1">Save Changes</button>
+            <button type="submit" class="btn btn-1" name="form_1">Save Changes</button>
         </div> 
-</form>
+</form>    
 
-<?php
- if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $image = $_FILES['image'];
 
-    $user_id = $_SESSION['phone'];
-
-    // update the user details in the database
-    $sql = "UPDATE teacher SET name = '$name', email = '$email'";
-
-    if (!empty($image['name'])) {
-        // upload the new image and get its path
-        $image_path = uploadImage($image);
-
-        // update the image path in the database
-        $sql .= ", teacherImage = '$image_path'";
-    }
-
-    $sql .= " WHERE phoneNumber = '$user_id'";
-
-    if (mysqli_query($connection, $sql)) {
-        // success message
-        echo "User details updated successfully";
-    } else {
-        // error message
-        echo "Error updating user details: " . mysqli_error($connection);
-    }
-
-    // function to upload the new image and get its path
-    function uploadImage($image) {
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($image["name"]);
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        $new_filename = uniqid() . '.' . $imageFileType;
-        $target_path = $target_dir . $new_filename;
-
-        if (move_uploaded_file($image["tmp_name"], $target_path)) {
-            return $target_path;
-        } else {
-            return "";
-        }
-    }
-
- }
-
-?>
-
+<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="heading">
             <p class="heading-p">Edit password</p>
 
@@ -132,16 +86,21 @@ $user = getUserById($_SESSION['phone'],$connection);
             </div>
 
             <div class="password-right">
-                <div><input type="password" name="current-password" class="input-field"></div>
-                <div> <input type="password" name="new-password" class="input-field" readonly id="disabled-txt-field"></div>
-                <div><input type="password" name="confirm-new-password" class="input-field" readonly id="disabled-txt-field"></div>
+                <div>
+                    <input type="password" name="current-password" class="input-field">
+                </div>
+                <div> <input type="password" name="new-password" class="input-field" ></div>
+                <div><input type="password" name="confirm-new-password" class="input-field" ></div>
             </div>
         </div>
 
+        <div class="btn-container">
+            <button type="submit" class="btn btn-1" name="form_2">Save Changes</button>
+        </div> 
+
+</form>
 
 
-
-    </div>
 
 </body>
 </html>
