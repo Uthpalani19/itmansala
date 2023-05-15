@@ -1,26 +1,23 @@
 <?php 
-    // Navigation Bar
-    session_start();
-    require_once('../../assets/includes/navbar-teacher.php');
-    require('../../config/dbconnection.php');
-    include('../../config/teacherconfig/editProfile.config.php');
+  session_start(); 
+  require('../../config/dbconnection.php');
+  include('../../config/studentconfig/editProfile.config.php');
+  
 
-    if(!isset($_SESSION['name']))
-    {
-        header('location:index.php');
-    }
+  if(!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = array();
+  }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['name']);
-        header('location:index.php');
-    }
-?>
+  if (!isset($_SESSION['studentname'])) {
+  	header('location: ../../student_login.php');
+  }
 
-<!-- Navigation Bar -->
-<?php 
-    require_once('../../assets/includes/navbar-teacher.php');
+  if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['studentname']);
+    header("location: ../../student_login.php");
+ }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,12 +31,29 @@
     <title>View Profile</title>
 </head>
 <body>
-<?php $user = getUserById($_SESSION['phone'], $connection); ?>
+<?php include('../../assets/includes/navbar-student.php') ?>
+
+<?php 
+    $user = getUserById($_SESSION['studentphone'], $connection); 
+?>
+
     
     <div class="container-profile">
         <div class="profilepicture">
+            <?php
+                $ppicture = $user['profilePicture'];
+                if(!$ppicture){
+                ?>
+                    <img src='../../assets/images/user.jpg' class='rounded-circle' width='150'>
+                <?php
+                }
+                else{
+                ?>
+                    <img src='<?php echo $ppicture ;?>' class='rounded-circle' width='150'>
+                <?php
+                }
+            ?>
             
-            <img src="<?php echo $user['teacherImage'];?>" class="rounded-circle" width="150">
         </div>
 
         <div class="student-details">
@@ -48,10 +62,12 @@
             </div>
 
             <div class = "std-details">
-               
+                <p id="student-details"></p>
             </div>
         </div>
     </div>
+
+    <!-- Student Details -->
 
     <div class="user-container">
         <div class="user-details">
