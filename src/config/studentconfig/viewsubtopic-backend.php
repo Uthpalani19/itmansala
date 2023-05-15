@@ -1,10 +1,44 @@
 <?php
     require('C:\xampp\htdocs\itmansala\src\config\dbconnection.php');
     $lesson = $_GET['lesson'];
+    $phoneNumber = $_SESSION['studentphone'];
 
     $subtopic_query= "SELECT * FROM course WHERE courseID = $lesson";
     $subtopic_result = mysqli_query($connection, $subtopic_query);
     $subtopic_row = mysqli_fetch_assoc($subtopic_result);
+
+    $student_course= "SELECT * FROM student_course WHERE courseID = $lesson AND phoneNumber = $phoneNumber";
+    $student_result = mysqli_query($connection, $student_course);
+    $check_student = mysqli_num_rows($student_result) > 0;
+
+    if(isset($_POST['checkbtn'])){
+        $subtopicNo = mysqli_real_escape_string($connection, $_POST['subtopicNo']);
+        $dateTime = date('Y-m-d H:i:s');
+        $updateQuery = "UPDATE student_subtopic
+                        SET status = '1', lastaccesstime = '$dateTime'
+                        WHERE subtopicId = '$subtopicNo' AND phoneNumber = '$phoneNumber'";
+        mysqli_query($connection, $updateQuery);
+        header("location: purchasedCourseDetails.php?lesson=".$lesson);
+    }
+
+    if(isset($_POST['uncheckbtn'])){
+        $subtopicNo = mysqli_real_escape_string($connection, $_POST['remove']);
+        $removeQuery = "UPDATE student_subtopic
+                        SET status = '0'
+                        WHERE subtopicId = '$subtopicNo' AND phoneNumber = '$phoneNumber'";
+        mysqli_query($connection, $removeQuery);
+        header("location: purchasedCourseDetails.php?lesson=".$lesson);
+    }
+
+    if(isset($_POST['insertcheckbtn'])){
+        $subtopicNo = mysqli_real_escape_string($connection, $_POST['insertsubtopicNo']);
+        $dateTime = date('Y-m-d H:i:s');
+
+        $insert_query = "INSERT INTO student_subtopic (phoneNumber,courseId, subtopicId, lastaccesstime, status)
+                                VALUES ('$phoneNumber', '$lesson', '$subtopicNo', '$dateTime', 1)";
+        mysqli_query($connection, $insert_query);
+        header("location: purchasedCourseDetails.php?lesson=".$lesson);
+    }
 
 
     if (isset($_POST['publish_to_students'])){

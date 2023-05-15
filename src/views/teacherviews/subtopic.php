@@ -2,13 +2,9 @@
     session_start(); 
 
     if (!isset($_SESSION['name'])) {
-  	    header('location: ../student_login.php');
+  	    header('location: ../../student_login.php');
     }
-    if(isset($_GET['logout'])) {
-        session_destroy();
-        unset($_SESSION['name']);
-        header("location: ../student_login.php");
-    }
+
 
     include('../../config/teacherconfig/subtopic-backend.php');
     include('../../assets/includes/navbar-teacher.php');

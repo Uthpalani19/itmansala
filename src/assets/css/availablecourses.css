@@ -324,3 +324,27 @@ body {
 .add-cart{
     cursor: not-allowed;
 }
+
+.progress-bar {
+    width: 90%;
+    margin: auto;
+    margin-top: 17px;
+    background: #f0f0f0;
+    border-radius: 15px;
+}
+
+.progress-bar-completed {
+    height: 10px;
+    background: #F99417;
+    border-radius: 15px;
+}
+
+.progress-text p{
+    font-size: 11px;
+    margin: 3px 0 15px 0;
+}
+
+.purchased-course-btn{
+    margin-top: 0;
+    margin-bottom: 0;
+}

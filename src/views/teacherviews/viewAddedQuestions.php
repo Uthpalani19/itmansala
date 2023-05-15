@@ -7,15 +7,9 @@
     require('../../config/dbconnection.php');
     if(!isset($_SESSION['name']))
     {
-        header('location:C:\xampp\htdocs\itmansala\src\index.php');
+        header('location: ../../student_login.php');
     }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['name']);
-        header('location:C:\xampp\htdocs\itmansala\src\index.php');
-    }
 
     // Get Subtopic ID
     $subId = $_GET['subId'];
@@ -43,12 +37,12 @@
 
         <!--Course Details-->
         <div class="course-details-box">
-            <p id="title">Course 01: <?php echo $subName; ?> </p>
+            <p id="title"> <?php echo $courseName; ?> </p>
         </div>
 
         <!--Set Subtopic Name-->
         <div class="subtopic-title">
-            <p> 1.1 <?php echo $courseName; ?> </p>
+            <p> <?php echo $subName; ?> </p>
         </div>
 
 <!-- View Added Questions of a specific subtopic -->

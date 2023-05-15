@@ -67,6 +67,32 @@ function PhoneError(){
         endif;
         }
 
+        function teacherPhoneError(){ 
+          require('../../config/adminconfig/addTeacher-backend.php') ;
+          if (count($teacherPhoneNumber_Error) > 0) :
+          foreach ($teacherPhoneNumber_Error as $teacherphone_error) :
+          echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$teacherphone_error."</span>" ;
+          endforeach;
+          endif;
+          }
+
+          function teacherEmailError(){ 
+            require('../../config/adminconfig/addTeacher-backend.php');
+            if (count($teacherEmail_Error) > 0) :
+            foreach ($teacherEmail_Error as $teacheremail_error) :
+            echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$teacheremail_error."</span>" ;
+            endforeach;
+            endif;
+            }
+
+            function teacherNameError(){ 
+              require('../../config/adminconfig/addTeacher-backend.php');
+              if (count($teachername_Error) > 0) :
+              foreach ($teachername_Error as $teacher_error) :
+              echo "<span class='error'><i class='fa-solid fa-circle-exclamation'></i>".$teacher_error."</span>" ;
+              endforeach;
+              endif;
+              }
           
 
 

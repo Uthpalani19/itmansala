@@ -13,7 +13,7 @@
     </div> -->
     <div class="left signupleft">
         <div class="welcome">
-            <p class="message signupmessage">Few clicks away from creating your account</p>
+            <p class="message signupmessage">Add your details</p>
         </div>
         <img class="avatar"src="assets/images/avatar.png">     
     </div>
@@ -24,6 +24,9 @@
             <div class="slider">
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div id="form1">
+                        <div class="signup-top">
+                            <p><?php passError(); ?></p>
+                        </div>                        
                         <div class="login_field signupfield">
                             <i class="login_icon fa-solid fa-user"></i>
                             <input type="text" class="login_input" placeholder="  Name" name="name" value="<?php echo $name;?>">
@@ -65,18 +68,12 @@
                             <i class="login_icon fa-solid fa-lock"></i>
                             <input type="password" class="login_input" id="psw1" placeholder="  Password" name="password_1" value="<?php echo $password_1;?>">
                             <i class="fa-regular fa-eye-slash" id="hidePsw1"></i>
-                            <div>
-                                <?php passError(); ?>
-                            </div>
                         </div>
 
                         <div class="login_field signupfield">
                             <i class="login_icon fa-solid fa-lock"></i>
                             <input type="password" class="login_input" id="psw2" placeholder="  Re-enter password" name="password_2">
                             <i class="fa-regular fa-eye-slash" id="hidePsw2"></i>
-                            <div>
-                                <?php passError(); ?>
-                            </div>
                         </div>
 
                         <div class="login">

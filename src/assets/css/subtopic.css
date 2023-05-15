@@ -98,7 +98,7 @@ body {
     vertical-align: middle;
     margin-left: 30px;
     color: #5C26A9;
-    margin-right: 60px;
+    margin-right: 50px;
 }
 
 .subtopic-edit{
@@ -553,6 +553,45 @@ label{
 .btn-questions:hover
 {
     background-color: #848484;
+}
+
+.db-subtopic-left button{
+    background: none;
+    border: 0px;
+    cursor: pointer;
+}
+
+.checkbox{
+    display: inline-block;
+}
+
+.fa-circle-check{
+    font-size: 45px;
+    vertical-align: middle;
+    margin-left: 30px;
+    color: #5C26A9;
+    margin-right: 50px; 
+}
+
+.notpurchased{
+    background: white;
+    border-radius: 40px;
+    width: 75%;
+    margin: auto;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.notpurchased p{
+    padding-top: 50px;
+    color: #747474;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.empty-img{
+    width: 30%;
+    padding: 30px 0 30px 0;
 }
 
 
