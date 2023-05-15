@@ -1,47 +1,46 @@
 <?php 
 
 function getUserById($id, $connection){
-    $query = " SELECT * FROM teacher WHERE $id = phoneNumber";
+    $query = " SELECT * FROM student WHERE $id = phoneNumber";
     $result = mysqli_query($connection, $query);
     $user =  mysqli_fetch_assoc($result);
     return $user;
 }
 
-$user = getUserById($_SESSION['phone'],$connection); 
-$phoneNumber = $user['phoneNumber'];
 
+$userid = $_SESSION['studentphone'];
 if (isset($_POST["form_1"])){
 
     // check if a new image was uploaded
     if(isset($_FILES['image'])) {
         // handle file upload
-        $target_dir = "../../assets/uploads/teacher/";
+        $target_dir = "../../assets/uploads/student/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        $newImage = $target_dir . $_SESSION['phone'] . "." . $imageFileType;
+        $newImage = $target_dir . $_SESSION['studentphone'] . "." . $imageFileType;
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $newImage)) {
-            // update teacher image path in database
-            $userid = $_SESSION['phone'];
-            $sql = "UPDATE teacher SET teacherImage='$newImage' WHERE phoneNumber='$phoneNumber '";
+            // update student image path in database
+
+            $sql = "UPDATE student SET profilePicture='$newImage' WHERE phoneNumber='$userid '";
             $result = mysqli_query($connection, $sql);
             if (!$result) {
-                header("Location: ../../views/teacherviews/viewProfile.php?error=1");
+                header("Location: ../../views/studentviews/viewProfile.php?error=1");
             }
         } else {
-            header("Location: ../../views/teacherviews/viewProfile.php?error=1");
+            header("Location: ../../views/studentviews/viewProfile.php?error=1");
         }
     }
 
     // update name and email
     $newName = $_POST['name'];
     $newEmail = $_POST['email'];
-    $sql = "UPDATE teacher SET name='$newName', email='$newEmail' WHERE phoneNumber='$phoneNumber'";
+    $sql = "UPDATE student SET name='$newName', email='$newEmail' WHERE phoneNumber='$userid'";
     $result = mysqli_query($connection, $sql);
     if ($result) {
-        header("Location: ../../views/teacherviews/viewProfile.php?success=1");
+        header("Location: ../../views/studentviews/viewProfile.php?success=1");
         exit();
     } else {
-        header("Location: ../../views/teacherviews/viewProfile.php?error=1");
+        header("Location: ../../views/studentviews/viewProfile.php?error=1");
         exit();
     }
 }
@@ -56,7 +55,7 @@ if(isset($_POST["form_2"])){
     $new_password = mysqli_real_escape_string($connection, $_POST['new-password']);
     $confirm_password = mysqli_real_escape_string($connection, $_POST['confirm-new-password']);
 
-    $user_id = $_SESSION['phone'];
+    $user_id = $_SESSION['studentphone'];
     $Password_Error2 ='';
     $Password_Error = array();
     $query = "SELECT password FROM usertable WHERE phoneNumber = $user_id";
@@ -90,7 +89,7 @@ if(isset($_POST["form_2"])){
             $hashed_password = md5($new_password);
             $query = "UPDATE usertable SET password='$hashed_password' WHERE phoneNumber = $user_id";
             mysqli_query($connection, $query);
-            header("Location: ../../views/teacherviews/viewProfile.php?success=1");
+            header("Location: ../../views/studentviews/viewProfile.php?success=1");
 
         }
     }  

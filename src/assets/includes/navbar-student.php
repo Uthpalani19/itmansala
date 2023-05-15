@@ -41,7 +41,7 @@
                     <p><i id="close" class="fa-solid fa-xmark"></i></p>
                     <p><i class="fa-solid fa-circle-user user2"></i></p>
                     <p><?php echo $_SESSION['studentname']; ?></p>
-                    <a href="">My Profile</a><br><br>
+                    <a href="../../views/studentviews/viewProfile.php">My Profile</a><br><br>
                     <a href="availablecourses.php?logout='1'">Logout</a>
                 </div>
             </div>

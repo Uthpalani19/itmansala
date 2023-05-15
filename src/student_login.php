@@ -17,7 +17,7 @@
     </div> --->
     <div class="left">
         <div class="welcome">
-            <p class="message">Hi!<br>Welcome to IT Mansala</p>
+            <p class="message">Hello!<br>Welcome to IT Mansala</p>
         </div>
         <img class="avatar "src="assets/images/avatar.png">     
     </div>
