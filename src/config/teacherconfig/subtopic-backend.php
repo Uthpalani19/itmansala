@@ -96,6 +96,7 @@ if (isset($_POST['add_subtopic'])) {
     $query = "INSERT INTO subtopic (subTopicId, courseId, subTopicName, content) 
                   VALUES('$subtopicNumber', '$lesson', '$subtopicName', '$subtopicPdf')";
     mysqli_query($connection, $query);
+    header('location:subtopic.php?lesson='.$lesson);
     
 
     }else{
@@ -177,7 +178,8 @@ if (isset($_POST['add_lesson'])) {
     $query = "INSERT INTO lesson (subTopicId, lessonName, content, videoContent) 
                   VALUES('$lessonNumber', '$lessonName', '$lessonPdf', '$videoContent')";
     mysqli_query($connection, $query);
-
+    header('location:subtopic.php?lesson='.$lesson);
+    
     }else{
         echo   '<div class="error-msg-container" id="errorPopup">
                 <div class="error-msg" >

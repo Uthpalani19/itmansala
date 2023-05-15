@@ -22,7 +22,7 @@
 
 <body id="body">
     <div class="content-container" id="content">
-        <p class="welcome-msg">Welcome back <?php echo $_SESSION['name']; ?></p>
+        <p class="welcome-msg">Welcome <?php echo $_SESSION['name']; ?></p>
 
         <div class="tip">
             <div class="tip-left">

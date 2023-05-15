@@ -358,14 +358,23 @@
                         $sqlHighestMarks = "SELECT subTopicId,avg(marks) as avg from student_modelpaperquiz where courseId='$course_id' group by subTopicId ORDER BY `avg` DESC limit 1";
                         $resultHighestMarks = mysqli_query($connection,$sqlHighestMarks);
                         $rowHighestMarks = mysqli_fetch_array($resultHighestMarks);
-                        $highestsubTopicId = $rowHighestMarks['subTopicId'];
+                        
+                        if(empty($rowHighestMarks))
+                        {
+                            echo "No quiz has taken";
+                        }
+                        else
+                        {
+                            $highestsubTopicId = $rowHighestMarks['subTopicId'];
 
-                        $sqlHighestMarksST = "SELECT subTopicName from subtopic where subTopicId='$highestsubTopicId'";
-                        $resultHighestMarksST = mysqli_query($connection,$sqlHighestMarksST);
-                        $rowHighestMarksST = mysqli_fetch_array($resultHighestMarksST);
-                        $highestsubTopicName = $rowHighestMarksST['subTopicName'];
-
-                        echo $highestsubTopicName;
+                            $sqlHighestMarksST = "SELECT subTopicName from subtopic where subTopicId='$highestsubTopicId'";
+                            $resultHighestMarksST = mysqli_query($connection,$sqlHighestMarksST);
+                            $rowHighestMarksST = mysqli_fetch_array($resultHighestMarksST);
+                            $highestsubTopicName = $rowHighestMarksST['subTopicName'];
+                        
+                            echo $highestsubTopicName;
+                        }
+                            
                         ?>
                     </div>
                 </div>
@@ -379,14 +388,22 @@
                         $sqlHighestMarks = "SELECT subTopicId,avg(marks) as avg from student_modelpaperquiz where courseId='$course_id' group by subTopicId ORDER BY `avg` ASC limit 1";
                         $resultHighestMarks = mysqli_query($connection,$sqlHighestMarks);
                         $rowHighestMarks = mysqli_fetch_array($resultHighestMarks);
-                        $highestsubTopicId = $rowHighestMarks['subTopicId'];
+                        
+                        if(empty($rowHighestMarks))
+                        {
+                            echo "No quiz has taken";
+                        }
+                        else
+                        {
+                            $highestsubTopicId = $rowHighestMarks['subTopicId'];
 
-                        $sqlHighestMarksST = "SELECT subTopicName from subtopic where subTopicId='$highestsubTopicId'";
-                        $resultHighestMarksST = mysqli_query($connection,$sqlHighestMarksST);
-                        $rowHighestMarksST = mysqli_fetch_array($resultHighestMarksST);
-                        $highestsubTopicName = $rowHighestMarksST['subTopicName'];
+                            $sqlHighestMarksST = "SELECT subTopicName from subtopic where subTopicId='$highestsubTopicId'";
+                            $resultHighestMarksST = mysqli_query($connection,$sqlHighestMarksST);
+                            $rowHighestMarksST = mysqli_fetch_array($resultHighestMarksST);
+                            $highestsubTopicName = $rowHighestMarksST['subTopicName'];
 
-                        echo $highestsubTopicName;
+                            echo $highestsubTopicName;
+                        }
                         ?>
                     </div>
                 </div>
@@ -400,14 +417,22 @@
                         $sqlHighestMarks = "SELECT subTopicId, count(*) as count from student_modelpaperquiz where courseId='$courseId' group by subTopicId order by count DESC limit 1";
                         $resultHighestMarks = mysqli_query($connection,$sqlHighestMarks);
                         $rowHighestMarks = mysqli_fetch_array($resultHighestMarks);
-                        $highestsubTopicId = $rowHighestMarks['subTopicId'];
 
-                        $sqlHighestMarksST = "SELECT subTopicName from subtopic where subTopicId='$highestsubTopicId'";
-                        $resultHighestMarksST = mysqli_query($connection,$sqlHighestMarksST);
-                        $rowHighestMarksST = mysqli_fetch_array($resultHighestMarksST);
-                        $highestsubTopicName = $rowHighestMarksST['subTopicName'];
+                        if(empty($rowHighestMarks))
+                        {
+                            echo "No quiz has taken";
+                        }
+                        else
+                        {
+                            $highestsubTopicId = $rowHighestMarks['subTopicId'];
 
-                        echo $highestsubTopicName;
+                            $sqlHighestMarksST = "SELECT subTopicName from subtopic where subTopicId='$highestsubTopicId'";
+                            $resultHighestMarksST = mysqli_query($connection,$sqlHighestMarksST);
+                            $rowHighestMarksST = mysqli_fetch_array($resultHighestMarksST);
+                            $highestsubTopicName = $rowHighestMarksST['subTopicName'];
+
+                            echo $highestsubTopicName;
+                        }
                         ?>
                     </div>
                 </div>

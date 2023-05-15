@@ -62,13 +62,13 @@ if(!isset($_SESSION['adminname']))
                         $checkStatus = "";
                     }
 
-                    if($row['profilePicture'] == NULL)
+                    if(empty($row['profilePicture']))
                     {
                         $row['profilePicture'] = '<i class="fa-regular user-profile fa-user fa-lg"></i>';
                     }
                     else
                     {
-                        $row['profilePicture'] = '<img class="teacherimg" src="'.$row['teacherImage'].'">';
+                        $row['profilePicture'] = '<img class="teacherimg" src="'.$row['profilePicture'].'">';
                     }
                             echo '
                             <tr>

@@ -34,20 +34,63 @@
         <div class="dboard-header-container1">
             <div class="header-box">
                 <?php
-                    // Last time accessed
-                    $sqlLastAccess = "SELECT lastAccessDate FROM student_course WHERE phoneNumber = '{$_SESSION['studentphone']}' ORDER BY lastAccessDate DESC LIMIT 1";
-                    $resultLastAccess = mysqli_query($connection,$sqlLastAccess);
-                    $dataLastAccess = mysqli_fetch_assoc($resultLastAccess);
-                    $lastAccessDate = $dataLastAccess['lastAccessDate'];
+                    $sqlCourses = "SELECT * from student_course where phoneNumber = '{$_SESSION['studentphone']}' and status = '1'";
+                    $resultCourses = mysqli_query($connection,$sqlCourses);
 
-                    // First time accessed
-                    $sqlFirstAccess = "SELECT enrolmentDateTime FROM student_course WHERE phoneNumber = '{$_SESSION['studentphone']}' ORDER BY enrolmentDateTime ASC LIMIT 1";
-                    $resultFirstAccess = mysqli_query($connection,$sqlFirstAccess);
-                    $dataFirstAccess = mysqli_fetch_assoc($resultFirstAccess);
-                    $firstAccessDate = $dataFirstAccess['enrolmentDateTime'];
+                    if(mysqli_fetch_assoc($resultCourses) == 0)
+                    {
+                        // Last time accessed
+                        $sqlLastAccess = "SELECT lastAccessDate FROM student_course WHERE phoneNumber = '{$_SESSION['studentphone']}' ORDER BY lastAccessDate DESC LIMIT 1";
+                        $resultLastAccess = mysqli_query($connection,$sqlLastAccess);
+                        
 
-                    // Get only the date
-                    $lastAccessDate = substr($lastAccessDate, 0, 10);
+                        if(mysqli_fetch_assoc($resultLastAccess) == null)
+                        {
+                            $lastAccessDate = "No courses";
+                        }
+                        else
+                        {
+                            $lastAccessDate = $dataLastAccess['lastAccessDate'];
+                        }
+
+                        // First time accessed
+                        $sqlFirstAccess = "SELECT enrolmentDateTime FROM student_course WHERE phoneNumber = '{$_SESSION['studentphone']}' ORDER BY enrolmentDateTime ASC LIMIT 1";
+                        $resultFirstAccess = mysqli_query($connection,$sqlFirstAccess);
+                        
+                        if(mysqli_fetch_assoc($resultLastAccess) == null)
+                        {
+                            $firstAccessDate = "No courses";
+                        }
+                        else
+                        {
+                            $firstAccessDate = mysqli_fetch_assoc($resultLastAccess);
+                        }
+
+                        // Get only the date
+                        if($lastAccessDate != null)
+                        {
+                            $lastAccessDate = substr($firstAccessDate, 0, 10);
+                        }
+                        $lastAccessDate = substr($lastAccessDate, 0, 10);
+                    }
+                    else
+                    {
+                        // Last time accessed
+                        $sqlLastAccess = "SELECT lastAccessDate FROM student_course WHERE phoneNumber = '{$_SESSION['studentphone']}' ORDER BY lastAccessDate DESC LIMIT 1";
+                        $resultLastAccess = mysqli_query($connection,$sqlLastAccess);
+                        $dataLastAccess = mysqli_fetch_assoc($resultLastAccess);
+                        $lastAccessDate = $dataLastAccess['lastAccessDate'];
+
+                        // First time accessed
+                        $sqlFirstAccess = "SELECT enrolmentDateTime FROM student_course WHERE phoneNumber = '{$_SESSION['studentphone']}' ORDER BY enrolmentDateTime ASC LIMIT 1";
+                        $resultFirstAccess = mysqli_query($connection,$sqlFirstAccess);
+                        $dataFirstAccess = mysqli_fetch_assoc($resultFirstAccess);
+                        $firstAccessDate = $dataFirstAccess['enrolmentDateTime'];
+
+                        // Get only the date
+                        $lastAccessDate = substr($lastAccessDate, 0, 10);
+                    }
+                    
                 ?>
                 <h2><?php echo $lastAccessDate; ?></h2>
                 <h5>Last accessed date </h5>
@@ -109,11 +152,11 @@
                 <h2><?php 
                     if($dataNoofCourses['total']<=9)
                     {
-                        echo "0".$dataNoofCourses['total'];
+                        echo "0".$dataNoofquizzes['total'];
                     }
                     else
                     {
-                        echo $dataNoofCourses['total'];
+                        echo $dataNoofquizzes['total'];
                     }
                     ?></h2>
                 <h5>Quizzes Attempted</h5>
@@ -147,7 +190,7 @@
         </div>
     </div>
 
-    <!-- Courses student does -->
+    <!-- Courses student does - drop down -->
     <?php
         // Getting the course name from the database
         $sql_dropdown = "SELECT c.courseName from course c,student_course sc where c.courseID = sc.courseID and sc.phoneNumber = '{$_SESSION['studentphone']}' and sc.status = '1'";
@@ -179,7 +222,12 @@
 
     <!-- Course content -->
     <div id="leaderboard">
-        
+        <!-- Instructions for the user -->
+        <div class="instructions" id="instruction">
+            <p>Choose a course from the above Drop down to see details</p>
+            <img src="../../assets/images/nodatafound.png">
+        </div>
+    <!-- End of Instructions for the user -->
     </div>
 
     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>

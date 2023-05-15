@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="../../assets/css/global.css"></link>
     <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" 
     integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" 
@@ -48,15 +51,15 @@
         {?>
             <div id="filters">
                 <select id="courses" class="courseName course-dropdown">
-                <option value="" disabled="" selected="">Select your course </option>
-            <?php
-                while($row = mysqli_fetch_assoc($result_dropdown))
-                {
-            ?>
-                <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName'];?> </option>
-            <?php
-                }
-            ?>
+                    <option value="" disabled="" selected="">Select your course </option>
+                <?php
+                    while($row = mysqli_fetch_assoc($result_dropdown))
+                    {
+                ?>
+                    <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName'];?> </option>
+                <?php
+                    }
+                ?>
                 </select>
             </div>
         <?php
@@ -196,5 +199,4 @@
         });
     </script>
 </body>
-</html>
-
+</html> 

@@ -438,3 +438,26 @@ tr:hover
 {
     width:5000px;
 }
+
+.instructions
+{
+    width: 100%;
+    height: auto;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #5318a6;
+    font-size: 1.2rem;
+    margin: 50px 0px;
+}
+
+.instructions img
+{
+    margin: 20px 0px;
+    width: 200px;
+    height: 200px;
+}

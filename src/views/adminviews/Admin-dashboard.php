@@ -117,7 +117,7 @@
     <!-- Reports generation -->
     <div class="report-container">
         <button type="submit" class="btn-view-pdf"><a href="revenueReport.php?ACTION=VIEW"><i class="fa fa-file-pdf-o"></i> View income report</a></button> &nbsp;&nbsp; 
-        <button type="submit" class="btn-view-pdf"><a href="courseReport.php?ACTION=DOWNLOAD"><i class="fa fa-file-pdf-o"></i> View course performance report</a></button> 
+        <button type="submit" class="btn-view-pdf"><a href="courseReport.php?ACTION=VIEW"><i class="fa fa-file-pdf-o"></i> View course performance report</a></button> 
     </div>
 
     <div class="container-main">
@@ -187,7 +187,7 @@
                         $resultEnrollmentsLastWeek = mysqli_query($connection, $sqlEnrollmentsLastWeek);
                         $rowEnrollmentsLastWeek = mysqli_fetch_assoc($resultEnrollmentsLastWeek);
 
-                        $percentage = ($rowEnrollments['count(*)'] - $rowEnrollmentsLastWeek['count(*)'])*100/$rowEnrollmentsLastWeek['count(*)'];
+                        $percentage = round(($rowEnrollments['count(*)'] - $rowEnrollmentsLastWeek['count(*)'])*100/$rowEnrollmentsLastWeek['count(*)']);
                         
                     
                     if($percentage < 0){

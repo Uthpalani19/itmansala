@@ -125,7 +125,7 @@
                         $studentRank = $rowLeaderboard['rank'];
                         echo "<tr>";
                         echo "<td>" . $studentRank . "</td>";
-                        echo "<td><img src='../../images/student/" . $rowLeaderboardName['profilePicture'] . "' alt='Profile Picture' class='leaderboard-profile-picture'></td>";
+                        echo "<td><i class='fa-solid fa-circle-user'></i></td>";
                         echo "<td>" . $rowLeaderboardName['name'] . "</td>";
                         echo "<td>" . $rowLeaderboard['average_marks'] . "</td>";
                         echo "</tr>";
