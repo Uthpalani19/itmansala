@@ -9,6 +9,7 @@
     }
 
     include('../../config/studentconfig/viewsubtopic-backend.php') ;
+    $phoneNumber = $_SESSION['studentphone'];
 
 ?>
 
@@ -65,7 +66,7 @@
                 </style>
                 <div class="db-subtopic">
                     <?php
-                    $check_query = "SELECT * FROM student_subtopic WHERE subtopicId = $subtopic";
+                    $check_query = "SELECT * FROM student_subtopic WHERE subtopicId = $subtopic AND phoneNumber = $phoneNumber ";
                     $check_result = mysqli_query($connection, $check_query);
                     $empty_check_result = mysqli_num_rows($check_result) > 0;
                     ?>
