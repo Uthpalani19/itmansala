@@ -15,7 +15,7 @@
         <div class="welcome">
             <p class="message signupmessage">Add your details</p>
         </div>
-        <img class="avatar"src="assets/images/avatar.png">     
+        <img class="avatar"src="assets/images/avatar-bye.png">     
     </div>
 
     <div class="right">

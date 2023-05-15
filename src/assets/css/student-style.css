@@ -1,10 +1,9 @@
 /* Profile */
-.container-profile
-{
+.container-profile {
     margin-top: 55px;
     display: flex;
-    background-color: #F0F0F0;
-    height: 250px;
+    background-color: #5319a6;
+    height: 215px;
     width: 93%;
     margin-left: auto;
     margin-right: auto;
@@ -12,28 +11,36 @@
 }
 
 .container-profile > div {
-    background-color: #f1f1f1;
-    margin: 10px;
     padding: 20px;
     font-size: 30px;
 }
 
 /* Profile Picture */
-.rounded-circle
-{
-    display: flex;
-    width: 300px;
-    clip-path: circle();
-    margin-left: -15%;
+
+.profilepicture{
+    height: 127px;
+    width: 132px;
+    margin: 20px;
+    border-radius: 113px;
 }
+
+.profilepicture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 113px;
+    object-fit: cover; 
+}
+
 
 #student-name
 {
     display: flex;
-    padding-left: 700px;
+    align-items: center;
+    padding-left: 702px;
+    padding-top: 34px;
     font-weight: bold;
     font-size: 1.5rem;
-    color: #6D6D6D;
+    color: #f39c12;
 }
 
 /* User Details */
@@ -42,86 +49,28 @@
     display: flex;
     flex-direction: row;
     width: 90%;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.user-container > *:nth-child(1)
-{
-    flex: 1 1 40%;
-    border: #d9d9d9 solid 1px;
-    min-width: 50ch;
-    color: #6D6D6D;
+.user-details {
+    width: 506px;
+    padding: 10px;
+    border: 1px solid #D9D9D9;
 }
 
-.user-container > *:nth-child(2)
-{
-    flex: 1 1 0%;
-}
-
-.user-container > *:nth-child(3)
-{
-    flex: 1 1 20%;
-    border: #d9d9d9 solid 1px;
-    color: #6D6D6D;
-    min-width: 50ch;
-}
-
-/* Table formatting */
-.tbl-user-details
-{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.tbl-user-details th
-{
+.user-details-row1{
     background-color: #d9d9d9;
-    text-align: left;
-    padding-left: 25px;
+    padding: 5px;
 }
 
-.tbl-user-details tr:nth-child(even) td
-{
-    padding-left: 25px;
-    padding-top: 20px;
-    font-weight: bold;
-}
-
-.tbl-user-details tr:nth-child(odd) td
-{
-    padding-left: 25px;
-}
-
-#last-row
-{
-    padding-bottom: 20px;
-}
-
-.tbl-login-activity
-{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.tbl-login-activity th
-{
-    background-color: #d9d9d9;
-    text-align: left;
-    padding-left: 25px;
-}
-
-.tbl-login-activity tr:nth-child(even) td
-{
-    padding-left: 25px;
-    padding-top: 20px;
-}
-
-.tbl-login-activity tr:nth-child(odd) td
-{
-    padding-left: 25px;
+.user-details-row2{
+    padding: 5px;
+    margin-bottom: 20px;
+    color: #5C26A9;
 }
 
 /* Edit Details Button */
@@ -139,7 +88,7 @@
     padding-right: 24px;
     border-radius: 5px;
     margin-top: 20px;
-    margin-left: 80px;
+    margin-left: 125px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
 }
@@ -151,14 +100,14 @@
     display: flex;
     flex-direction: column;
     background-color: #FFFFFF;
-    height: 1000px;
+    height: 100%;
     width: 85%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin-top: 29px;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 3px 5px 10px #848484;
+    padding-bottom: 100px;
 }
 
 .edit-profile-form
@@ -185,6 +134,29 @@
     margin-top: 8px;
     margin-bottom: 10px;
     color: #6D6D6D;
+}
+.btn-container button {
+    padding: 14px;
+    margin-top: 20px;
+    width: 158px;
+    border-style: none;
+    color: white;
+    background-color: #F99417;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-left: 386px;
+}
+
+.fa-search{
+    color: #636363;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 .label-field-num{
@@ -250,7 +222,8 @@
     font-weight: bold;
     font-size: 1rem;
     color: #6D6D6D;
-    margin-bottom: 0px;
+    margin-bottom: 15px;
+    margin-top: 60px;
 }
 
 .label-field-pass{
@@ -298,22 +271,6 @@
 }
 
 /* Profile Picture */
-.rounded-circle
-{
-    display: flex;
-    width: 300px;
-    clip-path: circle();
-    margin-left: -15%;
-}
-
-#student-name
-{
-    display: flex;
-    padding-left: 700px;
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: #6D6D6D;
-}
 
 .student-details
 {

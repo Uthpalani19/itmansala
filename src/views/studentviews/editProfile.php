@@ -1,22 +1,22 @@
 <?php 
-    // Navigation Bar
-    session_start();
-    require_once('../../assets/includes/navbar-teacher.php');
-    require('../../config/dbconnection.php');
-    include('../../config/errors.php');
-    include('../../config/teacherconfig/editProfile.config.php');
+  session_start(); 
+  require('../../config/dbconnection.php');
+  include('../../config/studentconfig/editProfile.config.php');
+  include('../../assets/includes/navbar-student.php');
 
-    if(!isset($_SESSION['name']))
-    {
-        header('location: ../../student_login.php');
-    }
+  if(!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = array();
+  }
 
-    if(isset($_GET['logout']))
-    {
-        session_destroy();
-        unset($_SESSION['name']);
-        header('location:index.php');
-    }
+  if (!isset($_SESSION['studentname'])) {
+  	header('location: ../../student_login.php');
+  }
+
+  if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['studentname']);
+    header("location: ../../student_login.php");
+ }
 
 ?>
 
@@ -33,14 +33,12 @@
 </head>
 
 <body class="body-2">
+<?php $user = getUserById($_SESSION['studentphone'],$connection)?>
 
-
-
-<!-- action="../../views/teacherviews/viewProfile.php" -->
 <form method="POST" enctype="multipart/form-data" >
     <div class="container-editprofile">
         <div class="heading">
-            <p class="heading-p">Eidt Profile</p>
+            <p class="heading-p">Edit Profile</p>
             
             <div class="edit-profile-form">
                 
@@ -64,7 +62,7 @@
         </div>
 
         <div class="edit-image">
-            <div><img src="<?php echo $user['teacherImage'];?>" class="change-image" ></div>
+            <div><img src="<?php echo $user['profilePicture'];?>" class="change-image" alt="profile-image"></div>
             <div class="edit-image-container" id="preview-image">
                 <input type="file" name="image" class="edit-image-btn">
             </div>
