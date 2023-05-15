@@ -11,7 +11,6 @@
             $subId = $_POST['subId'];
         ?>
             <script type="text/javascript">
-            alert("Quiz added successfully.");
             window.location.href="../../views/teacherviews/viewAddedQuestions.php?subId=<?php echo $subId; ?>&courseId=<?php echo $courseId?>";
             </script>
         <?php

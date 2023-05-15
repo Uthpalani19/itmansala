@@ -87,7 +87,7 @@
                 <?php
                     $sql = "SELECT DISTINCT phoneNumber, enrolmentDateTime FROM student_course INNER JOIN course ON student_course.courseID = course.courseID WHERE course.teacherPhoneNumber = '{$_SESSION['phone']}' GROUP BY student_course.phoneNumber";
                     $result = mysqli_query($connection,$sql);
-
+                            
                     while($row = mysqli_fetch_assoc($result))
                     {
                         $sql_studentDetails = "SELECT * FROM student WHERE phoneNumber = '{$row['phoneNumber']}'";

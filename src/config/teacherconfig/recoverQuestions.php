@@ -72,7 +72,7 @@
 
             <!--PHP Code-->
             <?php
-                $sql="SELECT * FROM modelpaperquestion where status=0";
+                $sql="SELECT * FROM modelpaperquestion where subTopicId='$subId' AND status=0";
                 $result = mysqli_query($connection,$sql);
                 
                 // Paginations

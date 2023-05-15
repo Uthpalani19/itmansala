@@ -11,6 +11,7 @@
     if(isset($_POST['checkbtn'])){
         $subtopicNo = mysqli_real_escape_string($connection, $_POST['subtopicNo']);
         $dateTime = date('Y-m-d H:i:s');
+        $phoneNumber = $_SESSION['studentphone'];
         $updateQuery = "UPDATE student_subtopic
                         SET status = '1', lastaccesstime = '$dateTime'
                         WHERE subtopicId = '$subtopicNo' AND phoneNumber = '$phoneNumber'";
@@ -20,6 +21,7 @@
 
     if(isset($_POST['uncheckbtn'])){
         $subtopicNo = mysqli_real_escape_string($connection, $_POST['remove']);
+        $phoneNumber = $_SESSION['studentphone'];
         $removeQuery = "UPDATE student_subtopic
                         SET status = '0'
                         WHERE subtopicId = '$subtopicNo' AND phoneNumber = '$phoneNumber'";
@@ -30,6 +32,7 @@
     if(isset($_POST['insertcheckbtn'])){
         $subtopicNo = mysqli_real_escape_string($connection, $_POST['insertsubtopicNo']);
         $dateTime = date('Y-m-d H:i:s');
+        $phoneNumber = $_SESSION['studentphone'];
 
         $insert_query = "INSERT INTO student_subtopic (phoneNumber,courseId, subtopicId, lastaccesstime, status)
                                 VALUES ('$phoneNumber', '$lesson', '$subtopicNo', '$dateTime', 1)";

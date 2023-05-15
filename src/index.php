@@ -147,7 +147,7 @@
         </h2>
         <br>    
         <p class="lpage-4-paragraph">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br> sed do eiusmod tempor incididunt ut labore et dolore magna 
+        Stay curious and explore: Embrace a curious mindset and explore different <br />aspects of ICT, such as coding languages, networking protocols, or emerging technologies. 
     </p>
     </div>
 
@@ -211,14 +211,6 @@
                 </div>
             </div>
             <hr>
-
-            <div class="footer-middle">
-                <div><h4>Join with us!</h4></div>
-                <div>
-                    <button >Sign In</button>
-                    <button>Sign Up</button>
-                </div> 
-            </div>
 
             <div class="footer-footer">
                 <div class="footer-footer-left">

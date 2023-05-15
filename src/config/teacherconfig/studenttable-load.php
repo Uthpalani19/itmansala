@@ -65,8 +65,12 @@
             <?php
             }
             else
-            {
-                echo "No students enrolled in this course";
+            {?>
+                <div class="instruction">
+                    <p>No student has enrolled for this course yet.</p>
+                    <img src="../../assets/images/nodatafound.png">
+                </div>
+            <?php
             }
             ?>
         </thead>

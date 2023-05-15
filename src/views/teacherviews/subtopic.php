@@ -78,7 +78,6 @@
                 <p id="<?php echo $subid; ?>"><?php echo $retrieve_subtopic_row['subTopicName']; ?></p>
             </div>
             <div class="db-subtopic-right">
-                <p><i class="fa-solid fa-file-pen subtopic-edit" id=></i></p>                
                 <p id="<?php echo $hideid ?>"><i class="fa-solid fa-chevron-down" ></i></p>
             </div>
         </div>

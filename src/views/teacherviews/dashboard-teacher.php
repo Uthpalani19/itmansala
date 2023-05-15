@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="../../assets/css/global.css"></link>
     <link rel="stylesheet" href="../../assets/css/teacher-style.css"></link>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" 
     integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" 
@@ -48,22 +51,27 @@
         {?>
             <div id="filters">
                 <select id="courses" class="courseName course-dropdown">
-                <option value="" disabled="" selected="">Select your course </option>
-            <?php
-                while($row = mysqli_fetch_assoc($result_dropdown))
-                {
-            ?>
-                <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName'];?> </option>
-            <?php
-                }
-            ?>
+                    <option value="" disabled="" selected="">Select your course </option>
+                <?php
+                    while($row = mysqli_fetch_assoc($result_dropdown))
+                    {
+                ?>
+                    <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName'];?> </option>
+                <?php
+                    }
+                ?>
                 </select>
             </div>
         <?php
         }
         else
-        {
-            echo '<a href="#">No Courses</a>';
+        {?>
+            <div id="filters">
+                <select id="courses" class="courseName course-dropdown">
+                <option value="" disabled="" selected="">Select your course </option>
+                </select>
+            </div>
+        <?php
         }
     ?>
     <!-- End of Courses teacher teaches -->
@@ -81,34 +89,73 @@
                 <div class="static_data_item_title">Total Courses</div>
             </div>
             <div class="static_data_item">
-                <div class="static_data_item_value"><?php $sqlTotalSubtopics = "SELECT COUNT(*) from subtopic";
-                                                          $resultTotalSubtopic = mysqli_query($connection,$sqlTotalSubtopics);
-                                                          $rowTotalSubtopic = mysqli_fetch_array($resultTotalSubtopic);
-                                                          echo $rowTotalSubtopic['COUNT(*)'];
+                <div class="static_data_item_value"><?php 
+                                                        //   get the count of the subtopics of courses
+                                                          // Get subtopic ids
+                                                          $sqlCourseId = "SELECT courseId from course where teacherPhoneNumber = '{$_SESSION['phone']}' and status = '1'";
+                                                          $resultCourseId = mysqli_query($connection,$sqlCourseId);
+                                                          if (!$resultCourseId) {
+                                                              die('Invalid query: ' . mysqli_error($connection));
+                                                          }
+                                                          
+                                                          $students = 0;
+                                                          $subtopics = 0;
+                                                          $lessons = 0;
+                                                          $questions = 0 ;
+                                                          
+                                                          foreach($resultCourseId as $courseId)
+                                                          {
+                                                              $sqlSubtopicId = "SELECT subtopicId from subtopic where courseId = '{$courseId['courseId']}'";
+                                                              $resultSubtopicId = mysqli_query($connection,$sqlSubtopicId);
+                                                              if (!$resultSubtopicId) {
+                                                                  die('Invalid query: ' . mysqli_error($connection));
+                                                              }
+                                                              $subtopics += mysqli_num_rows($resultSubtopicId);
+                                                          
+                                                              $sqlStudents = "SELECT phoneNumber from student_course where courseId = '{$courseId['courseId']}'";
+                                                              $resultStudents = mysqli_query($connection,$sqlStudents);
+                                                              if (!$resultStudents) {
+                                                                  die('Invalid query: ' . mysqli_error($connection));
+                                                              }
+                                                                $students += mysqli_num_rows($resultStudents);
+                                                          
+                                                              foreach($resultSubtopicId as $subtopicId)
+                                                              {
+                                                                  $sqlLessonId = "SELECT lessonName from lesson where subtopicId = '{$subtopicId['subtopicId']}'";
+                                                                  $resultLessonId = mysqli_query($connection,$sqlLessonId);
+                                                                  if (!$resultLessonId) {
+                                                                      die('Invalid query: ' . mysqli_error($connection));
+                                                                  }
+                                                                  $lessons += mysqli_num_rows($resultLessonId);
+                                                                  
+                                                                  $sqlQuestionId = "SELECT questionId from modelpaperquestion where subtopicId = '{$subtopicId['subtopicId']}'";
+                                                                    $resultQuestionId = mysqli_query($connection,$sqlQuestionId);
+                                                                    if (!$resultQuestionId) {
+                                                                        die('Invalid query: ' . mysqli_error($connection));
+                                                                    }
+                                                                    $questions += mysqli_num_rows($resultQuestionId);
+                                                              }
+                                                          }
+                                                          
+                                                            echo $subtopics;
                                                           ?></div>
                 <div class="static_data_item_title">Total Subtopics</div>
             </div>
             <div class="static_data_item">
-                <div class="static_data_item_value"><?php $sqlLessons = "SELECT COUNT(*) from lesson";
-                                                          $resultLessons = mysqli_query($connection,$sqlLessons);
-                                                          $rowLessons = mysqli_fetch_array($resultLessons);
-                                                          echo $rowLessons['COUNT(*)'];
+                <div class="static_data_item_value"><?php 
+                                                            echo $lessons;
                                                           ?></div>
                 <div class="static_data_item_title">Total Lessons</div>
             </div>
             <div class="static_data_item">
-                <div class="static_data_item_value"><?php $sqlQuestions = "SELECT COUNT(*) from modelpaperquestion";
-                                                          $resultQuestions = mysqli_query($connection,$sqlQuestions);
-                                                          $rowQuestions = mysqli_fetch_array($resultQuestions);
-                                                          echo $rowQuestions['COUNT(*)'];
+                <div class="static_data_item_value"><?php 
+                                                            echo $questions;
                                                           ?></div>
                 <div class="static_data_item_title">Total Questions</div>
             </div>
             <div class="static_data_item">
-                <div class="static_data_item_value"><?php $sqlStudents = "SELECT COUNT(*) from student";
-                                                          $resultStudents = mysqli_query($connection,$sqlStudents);
-                                                          $rowStudents = mysqli_fetch_array($resultStudents);
-                                                          echo $rowStudents['COUNT(*)'];
+                <div class="static_data_item_value"><?php
+                                                        echo $students;
                                                           ?></div>
                 <div class="static_data_item_title">Total Students</div>
             </div>
@@ -152,5 +199,4 @@
         });
     </script>
 </body>
-</html>
-
+</html> 

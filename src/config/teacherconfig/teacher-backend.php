@@ -12,15 +12,15 @@ $Title_Error= array();
 $Desc_Error= array();
 
 //auto generate course number
+$select = "SELECT MAX(CAST(courseId AS SIGNED)) AS max_number
+FROM course";
+$select_result = mysqli_query($connection, $select);
 
-$query = "SELECT courseId FROM course ORDER BY courseId DESC LIMIT 1";
-$result = mysqli_query($connection, $query);
-if (mysqli_num_rows($result) > 0) {
-$row = mysqli_fetch_assoc($result);
-$lastid = $row['courseId'];
-    $id = $lastid + 1;
+if ($select_result) {
+    $row = mysqli_fetch_assoc($select_result);
+    $id = $row['max_number'] + 1;
 }else{
-    $id= 1;
+    $id = 1;
 }
 
 //add course to database

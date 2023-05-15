@@ -1225,7 +1225,7 @@ tr:nth-child(odd)
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 0 0 40rem;
+    margin: 0 0 0 8rem;
 }
 
 .search-bar-course > .searchBar
@@ -1677,6 +1677,30 @@ h4{
 }
 
 .instructions img
+{
+    margin: 20px 0px;
+    width: 200px;
+    height: 200px;
+}
+
+.instruction
+{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #5318a6;
+    font-size: 1.2rem;
+    margin : 50px -795px;
+}
+
+.instruction img
 {
     margin: 20px 0px;
     width: 200px;
