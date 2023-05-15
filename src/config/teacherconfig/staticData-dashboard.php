@@ -442,19 +442,46 @@
             <div class="student-table-performance">
                 <table class="student-table">
                     <tr>
-                        <th>Student Profile Picture</th>
+                        <th>Student</th>
                         <th>Name</th>
                         <th>Contact</th>
                         <th>Total marks</th>
                         <th>Quizzes completed</th>
                     </tr>
+                    <?php
+                        $sqlStudentPerformance = "SELECT phoneNumber, sum(marks) as totalMarks, count(*) as count from student_modelpaperquiz where courseId='$course_id' group by phoneNumber order by totalMarks DESC";
+                        $resultStudentPerformance = mysqli_query($connection,$sqlStudentPerformance);
+
+                        while($rowStudentPerformance = mysqli_fetch_assoc($resultStudentPerformance)){
+                            $phoneNumber = $rowStudentPerformance['phoneNumber'];
+                            $totalMarks = $rowStudentPerformance['totalMarks'];
+                            $count = $rowStudentPerformance['count'];
+
+                            $sqlStudentDetails = "SELECT * from student where phoneNumber='$phoneNumber'";
+                            $resultStudentDetails = mysqli_query($connection,$sqlStudentDetails);
+                            $rowStudentDetails = mysqli_fetch_array($resultStudentDetails);
+                            $studentName = $rowStudentDetails['name'];
+                            $studentContact = $rowStudentDetails['phoneNumber'];
+                            $studentProfilePicture = $rowStudentDetails['profilePicture'];
+
+                            echo '
+                            <tr>
+                                <td><i class="fa-regular fa-user fa-lg"></i></td>
+                                <td>'.$studentName.'</td>
+                                <td>'.$studentContact.'</td>
+                                <td>'.$totalMarks.'</td>
+                                <td>'.$count.'</td>
+                            </tr>
+                        ';
+                        }
+                    ?>
+                </table>
             </div>
         </div>
         <!-- End of student performances -->
-
-
     <?php
     }
+    include_once "../../assets/includes/footer.php";
     ?>
 </body>
 </html>

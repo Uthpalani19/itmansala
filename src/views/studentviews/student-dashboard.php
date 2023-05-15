@@ -27,13 +27,30 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     
 </head>
+
 <body>
     <div class="dboard-header">
         <!-- Static data -->
         <div class="dboard-header-container1">
             <div class="header-box">
-                <h2>_ _ </h2>
-                <h5>Total time spent</h5>
+                <?php
+                    // Last time accessed
+                    $sqlLastAccess = "SELECT lastAccessDate FROM student_course WHERE phoneNumber = '{$_SESSION['studentphone']}' ORDER BY lastAccessDate DESC LIMIT 1";
+                    $resultLastAccess = mysqli_query($connection,$sqlLastAccess);
+                    $dataLastAccess = mysqli_fetch_assoc($resultLastAccess);
+                    $lastAccessDate = $dataLastAccess['lastAccessDate'];
+
+                    // First time accessed
+                    $sqlFirstAccess = "SELECT enrolmentDateTime FROM student_course WHERE phoneNumber = '{$_SESSION['studentphone']}' ORDER BY enrolmentDateTime ASC LIMIT 1";
+                    $resultFirstAccess = mysqli_query($connection,$sqlFirstAccess);
+                    $dataFirstAccess = mysqli_fetch_assoc($resultFirstAccess);
+                    $firstAccessDate = $dataFirstAccess['enrolmentDateTime'];
+
+                    // Get only the date
+                    $lastAccessDate = substr($lastAccessDate, 0, 10);
+                ?>
+                <h2><?php echo $lastAccessDate; ?></h2>
+                <h5>Last accessed date </h5>
             </div>
 
             <!-- Getting enrolled number of courses -->
@@ -43,7 +60,16 @@
                 $dataNoofCourses = mysqli_fetch_assoc($resultNoofCourses);
             ?>
             <div class="header-box">
-                <h2><?php echo $dataNoofCourses['total']; ?></h2>
+                <h2><?php 
+                    if($dataNoofCourses['total']<=9)
+                    {
+                        echo "0".$dataNoofCourses['total'];
+                    }
+                    else
+                    {
+                        echo $dataNoofCourses['total'];
+                    }
+                    ?></h2>
                 <h5>Courses enrolled</h5>
             </div>
 
@@ -58,27 +84,65 @@
                         $studentRank = $rowRank['rank'];
                     }
                 }
-                
-                echo "<div class='header-box'>";
-                echo "<h2>" . $studentRank . "</h2>";
-                echo "<h5>Rank score</h5>";
-                echo "</div>";
+                ?>
+                <div class="header-box">
+                <h2><?php 
+                    if($studentRank<=9)
+                    {
+                        echo "0".$studentRank;
+                    }
+                    else
+                    {
+                        echo $studentRank;
+                    }
+                    ?></h2>
+                <h5>Overall Rank score</h5>
+                </div>
+
+            <!-- Number of quizzes attempted -->
+            <?php
+                $sqlNoofquizzes = "SELECT count(*) as total from student_modelpaperquiz where phoneNumber = '{$_SESSION['studentphone']}'";
+                $resultNoofquizzes = mysqli_query($connection,$sqlNoofquizzes);
+                $dataNoofquizzes = mysqli_fetch_assoc($resultNoofquizzes);
             ?>
-           
+            <div class="header-box">
+                <h2><?php 
+                    if($dataNoofCourses['total']<=9)
+                    {
+                        echo "0".$dataNoofCourses['total'];
+                    }
+                    else
+                    {
+                        echo $dataNoofCourses['total'];
+                    }
+                    ?></h2>
+                <h5>Quizzes Attempted</h5>
+            </div>
         </div>
 
         <!-- Progress bar -->
         <div class="dboard-header-container2">
             <div class="header-box2">
-                <div class="box-progressbar"></div>
-                <div class="box-progressbar2"></div>
+                <div class="progress-bar">
+                    <div class="progress-bar-completed" style="width:<?php 
+                        // Count of subtopics of enrolled courses
+                        $sqlSubtopics = "SELECT count(*) as total from subtopic s,student_course sc where s.courseID = sc.courseID and sc.phoneNumber = '{$_SESSION['studentphone']}' and sc.status = '1'";
+                        $resultSubtopics = mysqli_query($connection,$sqlSubtopics);
+                        $dataSubtopics = mysqli_fetch_assoc($resultSubtopics);
 
-                <div>
-                    <h3>Total Status</h3>
-                </div> 
-            </div>
-            <div>
-                <h5>75 % completed on what you bought so far. This is not done yet. </h5>
+                        // Completed count of subtopics
+                        $sqlCompletedSubtopics = "SELECT count(*) as total from student_subtopic where phoneNumber = '{$_SESSION['studentphone']}' and status = '1'";
+                        $resultCompletedSubtopics = mysqli_query($connection,$sqlCompletedSubtopics);
+                        $dataCompletedSubtopics = mysqli_fetch_assoc($resultCompletedSubtopics);
+
+                        // Progress percentage
+                        $progress = round(($dataCompletedSubtopics['total']/$dataSubtopics['total'])*100);
+                        echo $progress;
+                    ?>%"></div>
+                </div>
+                <div class="progress-text">
+                    <p><?php echo $progress; ?>% completed from what you bought so far</p>
+                </div>
             </div>
         </div>
     </div>
@@ -114,120 +178,8 @@
     ?>
 
     <!-- Course content -->
-    <div class="dboard-middle-container">
-        <div class="middle-conatiner-heading">
-            <h4>Activity</h4>
-            <br>
-        </div>
-
-        <div class="middle-conatiner-content">
-            <div class="middle-conatiner-bargraph">
-                <div class="std-bargrapgh-head">
-                    <h4>Active hours in a Day</h4>
-                </div>
-
-                <div class="std-bargrapgh-body">
-                    <!-- <div class="std-bargraph">
-                    <canvas id="myChart" style=""></canvas>
-                    </div> -->
-
-                    <!-- Statistics about the student_course -->
-                    <div class="grpah-progress-cards">
-                        <div class="grpah-progress-card">
-                            <h4>Time spent</h4>
-                            <div class="progress-card-body">
-                                <h2>_ _</h2>
-                            </div>
-                        </div>
-
-                        <div class="grpah-progress-card">
-                            <h4>Quizes Taken</h4>
-                            <div class="progress-card-body">
-                                <h2><?php
-                                    $sql = "SELECT count(*) from student_modelpaperquiz where phoneNumber = '{$_SESSION['studentphone']}'"; 
-                                    $result = mysqli_query($connection, $sql);
-                                    $row = mysqli_fetch_assoc($result);
-                                    
-                                    echo $row['count(*)'];
-                                    ?>
-                                </h2>
-                            </div>
-                        </div>
-
-                        <div class="grpah-progress-card">
-                            <h4>Avg Mark</h4>
-                            <div class="progress-card-body">
-                                <h2>
-                                    <?php
-                                        $sql = "SELECT avg(marks) from student_modelpaperquiz where phoneNumber = '{$_SESSION['studentphone']}' group by phoneNumber"; 
-                                        $result = mysqli_query($connection, $sql);
-                                        $row = mysqli_fetch_assoc($result);
-                                        
-                                        echo round($row['avg(marks)']);
-                                        ?>
-                                </h2>
-                            </div>
-                        <div>
-                    </div>
-                    
-                </div>
-            </div>
-                </div>
-            </div>
-
-            <!-- Leaderboard -->
-            <div class="middle-conatiner-piechart">
-                <div class="pie-chart-header">
-                    <h4 class="graph-header">Leaderboard</h4>
-                </div>
-                <div>
-                    <table id="leaderboard">
-                        <tr>
-                            <th>Rank</th>
-                            <th>Profile Picture</th>
-                            <th>Name</th>
-                            <th>Average</th>
-                        </tr>
-                        <?php
-                            $sqlLeaderboard = "SELECT phoneNumber, AVG(marks) AS average_marks, RANK() OVER (ORDER BY AVG(marks) DESC) AS rank FROM student_modelpaperquiz GROUP BY phoneNumber;";
-                            $resultLeaderboard = mysqli_query($connection, $sqlLeaderboard);
-                            $studentRank = 0;
-                            
-                            while ($rowLeaderboard = mysqli_fetch_assoc($resultLeaderboard)) {
-                                $sqlLeaderboardName = "SELECT * FROM student WHERE phoneNumber = '{$rowLeaderboard['phoneNumber']}'";
-                                $resultLeaderboardName = mysqli_query($connection, $sqlLeaderboardName);
-                                $rowLeaderboardName = mysqli_fetch_assoc($resultLeaderboardName);
-                                $studentRank = $rowLeaderboard['rank'];
-                                echo "<tr>";
-                                echo "<td>" . $studentRank . "</td>";
-                                echo "<td><img src='../../images/student/" . $rowLeaderboardName['profilePicture'] . "' alt='Profile Picture' class='leaderboard-profile-picture'></td>";
-                                echo "<td>" . $rowLeaderboardName['name'] . "</td>";
-                                echo "<td>" . $rowLeaderboard['average_marks'] . "</td>";
-                                echo "</tr>";
-                            }
-                        ?>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="middle-conatiner-piechart">
-                <div class="pie-chart-header">
-                    <h4 class="std-bargrapgh-head">Overall Question Analysis</h4>
-                </div>
-
-                <div class="pie-chart-container">
-                        <!-- <div class="pie-chart-description">
-                            <h5>90 % answers are Correct</h5>
-                            <h5>10 % answers are Wrong</h5>
-                        </div> -->
-
-                    <div class="pie-chart-dboard">
-                        <canvas id="myChart2" style=""></canvas>
-                    </div>
-                    
-                </div>
-            
-            </div>
+    <div id="leaderboard">
+        
     </div>
 
     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>

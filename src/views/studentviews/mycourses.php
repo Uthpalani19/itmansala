@@ -62,6 +62,7 @@
                             $course_result = mysqli_query($connection, $course_query);
                             $check_course_result = mysqli_num_rows($course_result) > 0;
         
+                            $subtopic_count=0;
                             if($check_course_result){
                                 while($course_row = mysqli_fetch_array($course_result)){
                                     $number= $course_row['courseId'];
@@ -78,7 +79,10 @@
                                         $student_subtopic_count = mysqli_num_rows($student_subtopic_result);
                                     }
 
-                                    $value = ($student_subtopic_count / $subtopic_count)*100;
+                                    if ($subtopic_count > 0) {
+                                        $value = ($student_subtopic_count / $subtopic_count) * 100;
+                                        $progress = round($value);
+                                    }
                                     $progress = round($value);
                                     ?>
                                     <div class="db-lesson">

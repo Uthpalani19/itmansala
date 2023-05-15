@@ -132,7 +132,7 @@
                                         <input type="text" class="course-input title" name="phoneNumber" value="<?php echo $_SESSION['studentphone']; ?>" readonly hidden>
 
                                                 <div class="question-number-box">
-                                                    <textarea class="question-number" name="questionId" readonly style="resize: none;"><?php echo $row['questionId']; ?></textarea>
+                                                    <textarea class="question-number" name="questionId" readonly style="resize: none;" hidden><?php echo $row['questionId']; ?></textarea>
                                                 </div>
 
                                                 <div>
@@ -222,7 +222,7 @@
                                             <input type="text" class="course-input title" name="questionNumber" value="<?php echo $questionNumber; ?>" readonly hidden>
 
                                             <div class="question-number-box">
-                                                <textarea class="question-number" name="questionId" readonly style="resize: none;"><?php echo $questionId; ?></textarea>
+                                                <textarea class="question-number" name="questionId" readonly style="resize: none;" hidden><?php echo $questionId; ?></textarea>
                                             </div>
 
                                             <div>
@@ -291,7 +291,7 @@
 
 
                                         <div class="question-number-box">
-                                            <textarea class="question-number" name="questionId" readonly style="resize: none;"><?php echo $questionId; ?></textarea>
+                                            <textarea class="question-number" name="questionId" readonly style="resize: none;" hidden><?php echo $questionId; ?></textarea>
                                         </div>
 
                                         <div>

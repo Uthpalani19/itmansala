@@ -170,7 +170,7 @@ td{
 }
 
 .header-box{
-    width: 100%;
+    width: 200px;
     background-color: white;
     box-shadow:#0000003b 3px 3px 5px ;
     margin: 10px;
@@ -181,6 +181,27 @@ td{
 
 }
 
+.progress-bar {
+    width: 250px;
+    height: 25px;
+    margin: auto;
+    margin-top: -22px;
+    margin-left: 62px;
+    background: #f0f0f0;
+    border-radius: 15px;
+}
+
+.progress-bar-completed {
+    height: 25px;
+    background: #F99417;
+    border-radius: 15px;
+}
+
+.progress-text p{
+    font-size: 1rem;
+    margin:14px 0 10px -303px;
+    color :#F99417;
+}
 
 .header-box h2{
     color: #5319a6;
@@ -218,8 +239,7 @@ td{
 .header-box2{
     color: #D9D9D9;
     display: flex;
-    margin-bottom: 5px;
-    
+    margin-bottom: -32px;    
 }
 
 .header-box2 h3{
@@ -244,6 +264,16 @@ td{
 .middle-conatiner-bargraph{
     display: flex;
     box-shadow:#0000003b 0px 0px 5px  ;
+    margin: -23px 50px 0 -100px;
+    border-radius: 15px;
+    height: 360px;
+    width: 620px;
+}
+
+.middle-conatiner-leaderboard{
+    display: flex;
+    box-shadow:#0000003b 0px 0px 5px  ;
+    margin: -23px 50px 0 -100px;
     border-radius: 15px;
     height: 360px;
     width: 620px;

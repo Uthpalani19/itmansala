@@ -33,44 +33,110 @@
     <?php
     if(isset($_POST['request'])){
     ?>
-    <div id="leaderboard" class="leaderboard">
-        <table>
-        <tr>
-            <th>Rank</th>
-            <th>Profile Picture</th>
-            <th>Name</th>
-            <th>Average</th>
-        </tr>
-        <?php
-        $request = $_POST['request'];
+    <div class="dboard-middle-container">
+        <div class="middle-conatiner-heading">
+            <h4>Your performance</h4>
+            <br />
+        </div>
 
-        // Get course Id
-        $sqlCourseId = "SELECT courseId FROM course WHERE courseName = '{$request}'";
-        $resultCourseId = mysqli_query($connection, $sqlCourseId);
-        $rowCourseId = mysqli_fetch_assoc($resultCourseId);
-        $courseId = $rowCourseId['courseId'];
+        <div class="middle-conatiner-content">
+            <!-- Bargraph -->
+            <div class="middle-conatiner-bargraph">
+                        <div class="std-bargrapgh-head">
+                            <h4>Active hours in a Day</h4>
+                        </div>
 
-        $sqlLeaderboard = "SELECT phoneNumber, AVG(marks) AS average_marks, RANK() OVER (ORDER BY AVG(marks) DESC) AS rank FROM student_modelpaperquiz WHERE courseId='$courseId' GROUP BY phoneNumber ORDER BY average_marks DESC;";
-        $resultLeaderboard = mysqli_query($connection, $sqlLeaderboard);
-        $studentRank = 0;
-                                
-        while($rowLeaderboard = mysqli_fetch_assoc($resultLeaderboard)) {
-            $sqlLeaderboardName = "SELECT * FROM student WHERE phoneNumber = '{$rowLeaderboard['phoneNumber']}'";
-            $resultLeaderboardName = mysqli_query($connection, $sqlLeaderboardName);
-            $rowLeaderboardName = mysqli_fetch_assoc($resultLeaderboardName);
-            $studentRank = $rowLeaderboard['rank'];
-            echo "<tr>";
-            echo "<td>" . $studentRank . "</td>";
-            echo "<td><img src='../../images/student/" . $rowLeaderboardName['profilePicture'] . "' alt='Profile Picture' class='leaderboard-profile-picture'></td>";
-            echo "<td>" . $rowLeaderboardName['name'] . "</td>";
-            echo "<td>" . $rowLeaderboard['average_marks'] . "</td>";
-            echo "</tr>";
-        }
-        ?>
-        </table>
+                        <div class="std-bargrapgh-body">
+                            <!-- <div class="std-bargraph">
+                            <canvas id="myChart" style=""></canvas>
+                            </div> -->
+
+                            <!-- Statistics about the student_course -->
+                            <div class="grpah-progress-cards">
+                                <div class="grpah-progress-card">
+                                    <h4>Time spent</h4>
+                                    <div class="progress-card-body">
+                                        <h2>_ _</h2>
+                                    </div>
+                                </div>
+
+                                <div class="grpah-progress-card">
+                                    <h4>Quizes Taken</h4>
+                                    <div class="progress-card-body">
+                                        <h2><?php
+                                            $sql = "SELECT count(*) from student_modelpaperquiz where phoneNumber = '{$_SESSION['studentphone']}'"; 
+                                            $result = mysqli_query($connection, $sql);
+                                            $row = mysqli_fetch_assoc($result);
+                                            
+                                            echo $row['count(*)'];
+                                            ?>
+                                        </h2>
+                                    </div>
+                                </div>
+
+                                <div class="grpah-progress-card">
+                                    <h4>Avg Mark</h4>
+                                    <div class="progress-card-body">
+                                        <h2>
+                                            <?php
+                                                $sql = "SELECT avg(marks) from student_modelpaperquiz where phoneNumber = '{$_SESSION['studentphone']}' group by phoneNumber"; 
+                                                $result = mysqli_query($connection, $sql);
+                                                $row = mysqli_fetch_assoc($result);
+                                                
+                                                echo round($row['avg(marks)']);
+                                                ?>
+                                        </h2>
+                                    </div>
+                                <div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of bargraph -->
+
+            <!-- Leaderboard -->
+            <div class="middle-container-leaderboard">
+                <table>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Profile Picture</th>
+                        <th>Name</th>
+                        <th>Average</th>
+                    </tr>
+                    <?php
+                    $request = $_POST['request'];
+
+                    // Get course Id
+                    $sqlCourseId = "SELECT courseId FROM course WHERE courseName = '{$request}'";
+                    $resultCourseId = mysqli_query($connection, $sqlCourseId);
+                    $rowCourseId = mysqli_fetch_assoc($resultCourseId);
+                    $courseId = $rowCourseId['courseId'];
+
+                    $sqlLeaderboard = "SELECT phoneNumber, AVG(marks) AS average_marks, RANK() OVER (ORDER BY AVG(marks) DESC) AS rank FROM student_modelpaperquiz WHERE courseId='$courseId' GROUP BY phoneNumber ORDER BY average_marks DESC;";
+                    $resultLeaderboard = mysqli_query($connection, $sqlLeaderboard);
+                    $studentRank = 0;
+                                            
+                    while($rowLeaderboard = mysqli_fetch_assoc($resultLeaderboard)) {
+                        $sqlLeaderboardName = "SELECT * FROM student WHERE phoneNumber = '{$rowLeaderboard['phoneNumber']}'";
+                        $resultLeaderboardName = mysqli_query($connection, $sqlLeaderboardName);
+                        $rowLeaderboardName = mysqli_fetch_assoc($resultLeaderboardName);
+                        $studentRank = $rowLeaderboard['rank'];
+                        echo "<tr>";
+                        echo "<td>" . $studentRank . "</td>";
+                        echo "<td><img src='../../images/student/" . $rowLeaderboardName['profilePicture'] . "' alt='Profile Picture' class='leaderboard-profile-picture'></td>";
+                        echo "<td>" . $rowLeaderboardName['name'] . "</td>";
+                        echo "<td>" . $rowLeaderboard['average_marks'] . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </table>
+            </div>
+            <!-- End of the leaderboard -->
+        </div>
     <?php
     }
     ?>
-    </div>
 </body>
 </html>
