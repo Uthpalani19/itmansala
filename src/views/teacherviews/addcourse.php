@@ -24,10 +24,6 @@
     <div class="content-container" id="content">
         <p class="welcome-msg">Welcome back <?php echo $_SESSION['name']; ?></p>
 
-        <div class="edit tip-edit">
-            <p><i class="fa-solid fa-file-pen"></i></p>
-        </div>
-
         <div class="tip">
             <div class="tip-left">
                 <p><i class="fa-regular fa-square-check"></i> Pro tip</p>
