@@ -40,6 +40,10 @@
 
     </div>
     <?php
+        $phoneNumber = $_SESSION['studentphone'];
+        $student_course= "SELECT * FROM student_course WHERE courseID = $lesson AND phoneNumber = $phoneNumber";
+        $student_result = mysqli_query($connection, $student_course);
+        $check_student = mysqli_num_rows($student_result) > 0;
     if($check_student){
     ?>
     <div class="content">
