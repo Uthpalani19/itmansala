@@ -44,12 +44,11 @@
         <div id="desc2" class="description" data-id="2">
         <div class="lpage3-course-des" id="course-des2">
             <div class="course-des-heading" id="des-titile2">
-                <h3>02 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>02 පරිගණකයේ පරිණාමය</h3>
             </div>
 
             <div class="course-des-description">
-                <h3>තොරතුරු හා සන්නිවේදන තාෂණයේ මූලික සංකල්ප, වර්තමාන දැනුම පාදක සමාජෙයහි ද යොදා ගන්නා ආකාරය,
-                     එහි භූමිකාව හා උජිත උපෙයෝගීතාව සමග ගවේෂණය කරයි  </h3>
+                <h3>නූතන පරිගණකවල කාය සාධනය සැසඳම හා පැහැදිලි කිරිම අරබයා පරිගණනක උපකරණවල පරිණාමය ගවේෂණය කරයි   </h3>
             </div>
 
             <hr></hr>
@@ -71,7 +70,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des3">
             <div class="course-des-heading" id="des-titile3">
-                <h3>03 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>03 පරිගණකයේ දත්ත නිරූපණය</h3>
             </div>
 
             <div class="course-des-description">
@@ -98,7 +97,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des4">
             <div class="course-des-heading" id="des-titile4">
-                <h3>04 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>04 තර්ක ද්වාර</h3>
             </div>
 
             <div class="course-des-description">
@@ -126,7 +125,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des5">
             <div class="course-des-heading" id="des-titile5">
-                <h3>05 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>05 මතක කළමනාකරණය</h3>
             </div>
 
             <div class="course-des-description">
@@ -153,7 +152,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des6">
             <div class="course-des-heading" id="des-titile6">
-                <h3>06 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>06 මෙහෙයුම් පද්ධති</h3>
             </div>
 
             <div class="course-des-description">
@@ -180,7 +179,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des7">
             <div class="course-des-heading" id="des-titile7">
-                <h3>07 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>07 ක්‍රමලේඛනය</h3>
             </div>
 
             <div class="course-des-description">
@@ -207,7 +206,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des8">
             <div class="course-des-heading" id="des-titile8">
-                <h3>08 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>08 පරිගණක ජාල</h3>
             </div>
 
             <div class="course-des-description">
@@ -234,7 +233,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des9">
             <div class="course-des-heading" id="des-titile9">
-                <h3>09 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>09 දත්ත සමුදාය කළමනාකරණ පද්ධති</h3>
             </div>
 
             <div class="course-des-description">
@@ -261,7 +260,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des10">
             <div class="course-des-heading" id="des-titile10">
-                <h3>10 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>10 අන්තර්ජාලය හා වෙබ් අඩවි</h3>
             </div>
 
             <div class="course-des-description">
@@ -288,7 +287,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des11">
             <div class="course-des-heading" id="des-titile11">
-                <h3>11තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>11  පද්ධති සංවර්ධනය</h3>
             </div>
 
             <div class="course-des-description">
@@ -315,7 +314,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des12">
             <div class="course-des-heading" id="des-titile12">
-                <h3>12 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>12 ඉලෙක්ට්‍රොනික වාණිජ්‍ය</h3>
             </div>
 
             <div class="course-des-description">
@@ -342,7 +341,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des13">
             <div class="course-des-heading" id="des-titile13">
-                <h3>13 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>13 තොරතුරු සන්නිවේදන තාක්ෂණයේ අනාගතය</h3>
             </div>
 
             <div class="course-des-description">
@@ -369,7 +368,7 @@
         <div id="desc2" class="description">
         <div class="lpage3-course-des" id="course-des14">
             <div class="course-des-heading" id="des-titile14">
-                <h3>14 තොරතුරු සහ සන්නිවේදන තාෂණය පිළිබඳ සංකල්ප</h3>
+                <h3>14 සරල තොරතුරු පද්ධතියක් නිර්මාණය</h3>
             </div>
 
             <div class="course-des-description">

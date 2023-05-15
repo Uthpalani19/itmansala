@@ -52,10 +52,9 @@ body {
   100% {transform: translateY(-25px);}
 }
 
-.avatar{
-  width: 40%;
-  padding-top: 3.5rem;
-  margin-left: 12rem;
+.avatar {
+  width: 50%;
+  margin-left: 9rem;
   animation: shake 1s infinite alternate;
 }
 
@@ -252,7 +251,6 @@ h1{
 }
 
 .signupmessage{
-  padding-left: 45%;
   padding-top: 10px;
 }
 

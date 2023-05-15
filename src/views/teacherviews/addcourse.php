@@ -24,10 +24,6 @@
     <div class="content-container" id="content">
         <p class="welcome-msg">Welcome back <?php echo $_SESSION['name']; ?></p>
 
-        <div class="edit tip-edit">
-            <p><i class="fa-solid fa-file-pen"></i></p>
-        </div>
-
         <div class="tip">
             <div class="tip-left">
                 <p><i class="fa-regular fa-square-check"></i> Pro tip</p>
@@ -42,11 +38,6 @@
 
             <div class="lesson-container">
                 <?php
-                    $price_query = "SELECT price FROM course_name"; 
-                    $price_result = mysqli_query($connection, $price_query);
-                    $price_row = mysqli_fetch_array($price_result);
-                    $price = $price_row["price"];
-
                     $phoneNumber = $_SESSION['phone'];
                     $course_query= "SELECT * FROM course WHERE teacherPhoneNumber = $phoneNumber";
                     $course_result = mysqli_query($connection, $course_query);
@@ -95,6 +86,7 @@
                                 <div class="activate">
                                     <button type="" class="activate-course reviewBtn" name="">Published to students</button>
                                 </div>
+                                <div><button onclick="window.location.href='../../views/teacherviews/courseReview.php?course_id=<?php echo $number ?>'">Rating</button></div>
                                 <?php
                                 }
                                 ?>
@@ -147,7 +139,7 @@
                         </div>  
                         <div class="column2">
                             <textarea class="course-input" name="courseDescription" rows="5" placeholder="A brief introduction to the course and its content "></textarea>
-                            <input type="text" class="course-input" name="price" value="<?php echo $price;?>" readonly hidden>
+                            <input type="text" class="course-input" name="price" value="1000 LKR" readonly hidden>
                             <input type="text" class="course-input" name="courseNumber" value="<?php echo $id;?>" readonly hidden>
                             <div>
                                 <?php
