@@ -6,7 +6,6 @@
   	header('location: ../../student_login.php');
   }
 
- require('../../config/studentconfig/studentCart.php');
  include('../../config/teacherconfig/teacher-backend.php');
  include('../../assets/includes/navbar-student.php');
 ?>
@@ -66,6 +65,21 @@
                             if($check_course_result){
                                 while($course_row = mysqli_fetch_array($course_result)){
                                     $number= $course_row['courseId'];
+                                    $phoneNumber = $_SESSION['studentphone'];
+
+                                    $subtopic_query = "SELECT * FROM subtopic WHERE courseId = $number";
+                                    $subtopic_result = mysqli_query($connection, $subtopic_query);
+                                    if($subtopic_result){
+                                        $subtopic_count = mysqli_num_rows($subtopic_result);
+                                    }
+                                    $student_subtopic = "SELECT * FROM student_subtopic WHERE phoneNumber = $phoneNumber AND courseId = $number AND status = 1";
+                                    $student_subtopic_result = mysqli_query($connection, $student_subtopic);
+                                    if($student_subtopic_result){
+                                        $student_subtopic_count = mysqli_num_rows($student_subtopic_result);
+                                    }
+
+                                    $value = ($student_subtopic_count / $subtopic_count)*100;
+                                    $progress = round($value);
                                     ?>
                                     <div class="db-lesson">
                                         <div class="img-container">
@@ -79,9 +93,15 @@
                                             <a><?php echo $course_row['courseName'];?></a>
                                         </div>
                                         <div class ="price-username">
+                                            <div class="progress-bar">
+                                                <div class="progress-bar-completed" style="width:<?php echo $progress;?>%"></div>
+                                            </div>
+                                            <div class="progress-text">
+                                                <p ><?php echo $progress; ?>% completed</p>
+                                            </div>
                                             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                                                 <input type="text" value="<?php echo $number; ?>" name="updateNo" readonly hidden>
-                                                <button class="course-btn" name="updateTime" type="submit">Go to Course</button>
+                                                <button class="course-btn purchased-course-btn" name="updateTime" type="submit">Go to Course</button>
                                             </form>
                                         </div>
                                         <?php

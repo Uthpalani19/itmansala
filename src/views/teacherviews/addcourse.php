@@ -2,14 +2,9 @@
   session_start(); 
 
   if (!isset($_SESSION['name'])) {
-  	header('location: ../student_login.php');
+  	header('location: ../../student_login.php');
   }
 
-  if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['name']);
-    header("location: ../student_login.php");
- }
 
     include('../../config/dbconnection.php');
     include('../../config/teacherconfig/teacher-backend.php');
@@ -28,10 +23,6 @@
 <body id="body">
     <div class="content-container" id="content">
         <p class="welcome-msg">Welcome back <?php echo $_SESSION['name']; ?></p>
-
-        <div class="edit tip-edit">
-            <p><i class="fa-solid fa-file-pen"></i></p>
-        </div>
 
         <div class="tip">
             <div class="tip-left">

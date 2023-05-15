@@ -16,8 +16,8 @@ foreach($_SESSION['cart'] as $cid){
     if ($check_subtopic) {
         while ($subtopic_row = mysqli_fetch_array($subtopic_result)) {
             $subtopicId = $subtopic_row["subTopicId"];
-            $insert = "INSERT INTO student_subtopic (phoneNumber, subtopicId, status)
-            VALUES('$PhoneNumber', '$subtopicId', 0)";
+            $insert = "INSERT INTO student_subtopic (phoneNumber, courseId, subtopicId, status)
+            VALUES('$PhoneNumber', '$element', '$subtopicId', 0)";
             mysqli_query($connection, $insert);
         }
     }

@@ -8,7 +8,7 @@
 
     if(!isset($_SESSION['name']))
     {
-        header('location:index.php');
+        header('location: ../../student_login.php');
     }
 
     if(isset($_GET['logout']))

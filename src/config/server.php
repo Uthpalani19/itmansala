@@ -122,8 +122,10 @@ if (isset($_POST['signup_student'])) {
                         VALUES('$PhoneNumber', '$password', 'student')";
         mysqli_query($connection, $query);
         mysqli_query($connection, $userquery);
-        $_SESSION['name'] = $name;
-        header('location: views/studentviews/quizReview.php');
+        $_SESSION['studentname'] =$name;
+        $_SESSION['studentphone'] = $PhoneNumber;
+        $_SESSION['studentemail'] = $Email;
+        header('location: views/studentviews/student-dashboard.php');
     }
   }
 

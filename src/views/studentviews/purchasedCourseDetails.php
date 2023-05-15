@@ -38,6 +38,9 @@
         </p>
 
     </div>
+    <?php
+    if($check_student){
+    ?>
     <div class="content">
         <?php
         $retrieve_subtopic = "SELECT * FROM subtopic WHERE courseID = $lesson";
@@ -64,10 +67,13 @@
                     <?php
                     $check_query = "SELECT * FROM student_subtopic WHERE subtopicId = $subtopic";
                     $check_result = mysqli_query($connection, $check_query);
-                    $check_row = mysqli_fetch_array($check_result);
+                    $empty_check_result = mysqli_num_rows($check_result) > 0;
                     ?>
                     <div class="db-subtopic-left">
                     <?php
+                    if($empty_check_result){
+                        $check_row = mysqli_fetch_array($check_result);
+                    
                     if($check_row['status'] == 1){
                         ?>
                     <form class="checkbox" method="post">
@@ -83,6 +89,14 @@
                     </form>
                     <?php
                     }
+                }else{
+                    ?>
+                    <form class="checkbox" method="post">
+                        <input type="text" value="<?php echo $subtopic; ?>" name="insertsubtopicNo" readonly hidden>
+                        <button type="submit" name="insertcheckbtn"><i class="fa-regular fa-circle"></i></button>
+                    </form>
+                    <?php
+                }
                     ?>
                         <p id="<?php echo $subid; ?>"><?php echo $retrieve_subtopic_row['subTopicName']; ?></p>
                     </div>
@@ -371,6 +385,14 @@
         </div>
     <?php    
         }
+    }else{
+        ?>
+        <div class="notpurchased">
+            <p>Sorry! You have not purchased this course.</p>
+            <img class="empty-img" src="../../assets/images/welcome_avatar.png">
+        </div>
+        <?php
+    }
     ?>
    
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
