@@ -1,2 +1,2 @@
 # itmansala
- This is our second year group project.
+ An interactive ICT learning platform for A/L students
